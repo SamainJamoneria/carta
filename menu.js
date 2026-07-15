@@ -92,7 +92,7 @@ const carta = [
         {nombre:"Ensalada piquillo",descripcion:"Pimientos del piquillo con anchoas y queso del país",precio:"14,50 €"},
         {nombre:"Boquerones en vinagre",descripcion:"",precio:"10,00 €"},
         {nombre:"Gildas",descripcion:"Precio por unidad",precio:"2,70 €"}
+}
+   ];
 
-    ];
 
-},
