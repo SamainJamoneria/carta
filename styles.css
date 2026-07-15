@@ -290,3 +290,31 @@ transform:translateY(-2px);
 box-shadow:0 8px 18px rgba(0,0,0,.15);
 
 }  
+
+.emoji{
+
+font-size:42px;
+
+margin-bottom:12px;
+
+}
+
+.titulo{
+
+font-size:20px;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+}
+
+.descripcion-menu{
+
+margin-top:8px;
+
+font-size:14px;
+
+color:#777;
+
+}
