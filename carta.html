@@ -24,7 +24,13 @@ scroll-behavior:smooth;
 body{
 
 font-family:Arial,Helvetica,sans-serif;
-background:#f2f2f2;
+
+background:#ececec;
+
+background-image:
+radial-gradient(circle at top left,#ffffff 0%,transparent 35%),
+radial-gradient(circle at bottom right,#ffffff 0%,transparent 35%);
+
 color:#333;
 
 }
@@ -68,25 +74,6 @@ margin-top:8px;
 
 }
 
-<div class="menu-categorias">
-
-<a href="#tostas">🥖 Tostas</a>
-
-<a href="#tablas">🧀 Tablas</a>
-
-<a href="#raciones">🍖 Raciones</a>
-
-<a href="#ensaladas">🥗 Ensaladas</a>
-
-<a href="#quesos">🧀 Quesos</a>
-
-<a href="#piadinas">🌯 Piadinas</a>
-
-<a href="#bocadillos">🥪 Bocadillos</a>
-
-<a href="#postres">🍰 Postres</a>
-
-</div>
   
 main{
 
@@ -99,10 +86,18 @@ padding:25px;
 .seccion{
 
 background:white;
-margin-bottom:25px;
-border-radius:15px;
-padding:25px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+margin-bottom:35px;
+
+border-radius:22px;
+
+padding:30px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+border:1px solid #efefef;
+
+overflow:hidden;
 
 }
 
@@ -191,17 +186,19 @@ color:#666;
 
 summary{
 
-font-size:26px;
+font-size:30px;
 
-font-weight:bold;
+font-weight:700;
 
 color:#2d2b72;
 
+padding:8px 0 20px;
+
 cursor:pointer;
 
-list-style:none;
+border-bottom:2px solid #f2f2f2;
 
-padding-bottom:15px;
+margin-bottom:15px;
 
 }
 
@@ -335,10 +332,30 @@ box-shadow:0 8px 18px rgba(0,0,0,.15);
 
 </header>
 
+<div class="menu-categorias">
+
+<a href="#tostas">🥖 Tostas</a>
+
+<a href="#tablas">🧀 Tablas</a>
+
+<a href="#raciones">🍖 Raciones</a>
+
+<a href="#ensaladas">🥗 Ensaladas</a>
+
+<a href="#quesos">🧀 Quesos</a>
+
+<a href="#piadinas">🌯 Piadinas</a>
+
+<a href="#bocadillos">🥪 Bocadillos</a>
+
+<a href="#postres">🍰 Postres</a>
+
+</div>
+  
 <main>
 
-<details class="seccion" open>
-
+<details id="tostas" class="seccion" open>
+  
 <summary>🥖 Tostas Premium</summary>
 
 <div class="producto">
@@ -371,8 +388,8 @@ Tosta de Cecina
 
 </details>
 
-<details class="seccion">
-
+<details id="tablas" class="seccion">
+  
 <summary>🧀 Tablas</summary>
 
 <div class="producto">
@@ -401,6 +418,7 @@ Tabla de Quesos
 
 </details>
 
+   
 </main>
 
 <footer>
