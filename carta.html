@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Carta - Samaín La Cormelana</title>
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
 
-margin:0;
-
 font-family:Arial,Helvetica,sans-serif;
-
-background:#f5f5f5;
-
+background:#f2f2f2;
 color:#333;
 
 }
@@ -26,56 +26,73 @@ color:#333;
 header{
 
 background:#2d2b72;
-
-padding:25px;
-
+padding:30px;
 text-align:center;
-
-color:white;
 
 }
 
 header img{
 
 width:220px;
-
 max-width:90%;
 
 }
 
-section{
+header h1{
 
-max-width:900px;
-
-margin:auto;
-
-background:white;
-
-padding:40px;
+color:white;
+margin-top:20px;
+font-size:34px;
 
 }
 
-h2{
+header p{
+
+color:#ddd;
+margin-top:8px;
+
+}
+
+main{
+
+max-width:900px;
+margin:auto;
+padding:25px;
+
+}
+
+.seccion{
+
+background:white;
+margin-bottom:25px;
+border-radius:15px;
+padding:25px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.seccion h2{
 
 color:#2d2b72;
-
-border-bottom:2px solid #ddd;
-
-padding-bottom:10px;
-
-margin-top:50px;
+margin-bottom:20px;
 
 }
 
 .producto{
 
 display:flex;
-
 justify-content:space-between;
+align-items:center;
 
-padding:10px 0;
+padding:12px 0;
 
-border-bottom:1px dashed #ddd;
+border-bottom:1px solid #ececec;
+
+}
+
+.producto:last-child{
+
+border:none;
 
 }
 
@@ -87,19 +104,16 @@ font-weight:bold;
 
 .precio{
 
-color:#2d2b72;
-
 font-weight:bold;
+color:#2d2b72;
 
 }
 
 footer{
 
+padding:40px;
 text-align:center;
-
-padding:30px;
-
-color:#777;
+color:#666;
 
 }
 
@@ -119,44 +133,75 @@ color:#777;
 
 </header>
 
-<section>
+<main>
 
-<h2>Tostas Premium</h2>
+<div class="seccion">
 
-<p>Aquí iremos poniendo todos los productos.</p>
+<h2>🥖 Tostas Premium</h2>
 
-<h2>Tablas</h2>
+<div class="producto">
 
-<p>...</p>
+<div class="nombre">
+Burrata con polvo de jamón ibérico
+</div>
 
-<h2>Raciones</h2>
+<div class="precio">
+12,50 €
+</div>
 
-<p>...</p>
+</div>
 
-<h2>Ensaladas</h2>
+<div class="producto">
 
-<p>...</p>
+<div class="nombre">
+Tosta de Cecina
+</div>
 
-<h2>Piadinas</h2>
+<div class="precio">
+12,00 €
+</div>
 
-<p>...</p>
+</div>
 
-<h2>Bocadillos</h2>
+</div>
 
-<p>...</p>
+<div class="seccion">
 
-<h2>Postres</h2>
+<h2>🧀 Tablas</h2>
 
-<p>...</p>
+<div class="producto">
 
-</section>
+<div class="nombre">
+Tabla Ibérica
+</div>
+
+<div class="precio">
+18,00 €
+</div>
+
+</div>
+
+<div class="producto">
+
+<div class="nombre">
+Tabla de Quesos
+</div>
+
+<div class="precio">
+16,00 €
+</div>
+
+</div>
+
+</div>
+
+</main>
 
 <footer>
 
-© Samaín La Cormelana
+Samaín La Cormelana · A Coruña
 
 </footer>
 
 </body>
-
 </html>
