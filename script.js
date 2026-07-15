@@ -75,3 +75,27 @@ carta.forEach(categoria=>{
     });
 
 });
+
+const buscador = document.getElementById("buscar");
+
+buscador.addEventListener("input", function () {
+
+    const texto = this.value.toLowerCase();
+
+    document.querySelectorAll(".producto").forEach(producto => {
+
+        const contenido = producto.innerText.toLowerCase();
+
+        if (contenido.includes(texto)) {
+
+            producto.style.display = "";
+
+        } else {
+
+            producto.style.display = "none";
+
+        }
+
+    });
+
+});
