@@ -89,13 +89,25 @@ margin-bottom:20px;
 
 .producto{
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+background:#fafafa;
 
-padding:12px 0;
+padding:18px;
 
-border-bottom:1px solid #ececec;
+margin:15px 0;
+
+border-radius:12px;
+
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+
+transition:.25s;
+
+}
+
+.producto:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 8px 20px rgba(0,0,0,.10);
 
 }
 
@@ -107,13 +119,38 @@ border:none;
 
 .nombre{
 
+font-size:20px;
+
 font-weight:bold;
+
+color:#2d2b72;
+
+margin-bottom:8px;
+
+}
+
+.descripcion{
+
+color:#666;
+
+font-size:15px;
+
+margin-top:8px;
+
+line-height:1.5;
 
 }
 
 .precio{
 
+margin-top:15px;
+
+font-size:22px;
+
 font-weight:bold;
+
+text-align:right;
+
 color:#2d2b72;
 
 }
@@ -236,6 +273,10 @@ gap:15px;
 
 <div class="nombre">
 Burrata con polvo de jamón ibérico
+</div>
+
+<div class="descripcion">
+Burrata cremosa acompañada de polvo de jamón ibérico.
 </div>
 
 <div class="precio">
