@@ -52,11 +52,19 @@ carta.forEach(categoria=>{
             const tarjeta = document.createElement("div");
             tarjeta.className = "producto";
 
-            tarjeta.innerHTML = `
-                <div class="nombre">${producto.nombre}</div>
-                <div class="descripcion">${producto.descripcion}</div>
-                <div class="precio">${producto.precio}</div>
-            `;
+          tarjeta.innerHTML = `
+
+                <div class="cabecera-producto">
+
+                    <div class="nombre">${producto.nombre}</div>
+
+                    <div class="precio">${producto.precio}</div>
+
+                </div>
+
+            ${producto.descripcion ? `<div class="descripcion">${producto.descripcion}</div>` : ""}
+
+        `;
 
             seccion.appendChild(tarjeta);
 
