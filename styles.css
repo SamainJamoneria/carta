@@ -1,320 +1,434 @@
+/* ======================================================
+   SAMAÍN LA CORMELANA
+   Hoja de estilos principal
+====================================================== */
+
+/* ==========================
+   Variables
+========================== */
+
+:root{
+
+    --color-principal:#2d2b72;
+    --color-principal-hover:#4442a4;
+    --color-fondo:#f4f5f7;
+    --color-tarjeta:#ffffff;
+    --color-texto:#333333;
+    --color-secundario:#666666;
+    --color-borde:#ececec;
+
+    --radio:18px;
+
+    --sombra:0 10px 25px rgba(0,0,0,.08);
+
+    --ancho-maximo:1100px;
+
+}
+
+/* ==========================
+   Reset
+========================== */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
 }
 
 html{
 
-scroll-behavior:smooth;
+    scroll-behavior:smooth;
 
 }
 
 body{
 
-font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 
-background:#ececec;
+    background:var(--color-fondo);
 
-background-image:
-radial-gradient(circle at top left,#ffffff 0%,transparent 35%),
-radial-gradient(circle at bottom right,#ffffff 0%,transparent 35%);
+    color:var(--color-texto);
 
-color:#333;
+    line-height:1.6;
 
 }
 
+/* ==========================
+   Header
+========================== */
+
 header{
 
-background:linear-gradient(180deg,#2d2b72,#23235b);
+    background:linear-gradient(
+        180deg,
+        var(--color-principal),
+        #23235b
+    );
 
-padding:20px 20px 35px;
+    color:white;
 
-text-align:center;
+    text-align:center;
 
-color:white;
+    padding:30px 20px 45px;
 
 }
 
 header img{
 
-width:170px;
+    width:180px;
 
-max-width:80%;
+    max-width:80%;
 
-margin-bottom:10px;
+    margin-bottom:15px;
 
 }
 
 header h1{
 
-font-size:30px;
+    font-size:34px;
 
-margin:8px 0;
-
-font-weight:700;
+    margin-bottom:10px;
 
 }
 
 header p{
 
-color:#ddd;
-margin-top:8px;
+    color:#e5e5e5;
+
+    font-size:18px;
 
 }
 
-  
-main{
-
-max-width:900px;
-margin:auto;
-padding:25px;
-
-}
-
-.seccion{
-
-background:white;
-
-margin-bottom:35px;
-
-border-radius:22px;
-
-padding:30px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-border:1px solid #efefef;
-
-overflow:hidden;
-
-}
-
-.seccion h2{
-
-color:#2d2b72;
-margin-bottom:20px;
-
-}
-
-.producto{
-
-background:#fafafa;
-
-padding:18px;
-
-margin:15px 0;
-
-border-radius:12px;
-
-box-shadow:0 4px 12px rgba(0,0,0,.05);
-
-transition:.25s;
-
-}
-
-.producto:hover{
-
-transform:translateY(-2px);
-
-box-shadow:0 8px 20px rgba(0,0,0,.10);
-
-}
-
-.producto:last-child{
-
-border:none;
-
-}
-
-.nombre{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#2d2b72;
-
-margin-bottom:8px;
-
-}
-
-.descripcion{
-
-color:#666;
-
-font-size:15px;
-
-margin-top:8px;
-
-line-height:1.5;
-
-}
-
-.precio{
-
-margin-top:15px;
-
-font-size:22px;
-
-font-weight:bold;
-
-text-align:right;
-
-color:#2d2b72;
-
-}
-
-footer{
-
-padding:40px;
-text-align:center;
-color:#666;
-
-}
-
-summary{
-
-font-size:30px;
-
-font-weight:700;
-
-color:#2d2b72;
-
-padding:8px 0 20px;
-
-cursor:pointer;
-
-border-bottom:2px solid #f2f2f2;
-
-margin-bottom:15px;
-
-}
-
-summary::-webkit-details-marker{
-
-display:none;
-
-}
-
-details{
-
-transition:.3s;
-
-}
+/* ==========================
+   Navegación
+========================== */
 
 nav{
 
-position:sticky;
+    position:sticky;
 
-top:0;
+    top:0;
 
-background:#ffffff;
+    background:white;
 
-display:flex;
+    display:flex;
 
-justify-content:space-between;
+    justify-content:space-between;
 
-align-items:center;
+    align-items:center;
 
-padding:12px 20px;
+    padding:14px 20px;
 
-box-shadow:0 2px 12px rgba(0,0,0,.12);
+    box-shadow:0 2px 10px rgba(0,0,0,.10);
 
-z-index:999;
+    z-index:999;
 
 }
 
 nav a{
 
-text-decoration:none;
+    text-decoration:none;
 
-font-weight:bold;
+    color:var(--color-principal);
 
-color:#2d2b72;
-
-font-size:18px;
+    font-weight:bold;
 
 }
 
 .idiomas{
 
-display:flex;
+    display:flex;
 
-gap:15px;
+    gap:15px;
 
-}  
+}
+
+/* ==========================
+   Bienvenida
+========================== */
+
+.bienvenida{
+
+    max-width:800px;
+
+    margin:35px auto;
+
+    padding:0 25px;
+
+    text-align:center;
+
+}
+
+.bienvenida h2{
+
+    color:var(--color-principal);
+
+    margin-bottom:12px;
+
+    font-size:32px;
+
+}
+
+.bienvenida p{
+
+    color:var(--color-secundario);
+
+    font-size:18px;
+
+}
+
+/* ==========================
+   Categorías
+========================== */
 
 .menu-categorias{
 
-display:grid;
+    max-width:var(--ancho-maximo);
 
-grid-template-columns:repeat(2,1fr);
+    margin:auto;
 
-gap:12px;
+    padding:25px;
 
-padding:20px;
+    display:grid;
 
-max-width:900px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 
-margin:auto;
+    gap:18px;
 
 }
 
 .menu-categorias a{
 
-background:white;
+    background:var(--color-tarjeta);
 
-padding:15px;
+    border-radius:var(--radio);
 
-border-radius:12px;
+    padding:25px;
 
-text-decoration:none;
+    text-decoration:none;
 
-text-align:center;
+    color:var(--color-principal);
 
-font-weight:bold;
+    box-shadow:var(--sombra);
 
-color:#2d2b72;
+    transition:.25s;
 
-box-shadow:0 3px 10px rgba(0,0,0,.08);
+    display:flex;
 
-transition:.25s;
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
 
 }
 
 .menu-categorias a:hover{
 
-transform:translateY(-2px);
+    transform:translateY(-5px);
 
-box-shadow:0 8px 18px rgba(0,0,0,.15);
-
-}  
+}
 
 .emoji{
 
-font-size:42px;
+    font-size:42px;
 
-margin-bottom:12px;
+    margin-bottom:12px;
 
 }
 
 .titulo{
 
-font-size:20px;
+    font-size:20px;
 
-font-weight:700;
-
-letter-spacing:1px;
+    font-weight:bold;
 
 }
 
 .descripcion-menu{
 
-margin-top:8px;
+    color:var(--color-secundario);
 
-font-size:14px;
+    margin-top:8px;
 
-color:#777;
+    font-size:14px;
+
+}
+
+/* ==========================
+   Contenido
+========================== */
+
+main{
+
+    max-width:var(--ancho-maximo);
+
+    margin:auto;
+
+    padding:25px;
+
+}
+
+/* ==========================
+   Categorías de productos
+========================== */
+
+.seccion{
+
+    background:white;
+
+    border-radius:var(--radio);
+
+    margin-bottom:35px;
+
+    padding:30px;
+
+    box-shadow:var(--sombra);
+
+}
+
+summary{
+
+    cursor:pointer;
+
+    list-style:none;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:var(--color-principal);
+
+    margin-bottom:20px;
+
+}
+
+summary::-webkit-details-marker{
+
+    display:none;
+
+}
+
+/* ==========================
+   Producto
+========================== */
+
+.producto{
+
+    background:#fafafa;
+
+    border-radius:15px;
+
+    padding:22px;
+
+    margin-top:18px;
+
+    transition:.25s;
+
+    border:1px solid var(--color-borde);
+
+}
+
+.producto:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.nombre{
+
+    color:var(--color-principal);
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.descripcion{
+
+    color:var(--color-secundario);
+
+    margin-top:10px;
+
+}
+
+.precio{
+
+    margin-top:18px;
+
+    text-align:right;
+
+    color:var(--color-principal);
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+/* ==========================
+   Footer
+========================== */
+
+footer{
+
+    margin-top:40px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:768px){
+
+    header h1{
+
+        font-size:28px;
+
+    }
+
+    .menu-categorias{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .titulo{
+
+        font-size:18px;
+
+    }
+
+    summary{
+
+        font-size:24px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .menu-categorias{
+
+        grid-template-columns:1fr;
+
+    }
+
+    header img{
+
+        width:140px;
+
+    }
 
 }
