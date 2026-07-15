@@ -1,39 +1,130 @@
-function crearProducto(producto) {
+// ======================================
+// SAMAÍN LA CORMELANA
+// Generador automático de la carta
+// ======================================
 
-    return `
+document.addEventListener("DOMContentLoaded", () => {
 
-    <div class="producto">
+    generarMenu();
 
-        <div class="nombre">${producto.nombre}</div>
+    generarCarta();
 
-        <div class="descripcion">${producto.descripcion}</div>
+});
 
-        <div class="precio">${producto.precio}</div>
 
-    </div>
 
-    `;
+function generarMenu(){
 
-}
+    const menu=document.querySelector(".menu-categorias");
 
-function cargarCategoria(id, categoria) {
+    if(!menu) return;
 
-    const contenedor = document.getElementById(id);
+    menu.innerHTML="";
 
-    if (!contenedor) return;
+    carta.forEach(categoria=>{
 
-    categoria.forEach(producto => {
+        menu.innerHTML+=`
 
-        contenedor.innerHTML += crearProducto(producto);
+        <a href="#${categoria.id}">
+
+            <div class="emoji">${categoria.nombre.split(" ")[0]}</div>
+
+            <div class="titulo">
+
+                ${categoria.nombre.substring(3)}
+
+            </div>
+
+            <div class="descripcion-menu">
+
+                ${categoria.productos.length} productos
+
+            </div>
+
+        </a>
+
+        `;
 
     });
 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    cargarCategoria("lista-tostas", carta.tostas);
 
-    cargarCategoria("lista-tablas", carta.tablas);
+function generarCarta(){
 
-});
+    const contenedor=document.getElementById("carta");
+
+    contenedor.innerHTML="";
+
+    carta.forEach(categoria=>{
+
+        contenedor.innerHTML+=crearCategoria(categoria);
+
+    });
+
+}
+
+
+
+function crearCategoria(categoria){
+
+    let html=`
+
+    <section class="seccion" id="${categoria.id}">
+
+        <h2>
+
+            ${categoria.nombre}
+
+        </h2>
+
+    `;
+
+    categoria.productos.forEach(producto=>{
+
+        html+=crearProducto(producto);
+
+    });
+
+    html+=`
+
+    </section>
+
+    `;
+
+    return html;
+
+}
+
+
+
+function crearProducto(producto){
+
+    return`
+
+    <article class="producto">
+
+        <div class="nombre">
+
+            ${producto.nombre}
+
+        </div>
+
+        <div class="descripcion">
+
+            ${producto.descripcion}
+
+        </div>
+
+        <div class="precio">
+
+            ${producto.precio}
+
+        </div>
+
+    </article>
+
+    `;
+
+}
