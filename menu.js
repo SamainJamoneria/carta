@@ -93,6 +93,6 @@ const carta = [
         {nombre:"Boquerones en vinagre",descripcion:"",precio:"10,00 €"},
         {nombre:"Gildas",descripcion:"Precio por unidad",precio:"2,70 €"}
 
-    ]
+    ];
 
 },
