@@ -95,6 +95,106 @@ const carta = [
 
         ]
 }
+
+,
+
+{
+    id:"quesos",
+    titulo:"Quesos",
+    icono:"🧀",
+    productos:[
+
+        {nombre:"Stilton",descripcion:"Media / Entera",precio:"6,00 € / 12,00 €"},
+        {nombre:"Gouda trufado",descripcion:"Media / Entera",precio:"7,00 € / 12,50 €"},
+        {nombre:"Gorgonzola",descripcion:"Media / Entera",precio:"6,00 € / 10,00 €"},
+        {nombre:"Appenzeller",descripcion:"Media / Entera",precio:"6,00 € / 12,00 €"},
+        {nombre:"Comté",descripcion:"Media / Entera",precio:"6,00 € / 12,00 €"},
+        {nombre:"Parmigiano",descripcion:"Media / Entera",precio:"5,50 € / 10,00 €"},
+        {nombre:"Rulo de cabra",descripcion:"",precio:"5,00 €"},
+        {nombre:"Pria",descripcion:"Media / Entera",precio:"7,00 € / 13,00 €"},
+        {nombre:"Paulus",descripcion:"Media / Entera",precio:"6,50 € / 12,50 €"}
+
+    ]
+
+}
+
+
+    ,
+
+{
+    id:"piadinas",
+    titulo:"Piadinas",
+    icono:"🌯",
+    productos:[
+
+        {nombre:"Atún",descripcion:"Tomate, queso y atún",precio:"8,00 €"},
+        {nombre:"Ibérica",descripcion:"Tomate, queso y jamón al corte",precio:"12,50 €"},
+        {nombre:"Serrana",descripcion:"Tomate, queso y jamón D.O. Granada",precio:"9,50 €"},
+        {nombre:"Salmón",descripcion:"Salmón y queso del país",precio:"12,50 €"},
+        {nombre:"Samaín",descripcion:"Cecina, tomate, queso del país, queso gorgonzola y parmigiano",precio:"12,00 €"},
+        {nombre:"Bacon",descripcion:"Queso, tomate y bacon",precio:"10,00 €"},
+        {nombre:"Anchoas",descripcion:"Tomate, queso, aceite y anchoa",precio:"10,00 €"},
+        {nombre:"Pechuga de pavo",descripcion:"Queso, tomate y pechuga de pavo",precio:"7,50 €"},
+        {nombre:"Mortadela",descripcion:"Queso del país, tomate natural, pesto casero y mortadela",precio:"12,00 €"},
+        {nombre:"Chicharrones",descripcion:"Queso, chicharrones y salsa BBQ",precio:"12,00 €"},
+        {nombre:"Straciatella",descripcion:"Tomate natural aliñado con AOVE, reducción de PX, straciatella y polvo de jamón ibérico",precio:"12,00 €"}
+
+    ]
+
+}
+
+    ,
+
+{
+    id:"dulces",
+    titulo:"Piadinas Dulces",
+    icono:"🍫",
+    productos:[
+
+        {nombre:"Membrillo",descripcion:"Dos tipos de quesos y carpaccio de membrillo",precio:"8,00 €"},
+        {nombre:"Nutella",descripcion:"",precio:"6,00 €"},
+        {nombre:"Ingrediente extra",descripcion:"",precio:"0,50 €"}
+
+    ]
+
+}
+
+    ,
+
+{
+    id:"bocadillos",
+    titulo:"Bocadillos",
+    icono:"🥪",
+    productos:[
+
+        {nombre:"Jamón de bellota 100%",descripcion:"",precio:"12,00 €"},
+        {nombre:"Jamón D.O. Granada",descripcion:"",precio:"6,50 €"},
+        {nombre:"Salchichón ibérico",descripcion:"",precio:"5,00 €"},
+        {nombre:"Chorizo ibérico",descripcion:"",precio:"5,00 €"},
+        {nombre:"Lomo ibérico",descripcion:"",precio:"6,50 €"},
+        {nombre:"Queso",descripcion:"",precio:"4,00 €"},
+        {nombre:"Mortadela",descripcion:"",precio:"4,50 €"},
+        {nombre:"Bacon",descripcion:"",precio:"5,00 €"},
+        {nombre:"Ingrediente extra",descripcion:"",precio:"0,50 €"}
+
+    ]
+
+}
+    ,
+
+{
+    id:"postres",
+    titulo:"Postres",
+    icono:"🍰",
+    productos:[
+
+        {nombre:"Queso con membrillo",descripcion:"",precio:"5,00 €"},
+        {nombre:"Helados",descripcion:"Consultar sabores",precio:"Consultar"}
+
+    ]
+
+}
+    
    ];
 
 
