@@ -25,24 +25,33 @@ color:#333;
 
 header{
 
-background:#2d2b72;
-padding:30px;
+background:linear-gradient(180deg,#2d2b72,#23235b);
+
+padding:20px 20px 35px;
+
 text-align:center;
+
+color:white;
 
 }
 
 header img{
 
-width:220px;
-max-width:90%;
+width:170px;
+
+max-width:80%;
+
+margin-bottom:10px;
 
 }
 
 header h1{
 
-color:white;
-margin-top:20px;
-font-size:34px;
+font-size:30px;
+
+margin:8px 0;
+
+font-weight:700;
 
 }
 
@@ -145,6 +154,48 @@ transition:.3s;
 
 }
 
+nav{
+
+position:sticky;
+
+top:0;
+
+background:#ffffff;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px 20px;
+
+box-shadow:0 2px 12px rgba(0,0,0,.12);
+
+z-index:999;
+
+}
+
+nav a{
+
+text-decoration:none;
+
+font-weight:bold;
+
+color:#2d2b72;
+
+font-size:18px;
+
+}
+
+.idiomas{
+
+display:flex;
+
+gap:15px;
+
+}  
+
 </style>
 
 </head>
@@ -153,6 +204,20 @@ transition:.3s;
 
 <header>
 
+<nav>
+
+<a href="index.html">🏠 Inicio</a>
+
+<div class="idiomas">
+
+<a href="carta.html">🇪🇸</a>
+
+<a href="#">🇬🇧</a>
+
+</div>
+
+</nav>
+  
 <img src="LOGO.png">
 
 <h1>Carta</h1>
