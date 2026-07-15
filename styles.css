@@ -47,7 +47,7 @@ body{
 
     font-family:Arial, Helvetica, sans-serif;
 
-    background:var(--color-fondo);
+    background:#f6f4ef;
 
     color:var(--color-texto);
 
@@ -72,6 +72,8 @@ header{
     text-align:center;
 
     padding:30px 20px 45px;
+
+   box-shadow:0 12px 30px rgba(0,0,0,.18);
 
 }
 
@@ -289,6 +291,20 @@ main{
 
 }
 
+.seccion h2{
+
+    font-size:34px;
+
+    color:#2d2b72;
+
+    margin-bottom:30px;
+
+    border-bottom:4px solid #d8b35c;
+
+    padding-bottom:15px;
+
+}
+
 summary{
 
     cursor:pointer;
@@ -317,39 +333,49 @@ summary::-webkit-details-marker{
 
 .producto{
 
-    background:#fafafa;
+    background:#ffffff;
 
-    border-radius:15px;
+    border-radius:18px;
 
     padding:22px;
 
-    margin-top:18px;
+    margin:18px 0;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+    border:1px solid #ececec;
 
     transition:.25s;
-
-    border:1px solid var(--color-borde);
 
 }
 
 .producto:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
 
 }
 
 .nombre{
 
-    color:var(--color-principal);
+    font-size:24px;
 
-    font-size:22px;
+    font-weight:700;
 
-    font-weight:bold;
+    color:#2d2b72;
+
+    margin-bottom:8px;
 
 }
 
 .descripcion{
 
-    color:var(--color-secundario);
+    color:#666;
+
+    line-height:1.6;
+
+    font-size:16px;
 
     margin-top:10px;
 
@@ -361,11 +387,11 @@ summary::-webkit-details-marker{
 
     text-align:right;
 
-    color:var(--color-principal);
-
-    font-size:24px;
+    font-size:28px;
 
     font-weight:bold;
+
+    color:#8b0000;
 
 }
 
