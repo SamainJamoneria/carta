@@ -635,3 +635,41 @@ footer{
 }
 
 }
+
+.buscador{
+
+    max-width:900px;
+
+    margin:10px auto 35px;
+
+    padding:0 20px;
+
+}
+
+#buscar{
+
+    width:100%;
+
+    padding:18px 22px;
+
+    font-size:18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    outline:none;
+
+    background:white;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.2s;
+
+}
+
+#buscar:focus{
+
+    box-shadow:0 12px 30px rgba(45,43,114,.20);
+
+}
