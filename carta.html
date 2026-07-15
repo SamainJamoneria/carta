@@ -15,6 +15,12 @@ padding:0;
 box-sizing:border-box;
 }
 
+html{
+
+scroll-behavior:smooth;
+
+}
+
 body{
 
 font-family:Arial,Helvetica,sans-serif;
@@ -62,6 +68,26 @@ margin-top:8px;
 
 }
 
+<div class="menu-categorias">
+
+<a href="#tostas">🥖 Tostas</a>
+
+<a href="#tablas">🧀 Tablas</a>
+
+<a href="#raciones">🍖 Raciones</a>
+
+<a href="#ensaladas">🥗 Ensaladas</a>
+
+<a href="#quesos">🧀 Quesos</a>
+
+<a href="#piadinas">🌯 Piadinas</a>
+
+<a href="#bocadillos">🥪 Bocadillos</a>
+
+<a href="#postres">🍰 Postres</a>
+
+</div>
+  
 main{
 
 max-width:900px;
@@ -233,6 +259,52 @@ gap:15px;
 
 }  
 
+.menu-categorias{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+padding:20px;
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+.menu-categorias a{
+
+background:white;
+
+padding:15px;
+
+border-radius:12px;
+
+text-decoration:none;
+
+text-align:center;
+
+font-weight:bold;
+
+color:#2d2b72;
+
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+transition:.25s;
+
+}
+
+.menu-categorias a:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+}  
+  
 </style>
 
 </head>
