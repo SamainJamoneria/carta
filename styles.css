@@ -530,3 +530,69 @@ footer{
     font-size:14px;
 
 }
+
+.cabecera-producto{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.nombre{
+
+    flex:1;
+
+    font-size:23px;
+
+    font-weight:700;
+
+    color:#2d2b72;
+
+}
+
+.precio{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#8b0000;
+
+    white-space:nowrap;
+
+}
+
+.producto{
+
+    position:relative;
+
+}
+
+.producto::after{
+
+    content:"";
+
+    display:block;
+
+    margin-top:18px;
+
+    border-bottom:1px dashed #ddd;
+
+}
+
+.producto:last-child::after{
+
+    display:none;
+
+}
+
+.seccion{
+
+    scroll-margin-top:110px;
+
+}
