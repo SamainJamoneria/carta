@@ -466,83 +466,79 @@ footer{
    MENÚ HORIZONTAL
 ========================== */
 
+/*==================================================
+MENU DE CATEGORÍAS
+==================================================*/
+
 .menu-sticky{
 
-    position:sticky;
+    max-width:1100px;
 
-    top:0;
+    margin:25px auto;
 
-    z-index:1000;
-
-    background:#ffffff;
-
-    box-shadow:0 4px 15px rgba(0,0,0,.12);
+    padding:0 20px;
 
 }
 
 .menu-categorias{
 
-    display:flex;
+    display:grid;
 
-    overflow-x:auto;
+    grid-template-columns:repeat(2,1fr);
 
     gap:12px;
-
-    padding:15px;
-
-    scrollbar-width:none;
-
-}
-
-.menu-categorias::-webkit-scrollbar{
-
-    display:none;
 
 }
 
 .categoria{
 
-    flex:0 0 auto;
-
     display:flex;
 
     align-items:center;
 
+    justify-content:center;
+
     gap:8px;
 
-    padding:12px 18px;
-
-    border-radius:30px;
-
-    background:#2d2b72;
-
-    color:white;
-
     text-decoration:none;
+
+    background:white;
+
+    color:#2d2b72;
+
+    border:2px solid #d8b35c;
+
+    border-radius:14px;
+
+    padding:14px 10px;
 
     font-weight:bold;
 
     transition:.25s;
 
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
 }
 
 .categoria:hover{
 
-    background:#4442a4;
+    background:#2d2b72;
+
+    color:white;
+
+    transform:translateY(-2px);
 
 }
 
 .icono{
 
-    font-size:20px;
+    font-size:22px;
 
 }
 
 .texto{
 
     font-size:16px;
-
-    margin:0;
 
 }
 
@@ -713,6 +709,16 @@ footer{
         margin-top:8px;
 
         font-size:28px;
+
+    }
+
+}
+
+@media(min-width:900px){
+
+    .menu-categorias{
+
+        grid-template-columns:repeat(4,1fr);
 
     }
 
