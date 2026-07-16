@@ -730,3 +730,55 @@ MENÚ STICKY
     opacity:1;
 
 }
+
+/*==================================
+ALÉRGENOS
+==================================*/
+
+.alergenos{
+
+    max-width:900px;
+    margin:50px auto;
+    text-align:center;
+
+}
+
+.alergenos h2{
+
+    color:var(--color-principal);
+    margin-bottom:20px;
+
+}
+
+.alergenos img{
+
+    width:100%;
+    max-width:700px;
+
+    border-radius:18px;
+
+    border:2px solid var(--color-dorado);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+}
+
+.alergenos img:hover{
+
+    transform:scale(1.02);
+
+}
+
+.alergenos p{
+
+    margin-top:12px;
+
+    color:#666;
+
+    font-size:15px;
+
+}
