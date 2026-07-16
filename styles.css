@@ -411,15 +411,21 @@ RESPONSIVE
 
     .icono{
 
-        font-size:18px;
+    font-size:22px;
 
-    }
+    line-height:1;
+
+    text-decoration:none;
+
+}
 
     .texto{
 
-        font-size:14px;
+    text-align:center;
 
-    }
+    line-height:1.1;
+
+}
 
 }
 
