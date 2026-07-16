@@ -8,20 +8,15 @@ carta.forEach(categoria=>{
 
 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
 
-            <div class="icono">
+    <div class="icono">
+        ${categoria.icono}
+    </div>
 
-                ${categoria.icono}
+    <div class="texto">
+        ${categoria.titulo}
+    </div>
 
-            </div>
-
-            <div class="texto">
-
-                ${categoria.titulo}
-
-            </div>
-
-            <div class="cantidad">
-
+</a>
                 ${categoria.productos.length} productos
 
             </div>
