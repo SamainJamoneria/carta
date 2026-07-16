@@ -17,12 +17,7 @@ carta.forEach(categoria=>{
     </div>
 
 </a>
-                ${categoria.productos.length} productos
-
-            </div>
-
-        </a>
-
+               
     `;
 
 });
