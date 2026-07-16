@@ -846,3 +846,40 @@ MENÚ STICKY
     box-shadow:0 8px 20px rgba(216,179,92,.35);
 
 }
+
+.resultado-busqueda{
+
+    max-width:900px;
+    margin:0 auto 20px;
+    padding:0 20px;
+    text-align:center;
+    min-height:45px;
+
+}
+
+.texto-busqueda{
+
+    color:#666;
+    font-size:16px;
+
+}
+
+.con-resultados{
+
+    display:inline-block;
+    margin-top:8px;
+    font-size:20px;
+    font-weight:bold;
+    color:#2d2b72;
+
+}
+
+.sin-resultados{
+
+    display:inline-block;
+    margin-top:8px;
+    font-size:20px;
+    font-weight:bold;
+    color:#b22222;
+
+}
