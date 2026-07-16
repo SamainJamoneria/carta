@@ -79,7 +79,9 @@ header{
 
 header img{
 
-    width:170px;
+    width:220px;
+
+    margin:auto;
 
     padding:0;
 
@@ -87,7 +89,9 @@ header img{
 
     border:none;
 
-    box-shadow:0 8px 25px rgba(216,179,92,.18);
+    box-shadow:0 0 25px rgba(216,179,92,.35);
+
+    filter:drop-shadow(0 0 12px rgba(216,179,92,.45));
 
 }
 
@@ -341,7 +345,7 @@ RESPONSIVE
 
     header img{
 
-        width:130px;
+        width:170px;
 
     }
 
