@@ -140,13 +140,29 @@ buscador.addEventListener("input", function(){
 
     const busqueda = normalizarTexto(this.value);
 
-    document.querySelectorAll(".producto").forEach(producto=>{
+    document.querySelectorAll(".seccion").forEach(seccion=>{
 
-        const contenido = normalizarTexto(producto.innerText);
+        let visibles = 0;
 
-        producto.style.display = contenido.includes(busqueda)
-            ? ""
-            : "none";
+        seccion.querySelectorAll(".producto").forEach(producto=>{
+
+            const contenido = normalizarTexto(producto.innerText);
+
+            if(contenido.includes(busqueda)){
+
+                producto.style.display="";
+
+                visibles++;
+
+            }else{
+
+                producto.style.display="none";
+
+            }
+
+        });
+
+        seccion.style.display = visibles>0 ? "" : "none";
 
     });
 
