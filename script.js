@@ -6,7 +6,7 @@ carta.forEach(categoria=>{
 
     menu.innerHTML += `
 
-        <a href="#${categoria.id}" class="categoria">
+<a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
 
             <div class="icono">
 
@@ -70,7 +70,55 @@ carta.forEach(categoria=>{
 
         });
 
-        contenedor.appendChild(seccion);
+    contenedor.appendChild(seccion);
+
+    });
+
+    // Intersection Observer
+
+    const observer = new IntersectionObserver((entradas)=>{
+
+        entradas.forEach(entrada=>{
+
+            if(entrada.isIntersecting){
+
+                document.querySelectorAll(".categoria").forEach(boton=>{
+
+                    boton.classList.remove("activa");
+
+                });
+
+                const boton=document.querySelector(`[data-id="${entrada.target.id}"]`);
+
+                if(boton){
+
+                    boton.classList.add("activa");
+
+                    boton.scrollIntoView({
+
+                        behavior:"smooth",
+
+                        inline:"center",
+
+                        block:"nearest"
+
+                    });
+
+                }
+
+            }
+
+        });
+
+    },{
+
+        threshold:0.35
+
+    });
+
+    document.querySelectorAll(".seccion").forEach(seccion=>{
+
+        observer.observe(seccion);
 
     });
 
