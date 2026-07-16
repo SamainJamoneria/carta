@@ -657,3 +657,64 @@ MENÚ STICKY
     pointer-events:none;
 
 }
+
+.contenedor-menu{
+
+    position:relative;
+
+    flex:1;
+
+    overflow:hidden;
+
+}
+
+.contenedor-menu::before,
+.contenedor-menu::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    width:40px;
+
+    height:100%;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transition:opacity .25s;
+
+    z-index:5;
+
+}
+
+.contenedor-menu::before{
+
+    left:0;
+
+    background:linear-gradient(to right,#f6f4ef 0%,rgba(246,244,239,0) 100%);
+
+}
+
+.contenedor-menu::after{
+
+    right:0;
+
+    background:linear-gradient(to left,#f6f4ef 0%,rgba(246,244,239,0) 100%);
+
+}
+
+.contenedor-menu.mostrar-izquierda::before{
+
+    opacity:1;
+
+}
+
+.contenedor-menu.mostrar-derecha::after{
+
+    opacity:1;
+
+}
