@@ -125,25 +125,28 @@ carta.forEach(categoria=>{
 
 });
 
+function normalizarTexto(texto){
+
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
+
+}
+
 const buscador = document.getElementById("buscar");
 
-buscador.addEventListener("input", function () {
+buscador.addEventListener("input", function(){
 
-    const texto = this.value.toLowerCase();
+    const busqueda = normalizarTexto(this.value);
 
-    document.querySelectorAll(".producto").forEach(producto => {
+    document.querySelectorAll(".producto").forEach(producto=>{
 
-        const contenido = producto.innerText.toLowerCase();
+        const contenido = normalizarTexto(producto.innerText);
 
-        if (contenido.includes(texto)) {
-
-            producto.style.display = "";
-
-        } else {
-
-            producto.style.display = "none";
-
-        }
+        producto.style.display = contenido.includes(busqueda)
+            ? ""
+            : "none";
 
     });
 
