@@ -123,6 +123,54 @@ carta.forEach(categoria=>{
 
     });
 
+    const contenedorMenu = document.querySelector(".menu-categorias");
+
+const flechaIzquierda = document.getElementById("flecha-izquierda");
+const flechaDerecha = document.getElementById("flecha-derecha");
+
+function actualizarFlechas(){
+
+    const inicio = contenedorMenu.scrollLeft <= 5;
+
+    const fin = contenedorMenu.scrollLeft >=
+        contenedorMenu.scrollWidth - contenedorMenu.clientWidth - 5;
+
+    flechaIzquierda.classList.toggle("oculta", inicio);
+
+    flechaDerecha.classList.toggle("oculta", fin);
+
+}
+
+contenedorMenu.addEventListener("scroll", actualizarFlechas);
+
+window.addEventListener("resize", actualizarFlechas);
+
+actualizarFlechas();
+
+flechaIzquierda.addEventListener("click", ()=>{
+
+    contenedorMenu.scrollBy({
+
+        left:-250,
+
+        behavior:"smooth"
+
+    });
+
+});
+
+flechaDerecha.addEventListener("click", ()=>{
+
+    contenedorMenu.scrollBy({
+
+        left:250,
+
+        behavior:"smooth"
+
+    });
+
+});
+
 });
 
 function normalizarTexto(texto){
