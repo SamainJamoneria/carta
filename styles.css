@@ -643,3 +643,17 @@ MENÚ STICKY
     }
 
 }
+
+.flecha-menu{
+
+    transition:.25s;
+
+}
+
+.flecha-menu.oculta{
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
