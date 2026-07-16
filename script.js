@@ -251,3 +251,16 @@ buscador.addEventListener("input", function(){
 
 });
        
+const imagenAlergenos = document.getElementById("imagen-alergenos");
+
+imagenAlergenos.addEventListener("click", ()=>{
+
+    alert(
+`⚠️ INFORMACIÓN IMPORTANTE
+
+Por favor, si usted es alérgico a alguno de estos productos, avise al personal antes de realizar su pedido.
+
+Estaremos encantados de ayudarle.`
+    );
+
+});
