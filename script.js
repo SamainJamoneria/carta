@@ -112,8 +112,9 @@ carta.forEach(categoria=>{
 
     },{
 
-        threshold:0.35
-
+      rootMargin:"-35% 0px -55% 0px",
+      threshold:0
+        
     });
 
     document.querySelectorAll(".seccion").forEach(seccion=>{
