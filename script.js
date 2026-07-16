@@ -202,8 +202,4 @@ buscador.addEventListener("input", function(){
     }
 
 });
-        seccion.style.display = visibles>0 ? "" : "none";
-
-    });
-
-});
+       
