@@ -157,6 +157,8 @@ flechaIzquierda.addEventListener("click", ()=>{
 
     });
 
+    setTimeout(actualizarFlechas,300);
+
 });
 
 flechaDerecha.addEventListener("click", ()=>{
@@ -168,6 +170,8 @@ flechaDerecha.addEventListener("click", ()=>{
         behavior:"smooth"
 
     });
+
+    setTimeout(actualizarFlechas,300);
 
 });
 
