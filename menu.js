@@ -49,7 +49,7 @@ const carta = [
 {
     id:"tablas",
     titulo:"Tablas",
-    icono:"🧀",
+    icono:"🍽️",
     productos:[
 
         {
