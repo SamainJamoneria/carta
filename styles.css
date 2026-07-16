@@ -629,6 +629,8 @@ MENU DE CATEGORÍAS
 
     position:relative;
 
+    background:#fffdfa;
+
 }
 
 .producto::after{
