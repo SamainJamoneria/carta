@@ -251,16 +251,30 @@ buscador.addEventListener("input", function(){
 
 });
        
-const imagenAlergenos = document.getElementById("imagen-alergenos");
+const modal = document.getElementById("modal-alergenos");
 
-imagenAlergenos.addEventListener("click", ()=>{
+const imagen = document.getElementById("imagen-alergenos");
 
-    alert(
-`⚠️ INFORMACIÓN IMPORTANTE
+const cerrar = document.getElementById("cerrar-modal");
 
-Por favor, si usted es alérgico a alguno de estos productos, avise al personal antes de realizar su pedido.
+imagen.addEventListener("click", ()=>{
 
-Estaremos encantados de ayudarle.`
-    );
+    modal.classList.add("abierto");
+
+});
+
+cerrar.addEventListener("click", ()=>{
+
+    modal.classList.remove("abierto");
+
+});
+
+modal.addEventListener("click",(e)=>{
+
+    if(e.target===modal){
+
+        modal.classList.remove("abierto");
+
+    }
 
 });
