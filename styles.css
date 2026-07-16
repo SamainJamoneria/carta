@@ -499,11 +499,23 @@ MENÚ STICKY
 
     z-index:999;
 
-    background:#f6f4ef;
+    background:rgba(246,244,239,.90);
+   
+    backdrop-filter:blur(12px);
+   
+    -webkit-backdrop-filter:blur(12px);
 
     padding:12px 15px;
 
     box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+    border-bottom:1px solid rgba(216,179,92,.35);
+
+}
+
+.categoria.activa{
+
+    animation:activa .35s ease;
 
 }
 
@@ -607,5 +619,27 @@ MENÚ STICKY
     font-size:20px;
     font-weight:bold;
     color:#b22222;
+
+}
+
+@keyframes activa{
+
+    0%{
+
+        transform:scale(.92);
+
+    }
+
+    70%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1.03);
+
+    }
 
 }
