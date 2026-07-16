@@ -8,12 +8,12 @@ const carta = [
 
         {
             nombre:"Burrata with Iberian Ham Powder",
-            descripcion:"Tomato, burrata, extra virgin olive oil, homemade pesto and Iberian ham powder",
+            descripcion:"Tomato, burrata, EVOO, pesto and Iberian ham powder",
             precio:"12,50 €"
         },
 
         {
-            nombre:"Chicharrones with Local Cheese",
+            nombre:"Pork Cracklings with Local Cheese",
             descripcion:"",
             precio:"11,00 €"
         },
@@ -25,7 +25,7 @@ const carta = [
         },
 
         {
-            nombre:"Ham with Parmigiano & Isbilya EVOO",
+            nombre:"Ham with Parmigiano & Isbilya Olive Oil",
             descripcion:"Tomato, cured ham and grated Parmigiano",
             precio:"10,00 €"
         },
@@ -53,20 +53,20 @@ const carta = [
     productos:[
 
         {
-            nombre:"Samaín Sharing Board",
+            nombre:"Samaín Board",
             descripcion:"Iberian chorizo, Iberian salchichón, Granada cured ham, Iberian pork loin and three cheeses of your choice",
             precio:"23,00 €"
         },
 
         {
-            nombre:"Iberian Sharing Board",
+            nombre:"Iberian Board",
             descripcion:"100% Iberian ham, Iberian pork loin, Iberian chorizo, Iberian salchichón and cecina",
             precio:"25,00 €"
         },
 
         {
-            nombre:"Cheese Selection",
-            descripcion:"Five different cheeses served with carefully selected accompaniments",
+            nombre:"Cheese Board",
+            descripcion:"Five different cheeses served with their ideal pairings",
             precio:"23,50 €"
         }
 
@@ -111,13 +111,13 @@ const carta = [
         },
 
         {
-            nombre:"Cecina (Dry-Cured Beef)",
+            nombre:"Cecina (Dry-cured Beef)",
             descripcion:"Half / Whole",
             precio:"9,00 € / 16,00 €"
         },
 
         {
-            nombre:"Chicharrones with Local Cheese",
+            nombre:"Pork Cracklings with Local Cheese",
             descripcion:"Half / Whole",
             precio:"6,50 € / 13,00 €"
         },
@@ -155,41 +155,169 @@ const carta = [
     ]
 
 },
-
+    
 {
     id:"quesos",
-    titulo:"Cheeses",
+    titulo:"Cheese Selection",
     icono:"🧀",
     productos:[
 
         {
-            nombre:"Old Sheep's Cheese",
-            descripcion:"",
-            precio:"7,00 €"
+            nombre:"Stilton",
+            descripcion:"Half / Whole",
+            precio:"6,00 € / 12,00 €"
         },
 
         {
-            nombre:"Goat's Cheese",
-            descripcion:"",
-            precio:"7,00 €"
+            nombre:"Truffle Gouda",
+            descripcion:"Half / Whole",
+            precio:"7,00 € / 12,50 €"
         },
 
         {
-            nombre:"Smoked Cheese",
-            descripcion:"",
-            precio:"7,00 €"
+            nombre:"Gorgonzola",
+            descripcion:"Half / Whole",
+            precio:"6,00 € / 10,00 €"
         },
 
         {
-            nombre:"Blue Cheese",
-            descripcion:"",
-            precio:"7,00 €"
+            nombre:"Appenzeller",
+            descripcion:"Half / Whole",
+            precio:"6,00 € / 12,00 €"
         },
 
         {
-            nombre:"Truffled Cheese",
+            nombre:"Comté",
+            descripcion:"Half / Whole",
+            precio:"6,00 € / 12,00 €"
+        },
+
+        {
+            nombre:"Parmigiano Reggiano",
+            descripcion:"Half / Whole",
+            precio:"5,50 € / 10,00 €"
+        },
+
+        {
+            nombre:"Goat Cheese Roll",
             descripcion:"",
+            precio:"5,00 €"
+        },
+
+        {
+            nombre:"Pría Blue Cheese",
+            descripcion:"Half / Whole",
+            precio:"7,00 € / 13,00 €"
+        },
+
+        {
+            nombre:"Paulus",
+            descripcion:"Half / Whole",
+            precio:"6,50 € / 12,50 €"
+        }
+
+    ]
+
+},
+
+{
+    id:"piadinas",
+    titulo:"Piadinas",
+    icono:"🌯",
+    productos:[
+
+        {
+            nombre:"Tuna",
+            descripcion:"Tomato, cheese and tuna",
+            precio:"8,00 €"
+        },
+
+        {
+            nombre:"Iberian",
+            descripcion:"Tomato, cheese and hand-carved Iberian ham",
+            precio:"12,50 €"
+        },
+
+        {
+            nombre:"Serrana",
+            descripcion:"Tomato, cheese and Granada cured ham",
+            precio:"9,50 €"
+        },
+
+        {
+            nombre:"Smoked Salmon",
+            descripcion:"Smoked salmon and local cheese",
+            precio:"12,50 €"
+        },
+
+        {
+            nombre:"Samaín",
+            descripcion:"Cecina, tomato, local cheese, Gorgonzola and Parmigiano",
+            precio:"12,00 €"
+        },
+
+        {
+            nombre:"Bacon",
+            descripcion:"Cheese, tomato and bacon",
+            precio:"10,00 €"
+        },
+
+        {
+            nombre:"Anchovies",
+            descripcion:"Tomato, cheese, olive oil and anchovies",
+            precio:"10,00 €"
+        },
+
+        {
+            nombre:"Turkey Breast",
+            descripcion:"Cheese, tomato and turkey breast",
             precio:"7,50 €"
+        },
+
+        {
+            nombre:"Mortadella",
+            descripcion:"Local cheese, fresh tomato, homemade pesto and mortadella",
+            precio:"12,00 €"
+        },
+
+        {
+            nombre:"Pork Cracklings",
+            descripcion:"Cheese, pork cracklings and BBQ sauce",
+            precio:"12,00 €"
+        },
+
+        {
+            nombre:"Stracciatella",
+            descripcion:"Fresh tomato with EVOO, Pedro Ximénez reduction, stracciatella and Iberian ham powder",
+            precio:"12,00 €"
+        }
+
+    ]
+
+},
+
+{
+    id:"dulces",
+    titulo:"Sweet Piadinas",
+    icono:"🍫",
+    productos:[
+
+        {
+            nombre:"Quince",
+            descripcion:"Two cheeses with thin slices of quince",
+            precio:"8,00 €"
+        },
+
+        {
+            nombre:"Nutella",
+            descripcion:"",
+            precio:"6,00 €"
+        },
+
+        {
+            nombre:"Extra Ingredient",
+            descripcion:"",
+            precio:"0,50 €"
         }
 
     ]
@@ -199,11 +327,11 @@ const carta = [
 {
     id:"bocadillos",
     titulo:"Sandwiches",
-    icono:"🥖",
+    icono:"🥪",
     productos:[
 
         {
-            nombre:"100% Iberian Ham",
+            nombre:"100% Acorn-fed Iberian Ham",
             descripcion:"",
             precio:"12,00 €"
         },
@@ -274,10 +402,12 @@ const carta = [
 
         {
             nombre:"Ice Cream",
-            descripcion:"Ask for available flavours",
-            precio:"Check price"
+            descripcion:"Please, ask about our available flavors",
+            precio:"Please ask"
         }
 
     ]
 
-},
+}
+
+];
