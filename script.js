@@ -129,8 +129,14 @@ function actualizarFlechas(){
 
     flechaDerecha.classList.toggle("oculta", fin);
 
-}
+    const contenedor = document.querySelector(".contenedor-menu");
 
+    contenedor.classList.toggle("mostrar-izquierda", !inicio);
+
+    contenedor.classList.toggle("mostrar-derecha", !fin);
+
+}
+    
 contenedorMenu.addEventListener("scroll", actualizarFlechas);
 
 window.addEventListener("resize", actualizarFlechas);
