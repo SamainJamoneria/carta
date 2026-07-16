@@ -136,9 +136,13 @@ function normalizarTexto(texto){
 
 const buscador = document.getElementById("buscar");
 
+const resultado = document.getElementById("resultado-busqueda");
+
 buscador.addEventListener("input", function(){
 
     const busqueda = normalizarTexto(this.value);
+
+    let totalResultados = 0;
 
     document.querySelectorAll(".seccion").forEach(seccion=>{
 
@@ -150,18 +154,54 @@ buscador.addEventListener("input", function(){
 
             if(contenido.includes(busqueda)){
 
-                producto.style.display="";
+                producto.style.display = "";
 
                 visibles++;
+                totalResultados++;
 
             }else{
 
-                producto.style.display="none";
+                producto.style.display = "none";
 
             }
 
         });
 
+        seccion.style.display = visibles > 0 ? "" : "none";
+
+    });
+
+    if(busqueda===""){
+
+        resultado.innerHTML="";
+
+    }else if(totalResultados===0){
+
+        resultado.innerHTML=`
+            <span class="texto-busqueda">
+                🔍 Buscando: <strong>${this.value}</strong>
+            </span>
+            <br>
+            <span class="sin-resultados">
+                ❌ No se encontraron productos
+            </span>
+        `;
+
+    }else{
+
+        resultado.innerHTML=`
+            <span class="texto-busqueda">
+                🔍 Buscando: <strong>${this.value}</strong>
+            </span>
+            <br>
+            <span class="con-resultados">
+                ✅ ${totalResultados} ${totalResultados===1 ? "producto encontrado" : "productos encontrados"}
+            </span>
+        `;
+
+    }
+
+});
         seccion.style.display = visibles>0 ? "" : "none";
 
     });
