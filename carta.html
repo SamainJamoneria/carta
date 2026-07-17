@@ -162,28 +162,39 @@
 
     <div class="tarjeta-destino">
 
-      <div class="ruleta-destino">
+        <div class="ruleta-destino">
 
-    <div class="flecha-ruleta">
-        ▼
-    </div>
+            <!-- La flecha ahora envuelve al puntero para girar desde el centro como una aguja -->
+            <div class="flecha-ruleta" id="flecha-ruleta">
+                <span class="puntero">▼</span>
+            </div>
 
-    <div class="disco-ruleta" id="disco-ruleta">
+            <div class="disco-ruleta" id="disco-ruleta">
+                <!-- Los 8 gajos físicos de fondo para iluminarse de forma independiente -->
+                <div class="gajo-quesito" data-index="0"></div>
+                <div class="gajo-quesito" data-index="1"></div>
+                <div class="gajo-quesito" data-index="2"></div>
+                <div class="gajo-quesito" data-index="3"></div>
+                <div class="gajo-quesito" data-index="4"></div>
+                <div class="gajo-quesito" data-index="5"></div>
+                <div class="gajo-quesito" data-index="6"></div>
+                <div class="gajo-quesito" data-index="7"></div>
 
-        <div class="icono-ruleta">🥖</div>
-        <div class="icono-ruleta">🍽️</div>
-        <div class="icono-ruleta">🍖</div>
-        <div class="icono-ruleta">🧀</div>
-        <div class="icono-ruleta">🌯</div>
-        <div class="icono-ruleta">🍫</div>
-        <div class="icono-ruleta">🥪</div>
-      
-    </div>
+                <!-- Los 8 iconos fijos en sus porciones -->
+                <div class="icono-ruleta">🥖</div>
+                <div class="icono-ruleta">🍽️</div>
+                <div class="icono-ruleta">🍖</div>
+                <div class="icono-ruleta">🧀</div>
+                <div class="icono-ruleta">🌯</div>
+                <div class="icono-ruleta">🍫</div>
+                <div class="icono-ruleta">🥪</div>
+                <div class="icono-ruleta">🍰</div>
+            </div>
 
-</div>
-      
-      
-    <p class="titulo-destino">✨ El destino ha decidido...</p>
+        </div>
+          
+          
+        <p class="titulo-destino">✨ El destino ha decidido...</p>
 
         <!-- 1. CATEGORÍA COLOCADA AQUÍ (ENCIMA DEL PRODUCTO) -->
         <div id="categoria-destino" class="categoria-destino"></div>
