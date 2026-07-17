@@ -1,140 +1,152 @@
 <!DOCTYPE html>
-<html lang="es">
-  
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-  
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Carta - Samaín La Cormelana</title>
-
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-   <link rel="stylesheet" href="styles.css">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu - Samaín La Cormelana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
 <header>
-
-<nav>
-
-<a href="index.html">🏠 Inicio</a>
-
-<div class="idiomas">
-
-  <a href="carta.html">🇪🇸</a>
-
-  <a href="carta-en.html">🇬🇧</a>
-
-</div>
-
-</nav>
-  
-<img src="LOGO.png">
-
-<h1>Our menu</h1>
-
-<p>Specialists in Iberian products</p>
-  
+    <nav>
+        <a href="index.html">🏠 Home</a>
+        <div class="idiomas">
+            <a href="carta.html">🇪🇸</a>
+            <a href="carta-en.html">🇬🇧</a>
+        </div>
+    </nav>
+    <img src="LOGO.png" alt="Samaín Logo">
+    <h1>Our menu</h1>
+    <p>Specialists in Iberian products</p>
 </header>
 
 <div class="menu-sticky">
-
-    <button class="flecha-menu izquierda" id="flecha-izquierda">
-        ‹
-    </button>
-
+    <button class="flecha-menu izquierda" id="flecha-izquierda">‹</button>
     <div class="contenedor-menu">
-
-        <section class="menu-categorias" id="menu-categorias">
-
-        </section>
-
+        <section class="menu-categorias" id="menu-categorias"></section>
     </div>
-
-    <button class="flecha-menu derecha" id="flecha-derecha">
-        ›
-    </button>
-
+    <button class="flecha-menu derecha" id="flecha-derecha">›</button>
 </div>
   
 <section class="buscador">
-
     <input
         type="text"
         id="buscar"
         placeholder="🔍 Search a product..."
     >
-
 </section>
 
 <div id="resultado-busqueda" class="resultado-busqueda"></div>
 
-<main id="carta">
+<!-- ==================================================
+     SECCIÓN: EL DESTINO SAMAÍN (THE SAMAÍN DESTINY)
+     ================================================== -->
+<section class="destino-samain">
+    <p class="texto-destino">
+        Don't know what to order? Let luck decide your next dish! 🎯
+    </p>
+    <button class="btn-destino" id="btn-destino">
+        ✨ Spin the wheel
+    </button>
+</section>
 
-</main>
-  
-<main id="carta">
+<!-- MODAL: SELECCIÓN DE COMENSALES -->
+<div id="modal-destino" class="modal-destino">
+    <div class="ventana-destino">
+        <button class="cerrar-destino" id="cerrar-destino">&times;</button>
+        <h2>Who is sharing?</h2>
+        <button class="opcion-comensales" data-comensales="1">Just for me 🙋‍♂️</button>
+        <button class="opcion-comensales" data-comensales="2">To share (2 or more) 👥</button>
+    </div>
+</div>
 
-</main>
+<!-- PANTALLA COMPLETA DE GIRO Y RESULTADO FINAL -->
+<div id="resultado-destino" class="resultado-destino">
+    <div class="tarjeta-destino" onclick="event.stopPropagation();">
+        
+        <!-- RULETA ESTÁTICA MECÁNICA CON AGUJA MÓVIL -->
+        <div class="ruleta-destino">
+            <div class="disco-ruleta" id="disco-ruleta">
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+                <div class="gajo-quesito"></div>
+            </div>
+            
+            <!-- Iconos de las porciones -->
+            <div class="icono-ruleta">🥗</div>
+            <div class="icono-ruleta">🍳</div>
+            <div class="icono-ruleta">🥓</div>
+            <div class="icono-ruleta">🧀</div>
+            <div class="icono-ruleta">🥪</div>
+            <div class="icono-ruleta">🌯</div>
+            <div class="icono-ruleta">🍰</div>
+            <div class="icono-ruleta">🥖</div>
 
- <section class="alergenos">
+            <!-- Aguja superior giratoria -->
+            <div class="flecha-ruleta">
+                <div class="puntero">▼</div>
+            </div>
+        </div>
 
-    <h2>⚠️ Allergen information </h2>
+        <!-- Detalles del plato seleccionado -->
+        <div class="titulo-destino">Your Samaín Destiny is...</div>
+        <span id="categoria-destino" class="categoria-destino"></span>
+        <h2 id="nombre-destino"></h2>
+        <p id="descripcion-destino"></p>
+        <div id="precio-destino"></div>
+        
+        <small>✨ Tap anywhere to close ✨</small>
+    </div>
+</div>
 
+<!-- CONTENEDOR PARA EFECTO CONFETI -->
+<div id="confeti"></div>
+
+<!-- ==================================================
+     CONTENIDO PRINCIPAL DE LA CARTA
+     ================================================== -->
+<main id="carta"></main>
+
+<section class="alergenos">
+    <h2>⚠️ Allergen information</h2>
     <img
         src="alergenos-en.png"
         id="imagen-alergenos"
-        alt="Tabla de alérgenos"
+        alt="Allergens chart"
     >
-
-    <p>🔎 Click on the image to enlarge it. </p>
-
+    <p>🔎 Click on the image to enlarge it.</p>
 </section>
 
-<!-- Ventana emergente -->
-
+<!-- Ventana emergente Alérgenos -->
 <div id="modal-alergenos" class="modal-alergenos">
-
     <div class="modal-contenido">
-
         <span id="cerrar-modal">&times;</span>
-
-        <img src="alergenos-en.png" alt="Alérgenos">
-
+        <img src="alergenos-en.png" alt="Allergens">
         <div class="mensaje-alergenos">
-
             ⚠️ <strong>Please let the staff know before placing your order if you are allergic to any of these products.</strong>
-
         </div>
-
     </div>
-
 </div> 
 
 <footer>
-
-Samaín La Cormelana · A Coruña
-
- <br><br>
-
-📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">
-
-Instagram
-
-</a> 
-
+    Samaín La Cormelana · A Coruña
+    <br><br>
+    📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Instagram</a> 
 </footer>
-  
+
+<!-- Scripts unificados -->
 <script src="menu-en.js"></script>
 <script src="script.js"></script>
+<script src="destino.js"></script>
   
 </body>
 </html>
