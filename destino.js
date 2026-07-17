@@ -267,8 +267,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // CERRAR RESULTADO Y REINICIAR ESTADOS
     //================================================
 
+    //================================================
+    // CERRAR RESULTADO Y REINICIAR ESTADOS DESDE CERO
+    //================================================
+
     resultadoDestino.addEventListener("click",()=>{
-        // Cancelamos los loops de animación y timers activos por si se cierra antes de tiempo
+        // 1. Cancelamos los loops de animación y timers activos por si se cierra antes de tiempo
         if (timerFinalizacion) {
             clearTimeout(timerFinalizacion);
             timerFinalizacion = null;
@@ -277,15 +281,20 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelAnimationFrame(frameId);
         }
         
-        // Limpiamos los estados de las clases y apagamos los brillos residuales de los gajos
-        ruleta.classList.remove("girando");
+        // 2. Limpiamos las clases de animación y apagamos los brillos de los gajos
+        ruleta.classList.remove("girando", "finalizada");
         gajos.forEach(g => g.classList.remove("iluminado"));
         
-        // Reseteamos de forma inmediata la aguja a su posición norte
+        // 3. Reseteamos de forma inmediata la aguja a su posición norte nativa (0 grados)
         flechaAguja.style.transition = "none";
-        flechaAguja.style.transform = "rotate(0deg)";
+        flechaAguja.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
         
+        // 4. VACIAR TEXTOS: Evita que al reabrir la ruleta se vea el plato que tocó antes
+        nombreDestino.textContent = "";
+        descripcionDestino.textContent = "";
+        precioDestino.textContent = "";
+        categoriaDestino.textContent = "";
+        
+        // 5. Ocultamos la pantalla de resultados
         resultadoDestino.classList.remove("visible");
     });
-
-});
