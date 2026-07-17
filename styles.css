@@ -877,3 +877,297 @@ MODAL
     font-weight:bold;
 
 }
+
+/*==================================================
+EL DESTINO SAMAÍN
+==================================================*/
+
+.destino-samain{
+
+    max-width:900px;
+    margin:45px auto;
+    padding:0 20px;
+    text-align:center;
+
+}
+
+.texto-destino{
+
+    font-size:22px;
+    color:#2d2b72;
+    margin-bottom:18px;
+    line-height:1.5;
+
+}
+
+.btn-destino{
+
+    cursor:pointer;
+
+    border:none;
+
+    padding:18px 38px;
+
+    border-radius:999px;
+
+    background:linear-gradient(135deg,#2d2b72,#4a47b8);
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    box-shadow:0 12px 30px rgba(45,43,114,.30);
+
+    transition:.30s;
+
+}
+
+.btn-destino:hover{
+
+    transform:translateY(-4px) scale(1.03);
+
+    box-shadow:0 20px 45px rgba(45,43,114,.35);
+
+}
+
+.btn-destino:active{
+
+    transform:scale(.97);
+
+}
+
+/*==================================================
+MODAL DESTINO
+==================================================*/
+
+.modal-destino{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:5000;
+
+}
+
+.modal-destino.abierto{
+
+    display:flex;
+
+}
+
+.ventana-destino{
+
+    width:min(92%,420px);
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    text-align:center;
+
+    position:relative;
+
+    animation:zoomDestino .30s;
+
+}
+
+.cerrar-destino{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#eee;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+}
+
+.ventana-destino h2{
+
+    margin-bottom:30px;
+
+    color:#2d2b72;
+
+}
+
+.opcion-comensales{
+
+    width:100%;
+
+    margin-bottom:15px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2d2b72;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.opcion-comensales:hover{
+
+    background:#4442a4;
+
+    transform:translateY(-2px);
+
+}
+
+/*==================================================
+RESULTADO
+==================================================*/
+
+.resultado-destino{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.82);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:6000;
+
+    cursor:pointer;
+
+}
+
+.resultado-destino.visible{
+
+    display:flex;
+
+}
+
+.tarjeta-destino{
+
+    width:min(92%,480px);
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    text-align:center;
+
+    animation:zoomDestino .45s;
+
+}
+
+.icono-destino{
+
+    font-size:70px;
+
+    margin-bottom:20px;
+
+}
+
+.tarjeta-destino h2{
+
+    color:#666;
+
+    margin-bottom:20px;
+
+}
+
+#nombre-destino{
+
+    color:#2d2b72;
+
+    font-size:38px;
+
+    margin-bottom:15px;
+
+}
+
+#descripcion-destino{
+
+    color:#666;
+
+    margin-bottom:20px;
+
+    font-size:18px;
+
+}
+
+#precio-destino{
+
+    color:#8b0000;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+.tarjeta-destino small{
+
+    display:block;
+
+    margin-top:35px;
+
+    color:#999;
+
+}
+
+@keyframes zoomDestino{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
