@@ -99,8 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const indice = categoriasOrden.indexOf(resultado.categoria.id);
 
-    // Cada icono ocupa 45º
-    const gradosIcono = indice * 45;
+    // 360º dividido entre las categorías
+const gradosPorCategoria = 360 / categoriasOrden.length;
+
+const gradosIcono = indice * gradosPorCategoria;
 
     // 6 vueltas completas + posición final
     const gradosFinal = (360 * 6) - gradosIcono;
