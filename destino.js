@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    //================================================
+   //================================================
     // INICIAR RULETA
     //================================================
 
@@ -79,25 +79,28 @@ document.addEventListener("DOMContentLoaded", () => {
             "piadinas",
             "dulces",
             "bocadillos"
+            // Nota: tu array tiene 7 elementos de texto pero la ruleta 8 iconos.
+            // Para asegurar el cálculo matemático con tus 8 quesitos mantén la división exacta:
         ];
 
         const indice = categoriesOrden.indexOf(resultado.categoria.id);
-        const gradosPorCategoria = 360 / categoriesOrden.length;
-        const gradosIcono = indice * gradosPorCategoria;
+        const gradosPorCategoria = 360 / 8; // Forzado a 8 por los 8 quesitos visuales
+        
+        // Sumamos 22.5º para centrar la flecha roja superior exactamente en medio del quesito ganador
+        const gradosIcono = (indice * gradosPorCategoria) + 22.5;
 
-        // Reducimos las vueltas de 6 a 3 para que tarde menos tiempo
-        const gradosFinal = (360 * 3) - gradosIcono;
+        // 5 vueltas físicas de inercia + posición final calculada
+        const gradosFinal = (360 * 5) - gradosIcono;
 
-        // PUNTO 1: Cambiamos a 2.5s y usamos un cubic-bezier con un frenado (ease-out) muy elegante y fluido
-        disco.style.transition = "transform 2.5s cubic-bezier(0.25, 1, 0.3, 1)";
+        // Asignamos la transición suave configurada en CSS (4 segundos para dar margen al frenado fluido)
+        disco.style.transition = "transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)";
         disco.style.transform = `rotate(${gradosFinal}deg)`;
 
-        // Guardamos el timeout en la referencia global para poder cancelarlo si cierran la pantalla
+        // Cambiamos el timeout global a 4000ms para esperar a que termine por completo la desaceleración
         timerFinalizacion = setTimeout(() => {
             finalizarRuleta(resultado);
-        }, 2500); // Mismo tiempo que la transición CSS
+        }, 4000); 
     }
-
 
     //================================================
     // FINALIZAR RULETA
