@@ -227,9 +227,8 @@ setTimeout(() => {
                 "tostas",
                 "piadinas",
                 "dulces",
-                "bocadillos",
-                "postres"
-
+                "bocadillos"
+                
             ].includes(c.id)
 
         );
