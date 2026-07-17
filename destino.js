@@ -4,28 +4,59 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const botonDestino = document.getElementById("btn-destino");
+    // ==========================
+    // Elementos
+    // ==========================
+
+    const btnDestino = document.getElementById("btn-destino");
     const modalDestino = document.getElementById("modal-destino");
     const cerrarDestino = document.getElementById("cerrar-destino");
 
-    // Abrir ventana
-    botonDestino.addEventListener("click", () => {
+    const resultadoDestino = document.getElementById("resultado-destino");
+
+    const iconoDestino = document.getElementById("icono-destino");
+    const nombreDestino = document.getElementById("nombre-destino");
+    const descripcionDestino = document.getElementById("descripcion-destino");
+    const precioDestino = document.getElementById("precio-destino");
+
+    // ==========================
+    // Iconos de la ruleta
+    // ==========================
+
+    const iconosRuleta = [
+        "🥖",
+        "🍽️",
+        "🍖",
+        "🧀",
+        "🌯",
+        "🍫",
+        "🥪",
+        "🍰"
+    ];
+
+    // ==========================
+    // Abrir modal
+    // ==========================
+
+    btnDestino.addEventListener("click", () => {
 
         modalDestino.classList.add("visible");
 
     });
 
-    // Botón cerrar
+    // ==========================
+    // Cerrar modal
+    // ==========================
+
     cerrarDestino.addEventListener("click", () => {
 
         modalDestino.classList.remove("visible");
 
     });
 
-    // Cerrar pulsando fuera de la ventana
     modalDestino.addEventListener("click", (e) => {
 
-        if(e.target === modalDestino){
+        if (e.target === modalDestino) {
 
             modalDestino.classList.remove("visible");
 
@@ -33,177 +64,132 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // ==========================
+    // Selección de comensales
+    // ==========================
 
-/*==================================================
-DESTINO SAMAÍN
-==================================================*/
+    document.querySelectorAll(".opcion-comensales").forEach(boton => {
 
-const btnDestino = document.getElementById("btn-destino");
-const modalDestino = document.getElementById("modal-destino");
-const cerrarDestino = document.getElementById("cerrar-destino");
+        boton.addEventListener("click", () => {
 
-btnDestino.addEventListener("click", () => {
+            document
+                .querySelectorAll(".opcion-comensales")
+                .forEach(b => b.classList.remove("seleccionado"));
 
-    modalDestino.classList.add("abierto");
+            boton.classList.add("seleccionado");
 
-});
+            modalDestino.classList.remove("visible");
 
-cerrarDestino.addEventListener("click", () => {
+            iniciarRuleta();
 
-    modalDestino.classList.remove("abierto");
-
-});
-
-modalDestino.addEventListener("click", (e) => {
-
-    if(e.target === modalDestino){
-
-        modalDestino.classList.remove("abierto");
-
-    }
-
-});
-       
-
-const iconosRuleta = [
-    "🥖",
-    "🍽️",
-    "🍖",
-    "🧀",
-    "🌯",
-    "🍫",
-    "🥪",
-    "🍰"
-];
-
-const resultadoDestino = document.getElementById("resultado-destino");
-const iconoDestino = document.getElementById("icono-destino");
-
-document.querySelectorAll(".opcion-comensales").forEach(boton=>{
-
-    boton.addEventListener("click",()=>{
-
-        document.querySelectorAll(".opcion-comensales").forEach(b=>{
-
-    b.classList.remove("seleccionado");
+        });
 
     });
 
-        boton.classList.add("seleccionado");
+    // ==========================
+    // Ruleta
+    // ==========================
 
-        modalDestino.classList.remove("abierto");
+    function iniciarRuleta() {
 
         resultadoDestino.classList.add("visible");
 
-                // aquí empieza la ruleta...
+        let indice = 0;
+        let velocidad = 60;
+        let vueltas = 0;
 
+        function girar() {
 
-       let indice = 0;
+            iconoDestino.textContent = iconosRuleta[indice];
 
-let velocidad = 60;
+            indice++;
 
-let vueltas = 0;
+            if (indice >= iconosRuleta.length) {
 
-function girarRuleta(){
+                indice = 0;
+                vueltas++;
 
-    iconoDestino.textContent = iconosRuleta[indice];
+            }
 
-    indice++;
+            if (vueltas < 3) {
 
-    if(indice >= iconosRuleta.length){
+                setTimeout(girar, velocidad);
+                return;
 
-        indice = 0;
+            }
 
-        vueltas++;
+            velocidad += 18;
+
+            if (velocidad < 260) {
+
+                setTimeout(girar, velocidad);
+
+            } else {
+
+                mostrarResultado();
+
+            }
+
+        }
+
+        girar();
 
     }
 
-    if(vueltas < 3){
+    // ==========================
+    // Resultado
+    // ==========================
 
-        setTimeout(girarRuleta, velocidad);
+    function mostrarResultado() {
 
-        return;
+        if (navigator.vibrate) {
+
+            navigator.vibrate([80, 40, 80]);
+
+        }
+
+        const personas = document.querySelector(".opcion-comensales.seleccionado").dataset.comensales;
+
+        let categoriasValidas;
+
+        if (personas === "1") {
+
+            categoriasValidas = carta.filter(c =>
+                ["tostas", "piadinas", "dulces", "bocadillos", "postres"].includes(c.id)
+            );
+
+        } else {
+
+            categoriasValidas = carta;
+
+        }
+
+        const categoria = categoriasValidas[
+            Math.floor(Math.random() * categoriasValidas.length)
+        ];
+
+        const producto = categoria.productos[
+            Math.floor(Math.random() * categoria.productos.length)
+        ];
+
+        iconoDestino.textContent = categoria.icono;
+
+        nombreDestino.textContent = producto.nombre;
+
+        descripcionDestino.textContent = producto.descripcion;
+
+        precioDestino.textContent = producto.precio;
 
     }
 
-    velocidad += 18;
+    // ==========================
+    // Cerrar resultado
+    // ==========================
 
-    if(velocidad < 260){
+    resultadoDestino.addEventListener("click", () => {
 
-        setTimeout(girarRuleta, velocidad);
-
-    }else{
-
-        finalizarDestino();
-
-    }
-
-}
-
-girarRuleta();
+        resultadoDestino.classList.remove("visible");
 
     });
 
 });
-
-resultadoDestino.addEventListener("click",()=>{
-
-    resultadoDestino.classList.remove("visible");
-
-});
-
-function finalizarDestino(){
-
-    if(navigator.vibrate){
-
-        navigator.vibrate([80,40,80]);
-
-    }
-
-    let categoriasPermitidas=[];
-
-    const personas=document.querySelector(".opcion-comensales.seleccionado")?.dataset.comensales;
-
-    if(personas==="1"){
-
-        categoriasPermitidas=[
-            "tostas",
-            "piadinas",
-            "dulces",
-            "bocadillos",
-            "postres"
-        ];
-
-    }else{
-
-        categoriasPermitidas=carta.map(c=>c.id);
-
-    }
-
-    const categorias=carta.filter(c=>
-        categoriasPermitidas.includes(c.id)
-    );
-
-    const categoria=categorias[
-        Math.floor(Math.random()*categorias.length)
-    ];
-
-    const producto=categoria.productos[
-        Math.floor(Math.random()*categoria.productos.length)
-    ];
-
-    iconoDestino.textContent=categoria.icono;
-
-    document.getElementById("nombre-destino").textContent=
-        producto.nombre;
-
-    document.getElementById("descripcion-destino").textContent=
-        producto.descripcion;
-
-    document.getElementById("precio-destino").textContent=
-        producto.precio;
-
-}
-    
-});
-
