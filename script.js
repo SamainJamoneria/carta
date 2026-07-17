@@ -250,6 +250,36 @@ buscador.addEventListener("input", function(){
     }
 
 });
+
+/*==================================================
+DESTINO SAMAÍN
+==================================================*/
+
+const btnDestino = document.getElementById("btn-destino");
+const modalDestino = document.getElementById("modal-destino");
+const cerrarDestino = document.getElementById("cerrar-destino");
+
+btnDestino.addEventListener("click", () => {
+
+    modalDestino.classList.add("abierto");
+
+});
+
+cerrarDestino.addEventListener("click", () => {
+
+    modalDestino.classList.remove("abierto");
+
+});
+
+modalDestino.addEventListener("click", (e) => {
+
+    if(e.target === modalDestino){
+
+        modalDestino.classList.remove("abierto");
+
+    }
+
+});
        
 const modal = document.getElementById("modal-alergenos");
 
@@ -278,3 +308,5 @@ modal.addEventListener("click",(e)=>{
     }
 
 });
+
+
