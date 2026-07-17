@@ -158,6 +158,50 @@ setTimeout(() => {
 
 }
 
+    //================================================
+    // LANZAR CONFETI
+    //================================================
+    
+    function lanzarConfeti(){
+
+    const contenedor = document.getElementById("confeti");
+
+    const colores = [
+
+        "#d8b35c",   // dorado
+        "#2d2b72",   // azul Samaín
+        "#ffffff"
+
+    ];
+
+    for(let i=0;i<28;i++){
+
+        const pieza=document.createElement("div");
+
+        pieza.className="particula";
+
+        pieza.style.background=
+            colores[Math.floor(Math.random()*colores.length)];
+
+        pieza.style.left=
+            (window.innerWidth/2-80+Math.random()*160)+"px";
+
+        pieza.style.top=
+            (window.innerHeight/2-60)+"px";
+
+        pieza.style.transform+=
+            ` translateX(${(Math.random()-0.5)*220}px)`;
+
+        pieza.style.animationDuration=
+            (700+Math.random()*400)+"ms";
+
+        contenedor.appendChild(pieza);
+
+        setTimeout(()=>pieza.remove(),1200);
+
+    }
+
+}
 
 
     //================================================
