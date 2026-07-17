@@ -64,33 +64,6 @@ modalDestino.addEventListener("click", (e) => {
 
 });
        
-const modal = document.getElementById("modal-alergenos");
-
-const imagen = document.getElementById("imagen-alergenos");
-
-const cerrar = document.getElementById("cerrar-modal");
-
-imagen.addEventListener("click", ()=>{
-
-    modal.classList.add("abierto");
-
-});
-
-cerrar.addEventListener("click", ()=>{
-
-    modal.classList.remove("abierto");
-
-});
-
-modal.addEventListener("click",(e)=>{
-
-    if(e.target===modal){
-
-        modal.classList.remove("abierto");
-
-    }
-
-});
 
 const iconosRuleta = [
     "🥖",
