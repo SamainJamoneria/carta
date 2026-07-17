@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombreDestino = document.getElementById("nombre-destino");
     const descripcionDestino = document.getElementById("descripcion-destino");
     const precioDestino = document.getElementById("precio-destino");
+    const categoriaDestino = document.getElementById("categoria-destino");
 
     // ==========================
     // Iconos de la ruleta
@@ -179,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
         descripcionDestino.textContent = producto.descripcion;
 
         precioDestino.textContent = producto.precio;
+
+        categoriaDestino.textContent =
+        categoria.icono + " " + categoria.titulo;
 
     }
 
