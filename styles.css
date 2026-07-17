@@ -1368,3 +1368,56 @@ DESTINO SAMAÍN
     margin-bottom:15px;
 
 }
+
+.ruleta-destino{
+
+    width:120px;
+    height:120px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    border:6px solid #d8b35c;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:white;
+
+    box-shadow:
+        0 0 25px rgba(216,179,92,.35),
+        inset 0 0 25px rgba(216,179,92,.15);
+
+    transition:.3s;
+
+}
+
+.ruleta-destino.girando{
+
+    animation:girarRuleta .15s linear infinite;
+
+}
+
+@keyframes girarRuleta{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+.icono-destino{
+
+    font-size:64px;
+
+}
