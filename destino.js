@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const precioDestino = document.getElementById("precio-destino");
     const categoriaDestino = document.getElementById("categoria-destino");
 
+    // NUEVA VARIABLE GLOBAL PARA CONTROLAR Y CANCELAR EL TEMPORIZADOR
+    let timerFinalizacion = null;
 
 
     //================================================
@@ -29,25 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     //================================================
 
     btnDestino.addEventListener("click", () => {
-
         modalDestino.classList.add("visible");
-
     });
 
     cerrarDestino.addEventListener("click", cerrarModal);
 
     modalDestino.addEventListener("click", e => {
-
         if (e.target === modalDestino) cerrarModal();
-
     });
 
     function cerrarModal(){
-
         modalDestino.classList.remove("visible");
-
     }
-
 
 
     //================================================
@@ -55,22 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
     //================================================
 
     document.querySelectorAll(".opcion-comensales").forEach(boton=>{
-
         boton.addEventListener("click",()=>{
-
             document.querySelectorAll(".opcion-comensales")
             .forEach(b=>b.classList.remove("seleccionado"));
 
             boton.classList.add("seleccionado");
-
             cerrarModal();
-
             iniciarRuleta();
-
         });
-
     });
-
 
 
     //================================================
@@ -78,48 +66,37 @@ document.addEventListener("DOMContentLoaded", () => {
     //================================================
 
     function iniciarRuleta(){
+        resultadoDestino.classList.add("visible");
 
-    resultadoDestino.classList.add("visible");
+        const resultado = obtenerProducto();
+        ruleta.classList.add("girando");
 
-    // Elegimos el producto ANTES de girar
-    const resultado = obtenerProducto();
+        const categoriesOrden = [
+            "entrantes",
+            "raciones",
+            "ibericos",
+            "quesos",
+            "piadinas",
+            "dulces",
+            "bocadillos"
+        ];
 
-    ruleta.classList.add("girando");
+        const indice = categoriesOrden.indexOf(resultado.categoria.id);
+        const gradosPorCategoria = 360 / categoriesOrden.length;
+        const gradosIcono = indice * gradosPorCategoria;
 
-    const categoriasOrden = [
-        "entrantes",
-        "raciones",
-        "ibericos",
-        "quesos",
-        "piadinas",
-        "dulces",
-        "bocadillos",
-        
-    ];
+        // Reducimos las vueltas de 6 a 3 para que tarde menos tiempo
+        const gradosFinal = (360 * 3) - gradosIcono;
 
-    const indice = categoriasOrden.indexOf(resultado.categoria.id);
+        // PUNTO 1: Cambiamos a 2.5s y usamos un cubic-bezier con un frenado (ease-out) muy elegante y fluido
+        disco.style.transition = "transform 2.5s cubic-bezier(0.25, 1, 0.3, 1)";
+        disco.style.transform = `rotate(${gradosFinal}deg)`;
 
-    // 360º dividido entre las categorías
-const gradosPorCategoria = 360 / categoriasOrden.length;
-
-const gradosIcono = indice * gradosPorCategoria;
-
-    // 6 vueltas completas + posición final
-    const gradosFinal = (360 * 6) - gradosIcono;
-
-disco.style.transition =
-    "transform 4s cubic-bezier(.15,.85,.15,1)";
-
-disco.style.transform = `rotate(${gradosFinal}deg)`;
-
-setTimeout(() => {
-
-    finalizarRuleta(resultado);
-
-}, 4000);
-
-}
-
+        // Guardamos el timeout en la referencia global para poder cancelarlo si cierran la pantalla
+        timerFinalizacion = setTimeout(() => {
+            finalizarRuleta(resultado);
+        }, 2500); // Mismo tiempo que la transición CSS
+    }
 
 
     //================================================
@@ -127,85 +104,47 @@ setTimeout(() => {
     //================================================
 
     function finalizarRuleta(resultado){
+        ruleta.classList.remove("girando");
+        ruleta.classList.add("finalizada");
 
-    ruleta.classList.remove("girando");
+        setTimeout(() => {
+            ruleta.classList.remove("finalizada");
+        }, 450);
 
-    ruleta.classList.add("finalizada");
+        // Si la pantalla sigue abierta, ejecutamos los efectos visuales y hápticos
+        if(navigator.vibrate){
+            navigator.vibrate([100,50,100]);
+        }
 
-setTimeout(() => {
+        lanzarConfeti();    
 
-    ruleta.classList.remove("finalizada");
-
-}, 450);
-
-    if(navigator.vibrate){
-
-        navigator.vibrate([100,50,100]);
-
+        nombreDestino.textContent = resultado.producto.nombre;
+        descripcionDestino.textContent = resultado.producto.descripcion || "";
+        precioDestino.textContent = resultado.producto.precio;
+        categoriaDestino.textContent = resultado.categoria.icono + " " + resultado.categoria.titulo;
     }
-
-    lanzarConfeti();    
-
-    nombreDestino.textContent =
-        resultado.producto.nombre;
-
-    descripcionDestino.textContent =
-        resultado.producto.descripcion || "";
-
-    precioDestino.textContent =
-        resultado.producto.precio;
-
-    categoriaDestino.textContent =
-        resultado.categoria.icono +
-        " " +
-        resultado.categoria.titulo;
-
-}
 
     //================================================
     // LANZAR CONFETI
     //================================================
     
     function lanzarConfeti(){
+        const contenedor = document.getElementById("confeti");
+        const colores = ["#d8b35c", "#2d2b72", "#ffffff"];
 
-    const contenedor = document.getElementById("confeti");
+        for(let i=0;i<28;i++){
+            const pieza=document.createElement("div");
+            pieza.className="particula";
+            pieza.style.background= colores[Math.floor(Math.random()*colores.length)];
+            pieza.style.left= (window.innerWidth/2-80+Math.random()*160)+"px";
+            pieza.style.top= (window.innerHeight/2-60)+"px";
+            pieza.style.transform+= ` translateX(${(Math.random()-0.5)*220}px)`;
+            pieza.style.animationDuration= (700+Math.random()*400)+"ms";
 
-    const colores = [
-
-        "#d8b35c",   // dorado
-        "#2d2b72",   // azul Samaín
-        "#ffffff"
-
-    ];
-
-    for(let i=0;i<28;i++){
-
-        const pieza=document.createElement("div");
-
-        pieza.className="particula";
-
-        pieza.style.background=
-            colores[Math.floor(Math.random()*colores.length)];
-
-        pieza.style.left=
-            (window.innerWidth/2-80+Math.random()*160)+"px";
-
-        pieza.style.top=
-            (window.innerHeight/2-60)+"px";
-
-        pieza.style.transform+=
-            ` translateX(${(Math.random()-0.5)*220}px)`;
-
-        pieza.style.animationDuration=
-            (700+Math.random()*400)+"ms";
-
-        contenedor.appendChild(pieza);
-
-        setTimeout(()=>pieza.remove(),1200);
-
+            contenedor.appendChild(pieza);
+            setTimeout(()=>pieza.remove(),1200);
+        }
     }
-
-}
 
 
     //================================================
@@ -213,59 +152,39 @@ setTimeout(() => {
     //================================================
 
     function obtenerProducto(){
+        const personas = document.querySelector(".seleccionado").dataset.comensales;
+        let categorias;
 
-    const personas =
-        document.querySelector(".seleccionado").dataset.comensales;
+        if(personas==="1"){
+            categorias=carta.filter(c=> [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
+        }else{
+            categorias=carta;
+        }
 
-    let categorias;
+        const categoria = categorias[Math.floor(Math.random()*categorias.length)];
+        const producto = categoria.productos[Math.floor(Math.random()*categoria.productos.length)];
 
-    if(personas==="1"){
-
-        categorias=carta.filter(c=>
-
-            [
-                "tostas",
-                "piadinas",
-                "dulces",
-                "bocadillos"
-                
-            ].includes(c.id)
-
-        );
-
-    }else{
-
-        categorias=carta;
-
+        return { categoria, producto };
     }
-
-    const categoria =
-        categorias[Math.floor(Math.random()*categorias.length)];
-
-    const producto =
-        categoria.productos[
-            Math.floor(Math.random()*categoria.productos.length)
-        ];
-
-    return {
-
-        categoria,
-        producto
-
-    };
-
-}
-
 
 
     //================================================
-    // CERRAR RESULTADO
+    // CERRAR RESULTADO (PUNTO 2: AQUÍ LIMPIAMOS EL TIMER)
     //================================================
 
     resultadoDestino.addEventListener("click",()=>{
-
+        // Limpiamos el temporizador para abortar confeti/vibración si el usuario decide hacer clic y cerrar antes de los 2.5s
+        if (timerFinalizacion) {
+            clearTimeout(timerFinalizacion);
+            timerFinalizacion = null;
+        }
+        
+        // Limpiamos el estado visual de la ruleta para reiniciar su comportamiento
+        ruleta.classList.remove("girando");
+        disco.style.transition = "none";
+        disco.style.transform = "rotate(0deg)";
+        
         resultadoDestino.classList.remove("visible");
-
     });
 
 });
