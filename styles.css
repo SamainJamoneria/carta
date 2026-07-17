@@ -1435,37 +1435,67 @@ RULETA DESTINO
 
 }
 
+/*=========================================
+RULETA DESTINO MODIFICADA CON QUESITOS
+=========================================*/
+
 .disco-ruleta {
-    width: 170px;
-    height: 170px;
+    width: 200px; /* Un poco más grande para lucir los quesitos */
+    height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f7f2e5 30%, #d8b35c 100%);
-    border: 6px solid #d8b35c;
+    border: 6px solid var(--color-dorado);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.25),
-        inset 0 3px 8px rgba(255,255,255,.7),
-        inset 0 -6px 10px rgba(0,0,0,.15);
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    overflow: hidden;
 
-    /* Mantenemos esta transición corta únicamente para cuando se inicialice a mano desde JS */
-    transition: transform 0.2s ease-out; 
+    /* Pintamos los 8 quesitos intercalando colores (45º cada uno) */
+    background: conic-gradient(
+        #ffffff 0deg 45deg,
+        #f2edd9 45deg 90deg,
+        #ffffff 90deg 135deg,
+        #f2edd9 135deg 180deg,
+        #ffffff 180deg 225deg,
+        #f2edd9 225deg 270deg,
+        #ffffff 270deg 315deg,
+        #f2edd9 315deg 360deg
+    );
+
+    /* PARO PROGRESIVO EXTREMO: Curva de frenado suave tipo inercia real */
+    transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
 }
 
-.icono-ruleta{
-
-    position:absolute;
-
-    font-size:28px;
-
-    filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));
-
-    transition:transform .2s;
-
+.icono-ruleta {
+    position: absolute;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* El punto de origen del giro de cada gajo pasa a ser el centro del disco */
+    transform-origin: center center; 
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
 }
 
+/* 
+   Posicionamos cada icono rotándolo en su gajo correspondiente.
+   Como cada quesito mide 45º, el centro exacto de cada uno está en:
+   22.5º, 67.5º, 112.5º, 157.5º, 202.5º, 247.5º, 292.5º y 337.5º.
+   Desplazamos el icono hacia el borde exterior con translateY(-60px).
+*/
+.icono-ruleta:nth-child(1) { transform: rotate(22.5deg) translateY(-60px) rotate(-22.5deg); }
+.icono-ruleta:nth-child(2) { transform: rotate(67.5deg) translateY(-60px) rotate(-67.5deg); }
+.icono-ruleta:nth-child(3) { transform: rotate(112.5deg) translateY(-60px) rotate(-112.5deg); }
+.icono-ruleta:nth-child(4) { transform: rotate(157.5deg) translateY(-60px) rotate(-157.5deg); }
+.icono-ruleta:nth-child(5) { transform: rotate(202.5deg) translateY(-60px) rotate(-202.5deg); }
+.icono-ruleta:nth-child(6) { transform: rotate(247.5deg) translateY(-60px) rotate(-247.5deg); }
+.icono-ruleta:nth-child(7) { transform: rotate(292.5deg) translateY(-60px) rotate(-292.5deg); }
+.icono-ruleta:nth-child(8) { transform: rotate(337.5deg) translateY(-60px) rotate(-337.5deg); }
 /* posiciones */
 
 .icono-ruleta:nth-child(1){
