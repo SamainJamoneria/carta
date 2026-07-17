@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "piadinas",
         "dulces",
         "bocadillos",
-        "postres"
+        
     ];
 
     const indice = categoriasOrden.indexOf(resultado.categoria.id);
