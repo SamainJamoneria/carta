@@ -230,38 +230,52 @@ document.addEventListener("DOMContentLoaded", () => {
     // ELEGIR PRODUCTO
     //================================================
 
-   //================================================
-    // ELEGIR PRODUCTO (FILTRANDO EXTRAS)
+  //================================================
+    // ELEGIR PRODUCTO (SOPORTE MULTI-IDIOMA Y FILTRADO)
     //================================================
 
     function obtenerProducto(){
         const personas = document.querySelector(".seleccionado").dataset.comensales;
         let categorias;
 
+        // DETECCIÓN AUTOMÁTICA DE IDIOMA:
+        // Si 'carta' no existe, busca las variables alternativas de menu-en.js
+        let datosCarta = typeof carta !== "undefined" ? carta : 
+                         (typeof cartaEn !== "undefined" ? cartaEn : 
+                         (typeof menuEn !== "undefined" ? menuEn : null));
+
+        // Si no se encuentra ninguna, lanzamos un aviso controlado en la consola
+        if (!datosCarta) {
+            console.error("Error: No se ha encontrado el array de datos de la carta en menu.js ni menu-en.js");
+            return null;
+        }
+
         if(personas==="1"){
-            categorias=carta.filter(c=> [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
+            // Filtramos por las categorías individuales (funciona igual en inglés por ID)
+            categorias = datosCarta.filter(c => [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
         }else{
-            categorias=carta;
+            categorias = datosCarta;
         }
 
         // 1. Elegimos una categoría al azar
         const categoria = categorias[Math.floor(Math.random()*categorias.length)];
         
-        // 2. Filtramos la lista de productos para eliminar "Ingrediente extra" u otros extras parecidos
+        // 2. Filtramos la lista de productos para eliminar "Ingrediente extra" o "Extra ingredient"
         const productosValidos = categoria.productos.filter(p => {
             const nombreMinuscula = p.nombre.toLowerCase();
-            return !nombreMinuscula.includes("extra") && !nombreMinuscula.includes("ingrediente");
+            return !nombreMinuscula.includes("extra") && 
+                   !nombreMinuscula.includes("ingrediente") && 
+                   !nombreMinuscula.includes("ingredient");
         });
 
-        // 3. Si por seguridad una categoría se quedara vacía tras el filtro, usamos la lista original
+        // 3. Si por seguridad quedara vacía, usamos la lista original de la categoría
         const listaFinalProductos = productosValidos.length > 0 ? productosValidos : categoria.productos;
 
-        // 4. Seleccionamos el producto final de la lista limpia
+        // 4. Seleccionamos el producto final
         const producto = listaFinalProductos[Math.floor(Math.random()*listaFinalProductos.length)];
 
         return { categoria, producto };
     }
-
 
     //================================================
     // CERRAR RESULTADO Y REINICIAR ESTADOS
