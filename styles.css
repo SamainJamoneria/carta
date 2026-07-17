@@ -619,6 +619,7 @@ NUEVO MECANISMO INTERNO DE LA RULETA ESTÁTICA
 .icono-ruleta:nth-child(16) { transform: rotate(337.5deg) translateY(-65px) rotate(-337.5deg); }
 
 /* LA FLECHA AGUJA CENTRAL: Eje total y transición de inercia limpia */
+/* LA FLECHA AGUJA CENTRAL: Eje total y transición de inercia limpia */
 .flecha-ruleta {
     position: absolute;
     top: 0;
@@ -631,6 +632,12 @@ NUEVO MECANISMO INTERNO DE LA RULETA ESTÁTICA
     justify-content: center;
     align-items: flex-start;
     transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+    
+    /* SOLUCIÓN MÓVIL: Forzar aceleración de hardware por GPU */
+    will-change: transform;
+    transform: rotate(0deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .flecha-ruleta .puntero {
