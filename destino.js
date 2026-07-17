@@ -128,6 +128,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ruleta.classList.remove("girando");
 
+    ruleta.classList.add("finalizada");
+
+setTimeout(() => {
+
+    ruleta.classList.remove("finalizada");
+
+}, 450);
+
     if(navigator.vibrate){
 
         navigator.vibrate([100,50,100]);
