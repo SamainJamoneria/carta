@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <header>
@@ -19,7 +21,7 @@
             <a href="carta-en.html">🇬🇧</a>
         </div>
     </nav>
-    <img src="LOGO.png" alt="Samaín Logo">
+    <img src="LOGO.png">
     <h1>Our menu</h1>
     <p>Specialists in Iberian products</p>
 </header>
@@ -40,82 +42,20 @@
     >
 </section>
 
-<div id="resultado-busqueda" class="resultado-busqueda"></div>
-
-<!-- ==================================================
-     SECCIÓN: EL DESTINO SAMAÍN (THE SAMAÍN DESTINY)
-     ================================================== -->
 <section class="destino-samain">
     <p class="texto-destino">
-        Don't know what to order? Let luck decide your next dish! 🎯
+        🎲 Don't know what to order?<br>
+        <strong>Let luck decide.</strong>
     </p>
-    <button class="btn-destino" id="btn-destino">
-        ✨ Spin the wheel
+    <button id="btn-destino" class="btn-destino">
+        🎲 THE SAMAÍN DESTINY
     </button>
 </section>
 
-<!-- MODAL: SELECCIÓN DE COMENSALES -->
-<div id="modal-destino" class="modal-destino">
-    <div class="ventana-destino">
-        <button class="cerrar-destino" id="cerrar-destino">&times;</button>
-        <h2>Who is sharing?</h2>
-        <button class="opcion-comensales" data-comensales="1">Just for me 🙋‍♂️</button>
-        <button class="opcion-comensales" data-comensales="2">To share (2 or more) 👥</button>
-    </div>
-</div>
+<div id="resultado-busqueda" class="resultado-busqueda"></div>
 
-<!-- PANTALLA COMPLETA DE GIRO Y RESULTADO FINAL -->
-<div id="resultado-destino" class="resultado-destino">
-    <div class="tarjeta-destino" onclick="event.stopPropagation();">
-        
-        <!-- RULETA ESTÁTICA MECÁNICA CON AGUJA MÓVIL -->
-        <div class="ruleta-destino">
-            <div class="disco-ruleta" id="disco-ruleta">
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-                <div class="gajo-quesito"></div>
-            </div>
-            
-            <!-- Iconos de las porciones distribuidos radialmente -->
-            <div class="icono-ruleta"><span>🥗</span></div>
-            <div class="icono-ruleta"><span>🍳</span></div>
-            <div class="icono-ruleta"><span> Bacon 🥓</span></div>
-            <div class="icono-ruleta"><span>🧀</span></div>
-            <div class="icono-ruleta"><span>🥪</span></div>
-            <div class="icono-ruleta"><span>🌯</span></div>
-            <div class="icono-ruleta"><span>🍰</span></div>
-            <div class="icono-ruleta"><span>🥖</span></div>
-
-            <!-- Aguja superior giratoria en posición Norte -->
-            <div class="flecha-ruleta">
-                <div class="puntero">▼</div>
-            </div>
-        </div>
-
-        <!-- Detalles del plato seleccionado -->
-        <div class="titulo-destino">Your Samaín Destiny is...</div>
-        <span id="categoria-destino" class="categoria-destino"></span>
-        <h2 id="nombre-destino"></h2>
-        <p id="descripcion-destino"></p>
-        <div id="precio-destino"></div>
-        
-        <small>✨ Tap anywhere to close ✨</small>
-    </div>
-</div>
-
-<!-- CONTENEDOR PARA EFECTO CONFETI -->
-<div id="confeti"></div>
-
-<!-- ==================================================
-     CONTENIDO PRINCIPAL DE LA CARTA
-     ================================================== -->
 <main id="carta"></main>
-
+  
 <section class="alergenos">
     <h2>⚠️ Allergen information</h2>
     <img
@@ -126,7 +66,7 @@
     <p>🔎 Click on the image to enlarge it.</p>
 </section>
 
-<!-- Ventana emergente Alérgenos -->
+<!-- Ventana emergente -->
 <div id="modal-alergenos" class="modal-alergenos">
     <div class="modal-contenido">
         <span id="cerrar-modal">&times;</span>
@@ -137,16 +77,78 @@
     </div>
 </div> 
 
+<div id="modal-destino" class="modal-destino">
+    <div class="ventana-destino">
+        <button class="cerrar-destino" id="cerrar-destino">✕</button>
+        <h2>🍴 Who is sharing?</h2>
+        <button class="opcion-comensales" data-comensales="1">
+            👤 Just me
+        </button>
+        <button class="opcion-comensales" data-comensales="2">
+            👥 Two people
+        </button>
+        <button class="opcion-comensales" data-comensales="3">
+            👨‍👩‍👧‍👦 Three or more
+        </button>
+    </div>
+</div> 
+ 
+<div id="resultado-destino" class="resultado-destino">
+    <div class="tarjeta-destino">
+        <div class="ruleta-destino">
+            
+            <!-- Clon idéntico de la aguja con su ID original -->
+            <div class="flecha-ruleta" id="flecha-ruleta">
+                <span class="puntero">▼</span>
+            </div>
+
+            <!-- Clon idéntico del disco y los 8 emojis fijos de carta.html -->
+            <div class="disco-ruleta" id="disco-ruleta">
+                <div class="gajo-quesito" data-index="0"></div>
+                <div class="gajo-quesito" data-index="1"></div>
+                <div class="gajo-quesito" data-index="2"></div>
+                <div class="gajo-quesito" data-index="3"></div>
+                <div class="gajo-quesito" data-index="4"></div>
+                <div class="gajo-quesito" data-index="5"></div>
+                <div class="gajo-quesito" data-index="6"></div>
+                <div class="gajo-quesito" data-index="7"></div>
+
+                <div class="icono-ruleta">🥖</div>
+                <div class="icono-ruleta">🍽️</div>
+                <div class="icono-ruleta">🍖</div>
+                <div class="icono-ruleta">🧀</div>
+                <div class="icono-ruleta">🌯</div>
+                <div class="icono-ruleta">🍫</div>
+                <div class="icono-ruleta">🥪</div>
+                <div class="icono-ruleta">🍰</div>
+            </div>
+
+        </div>
+          
+        <p class="titulo-destino">✨ Destiny has decided...</p>
+
+        <div id="categoria-destino" class="categoria-destino"></div>
+
+        <h1 id="nombre-destino"></h1>
+        <p id="descripcion-destino"></p>
+        <div id="precio-destino"></div>
+
+        <small>Tap anywhere to continue</small>
+    </div>
+</div>
+
 <footer>
     Samaín La Cormelana · A Coruña
     <br><br>
-    📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Instagram</a> 
+    📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Follow us on Insta</a>
 </footer>
-
-<!-- Scripts unificados -->
+  
+<!-- Carga de scripts con la versión del menú en inglés -->
 <script src="menu-en.js"></script>
 <script src="script.js"></script>
 <script src="destino.js"></script>
+
+<div id="confeti"></div>
   
 </body>
 </html>
