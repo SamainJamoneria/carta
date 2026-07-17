@@ -64,20 +64,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //================================================
-    // INICIAR RULETA
-    //================================================
-
-    //================================================
-    // INICIAR RULETA
+    // INICIAR RULETA (CORREGIDA PARA IDIOMAS)
     //================================================
 
     function iniciarRuleta(){
-        resultadoDestino.classList.add("visible");
-
         const resultado = obtenerProducto();
+        
+        if (!resultado) {
+            alert("Error al cargar la carta. Por favor, inténtelo de nuevo.");
+            return;
+        }
+
+        resultadoDestino.classList.add("visible");
         ruleta.classList.add("girando");
 
-        // Lista exacta de las 8 categorías mapeadas en orden según tus 8 quesitos visuales
+        // Lista exacta de IDs que espera el orden físico de tus 8 quesitos en el CSS
         const categoriesOrden = [
             "entrantes",
             "raciones",
@@ -89,27 +90,32 @@ document.addEventListener("DOMContentLoaded", () => {
             "bocadillos"
         ];
 
-        const indice = categoriesOrden.indexOf(resultado.categoria.id);
-        const gradosPorCategoria = 360 / 8; // 45º exactos por porción
-        
-        // Calculamos los grados exactos del centro de la porción ganadora.
-        // Sumamos 22.5º para clavar el centro exacto del quesito.
-        const gradosIcono = (indice * gradosPorCategoria) + 22.5;
+        // MAPEO DE IDS: Si el ID viene en inglés/formato alternativo, lo adaptamos al gajo físico correcto
+        let categoriaId = resultado.categoria.id;
+        if (categoriaId === "tablas")  categoriaId = "raciones";  // 'tablas' va al quesito de raciones (🍽️)
+        if (categoriaId === "postres") categoriaId = "dulces";    // 'postres' va al quesito de dulces (🍰)
 
-        // 5 vueltas completas de inercia hacia adelante (sentido horario) más la posición de la categoría
+        const indice = categoriesOrden.indexOf(categoriaId);
+        
+        // Si por alguna razón el ID sigue sin cuadrar, por seguridad le asignamos el gajo 0
+        const indiceSeguro = indice !== -1 ? indice : 0;
+
+        const gradosPorCategoria = 360 / 8; // 45º exactos por porción
+        const gradosIcono = (indiceSeguro * gradosPorCategoria) + 22.5;
+
+        // 5 vueltas completas de inercia hacia adelante más la posición de la categoría
         const gradosFinal = (360 * 5) + gradosIcono;
 
-        // Limpieza de transiciones previas para reiniciar el estado de la aguja
+        // Limpieza de transiciones previas
         flechaAguja.style.transition = "none";
-        flechaAguja.style.transform = "rotate(0deg)";
+        flechaAguja.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
         
-        // Forzamos un reflow para que el navegador móvil registre el "reseteo" a 0 grados
+        // Forzamos un reflow
         flechaAguja.getBoundingClientRect();
 
-        // EJECUCIÓN OPTIMIZADA PARA MÓVILES: Esperamos al siguiente frame de renderizado
+        // Ejecución con aceleración gráfica nativa
         requestAnimationFrame(() => {
             flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
-            // Usamos translate3d junto con rotate para activar la aceleración gráfica nativa del móvil
             flechaAguja.style.transform = `translate3d(0, 0, 0) rotate(${gradosFinal}deg)`;
         });
 
@@ -122,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Forzamos que al terminar se encienda únicamente el gajo ganador definitivo
             gajos.forEach((gajo, i) => {
-                if (i === indice) {
+                if (i === indiceSeguro) {
                     gajo.classList.add("iluminado");
                 } else {
                     gajo.classList.remove("iluminado");
