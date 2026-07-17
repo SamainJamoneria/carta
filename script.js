@@ -303,13 +303,22 @@ const mapaAlergenos = {
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Diccionario universal de alérgenos
+    // Diccionario universal de los 14 alérgenos obligatorios de la UE
     const mapaAlergenos = {
         "g": { icono: "🌾", nombre: "Gluten / Contains Gluten" },
         "l": { icono: "🥛", nombre: "Lácteos / Dairy" },
-        "f": { icono: "🥜", nombre: "Frutos Secos / Nuts" },
-        "v": { icono: "🍷", nombre: "Sulfitos / Sulphites" },
-        "p": { icono: "🐟", nombre: "Pescado / Fish" }
+        "f": { icono: "🥜", nombre: "Frutos de cáscara / Nuts" },
+        "p": { icono: "🐟", nombre: "Pescado / Fish" },
+        "v": { icono: "🍷", nombre: "Dióxido de azufre y sulfitos / Sulphites" },
+        "cr": { icono: "🦀", nombre: "Crustáceos / Crustaceans" },
+        "h": { icono: "🥚", nombre: "Huevos / Eggs" },
+        "ag": { icono: "🌱", nombre: "Altramuces / Lupins" },
+        "m": { icono: "🦪", nombre: "Moluscos / Molluscs" },
+        "ca": { icono: "🥦", nombre: "Apio / Celery" },
+        "mo": { icono: "🟡", nombre: "Mostaza / Mustard" },
+        "s": { icono: "🫘", nombre: "Soja / Soya" },
+        "se": { icono: "🌾", nombre: "Granos de sésamo / Sesame" },
+        "cac": { icono: "🥜", nombre: "Cacahuetes / Peanuts" }
     };
 
     const contenedorCarta = document.getElementById("contenedor-carta");
@@ -357,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Estructura limpia de la tarjeta del plato
                 item.innerHTML = `
-                    <div class="producto-header" style="display:flex; justify-content:between; align-items:flex-start; justify-content:space-between; gap:10px;">
+                    <div class="producto-header" style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
                         <h3 class="producto-nombre" style="margin:0; font-size:18px; color:#2d2b72; font-weight:bold;">${producto.nombre}</h3>
                         <span class="producto-precio" style="font-weight:bold; color:#d8b35c; white-space:nowrap; font-size:17px;">${producto.precio}</span>
                     </div>
@@ -381,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // =========================================
-// GESTIÓN DEL MODAL ANUNCIO BIENVENIDA
+// GESTIÓN DEL MODAL ANUNCIO BIENVENIDA (LISTO PARA EL FUTURO)
 // =========================================
 document.addEventListener("DOMContentLoaded", () => {
     const modalAnuncio = document.getElementById("modal-anuncio");
