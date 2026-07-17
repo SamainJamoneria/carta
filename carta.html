@@ -1,141 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
+  
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta - Samaín La Cormelana</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(180deg, #2d2b72, #23235b);
-            color: white;
-            min-height: 100vh;
-            padding: 25px 15px;
-        }
-        .contenedor-principal {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            color: #333;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.35);
-        }
-        .header-carta {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #2d2b72;
-            padding-bottom: 15px;
-        }
-        .header-carta h1 {
-            color: #2d2b72;
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-        .header-carta p {
-            color: #666;
-            font-style: italic;
-        }
 
-        /* Zona de enlaces abajo */
-        .enlaces-aux {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        .enlaces-aux a, .enlaces-aux button {
-            color: #2d2b72;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        /* Ventana emergente (Modal) que atenúa la aplicación */
-        .modal-alergenos {
-            display: none; /* Oculto por defecto */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85); /* Atenúa el fondo en oscuro */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
-            cursor: pointer; /* Indica que al hacer clic se cierra */
-        }
-        .modal-alergenos.activo {
-            display: flex; /* Se muestra al pulsar */
-        }
-        .modal-contenido {
-            max-width: 95%;
-            max-height: 95%;
-            overflow-y: auto;
-        }
-        .modal-contenido img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-        }
-    </style>
+<title>Carta - Samaín La Cormelana</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  
 </head>
+
 <body>
 
-    <div class="contenedor-principal">
-        
-        <header class="header-carta">
-            <h1>Samaín</h1>
-            <p>- Especialistas en Ibérico -</p>
-        </header>
+<header>
 
-        <!-- PEGA AQUÍ TU LISTA ORIGINAL DE PLATOS ESCRITA A MANO -->
-        <div class="tu-contenido-de-la-carta">
-            <!-- Tus h2, párrafos y precios estáticos tal y como los tenías -->
-        </div>
+<nav>
 
-        <footer class="enlaces-aux">
-            <!-- Al tocar aquí se activa el mensaje emergente atenuado -->
-            <button id="btn-alergenos">📋 Ver Tabla de Alérgenos</button>
-            <a href="carta.pdf" target="_blank">📥 Descargar PDF</a>
-        </footer>
+<a href="index.html">🏠 Inicio</a>
+
+<div class="idiomas">
+
+  <a href="carta.html">🇪🇸</a>
+
+  <a href="carta-en.html">🇬🇧</a>
+
+</div>
+
+</nav>
+  
+<img src="LOGO.png">
+
+<h1>Nuestra carta</h1>
+
+<p>Especialistas en Ibérico</p>
+
+</header>
+
+<div class="menu-sticky">
+
+    <button class="flecha-menu izquierda" id="flecha-izquierda">
+        ‹
+    </button>
+
+    <div class="contenedor-menu">
+
+        <section class="menu-categorias" id="menu-categorias">
+
+        </section>
 
     </div>
 
-    <!-- Mensaje emergente de la imagen (Cierra al hacer clic en cualquier parte) -->
-    <div id="modal-foto" class="modal-alergenos">
-        <div class="modal-contenido">
-            <img src="alergenos.jpg" alt="Tabla de Alérgenos">
+    <button class="flecha-menu derecha" id="flecha-derecha">
+        ›
+    </button>
+
+</div>
+  
+<section class="buscador">
+
+    <input
+        type="text"
+        id="buscar"
+        placeholder="🔍 Buscar un producto..."
+    >
+
+</section>
+
+<section class="destino-samain">
+
+    <p class="texto-destino">
+        🎲 ¿No sabes qué pedir?<br>
+        <strong>Deja que el azar decida.</strong>
+    </p>
+
+    <button id="btn-destino" class="btn-destino">
+        🎲 EL DESTINO SAMAÍN
+    </button>
+
+</section>
+
+  
+  
+<div id="resultado-busqueda" class="resultado-busqueda"></div>
+
+<main id="carta">
+
+</main>
+  
+
+ <section class="alergenos">
+
+    <h2>⚠️ Información sobre alérgenos</h2>
+
+    <img
+        src="alergenos.jpg"
+        id="imagen-alergenos"
+        alt="Tabla de alérgenos"
+    >
+
+    <p>🔎 Pulse sobre la imagen para ampliarla.</p>
+
+</section>
+
+<!-- Ventana emergente -->
+
+<div id="modal-alergenos" class="modal-alergenos">
+
+    <div class="modal-contenido">
+
+        <span id="cerrar-modal">&times;</span>
+
+        <img src="alergenos.jpg" alt="Alérgenos">
+
+        <div class="mensaje-alergenos">
+
+            ⚠️ <strong>Por favor, si usted es alérgico a alguno de estos productos, avise al personal antes de realizar su pedido.</strong>
+
         </div>
+
     </div>
 
-    <script>
-        const btnAbrir = document.getElementById('btn-alergenos');
-        const modalFoto = document.getElementById('modal-foto');
+</div> 
 
-        // Al tocar el botón, se abre atenuando la aplicación
-        btnAbrir.addEventListener('click', () => {
-            modalFoto.classList.add('activo');
-        });
+ <div id="modal-destino" class="modal-destino">
 
-        // Al hacer clic en cualquier parte del fondo o de la imagen, desaparece por completo
-        modalFoto.addEventListener('click', () => {
-            modalFoto.classList.remove('activo');
-        });
-    </script>
+    <div class="ventana-destino">
 
+        <button class="cerrar-destino" id="cerrar-destino">
+            ✕
+        </button>
+
+        <h2>🍴 ¿Cuántos comensales sois?</h2>
+
+        <button class="opcion-comensales" data-comensales="1">
+            👤 Solo yo
+        </button>
+
+        <button class="opcion-comensales" data-comensales="2">
+            👥 Dos personas
+        </button>
+
+        <button class="opcion-comensales" data-comensales="3">
+            👨‍👩‍👧‍👦 Tres o más
+        </button>
+
+    </div>
+
+</div> 
+ 
+
+<div id="resultado-destino" class="resultado-destino">
+
+    <div class="tarjeta-destino">
+
+        <div class="ruleta-destino">
+
+            <!-- La flecha ahora envuelve al puntero para girar desde el centro como una aguja -->
+            <div class="flecha-ruleta" id="flecha-ruleta">
+                <span class="puntero">▼</span>
+            </div>
+
+            <div class="disco-ruleta" id="disco-ruleta">
+                <!-- Los 8 gajos físicos de fondo para iluminarse de forma independiente -->
+                <div class="gajo-quesito" data-index="0"></div>
+                <div class="gajo-quesito" data-index="1"></div>
+                <div class="gajo-quesito" data-index="2"></div>
+                <div class="gajo-quesito" data-index="3"></div>
+                <div class="gajo-quesito" data-index="4"></div>
+                <div class="gajo-quesito" data-index="5"></div>
+                <div class="gajo-quesito" data-index="6"></div>
+                <div class="gajo-quesito" data-index="7"></div>
+
+                <!-- Los 8 iconos fijos en sus porciones -->
+                <div class="icono-ruleta">🥖</div>
+                <div class="icono-ruleta">🍽️</div>
+                <div class="icono-ruleta">🍖</div>
+                <div class="icono-ruleta">🧀</div>
+                <div class="icono-ruleta">🌯</div>
+                <div class="icono-ruleta">🍫</div>
+                <div class="icono-ruleta">🥪</div>
+                <div class="icono-ruleta">🍰</div>
+            </div>
+
+        </div>
+          
+          
+        <p class="titulo-destino">✨ El destino ha decidido...</p>
+
+        <!-- 1. CATEGORÍA COLOCADA AQUÍ (ENCIMA DEL PRODUCTO) -->
+        <div id="categoria-destino" class="categoria-destino"></div>
+
+        <!-- 2. DATOS DEL PRODUCTO -->
+        <h1 id="nombre-destino"></h1>
+
+        <p id="descripcion-destino"></p>
+
+        <div id="precio-destino"></div>
+
+        <small>Pulsa cualquier lugar para continuar</small>
+
+    </div>
+</div>
+
+<footer>
+
+Jamonería Samaín · A Coruña
+
+
+<br><br>
+
+📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">
+
+Síguenos en Insta
+
+</a>
+
+ 
+</footer>
+  
+<script src="menu.js"></script>
+<script src="script.js"></script>
+<script src="destino.js"></script>
+
+<div id="confeti"></div>
+  
 </body>
 </html>
