@@ -79,15 +79,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function iniciarRuleta(){
 
-        resultadoDestino.classList.add("visible");
+    resultadoDestino.classList.add("visible");
 
-        ruleta.classList.add("girando");
+    // Elegimos el producto ANTES de girar
+    const resultado = obtenerProducto();
 
-        disco.style.animation="girarRuleta 2.8s cubic-bezier(.18,.82,.18,1) forwards";
+    ruleta.classList.add("girando");
 
-        disco.addEventListener("animationend", finalizarRuleta,{once:true});
+    const categoriasOrden = [
+        "entrantes",
+        "raciones",
+        "ibericos",
+        "quesos",
+        "piadinas",
+        "dulces",
+        "bocadillos",
+        "postres"
+    ];
 
-    }
+    const indice = categoriasOrden.indexOf(resultado.categoria.id);
+
+    // Cada icono ocupa 45º
+    const gradosIcono = indice * 45;
+
+    // 6 vueltas completas + posición final
+    const gradosFinal = (360 * 6) - gradosIcono;
+
+    disco.style.transform = `rotate(${gradosFinal}deg)`;
+
+    disco.style.transition =
+        "transform 4s cubic-bezier(.15,.85,.15,1)";
+
+    disco.addEventListener("transitionend",()=>{
+
+        finalizarRuleta(resultado);
+
+    },{once:true});
+
+}
 
 
 
@@ -95,21 +124,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // FINALIZAR RULETA
     //================================================
 
-    function finalizarRuleta(){
+    function finalizarRuleta(resultado){
 
-        ruleta.classList.remove("girando");
+    ruleta.classList.remove("girando");
 
-        disco.style.animation="";
+    if(navigator.vibrate){
 
-        if(navigator.vibrate){
-
-            navigator.vibrate([80,40,80]);
-
-        }
-
-        mostrarProducto();
+        navigator.vibrate([100,50,100]);
 
     }
+
+    nombreDestino.textContent =
+        resultado.producto.nombre;
+
+    descripcionDestino.textContent =
+        resultado.producto.descripcion || "";
+
+    precioDestino.textContent =
+        resultado.producto.precio;
+
+    categoriaDestino.textContent =
+        resultado.categoria.icono +
+        " " +
+        resultado.categoria.titulo;
+
+}
 
 
 
@@ -117,51 +156,50 @@ document.addEventListener("DOMContentLoaded", () => {
     // ELEGIR PRODUCTO
     //================================================
 
-    function mostrarProducto(){
+    function obtenerProducto(){
 
-        const personas=document.querySelector(".seleccionado").dataset.comensales;
+    const personas =
+        document.querySelector(".seleccionado").dataset.comensales;
 
-        let categorias;
+    let categorias;
 
-        if(personas==="1"){
+    if(personas==="1"){
 
-            categorias=carta.filter(c=>
+        categorias=carta.filter(c=>
 
-                [
-                    "tostas",
-                    "piadinas",
-                    "dulces",
-                    "bocadillos",
-                    "postres"
+            [
+                "tostas",
+                "piadinas",
+                "dulces",
+                "bocadillos",
+                "postres"
 
-                ].includes(c.id)
+            ].includes(c.id)
 
-            );
+        );
 
-        }else{
+    }else{
 
-            categorias=carta;
+        categorias=carta;
 
-        }
+    }
 
-        const categoria=categorias[
-            Math.floor(Math.random()*categorias.length)
-        ];
+    const categoria =
+        categorias[Math.floor(Math.random()*categorias.length)];
 
-        const producto=categoria.productos[
+    const producto =
+        categoria.productos[
             Math.floor(Math.random()*categoria.productos.length)
         ];
 
-        nombreDestino.textContent=producto.nombre;
+    return {
 
-        descripcionDestino.textContent=producto.descripcion || "";
+        categoria,
+        producto
 
-        precioDestino.textContent=producto.precio;
+    };
 
-        categoriaDestino.textContent=
-            categoria.icono+" "+categoria.titulo;
-
-    }
+}
 
 
 
