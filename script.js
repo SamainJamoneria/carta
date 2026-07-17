@@ -278,3 +278,124 @@ modal.addEventListener("click",(e)=>{
     }
 
 });
+
+// Diccionario oficial de los 14 alérgenos obligatorios de la UE
+const mapaAlergenos = {
+    "g": { icono: "🌾", nombre: "Gluten / Contains Gluten" },
+    "l": { icono: "🥛", nombre: "Lácteos / Dairy" },
+    "f": { icono: "🥜", nombre: "Frutos de cáscara / Nuts" },
+    "p": { icono: "🐟", nombre: "Pescado / Fish" },
+    "v": { icono: "🍷", nombre: "Dióxido de azufre y sulfitos / Sulphites" },
+    "cr": { icono: "🦀", nombre: "Crustáceos / Crustaceans" },
+    "h": { icono: "🥚", nombre: "Huevos / Eggs" },
+    "ag": { icono: "🌱", nombre: "Altramuces / Lupins" },
+    "m": { icono: "🦪", nombre: "Moluscos / Molluscs" },
+    "ca": { icono: "🥦", nombre: "Apio / Celery" },
+    "mo": { icono: "🟡", nombre: "Mostaza / Mustard" },
+    "s": { icono: "🫘", nombre: "Soja / Soya" },
+    "se": { icono: "🌾", nombre: "Granos de sésamo / Sesame" },
+    "cac": { icono: "🥜", nombre: "Cacahuetes / Peanuts" }
+};
+
+// =================================================
+// MOTOR DE RENDERIZADO SAMAÍN LA CORMELANA
+// =================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Diccionario universal de alérgenos
+    const mapaAlergenos = {
+        "g": { icono: "🌾", nombre: "Gluten / Contains Gluten" },
+        "l": { icono: "🥛", nombre: "Lácteos / Dairy" },
+        "f": { icono: "🥜", nombre: "Frutos Secos / Nuts" },
+        "v": { icono: "🍷", nombre: "Sulfitos / Sulphites" },
+        "p": { icono: "🐟", nombre: "Pescado / Fish" }
+    };
+
+    const contenedorCarta = document.getElementById("contenedor-carta");
+    
+    // Inyectar la interfaz si la base de datos 'carta' existe
+    if (typeof carta !== "undefined" && carta && contenedorCarta) {
+        renderizarCarta(carta);
+    }
+
+    function renderizarCarta(datosCarta) {
+        contenedorCarta.innerHTML = ""; // Limpieza inicial
+
+        datosCarta.forEach(categoria => {
+            // Creamos la sección de la categoría
+            const seccion = document.createElement("section");
+            seccion.className = "categoria-seccion";
+            seccion.id = `sec-${categoria.id}`;
+
+            // Título de la categoría
+            const tituloSeccion = document.createElement("h2");
+            tituloSeccion.className = "categoria-titulo";
+            tituloSeccion.innerHTML = `${categoria.icono} ${categoria.titulo}`;
+            seccion.appendChild(tituloSeccion);
+
+            // Contenedor de productos de esta categoría
+            const listaProductos = document.createElement("div");
+            listaProductos.className = "productos-lista";
+
+            categoria.productos.forEach(producto => {
+                const item = document.createElement("div");
+                item.className = "producto-item";
+                
+                // Procesar los alérgenos del plato en HTML
+                let htmlAlergenos = "";
+                if (producto.alergenos && producto.alergenos.length > 0) {
+                    htmlAlergenos = `<div class="tags-alergenos" style="display:flex; gap:6px; margin-top:8px;">`;
+                    producto.alergenos.forEach(letra => {
+                        const data = mapaAlergenos[letra];
+                        if (data) {
+                            htmlAlergenos += `<span class="badge-alergeno" title="${data.nombre}" style="font-size:14px; background:rgba(0,0,0,0.05); padding:3px 6px; border-radius:6px; cursor:help; display:inline-flex; align-items:center;">${data.icono}</span>`;
+                        }
+                    });
+                    htmlAlergenos += `</div>`;
+                }
+
+                // Estructura limpia de la tarjeta del plato
+                item.innerHTML = `
+                    <div class="producto-header" style="display:flex; justify-content:between; align-items:flex-start; justify-content:space-between; gap:10px;">
+                        <h3 class="producto-nombre" style="margin:0; font-size:18px; color:#2d2b72; font-weight:bold;">${producto.nombre}</h3>
+                        <span class="producto-precio" style="font-weight:bold; color:#d8b35c; white-space:nowrap; font-size:17px;">${producto.precio}</span>
+                    </div>
+                    ${producto.descripcion ? `<p class="producto-descripcion" style="margin:6px 0 0 0; color:#666; font-size:14px; line-height:1.4;">${producto.descripcion}</p>` : ''}
+                    ${htmlAlergenos}
+                `;
+                
+                // Le añadimos estilos de espaciado y borde a la tarjeta mediante JS nativo
+                item.style.padding = "15px 0";
+                item.style.borderBottom = "1px solid #f0f0f0";
+                
+                listaProductos.appendChild(item);
+            });
+
+            seccion.appendChild(listaProductos);
+            seccion.style.marginBottom = "35px";
+            contenedorCarta.appendChild(seccion);
+        });
+    }
+});
+
+
+// =========================================
+// GESTIÓN DEL MODAL ANUNCIO BIENVENIDA
+// =========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const modalAnuncio = document.getElementById("modal-anuncio");
+    const btnCerrarAnuncio = document.getElementById("cerrar-anuncio");
+
+    if (modalAnuncio) {
+        if (btnCerrarAnuncio) {
+            btnCerrarAnuncio.addEventListener("click", (e) => {
+                e.stopPropagation();
+                modalAnuncio.classList.remove("visible");
+            });
+        }
+        modalAnuncio.addEventListener("click", () => {
+            modalAnuncio.classList.remove("visible");
+        });
+    }
+});
