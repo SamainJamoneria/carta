@@ -331,74 +331,49 @@ document.querySelectorAll(".opcion-comensales").forEach(boton=>{
 
         resultadoDestino.classList.add("visible");
 
-        let i=0;
+       let indice = 0;
 
-        const intervalo=setInterval(()=>{
+let velocidad = 60;
 
-            iconoDestino.textContent=iconosRuleta[i];
+let vueltas = 0;
 
-            i++;
+function girarRuleta(){
 
-            if(i>=iconosRuleta.length){
+    iconoDestino.textContent = iconosRuleta[indice];
 
-                i=0;
+    indice++;
 
-            }
+    if(indice >= iconosRuleta.length){
 
-        },90);
+        indice = 0;
 
-        setTimeout(()=>{
-
-    clearInterval(intervalo);
-
-    if(navigator.vibrate){
-
-        navigator.vibrate(120);
+        vueltas++;
 
     }
 
-    let categoriasPermitidas=[];
+    if(vueltas < 3){
 
-    const personas=boton.dataset.comensales;
+        setTimeout(girarRuleta, velocidad);
 
-    if(personas==="1"){
+        return;
 
-        categoriasPermitidas=[
-            "tostas",
-            "piadinas",
-            "dulces",
-            "bocadillos",
-            "postres"
-        ];
+    }
+
+    velocidad += 18;
+
+    if(velocidad < 260){
+
+        setTimeout(girarRuleta, velocidad);
 
     }else{
 
-        categoriasPermitidas=carta.map(c=>c.id);
+        finalizarDestino();
 
     }
 
-    const categorias=carta.filter(c=>
-        categoriasPermitidas.includes(c.id)
-    );
+}
 
-    const categoria=
-        categorias[Math.floor(Math.random()*categorias.length)];
-
-    const producto=
-        categoria.productos[Math.floor(Math.random()*categoria.productos.length)];
-
-    iconoDestino.textContent=categoria.icono;
-
-    document.getElementById("nombre-destino").textContent=
-        producto.nombre;
-
-    document.getElementById("descripcion-destino").textContent=
-        producto.descripcion;
-
-    document.getElementById("precio-destino").textContent=
-        producto.precio;
-
-    },2500);
+girarRuleta();
 
     });
 
