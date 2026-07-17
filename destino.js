@@ -4,9 +4,9 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ==========================
-    // Elementos
-    // ==========================
+    //================================================
+    // ELEMENTOS
+    //================================================
 
     const btnDestino = document.getElementById("btn-destino");
     const modalDestino = document.getElementById("modal-destino");
@@ -14,30 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const resultadoDestino = document.getElementById("resultado-destino");
 
-    const iconoDestino = document.getElementById("icono-destino");
+    const ruleta = document.querySelector(".ruleta-destino");
+    const disco = document.getElementById("disco-ruleta");
+
     const nombreDestino = document.getElementById("nombre-destino");
     const descripcionDestino = document.getElementById("descripcion-destino");
     const precioDestino = document.getElementById("precio-destino");
     const categoriaDestino = document.getElementById("categoria-destino");
 
-    // ==========================
-    // Iconos de la ruleta
-    // ==========================
 
-    const iconosRuleta = [
-        "🥖",
-        "🍽️",
-        "🍖",
-        "🧀",
-        "🌯",
-        "🍫",
-        "🥪",
-        "🍰"
-    ];
 
-    // ==========================
-    // Abrir modal
-    // ==========================
+    //================================================
+    // ABRIR / CERRAR MODAL
+    //================================================
 
     btnDestino.addEventListener("click", () => {
 
@@ -45,41 +34,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    // ==========================
-    // Cerrar modal
-    // ==========================
+    cerrarDestino.addEventListener("click", cerrarModal);
 
-    cerrarDestino.addEventListener("click", () => {
+    modalDestino.addEventListener("click", e => {
+
+        if (e.target === modalDestino) cerrarModal();
+
+    });
+
+    function cerrarModal(){
 
         modalDestino.classList.remove("visible");
 
-    });
+    }
 
-    modalDestino.addEventListener("click", (e) => {
 
-        if (e.target === modalDestino) {
 
-            modalDestino.classList.remove("visible");
+    //================================================
+    // SELECCIÓN DE COMENSALES
+    //================================================
 
-        }
+    document.querySelectorAll(".opcion-comensales").forEach(boton=>{
 
-    });
+        boton.addEventListener("click",()=>{
 
-    // ==========================
-    // Selección de comensales
-    // ==========================
-
-    document.querySelectorAll(".opcion-comensales").forEach(boton => {
-
-        boton.addEventListener("click", () => {
-
-            document
-                .querySelectorAll(".opcion-comensales")
-                .forEach(b => b.classList.remove("seleccionado"));
+            document.querySelectorAll(".opcion-comensales")
+            .forEach(b=>b.classList.remove("seleccionado"));
 
             boton.classList.add("seleccionado");
 
-            modalDestino.classList.remove("visible");
+            cerrarModal();
 
             iniciarRuleta();
 
@@ -87,115 +71,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    // ==========================
-    // Ruleta
-    // ==========================
 
-    function iniciarRuleta() {
 
-    resultadoDestino.classList.add("visible");
+    //================================================
+    // INICIAR RULETA
+    //================================================
 
-    const ruleta = document.querySelector(".ruleta-destino");
+    function iniciarRuleta(){
 
-    ruleta.classList.add("girando");
+        resultadoDestino.classList.add("visible");
 
-    let indice = 0;
-    let velocidad = 60;
-    let vueltas = 0;
+        ruleta.classList.add("girando");
 
-    function girar() {
+        disco.style.animation="girarRuleta 2.8s cubic-bezier(.18,.82,.18,1) forwards";
 
-        iconoDestino.textContent = iconosRuleta[indice];
+        disco.addEventListener("animationend", finalizarRuleta,{once:true});
 
-        indice++;
+    }
 
-        if(indice >= iconosRuleta.length){
 
-            indice = 0;
-            vueltas++;
+
+    //================================================
+    // FINALIZAR RULETA
+    //================================================
+
+    function finalizarRuleta(){
+
+        ruleta.classList.remove("girando");
+
+        disco.style.animation="";
+
+        if(navigator.vibrate){
+
+            navigator.vibrate([80,40,80]);
 
         }
 
-        if(vueltas < 3){
+        mostrarProducto();
 
-            setTimeout(girar, velocidad);
-            return;
+    }
 
-        }
 
-        velocidad += 18;
 
-        if(velocidad < 260){
+    //================================================
+    // ELEGIR PRODUCTO
+    //================================================
 
-            setTimeout(girar, velocidad);
+    function mostrarProducto(){
+
+        const personas=document.querySelector(".seleccionado").dataset.comensales;
+
+        let categorias;
+
+        if(personas==="1"){
+
+            categorias=carta.filter(c=>
+
+                [
+                    "tostas",
+                    "piadinas",
+                    "dulces",
+                    "bocadillos",
+                    "postres"
+
+                ].includes(c.id)
+
+            );
 
         }else{
 
-            ruleta.classList.remove("girando");
-
-            mostrarResultado();
+            categorias=carta;
 
         }
+
+        const categoria=categorias[
+            Math.floor(Math.random()*categorias.length)
+        ];
+
+        const producto=categoria.productos[
+            Math.floor(Math.random()*categoria.productos.length)
+        ];
+
+        nombreDestino.textContent=producto.nombre;
+
+        descripcionDestino.textContent=producto.descripcion || "";
+
+        precioDestino.textContent=producto.precio;
+
+        categoriaDestino.textContent=
+            categoria.icono+" "+categoria.titulo;
 
     }
 
-    girar();
 
-}
-    // ==========================
-    // Resultado
-    // ==========================
 
-    function mostrarResultado() {
+    //================================================
+    // CERRAR RESULTADO
+    //================================================
 
-        if (navigator.vibrate) {
-
-            navigator.vibrate([80, 40, 80]);
-
-        }
-
-        const personas = document.querySelector(".opcion-comensales.seleccionado").dataset.comensales;
-
-        let categoriasValidas;
-
-        if (personas === "1") {
-
-            categoriasValidas = carta.filter(c =>
-                ["tostas", "piadinas", "dulces", "bocadillos", "postres"].includes(c.id)
-            );
-
-        } else {
-
-            categoriasValidas = carta;
-
-        }
-
-        const categoria = categoriasValidas[
-            Math.floor(Math.random() * categoriasValidas.length)
-        ];
-
-        const producto = categoria.productos[
-            Math.floor(Math.random() * categoria.productos.length)
-        ];
-
-        iconoDestino.textContent = categoria.icono;
-
-        nombreDestino.textContent = producto.nombre;
-
-        descripcionDestino.textContent = producto.descripcion;
-
-        precioDestino.textContent = producto.precio;
-
-        categoriaDestino.textContent =
-        categoria.icono + " " + categoria.titulo;
-
-    }
-
-    // ==========================
-    // Cerrar resultado
-    // ==========================
-
-    resultadoDestino.addEventListener("click", () => {
+    resultadoDestino.addEventListener("click",()=>{
 
         resultadoDestino.classList.remove("visible");
 
