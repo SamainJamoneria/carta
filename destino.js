@@ -15,15 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultadoDestino = document.getElementById("resultado-destino");
 
     const ruleta = document.querySelector(".ruleta-destino");
-    const disco = document.getElementById("disco-ruleta");
+    const flechaAguja = document.querySelector(".flecha-ruleta");
+    const gajos = document.querySelectorAll(".gajo-quesito");
 
     const nombreDestino = document.getElementById("nombre-destino");
     const descripcionDestino = document.getElementById("descripcion-destino");
     const precioDestino = document.getElementById("precio-destino");
     const categoriaDestino = document.getElementById("categoria-destino");
 
-    // NUEVA VARIABLE GLOBAL PARA CONTROLAR Y CANCELAR EL TEMPORIZADOR
+    // Temporizadores y variables de control de animación
     let timerFinalizacion = null;
+    let frameId = null;
 
 
     //================================================
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-   //================================================
+    //================================================
     // INICIAR RULETA
     //================================================
 
@@ -71,35 +73,87 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultado = obtenerProducto();
         ruleta.classList.add("girando");
 
+        // Lista exacta de las 8 categorías mapeadas en orden según tus 8 quesitos visuales
         const categoriesOrden = [
             "entrantes",
             "raciones",
             "ibericos",
             "quesos",
+            "tostas",
             "piadinas",
             "dulces",
             "bocadillos"
-            // Nota: tu array tiene 7 elementos de texto pero la ruleta 8 iconos.
-            // Para asegurar el cálculo matemático con tus 8 quesitos mantén la división exacta:
         ];
 
         const indice = categoriesOrden.indexOf(resultado.categoria.id);
-        const gradosPorCategoria = 360 / 8; // Forzado a 8 por los 8 quesitos visuales
+        const gradosPorCategoria = 360 / 8; // 45º exactos por porción
         
-        // Sumamos 22.5º para centrar la flecha roja superior exactamente en medio del quesito ganador
-        const gradosIcono = (indice * gradosPorCategoria) + 22.5;
+        // El punto 0 de la aguja apunta arriba (centro del gajo 1). 
+        // Para que caiga en mitad del gajo ganador sumamos su desfase angular correspondiente.
+        const gradosIcono = (indice * gradosPorCategoria);
 
-        // 5 vueltas físicas de inercia + posición final calculada
-        const gradosFinal = (360 * 5) - gradosIcono;
+        // 5 vueltas completas de inercia hacia adelante (sentido horario) más la posición de la categoría
+        const gradosFinal = (360 * 5) + gradosIcono;
 
-        // Asignamos la transición suave configurada en CSS (4 segundos para dar margen al frenado fluido)
-        disco.style.transition = "transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)";
-        disco.style.transform = `rotate(${gradosFinal}deg)`;
+        // Rotamos la aguja central con la transición fluida definida en CSS
+        flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
+        flechaAguja.style.transform = `rotate(${gradosFinal}deg)`;
 
-        // Cambiamos el timeout global a 4000ms para esperar a que termine por completo la desaceleración
+        // Iniciamos el rastreador en tiempo real para iluminar los quesitos al paso de la aguja
+        rastrearPasoDeAguja(gradosFinal);
+
+        // Esperamos los 3.5 segundos exactos de la transición
         timerFinalizacion = setTimeout(() => {
+            cancelAnimationFrame(frameId);
             finalizarRuleta(resultado);
-        }, 4000); 
+        }, 3500); 
+    }
+
+    //================================================
+    // DETECCIÓN DINÁMICA DE GAJOS (EFECTO GLOW)
+    //================================================
+
+    function rastrearPasoDeAguja(gradosObjetivo) {
+        const tiempoInicial = performance.now();
+        const duracionTotal = 3500; // Mismos ms que la animación CSS
+
+        // Función de flexión idéntica al cubic-bezier(0.1, 0.8, 0.2, 1) para calcular los grados en cada frame
+        function obtenerGradosActuales(progreso) {
+            const t = progreso;
+            // Aproximación polinómica simple de la curva bezier de frenado
+            const factor = 1 - Math.pow(1 - t, 3.5); 
+            return gradosObjetivo * factor;
+        }
+
+        function actualizarGlow() {
+            const tiempoActual = performance.now();
+            let progreso = (tiempoActual - tiempoInicial) / duracionTotal;
+
+            if (progreso > 1) progreso = 1;
+
+            const gradosActuales = obtenerGradosActuales(progreso);
+            
+            // Reducimos a una única vuelta de 0 a 359 para saber en qué ángulo exacto se encuentra la punta
+            const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
+
+            // Cada gajo ocupa 45º, pero visualmente están desplazados de -22.5º a +22.5º respecto a su eje central
+            const indiceGajoActual = Math.floor(((anguloNormalizado + 22.5) % 360) / 45);
+
+            // Añadimos y removemos la clase CSS iluminado de forma reactiva
+            gajos.forEach((gajo, i) => {
+                if (i === indiceGajoActual) {
+                    gajo.classList.add("iluminado");
+                } else {
+                    gajo.classList.remove("iluminado");
+                }
+            });
+
+            if (progreso < 1) {
+                frameId = requestAnimationFrame(actualizarGlow);
+            }
+        }
+
+        frameId = requestAnimationFrame(actualizarGlow);
     }
 
     //================================================
@@ -114,9 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ruleta.classList.remove("finalizada");
         }, 450);
 
-        // Si la pantalla sigue abierta, ejecutamos los efectos visuales y hápticos
+        // Feedback háptico en dispositivos móviles
         if(navigator.vibrate){
-            navigator.vibrate([100,50,100]);
+            navigator.vibrate([120, 60, 120]);
         }
 
         lanzarConfeti();    
@@ -159,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let categorias;
 
         if(personas==="1"){
+            // Filtrado optimizado para raciones individuales
             categorias=carta.filter(c=> [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
         }else{
             categorias=carta;
@@ -172,20 +227,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //================================================
-    // CERRAR RESULTADO (PUNTO 2: AQUÍ LIMPIAMOS EL TIMER)
+    // CERRAR RESULTADO Y REINICIAR ESTADOS
     //================================================
 
     resultadoDestino.addEventListener("click",()=>{
-        // Limpiamos el temporizador para abortar confeti/vibración si el usuario decide hacer clic y cerrar antes de los 2.5s
+        // Cancelamos los loops de animación y timers activos por si se cierra antes de tiempo
         if (timerFinalizacion) {
             clearTimeout(timerFinalizacion);
             timerFinalizacion = null;
         }
+        if (frameId) {
+            cancelAnimationFrame(frameId);
+        }
         
-        // Limpiamos el estado visual de la ruleta para reiniciar su comportamiento
+        // Limpiamos los estados de las clases y apagamos los brillos residuales de los gajos
         ruleta.classList.remove("girando");
-        disco.style.transition = "none";
-        disco.style.transform = "rotate(0deg)";
+        gajos.forEach(g => g.classList.remove("iluminado"));
+        
+        // Reseteamos de forma inmediata la aguja a su posición norte
+        flechaAguja.style.transition = "none";
+        flechaAguja.style.transform = "rotate(0deg)";
         
         resultadoDestino.classList.remove("visible");
     });
