@@ -42,16 +42,8 @@
             color: #666;
             font-style: italic;
         }
-        /* Estilos para las secciones dinámicas */
-        .categoria-titulo {
-            color: #2d2b72;
-            font-size: 22px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-        /* Enlaces a alérgenos y PDF */
+
+        /* Zona de enlaces abajo */
         .enlaces-aux {
             display: flex;
             justify-content: space-between;
@@ -59,11 +51,58 @@
             padding-top: 20px;
             border-top: 1px solid #ddd;
         }
-        .enlaces-aux a {
+        .enlaces-aux a, .enlaces-aux button {
             color: #2d2b72;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Ventana del aviso de alérgenos */
+        .modal-alergenos {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .modal-alergenos.activo {
+            display: flex;
+        }
+        .modal-contenido {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            text-align: center;
+            position: relative;
+        }
+        .modal-contenido img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .btn-cerrar {
+            margin-top: 15px;
+            background: #2d2b72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -76,20 +115,49 @@
             <p>- Especialistas en Ibérico -</p>
         </header>
 
-        <!-- EL MOTOR INYECTA AQUÍ TODA LA CARTA Y LOS ALÉRGENOS AUTOMÁTICAMENTE -->
-        <div id="contenedor-carta"></div>
+        <!-- AQUÍ VA TU LISTA DE PLATOS ESCRITA A MANO COMO LA TENÍAS ANTES -->
+        <div class="tu-contenido-de-la-carta">
+            <!-- Pega aquí tus secciones de platos si las tienes guardadas -->
+        </div>
 
         <footer class="enlaces-aux">
-            <a href="alergenos.jpg" target="_blank">📋 Ver Tabla de Alérgenos</a>
+            <!-- Al pinchar aquí, saltará el aviso en la pantalla -->
+            <button id="btn-alergenos">📋 Ver Tabla de Alérgenos</button>
             <a href="carta.pdf" target="_blank">📥 Descargar PDF</a>
         </footer>
 
     </div>
 
-    <!-- ORDEN DE CARGA CRÍTICO: Primero los datos, luego el motor -->
-    <script src="menu.js"></script>
-    <script src="script.js"></script>
-    <script src="destino.js"></script>
+    <!-- El aviso oculto que se abrirá al pulsar -->
+    <div id="mi-modal" class="modal-alergenos">
+        <div class="modal-contenido">
+            <img src="alergenos.jpg" alt="Tabla de Alérgenos">
+            <br>
+            <button class="btn-cerrar" id="btn-cerrar-modal">Cerrar Aviso</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica simple para abrir y cerrar el aviso de alérgenos
+        const btnAbrir = document.getElementById('btn-alergenos');
+        const btnCerrar = document.getElementById('btn-cerrar-modal');
+        const modal = document.getElementById('mi-modal');
+
+        btnAbrir.addEventListener('click', () => {
+            modal.classList.add('activo');
+        });
+
+        btnCerrar.addEventListener('click', () => {
+            modal.classList.remove('activo');
+        });
+
+        // Cerrar también si pinchan fuera de la foto
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('activo');
+            }
+        });
+    </script>
 
 </body>
 </html>
