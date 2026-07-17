@@ -107,16 +107,16 @@ const gradosIcono = indice * gradosPorCategoria;
     // 6 vueltas completas + posición final
     const gradosFinal = (360 * 6) - gradosIcono;
 
-    disco.style.transform = `rotate(${gradosFinal}deg)`;
+disco.style.transition =
+    "transform 4s cubic-bezier(.15,.85,.15,1)";
 
-    disco.style.transition =
-        "transform 4s cubic-bezier(.15,.85,.15,1)";
+disco.style.transform = `rotate(${gradosFinal}deg)`;
 
-    disco.addEventListener("transitionend",()=>{
+setTimeout(() => {
 
-        finalizarRuleta(resultado);
+    finalizarRuleta(resultado);
 
-    },{once:true});
+}, 4000);
 
 }
 
