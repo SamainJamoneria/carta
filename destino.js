@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let timerFinalizacion = null;
     let frameId = null;
 
+    console.log("Destino.js cargado e inicializado correctamente.");
+
     //================================================
     // CONTROL DE APERTURA: EL PRIMER PASO
     //================================================
@@ -196,23 +198,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
         
-        // Comprobación ultra segura de la existencia del array 'carta'
         if (typeof carta === "undefined" || !carta || !Array.isArray(carta)) {
             return null;
         }
 
-        let categorias;
+        let ServerCategorias;
         if(personas === "1"){
-            categorias = carta.filter(c => [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
+            ServerCategorias = carta.filter(c => [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
         } else {
-            categorias = carta;
+            ServerCategorias = carta;
         }
 
-        if (categorias.length === 0) categorias = carta;
+        if (ServerCategorias.length === 0) ServerCategorias = carta;
 
-        const categoria = categorias[Math.floor(Math.random()*categorias.length)];
+        const categoria = ServerCategorias[Math.floor(Math.random()*ServerCategorias.length)];
         
-        // Filtro para quitar extras de la ruleta
         const productosValidos = categoria.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
@@ -245,4 +245,5 @@ document.addEventListener("DOMContentLoaded", () => {
             resultadoDestino.classList.remove("visible");
         });
     }
+
 });
