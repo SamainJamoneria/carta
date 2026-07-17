@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // INICIAR RULETA
     //================================================
 
+    //================================================
+    // INICIAR RULETA
+    //================================================
+
     function iniciarRuleta(){
         resultadoDestino.classList.add("visible");
 
@@ -95,13 +99,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // 5 vueltas completas de inercia hacia adelante (sentido horario) más la posición de la categoría
         const gradosFinal = (360 * 5) + gradosIcono;
 
-        // Forzamos un reflow antes de iniciar para limpiar estilos previos
+        // Limpieza de transiciones previas para reiniciar el estado de la aguja
+        flechaAguja.style.transition = "none";
         flechaAguja.style.transform = "rotate(0deg)";
+        
+        // Forzamos un reflow para que el navegador móvil registre el "reseteo" a 0 grados
         flechaAguja.getBoundingClientRect();
 
-        // Rotamos la aguja central con la transición fluida definida en CSS
-        flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
-        flechaAguja.style.transform = `rotate(${gradosFinal}deg)`;
+        // EJECUCIÓN OPTIMIZADA PARA MÓVILES: Esperamos al siguiente frame de renderizado
+        requestAnimationFrame(() => {
+            flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
+            // Usamos translate3d junto con rotate para activar la aceleración gráfica nativa del móvil
+            flechaAguja.style.transform = `translate3d(0, 0, 0) rotate(${gradosFinal}deg)`;
+        });
 
         // Iniciamos el rastreador en tiempo real para iluminar los quesitos al paso de la aguja
         rastrearPasoDeAguja(gradosFinal);
@@ -122,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             finalizarRuleta(resultado);
         }, 3500); 
     }
-
+    
     //================================================
     // DETECCIÓN DINÁMICA DE GAJOS (EFECTO GLOW)
     //================================================
