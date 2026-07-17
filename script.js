@@ -309,4 +309,58 @@ modal.addEventListener("click",(e)=>{
 
 });
 
+const iconosRuleta = [
+    "🥖",
+    "🍽️",
+    "🍖",
+    "🧀",
+    "🌯",
+    "🍫",
+    "🥪",
+    "🍰"
+];
 
+const resultadoDestino = document.getElementById("resultado-destino");
+const iconoDestino = document.getElementById("icono-destino");
+
+document.querySelectorAll(".opcion-comensales").forEach(boton=>{
+
+    boton.addEventListener("click",()=>{
+
+        modalDestino.classList.remove("abierto");
+
+        resultadoDestino.classList.add("visible");
+
+        let i=0;
+
+        const intervalo=setInterval(()=>{
+
+            iconoDestino.textContent=iconosRuleta[i];
+
+            i++;
+
+            if(i>=iconosRuleta.length){
+
+                i=0;
+
+            }
+
+        },90);
+
+        setTimeout(()=>{
+
+            clearInterval(intervalo);
+
+            iconoDestino.textContent="🍴";
+
+            if(navigator.vibrate){
+
+                navigator.vibrate(120);
+
+            }
+
+        },2500);
+
+    });
+
+});
