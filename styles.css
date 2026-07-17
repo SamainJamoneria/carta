@@ -7,7 +7,6 @@ Variables
 ==========================*/
 
 :root{
-
     --color-principal:#2d2b72;
     --color-principal-hover:#4442a4;
     --color-dorado:#d8b35c;
@@ -24,7 +23,6 @@ Variables
     --sombra:0 8px 22px rgba(0,0,0,.08);
 
     --ancho-maximo:1100px;
-
 }
 
 /*==========================
@@ -32,29 +30,20 @@ Reset
 ==========================*/
 
 *{
-
     margin:0;
     padding:0;
     box-sizing:border-box;
-
 }
 
 html{
-
     scroll-behavior:smooth;
-
 }
 
 body{
-
     font-family:Arial,Helvetica,sans-serif;
-
     background:var(--color-fondo);
-
     color:var(--color-texto);
-
     line-height:1.6;
-
 }
 
 /*==========================
@@ -62,53 +51,32 @@ Header
 ==========================*/
 
 header{
-
     background:
-
     linear-gradient(rgba(34,34,80,.82),rgba(34,34,80,.82)),
-
     url("cabecera.jpg") center/cover;
-
     padding:45px 20px 60px;
-
     text-align:center;
-
     color:white;
-
 }
 
 header img{
-
     width:220px;
-
     margin:auto;
-
     padding:0;
-
     background:transparent;
-
     border:none;
-
     box-shadow:0 0 25px rgba(216,179,92,.35);
-
     filter:drop-shadow(0 0 12px rgba(216,179,92,.45));
-
 }
 
 header h1{
-
     margin-top:25px;
-
     font-size:42px;
-
 }
 
 header p{
-
     margin-top:10px;
-
     font-size:20px;
-
 }
 
 /*==========================
@@ -116,48 +84,31 @@ Navegación
 ==========================*/
 
 nav{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:40px;
-
 }
 
 nav a{
-
     color:white;
-
     text-decoration:none;
-
     font-weight:bold;
-
 }
 
 .idiomas{
-
     display:flex;
-
     gap:18px;
-
 }
-
 
 /*==================================================
 CONTENIDO
 ==================================================*/
 
 main{
-
     max-width:var(--ancho-maximo);
-
     margin:auto;
-
     padding:25px;
-
 }
 
 /*==================================================
@@ -165,41 +116,25 @@ BUSCADOR
 ==================================================*/
 
 .buscador{
-
     max-width:900px;
-
-    margin:20px auto 35px;
-
+    margin:10px auto 35px;
     padding:0 20px;
-
 }
 
 #buscar{
-
     width:100%;
-
     padding:18px 22px;
-
     border:none;
-
     outline:none;
-
     border-radius:18px;
-
     background:white;
-
     font-size:18px;
-
     box-shadow:var(--sombra);
-
     transition:.25s;
-
 }
 
 #buscar:focus{
-
-    box-shadow:0 10px 25px rgba(45,43,114,.18);
-
+    box-shadow:0 12px 30px rgba(45,43,114,.20);
 }
 
 /*==================================================
@@ -207,33 +142,20 @@ SECCIONES
 ==================================================*/
 
 .seccion{
-
     background:white;
-
     border-radius:22px;
-
     padding:35px;
-
     margin-bottom:35px;
-
     box-shadow:var(--sombra);
-
     scroll-margin-top:120px;
-
 }
 
 .seccion h2{
-
     font-size:32px;
-
     color:var(--color-principal);
-
     margin-bottom:28px;
-
     padding-bottom:12px;
-
     border-bottom:4px solid var(--color-dorado);
-
 }
 
 /*==================================================
@@ -241,1232 +163,438 @@ PRODUCTOS
 ==================================================*/
 
 .producto{
-
     padding:20px 0;
-
     border-bottom:1px dashed #ddd;
-
 }
 
 .producto:last-child{
-
     border-bottom:none;
-
 }
 
 .cabecera-producto{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:flex-start;
-
-    gap:20px;
-
+    gap:15px;
 }
 
 .nombre{
-
     flex:1;
-
     font-size:24px;
-
     font-weight:700;
-
     color:var(--color-principal);
-
     line-height:1.3;
-
 }
 
 .precio{
-
     flex-shrink:0;
-
     font-size:24px;
-
     font-weight:800;
-
     color:var(--color-precio);
-
     white-space:nowrap;
-
 }
 
 .descripcion{
-
     margin-top:10px;
-
     color:var(--color-secundario);
-
     font-size:16px;
-
     line-height:1.6;
-
 }
+
 /* ==========================
    Footer
 ========================== */
 
 footer{
-
     margin-top:40px;
-
     padding:40px 20px;
-
     text-align:center;
-
     color:#777;
-
 }
 
 /*==================================================
-RESPONSIVE
-==================================================*/
-
-@media(max-width:900px){
-
-    .menu-categorias{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-}
-
-@media(max-width:700px){
-
-    header{
-
-        padding:35px 20px 45px;
-
-    }
-
-    header img{
-
-        width:170px;
-
-    }
-
-    header h1{
-
-        font-size:30px;
-
-    }
-
-    header p{
-
-        font-size:17px;
-
-    }
-
-    .seccion{
-
-        padding:22px;
-
-    }
-
-    .seccion h2{
-
-        font-size:26px;
-
-    }
-
-    .cabecera-producto{
-
-        flex-direction:column;
-
-        gap:6px;
-
-    }
-
-    .nombre{
-
-        font-size:21px;
-
-    }
-
-    .precio{
-
-        font-size:22px;
-
-    }
-
-}
-
-@media(max-width:500px){
-
-    .menu-categorias{
-
-        grid-template-columns:repeat(2,1fr);
-
-        gap:10px;
-
-    }
-
-    .categoria{
-
-        padding:12px 8px;
-
-    }
-
-    .icono{
-
-    font-size:22px;
-
-    line-height:1;
-
-    text-decoration:none;
-
-}
-
-    .texto{
-
-    text-align:center;
-
-    line-height:1.1;
-
-}
-
-}
-
-
-/*==================================================
-MENU DE CATEGORÍAS
-==================================================*/
-
-.buscador{
-
-    max-width:900px;
-
-    margin:10px auto 35px;
-
-    padding:0 20px;
-
-}
-
-
-#buscar:focus{
-
-    box-shadow:0 12px 30px rgba(45,43,114,.20);
-
-}
-
-.cabecera-producto{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-}
-
-@media (max-width:700px){
-
-    .cabecera-producto{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-    .precio{
-
-        margin-top:8px;
-
-        font-size:28px;
-
-    }
-
-}
-
-@media(min-width:900px){
-
-    .menu-categorias{
-
-        grid-template-columns:repeat(4,1fr);
-
-    }
-
-}
-
-/*==================================================
-MENÚ STICKY
+MENÚ STICKY Y CATEGORÍAS
 ==================================================*/
 
 .menu-sticky{
-
     position:sticky;
-
     top:0;
-
     z-index:999;
-
     background:rgba(246,244,239,.90);
-   
     backdrop-filter:blur(12px);
-   
     -webkit-backdrop-filter:blur(12px);
-
     padding:12px 15px;
-
     box-shadow:0 4px 15px rgba(0,0,0,.08);
-
     border-bottom:1px solid rgba(216,179,92,.35);
-
-}
-
-.categoria.activa{
-
-    animation:activa .35s ease;
-
 }
 
 .menu-categorias{
-
     display:flex;
-
     gap:10px;
-
     overflow-x:auto;
-
     overflow-y:hidden;
-
     scroll-behavior:smooth;
-
     scrollbar-width:none;
-
 }
 
 .menu-categorias::-webkit-scrollbar{
-
     display:none;
-
 }
 
 .categoria{
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     gap:6px;
-
     flex:0 0 auto;
-
     padding:12px 18px;
-
     border-radius:999px;
-
     background:white;
-
     border:2px solid #d8b35c;
-
     color:#2d2b72;
-
     text-decoration:none;
-
     font-weight:700;
-
     white-space:nowrap;
-
     transition:.25s;
-
 }
 
 .categoria:hover{
-
     background:#2d2b72;
-
     color:white;
-
 }
 
 .categoria.activa{
-
     background:#d8b35c;
-
     color:white;
-
     border-color:#d8b35c;
-
     transform:scale(1.05);
-
     box-shadow:0 8px 20px rgba(216,179,92,.35);
-
+    animation:activa .35s ease;
 }
 
-.resultado-busqueda{
+@keyframes activa{
+    0%{ transform:scale(.92); }
+    70%{ transform:scale(1.08); }
+    100%{ transform:scale(1.03); }
+}
 
+.flecha-menu{
+    transition:.25s;
+}
+
+.flecha-menu.oculta{
+    opacity:0;
+    pointer-events:none;
+}
+
+.contenedor-menu{
+    position:relative;
+    flex:1;
+    overflow:hidden;
+}
+
+.contenedor-menu::before,
+.contenedor-menu::after{
+    content:"";
+    position:absolute;
+    top:0;
+    width:40px;
+    height:100%;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .25s;
+    z-index:5;
+}
+
+.contenedor-menu::before{
+    left:0;
+    background:linear-gradient(to right,#f6f4ef 0%,rgba(246,244,239,0) 100%);
+}
+
+.contenedor-menu::after{
+    right:0;
+    background:linear-gradient(to left,#f6f4ef 0%,rgba(246,244,239,0) 100%);
+}
+
+.contenedor-menu.mostrar-izquierda::before{ opacity:1; }
+.contenedor-menu.mostrar-derecha::after{ opacity:1; }
+
+.resultado-busqueda{
     max-width:900px;
     margin:0 auto 20px;
     padding:0 20px;
     text-align:center;
     min-height:45px;
-
 }
 
 .texto-busqueda{
-
     color:#666;
     font-size:16px;
-
 }
 
 .con-resultados{
-
     display:inline-block;
     margin-top:8px;
     font-size:20px;
     font-weight:bold;
     color:#2d2b72;
-
 }
 
 .sin-resultados{
-
     display:inline-block;
     margin-top:8px;
     font-size:20px;
     font-weight:bold;
     color:#b22222;
-
-}
-
-@keyframes activa{
-
-    0%{
-
-        transform:scale(.92);
-
-    }
-
-    70%{
-
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        transform:scale(1.03);
-
-    }
-
-}
-
-.flecha-menu{
-
-    transition:.25s;
-
-}
-
-.flecha-menu.oculta{
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-.contenedor-menu{
-
-    position:relative;
-
-    flex:1;
-
-    overflow:hidden;
-
-}
-
-.contenedor-menu::before,
-.contenedor-menu::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    width:40px;
-
-    height:100%;
-
-    pointer-events:none;
-
-    opacity:0;
-
-    transition:opacity .25s;
-
-    z-index:5;
-
-}
-
-.contenedor-menu::before{
-
-    left:0;
-
-    background:linear-gradient(to right,#f6f4ef 0%,rgba(246,244,239,0) 100%);
-
-}
-
-.contenedor-menu::after{
-
-    right:0;
-
-    background:linear-gradient(to left,#f6f4ef 0%,rgba(246,244,239,0) 100%);
-
-}
-
-.contenedor-menu.mostrar-izquierda::before{
-
-    opacity:1;
-
-}
-
-.contenedor-menu.mostrar-derecha::after{
-
-    opacity:1;
-
-}
-
-/*==================================
-ALÉRGENOS
-==================================*/
-
-.alergenos{
-
-    max-width:900px;
-    margin:60px auto;
-    text-align:center;
-
-}
-
-.alergenos img{
-
-    display:block;
-
-    width:88%;
-
-    max-width:560px;
-
-    margin:0 auto;
-
-    border-radius:18px;
-
-    border:2px solid var(--color-dorado);
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-
-}
-
-.alergenos img:hover{
-
-    transform:scale(1.02);
-
-}
-
-.alergenos p{
-
-    margin-top:15px;
-    color:#666;
-
-}
-
-/*==================================
-MODAL
-==================================*/
-
-.modal-alergenos{
-
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.82);
-
-    z-index:99999;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-}
-
-.modal-alergenos.abierto{
-
-    display:flex;
-
-}
-
-.modal-contenido{
-
-    position:relative;
-
-    max-width:900px;
-
-    width:100%;
-
-    text-align:center;
-
-}
-
-.modal-contenido img{
-
-    width:100%;
-
-    border-radius:18px;
-
-    background:white;
-
-}
-
-.cerrar-modal{
-
-    position:absolute;
-
-    right:-10px;
-
-    top:-10px;
-
-}
-
-#cerrar-modal{
-
-    position:absolute;
-
-    right:10px;
-
-    top:-45px;
-
-    color:white;
-
-    font-size:42px;
-
-    cursor:pointer;
-
-}
-
-.mensaje-alergenos{
-
-    margin-top:20px;
-
-    background:#fff;
-
-    padding:18px;
-
-    border-radius:15px;
-
-    color:#222;
-
-    font-size:18px;
-
-    font-weight:bold;
-
 }
 
 /*==================================================
-EL DESTINO SAMAÍN
+EL DESTINO SAMAÍN (ZONA LANZAMIENTO)
 ==================================================*/
 
 .destino-samain{
-
     max-width:900px;
     margin:45px auto;
     padding:0 20px;
     text-align:center;
-
 }
 
 .texto-destino{
-
     font-size:22px;
     color:#2d2b72;
     margin-bottom:18px;
     line-height:1.5;
-
 }
 
 .btn-destino{
-
     cursor:pointer;
-
     border:none;
-
     padding:18px 38px;
-
     border-radius:999px;
-
     background:linear-gradient(135deg,#2d2b72,#4a47b8);
-
     color:white;
-
     font-size:20px;
-
     font-weight:700;
-
     letter-spacing:.5px;
-
     box-shadow:0 12px 30px rgba(45,43,114,.30);
-
     transition:.30s;
-
 }
 
 .btn-destino:hover{
-
     transform:translateY(-4px) scale(1.03);
-
     box-shadow:0 20px 45px rgba(45,43,114,.35);
-
 }
 
 .btn-destino:active{
-
     transform:scale(.97);
-
 }
 
 /*==================================================
-MODAL DESTINO
+MODAL SELECCIÓN COMENSALES
 ==================================================*/
 
 .modal-destino{
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.65);
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:5000;
-
-}
-
-.modal-destino.abierto{
-
-    display:flex;
-
-}
-
-.ventana-destino{
-
-    width:min(92%,420px);
-
-    background:white;
-
-    border-radius:22px;
-
-    padding:35px;
-
-    text-align:center;
-
-    position:relative;
-
-    animation:zoomDestino .30s;
-
-}
-
-.cerrar-destino{
-
-    position:absolute;
-
-    top:15px;
-
-    right:15px;
-
-    width:36px;
-
-    height:36px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#eee;
-
-    cursor:pointer;
-
-    font-size:20px;
-
-}
-
-.ventana-destino h2{
-
-    margin-bottom:30px;
-
-    color:#2d2b72;
-
-}
-
-.opcion-comensales{
-
-    width:100%;
-
-    margin-bottom:15px;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#2d2b72;
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.opcion-comensales:hover{
-
-    background:#4442a4;
-
-    transform:translateY(-2px);
-
-}
-
-/*==================================================
-RESULTADO
-==================================================*/
-
-.resultado-destino{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.82);
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:6000;
-
-    cursor:pointer;
-
-}
-
-.resultado-destino.visible{
-
-    display:flex;
-
-}
-
-.tarjeta-destino{
-
-    width:min(92%,480px);
-
-    background:white;
-
-    border-radius:24px;
-
-    padding:45px;
-
-    text-align:center;
-
-    animation:zoomDestino .45s;
-
-}
-
-.icono-destino{
-
-    font-size:70px;
-
-    margin-bottom:20px;
-
-}
-
-.tarjeta-destino h2{
-
-    color:#666;
-
-    margin-bottom:20px;
-
-}
-
-#nombre-destino{
-
-    color:#2d2b72;
-
-    font-size:38px;
-
-    margin-bottom:15px;
-
-}
-
-#descripcion-destino{
-
-    color:#666;
-
-    margin-bottom:20px;
-
-    font-size:18px;
-
-}
-
-#precio-destino{
-
-    color:#8b0000;
-
-    font-size:34px;
-
-    font-weight:bold;
-
-}
-
-.tarjeta-destino small{
-
-    display:block;
-
-    margin-top:35px;
-
-    color:#999;
-
-}
-
-@keyframes zoomDestino{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.8);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-
-    }
-
-}
-
-/*==========================================
-DESTINO SAMAÍN
-==========================================*/
-
-.modal-destino{
-
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.65);
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     opacity:0;
     visibility:hidden;
-
     transition:.35s;
-
     z-index:5000;
-
 }
 
 .modal-destino.visible{
-
     opacity:1;
     visibility:visible;
-
 }
 
 .ventana-destino{
-
     width:min(90%,420px);
-
     background:white;
-
     border-radius:24px;
-
     padding:35px;
-
     text-align:center;
-
     position:relative;
-
     animation:subir .35s ease;
-
 }
 
 .cerrar-destino{
-
     position:absolute;
-
     top:15px;
     right:15px;
-
     width:36px;
     height:36px;
-
     border:none;
-
     border-radius:50%;
-
     background:#eee;
-
     cursor:pointer;
-
     font-size:18px;
+}
 
+.ventana-destino h2{
+    margin-bottom:30px;
+    color:#2d2b72;
 }
 
 .opcion-comensales{
-
     display:block;
-
     width:100%;
-
     margin-top:15px;
-
     padding:18px;
-
     border:none;
-
     border-radius:14px;
-
     background:#2d2b72;
-
     color:white;
-
     font-size:18px;
-
     font-weight:bold;
-
     cursor:pointer;
-
     transition:.25s;
-
 }
 
 .opcion-comensales:hover{
-
-    background:#d8b35c;
-
+    background:var(--color-dorado);
 }
 
 @keyframes subir{
+    from{ transform:translateY(40px); opacity:0; }
+    to{ transform:translateY(0); opacity:1; }
+}
 
-    from{
+/*==================================================
+PANTALLA DE RESULTADO Y TARJETA DEL PREMIO
+==================================================*/
 
-        transform:translateY(40px);
+.resultado-destino{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:6000;
+    cursor:pointer;
+}
 
-        opacity:0;
+.resultado-destino.visible{
+    display:flex;
+}
 
-    }
+.tarjeta-destino{
+    width:min(92%,480px);
+    background:white;
+    border-radius:24px;
+    padding:45px;
+    text-align:center;
+    animation:zoomDestino .45s ease-out;
+}
 
-    to{
-
-        transform:translateY(0);
-
-        opacity:1;
-
-    }
-
+@keyframes zoomDestino{
+    from{ opacity:0; transform:scale(.8); }
+    to{ opacity:1; transform:scale(1); }
 }
 
 .titulo-destino{
-
     color:#777;
-
     font-size:18px;
-
     margin-bottom:18px;
-
 }
 
 #nombre-destino{
-
     font-size:34px;
-
     color:#2d2b72;
-
     margin:18px 0;
-
     line-height:1.2;
-
 }
 
 #descripcion-destino{
-
     color:#666;
-
     margin:18px auto;
-
     max-width:320px;
-
     line-height:1.6;
-
 }
 
 #precio-destino{
-
     font-size:36px;
-
     font-weight:800;
-
     color:#8b0000;
-
     margin:25px 0;
-
 }
 
 .categoria-destino{
-
     display:inline-block;
-
     padding:10px 18px;
-
     border-radius:999px;
-
-    background:#d8b35c;
-
+    background:var(--color-dorado);
     color:white;
-
     font-weight:bold;
-
     margin-bottom:20px;
-
 }
 
-.icono-destino{
-
-    font-size:64px;
-
-    margin-bottom:15px;
-
+.tarjeta-destino small{
+    display:block;
+    margin-top:35px;
+    color:#999;
 }
 
-.ruleta-destino{
+/*==================================================
+NUEVO MECANISMO INTERNO DE LA RULETA ESTÁTICA
+==================================================*/
 
-    width:120px;
-    height:120px;
-
-    margin:0 auto 25px;
-
-    border-radius:50%;
-
-    border:6px solid #d8b35c;
-
-    background:white;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    box-shadow:
-        0 0 20px rgba(216,179,92,.35),
-        inset 0 0 20px rgba(216,179,92,.15);
-
+.ruleta-destino {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 35px;
 }
 
-.ruleta-destino.girando{
-
-    animation:girarRuleta .18s linear infinite;
-
-}
-
-@keyframes girarRuleta{
-
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-.icono-destino{
-
-    font-size:64px;
-
-}
-
-/*=========================================
-RULETA DESTINO
-=========================================*/
-
-.ruleta-destino{
-
-    position:relative;
-
-    width:240px;
-    height:240px;
-
-    margin:0 auto 35px;
-
-}
-
-/*=========================================
-RULETA DESTINO MODIFICADA CON QUESITOS
-=========================================*/
-
+/* El disco se queda fijo de fondo */
 .disco-ruleta {
-    width: 200px; /* Un poco más grande para lucir los quesitos */
+    width: 200px;
     height: 200px;
     border-radius: 50%;
     border: 6px solid var(--color-dorado);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    position: absolute;
+    top: 20px;
+    left: 20px;
     overflow: hidden;
-
-    /* Pintamos los 8 quesitos intercalando colores (45º cada uno) */
-    background: conic-gradient(
-        #ffffff 0deg 45deg,
-        #f2edd9 45deg 90deg,
-        #ffffff 90deg 135deg,
-        #f2edd9 135deg 180deg,
-        #ffffff 180deg 225deg,
-        #f2edd9 225deg 270deg,
-        #ffffff 270deg 315deg,
-        #f2edd9 315deg 360deg
-    );
-
-    /* PARO PROGRESIVO EXTREMO: Curva de frenado suave tipo inercia real */
-    transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
 }
 
+/* Estructura geométrica de porciones usando clip-path */
+.gajo-quesito {
+    position: absolute;
+    inset: 0;
+    transform-origin: center center;
+    clip-path: polygon(50% 50%, 50% 0%, 93% 15%); 
+    transition: background-color 0.08s ease, filter 0.08s ease;
+}
+
+/* Intercalado limpio de colores estáticos crema y blanco */
+.gajo-quesito:nth-child(odd)  { background-color: #ffffff; }
+.gajo-quesito:nth-child(even) { background-color: #f2edd9; }
+
+/* Distribución angular de las 8 porciones equidistantes */
+.gajo-quesito:nth-child(1) { transform: rotate(0deg); }
+.gajo-quesito:nth-child(2) { transform: rotate(45deg); }
+.gajo-quesito:nth-child(3) { transform: rotate(90deg); }
+.gajo-quesito:nth-child(4) { transform: rotate(135deg); }
+.gajo-quesito:nth-child(5) { transform: rotate(180deg); }
+.gajo-quesito:nth-child(6) { transform: rotate(225deg); }
+.gajo-quesito:nth-child(7) { transform: rotate(270deg); }
+.gajo-quesito:nth-child(8) { transform: rotate(315deg); }
+
+/* Inyección de brillo cuando pasa la aguja por encima */
+.gajo-quesito.iluminado {
+    background-color: var(--color-dorado) !important;
+    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216,179,92,0.5));
+}
+
+/* Posición absoluta y radial fija para los 8 iconos */
 .icono-ruleta {
     position: absolute;
     font-size: 24px;
@@ -1475,181 +603,195 @@ RULETA DESTINO MODIFICADA CON QUESITOS
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* El punto de origen del giro de cada gajo pasa a ser el centro del disco */
-    transform-origin: center center; 
+    transform-origin: center center;
     top: calc(50% - 20px);
     left: calc(50% - 20px);
+    z-index: 5;
 }
 
-/* 
-   Posicionamos cada icono rotándolo en su gajo correspondiente.
-   Como cada quesito mide 45º, el centro exacto de cada uno está en:
-   22.5º, 67.5º, 112.5º, 157.5º, 202.5º, 247.5º, 292.5º y 337.5º.
-   Desplazamos el icono hacia el borde exterior con translateY(-60px).
-*/
-.icono-ruleta:nth-child(1) { transform: rotate(22.5deg) translateY(-60px) rotate(-22.5deg); }
-.icono-ruleta:nth-child(2) { transform: rotate(67.5deg) translateY(-60px) rotate(-67.5deg); }
-.icono-ruleta:nth-child(3) { transform: rotate(112.5deg) translateY(-60px) rotate(-112.5deg); }
-.icono-ruleta:nth-child(4) { transform: rotate(157.5deg) translateY(-60px) rotate(-157.5deg); }
-.icono-ruleta:nth-child(5) { transform: rotate(202.5deg) translateY(-60px) rotate(-202.5deg); }
-.icono-ruleta:nth-child(6) { transform: rotate(247.5deg) translateY(-60px) rotate(-247.5deg); }
-.icono-ruleta:nth-child(7) { transform: rotate(292.5deg) translateY(-60px) rotate(-292.5deg); }
-.icono-ruleta:nth-child(8) { transform: rotate(337.5deg) translateY(-60px) rotate(-337.5deg); }
-/* posiciones */
+.icono-ruleta:nth-child(9)  { transform: rotate(22.5deg) translateY(-65px) rotate(-22.5deg); }
+.icono-ruleta:nth-child(10) { transform: rotate(67.5deg) translateY(-65px) rotate(-67.5deg); }
+.icono-ruleta:nth-child(11) { transform: rotate(112.5deg) translateY(-65px) rotate(-112.5deg); }
+.icono-ruleta:nth-child(12) { transform: rotate(157.5deg) translateY(-65px) rotate(-157.5deg); }
+.icono-ruleta:nth-child(13) { transform: rotate(202.5deg) translateY(-65px) rotate(-202.5deg); }
+.icono-ruleta:nth-child(14) { transform: rotate(247.5deg) translateY(-65px) rotate(-247.5deg); }
+.icono-ruleta:nth-child(15) { transform: rotate(292.5deg) translateY(-65px) rotate(-292.5deg); }
+.icono-ruleta:nth-child(16) { transform: rotate(337.5deg) translateY(-65px) rotate(-337.5deg); }
 
-.icono-ruleta:nth-child(1){
-
-    top:8px;
-    left:98px;
-
+/* LA FLECHA AGUJA CENTRAL: Eje total y transición de inercia limpia */
+.flecha-ruleta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 240px;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1);
 }
 
-.icono-ruleta:nth-child(2){
-
-    top:36px;
-    right:30px;
-
+.flecha-ruleta .puntero {
+    color: #8b0000;
+    font-size: 30px;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    margin-top: -2px;
 }
 
-.icono-ruleta:nth-child(3){
-
-    top:98px;
-    right:8px;
-
-}
-
-.icono-ruleta:nth-child(4){
-
-    bottom:36px;
-    right:30px;
-
-}
-
-.icono-ruleta:nth-child(5){
-
-    bottom:8px;
-    left:98px;
-
-}
-
-.icono-ruleta:nth-child(6){
-
-    bottom:36px;
-    left:30px;
-
-}
-
-.icono-ruleta:nth-child(7){
-
-    top:98px;
-    left:8px;
-
-}
-
-.icono-ruleta:nth-child(8){
-
-    top:36px;
-    left:30px;
-
-}
-
-.flecha-ruleta{
-
-    position:absolute;
-
-    top:-18px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    font-size:30px;
-
-    color:#8b0000;
-
-    z-index:10;
-
-    text-shadow:0 2px 6px rgba(0,0,0,.35);
-
-}
-
+/* Efecto feedback rebote al finalizar */
 @keyframes reboteRuleta{
-
-    0%{
-        transform:scale(1);
-    }
-
-    45%{
-        transform:scale(1.06);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-
+    0%  { transform: scale(1); }
+    45% { transform: scale(1.06); }
+    100%{ transform: scale(1); }
 }
 
-.ruleta-destino.finalizada{
+.ruleta-destino.finalizada {
+    animation: reboteRuleta .45s ease;
+}
 
-    animation:reboteRuleta .45s ease;
+/*==================================
+ALÉRGENOS
+==================================*/
 
+.alergenos{
+    max-width:900px;
+    margin:60px auto;
+    text-align:center;
+}
+
+.alergenos img{
+    display:block;
+    width:88%;
+    max-width:560px;
+    margin:0 auto;
+    border-radius:18px;
+    border:2px solid var(--color-dorado);
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.alergenos img:hover{
+    transform:scale(1.02);
+}
+
+.alergenos p{
+    margin-top:15px;
+    color:#666;
+}
+
+/*==================================
+MODAL ALÉRGENOS AMPLIFICADO
+==================================*/
+
+.modal-alergenos{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    z-index:99999;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-alergenos.abierto{
+    display:flex;
+}
+
+.modal-contenido{
+    position:relative;
+    max-width:900px;
+    width:100%;
+    text-align:center;
+}
+
+.modal-contenido img{
+    width:100%;
+    border-radius:18px;
+    background:white;
+}
+
+#cerrar-modal{
+    position:absolute;
+    right:10px;
+    top:-45px;
+    color:white;
+    font-size:42px;
+    cursor:pointer;
+}
+
+.mensaje-alergenos{
+    margin-top:20px;
+    background:#fff;
+    padding:18px;
+    border-radius:15px;
+    color:#222;
+    font-size:18px;
+    font-weight:bold;
 }
 
 /*==================================================
-CONFETI
+EFECTO DINÁMICO CONFETI
 ==================================================*/
 
 #confeti{
-
     position:fixed;
-
     inset:0;
-
     pointer-events:none;
-
     overflow:hidden;
-
     z-index:99999;
-
 }
 
 .particula{
-
     position:absolute;
-
     width:10px;
-
     height:18px;
-
     border-radius:2px;
-
     animation:caerConfeti 900ms linear forwards;
-
     opacity:1;
-
 }
 
 @keyframes caerConfeti{
-
     0%{
-
-        transform:
-            translateY(-30px)
-            rotate(0deg);
-
+        transform: translateY(-30px) rotate(0deg);
         opacity:1;
-
     }
-
     100%{
-
-        transform:
-            translateY(250px)
-            rotate(720deg);
-
+        transform: translateY(250px) rotate(720deg);
         opacity:0;
-
     }
+}
 
+/*==================================================
+MEDIA QUERIES COMPACTADAS (RESPONSIVE)
+==================================================*/
+
+@media(min-width:900px){
+    .menu-categorias{ grid-template-columns:repeat(4,1fr); }
+}
+
+@media(max-width:900px){
+    .menu-categorias{ grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:700px){
+    header{ padding:35px 20px 45px; }
+    header img{ width:170px; }
+    header h1{ font-size:30px; }
+    header p{ font-size:17px; }
+    .seccion{ padding:22px; }
+    .seccion h2{ font-size:26px; }
+    .cabecera-producto{ flex-direction:column; align-items:flex-start; }
+    .nombre{ font-size:21px; }
+    .precio{ margin-top:8px; font-size:28px; }
+}
+
+@media(max-width:500px){
+    .menu-categorias{ grid-template-columns:repeat(2,1fr); gap:10px; }
+    .categoria{ padding:12px 8px; }
+    .icono{ font-size:22px; line-height:1; text-decoration:none; }
+    .texto{ text-align:center; line-height:1.1; }
 }
