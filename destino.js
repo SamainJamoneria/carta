@@ -88,12 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const indice = categoriesOrden.indexOf(resultado.categoria.id);
         const gradosPorCategoria = 360 / 8; // 45º exactos por porción
         
-        // El punto 0 de la aguja apunta arriba (centro del gajo 1). 
-        // Para que caiga en mitad del gajo ganador sumamos su desfase angular correspondiente.
-        const gradosIcono = (indice * gradosPorCategoria);
+        // Calculamos los grados exactos del centro de la porción ganadora.
+        // Sumamos 22.5º para clavar el centro exacto del quesito.
+        const gradosIcono = (indice * gradosPorCategoria) + 22.5;
 
         // 5 vueltas completas de inercia hacia adelante (sentido horario) más la posición de la categoría
         const gradosFinal = (360 * 5) + gradosIcono;
+
+        // Forzamos un reflow antes de iniciar para limpiar estilos previos
+        flechaAguja.style.transform = "rotate(0deg)";
+        flechaAguja.getBoundingClientRect();
 
         // Rotamos la aguja central con la transición fluida definida en CSS
         flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
@@ -105,6 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // Esperamos los 3.5 segundos exactos de la transición
         timerFinalizacion = setTimeout(() => {
             cancelAnimationFrame(frameId);
+            
+            // Forzamos que al terminar se encienda únicamente el gajo ganador definitivo
+            gajos.forEach((gajo, i) => {
+                if (i === indice) {
+                    gajo.classList.add("iluminado");
+                } else {
+                    gajo.classList.remove("iluminado");
+                }
+            });
+
             finalizarRuleta(resultado);
         }, 3500); 
     }
@@ -117,11 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const tiempoInicial = performance.now();
         const duracionTotal = 3500; // Mismos ms que la animación CSS
 
-        // Función de flexión idéntica al cubic-bezier(0.1, 0.8, 0.2, 1) para calcular los grados en cada frame
         function obtenerGradosActuales(progreso) {
-            const t = progreso;
-            // Aproximación polinómica simple de la curva bezier de frenado
-            const factor = 1 - Math.pow(1 - t, 3.5); 
+            // Curva bezier de frenado simulada por software para aproximar el CSS
+            const factor = 1 - Math.pow(1 - progreso, 3.5); 
             return gradosObjetivo * factor;
         }
 
@@ -133,13 +145,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const gradosActuales = obtenerGradosActuales(progreso);
             
-            // Reducimos a una única vuelta de 0 a 359 para saber en qué ángulo exacto se encuentra la punta
+            // Reducimos a una única vuelta de 0 a 359.99 para saber en qué ángulo exacto se encuentra la punta
             const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
 
-            // Cada gajo ocupa 45º, pero visualmente están desplazados de -22.5º a +22.5º respecto a su eje central
-            const indiceGajoActual = Math.floor(((anguloNormalizado + 22.5) % 360) / 45);
+            // Al girar la aguja en sentido horario, dividimos directamente por 45 para obtener el índice real
+            const indiceGajoActual = Math.floor(anguloNormalizado / 45) % 8;
 
-            // Añadimos y removemos la clase CSS iluminado de forma reactiva
+            // Añadimos y removemos la clase CSS iluminado de forma reactiva y limpia
             gajos.forEach((gajo, i) => {
                 if (i === indiceGajoActual) {
                     gajo.classList.add("iluminado");
@@ -213,7 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let categorias;
 
         if(personas==="1"){
-            // Filtrado optimizado para raciones individuales
             categorias=carta.filter(c=> [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
         }else{
             categorias=carta;
