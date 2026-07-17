@@ -62,47 +62,34 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Ventana del aviso de alérgenos */
+        /* Ventana emergente (Modal) que atenúa la aplicación */
         .modal-alergenos {
-            display: none;
+            display: none; /* Oculto por defecto */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.85); /* Atenúa el fondo en oscuro */
             justify-content: center;
             align-items: center;
             z-index: 9999;
             padding: 20px;
+            cursor: pointer; /* Indica que al hacer clic se cierra */
         }
         .modal-alergenos.activo {
-            display: flex;
+            display: flex; /* Se muestra al pulsar */
         }
         .modal-contenido {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             overflow-y: auto;
-            text-align: center;
-            position: relative;
         }
         .modal-contenido img {
             width: 100%;
             height: auto;
             border-radius: 10px;
-        }
-        .btn-cerrar {
-            margin-top: 15px;
-            background: #2d2b72;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -115,47 +102,38 @@
             <p>- Especialistas en Ibérico -</p>
         </header>
 
-        <!-- AQUÍ VA TU LISTA DE PLATOS ESCRITA A MANO COMO LA TENÍAS ANTES -->
+        <!-- PEGA AQUÍ TU LISTA ORIGINAL DE PLATOS ESCRITA A MANO -->
         <div class="tu-contenido-de-la-carta">
-            <!-- Pega aquí tus secciones de platos si las tienes guardadas -->
+            <!-- Tus h2, párrafos y precios estáticos tal y como los tenías -->
         </div>
 
         <footer class="enlaces-aux">
-            <!-- Al pinchar aquí, saltará el aviso en la pantalla -->
+            <!-- Al tocar aquí se activa el mensaje emergente atenuado -->
             <button id="btn-alergenos">📋 Ver Tabla de Alérgenos</button>
             <a href="carta.pdf" target="_blank">📥 Descargar PDF</a>
         </footer>
 
     </div>
 
-    <!-- El aviso oculto que se abrirá al pulsar -->
-    <div id="mi-modal" class="modal-alergenos">
+    <!-- Mensaje emergente de la imagen (Cierra al hacer clic en cualquier parte) -->
+    <div id="modal-foto" class="modal-alergenos">
         <div class="modal-contenido">
             <img src="alergenos.jpg" alt="Tabla de Alérgenos">
-            <br>
-            <button class="btn-cerrar" id="btn-cerrar-modal">Cerrar Aviso</button>
         </div>
     </div>
 
     <script>
-        // Lógica simple para abrir y cerrar el aviso de alérgenos
         const btnAbrir = document.getElementById('btn-alergenos');
-        const btnCerrar = document.getElementById('btn-cerrar-modal');
-        const modal = document.getElementById('mi-modal');
+        const modalFoto = document.getElementById('modal-foto');
 
+        // Al tocar el botón, se abre atenuando la aplicación
         btnAbrir.addEventListener('click', () => {
-            modal.classList.add('activo');
+            modalFoto.classList.add('activo');
         });
 
-        btnCerrar.addEventListener('click', () => {
-            modal.classList.remove('activo');
-        });
-
-        // Cerrar también si pinchan fuera de la foto
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) {
-                modal.classList.remove('activo');
-            }
+        // Al hacer clic en cualquier parte del fondo o de la imagen, desaparece por completo
+        modalFoto.addEventListener('click', () => {
+            modalFoto.classList.remove('activo');
         });
     </script>
 
