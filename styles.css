@@ -1419,3 +1419,128 @@ DESTINO SAMAÍN
     font-size:64px;
 
 }
+
+/*=========================================
+RULETA DESTINO
+=========================================*/
+
+.ruleta-destino{
+
+    position:relative;
+
+    width:240px;
+    height:240px;
+
+    margin:0 auto 35px;
+
+}
+
+.disco-ruleta{
+
+    position:relative;
+
+    width:240px;
+    height:240px;
+
+    border-radius:50%;
+
+    background:white;
+
+    border:8px solid #d8b35c;
+
+    box-shadow:
+        0 0 35px rgba(216,179,92,.35),
+        inset 0 0 30px rgba(216,179,92,.15);
+
+}
+
+.icono-ruleta{
+
+    position:absolute;
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+}
+
+/* posiciones */
+
+.icono-ruleta:nth-child(1){
+
+    top:8px;
+    left:98px;
+
+}
+
+.icono-ruleta:nth-child(2){
+
+    top:36px;
+    right:30px;
+
+}
+
+.icono-ruleta:nth-child(3){
+
+    top:98px;
+    right:8px;
+
+}
+
+.icono-ruleta:nth-child(4){
+
+    bottom:36px;
+    right:30px;
+
+}
+
+.icono-ruleta:nth-child(5){
+
+    bottom:8px;
+    left:98px;
+
+}
+
+.icono-ruleta:nth-child(6){
+
+    bottom:36px;
+    left:30px;
+
+}
+
+.icono-ruleta:nth-child(7){
+
+    top:98px;
+    left:8px;
+
+}
+
+.icono-ruleta:nth-child(8){
+
+    top:36px;
+    left:30px;
+
+}
+
+.flecha-ruleta{
+
+    position:absolute;
+
+    top:-28px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:36px;
+
+    color:#d8b35c;
+
+    z-index:20;
+
+}
