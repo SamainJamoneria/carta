@@ -220,6 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // ELEGIR PRODUCTO
     //================================================
 
+   //================================================
+    // ELEGIR PRODUCTO (FILTRANDO EXTRAS)
+    //================================================
+
     function obtenerProducto(){
         const personas = document.querySelector(".seleccionado").dataset.comensales;
         let categorias;
@@ -230,8 +234,20 @@ document.addEventListener("DOMContentLoaded", () => {
             categorias=carta;
         }
 
+        // 1. Elegimos una categoría al azar
         const categoria = categorias[Math.floor(Math.random()*categorias.length)];
-        const producto = categoria.productos[Math.floor(Math.random()*categoria.productos.length)];
+        
+        // 2. Filtramos la lista de productos para eliminar "Ingrediente extra" u otros extras parecidos
+        const productosValidos = categoria.productos.filter(p => {
+            const nombreMinuscula = p.nombre.toLowerCase();
+            return !nombreMinuscula.includes("extra") && !nombreMinuscula.includes("ingrediente");
+        });
+
+        // 3. Si por seguridad una categoría se quedara vacía tras el filtro, usamos la lista original
+        const listaFinalProductos = productosValidos.length > 0 ? productosValidos : categoria.productos;
+
+        // 4. Seleccionamos el producto final de la lista limpia
+        const producto = listaFinalProductos[Math.floor(Math.random()*listaFinalProductos.length)];
 
         return { categoria, producto };
     }
