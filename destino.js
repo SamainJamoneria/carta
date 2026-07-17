@@ -93,50 +93,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function iniciarRuleta() {
 
-        resultadoDestino.classList.add("visible");
+    resultadoDestino.classList.add("visible");
 
-        let indice = 0;
-        let velocidad = 60;
-        let vueltas = 0;
+    const ruleta = document.querySelector(".ruleta-destino");
 
-        function girar() {
+    ruleta.classList.add("girando");
 
-            iconoDestino.textContent = iconosRuleta[indice];
+    let indice = 0;
+    let velocidad = 60;
+    let vueltas = 0;
 
-            indice++;
+    function girar() {
 
-            if (indice >= iconosRuleta.length) {
+        iconoDestino.textContent = iconosRuleta[indice];
 
-                indice = 0;
-                vueltas++;
+        indice++;
 
-            }
+        if(indice >= iconosRuleta.length){
 
-            if (vueltas < 3) {
-
-                setTimeout(girar, velocidad);
-                return;
-
-            }
-
-            velocidad += 18;
-
-            if (velocidad < 260) {
-
-                setTimeout(girar, velocidad);
-
-            } else {
-
-                mostrarResultado();
-
-            }
+            indice = 0;
+            vueltas++;
 
         }
 
-        girar();
+        if(vueltas < 3){
+
+            setTimeout(girar, velocidad);
+            return;
+
+        }
+
+        velocidad += 18;
+
+        if(velocidad < 260){
+
+            setTimeout(girar, velocidad);
+
+        }else{
+
+            ruleta.classList.remove("girando");
+
+            mostrarResultado();
+
+        }
 
     }
 
+    girar();
+
+}
     // ==========================
     // Resultado
     // ==========================
