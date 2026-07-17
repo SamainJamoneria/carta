@@ -349,18 +349,63 @@ document.querySelectorAll(".opcion-comensales").forEach(boton=>{
 
         setTimeout(()=>{
 
-            clearInterval(intervalo);
+    clearInterval(intervalo);
 
-            iconoDestino.textContent="🍴";
+    if(navigator.vibrate){
 
-            if(navigator.vibrate){
+        navigator.vibrate(120);
 
-                navigator.vibrate(120);
+    }
 
-            }
+    let categoriasPermitidas=[];
 
-        },2500);
+    const personas=boton.dataset.comensales;
+
+    if(personas==="1"){
+
+        categoriasPermitidas=[
+            "tostas",
+            "piadinas",
+            "dulces",
+            "bocadillos",
+            "postres"
+        ];
+
+    }else{
+
+        categoriasPermitidas=carta.map(c=>c.id);
+
+    }
+
+    const categorias=carta.filter(c=>
+        categoriasPermitidas.includes(c.id)
+    );
+
+    const categoria=
+        categorias[Math.floor(Math.random()*categorias.length)];
+
+    const producto=
+        categoria.productos[Math.floor(Math.random()*categoria.productos.length)];
+
+    iconoDestino.textContent=categoria.icono;
+
+    document.getElementById("nombre-destino").textContent=
+        producto.nombre;
+
+    document.getElementById("descripcion-destino").textContent=
+        producto.descripcion;
+
+    document.getElementById("precio-destino").textContent=
+        producto.precio;
+
+    },2500);
 
     });
+
+});
+
+resultadoDestino.addEventListener("click",()=>{
+
+    resultadoDestino.classList.remove("visible");
 
 });
