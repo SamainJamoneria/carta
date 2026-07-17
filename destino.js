@@ -142,6 +142,8 @@ setTimeout(() => {
 
     }
 
+    lanzarConfeti();    
+
     nombreDestino.textContent =
         resultado.producto.nombre;
 
