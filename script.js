@@ -215,4 +215,32 @@ if (imagen && modal && cerrar) {
             modal.classList.remove("abierto");
         }
     });
+
+// --- LÓGICA MOSTRAR / OCULTAR CONTACTO ---
+document.addEventListener('DOMContentLoaded', () => {
+  const btnContacto = document.getElementById('btn-contacto-carta');
+  const modalContacto = document.getElementById('modal-contacto');
+  const cerrarContacto = document.getElementById('cerrar-contacto');
+
+  // Si existe el botón en esta página, activa la función de abrir
+  if (btnContacto && modalContacto) {
+    btnContacto.addEventListener('click', () => {
+      modalContacto.classList.remove('hidden');
+    });
+  }
+
+  // Cierra al hacer clic en la X
+  if (cerrarContacto && modalContacto) {
+    cerrarContacto.addEventListener('click', () => {
+      modalContacto.classList.add('hidden');
+    });
+  }
+
+  // Cierra al hacer clic en la zona oscura fuera del cuadro
+  window.addEventListener('click', (event) => {
+    if (event.target === modalContacto) {
+      modalContacto.classList.add('hidden');
+    }
+  });
+});    
 }
