@@ -979,3 +979,126 @@ MEDIA QUERIES COMPACTADAS (RESPONSIVE)
   50% { filter: brightness(1.25) drop-shadow(0 0 12px rgba(200, 162, 97, 0.5)); }
   100% { filter: brightness(1); }
 }
+
+/* ==========================================
+   ESTILOS CABECERA (ALINEACIÓN Y ENLACES)
+   ========================================== */
+.header-principal {
+  position: relative;
+  padding-top: 15px;
+}
+
+.top-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.top-nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+}
+
+.top-nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Enlaces limpios sin fondo, borde ni subrayado */
+.nav-link, 
+.nav-link-btn {
+  background: none !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.nav-link:hover, 
+.nav-link-btn:hover {
+  color: #c8a261 !important; /* Tono dorado al hacer hover */
+}
+
+.btn-flag {
+  font-size: 1.3rem !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+}
+
+/* ==========================================
+   ESTILOS MODAL CONTACTO (COLORES SAMAÍN)
+   ========================================== */
+.modal-contacto-content {
+  background-color: #2e3256 !important; /* Fondo azul/púrpura corporativo */
+  color: #f7f4ed !important;
+  padding: 25px 20px !important;
+  border-radius: 16px !important;
+  border: 1px solid #c8a261 !important; /* Borde dorado */
+  width: 90% !important;
+  max-width: 440px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-contacto-content h2 {
+  color: #c8a261 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 1px !important;
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid rgba(200, 162, 97, 0.3) !important;
+  padding-bottom: 8px !important;
+  text-align: center !important;
+}
+
+.close-btn {
+  color: #c8a261 !important;
+  opacity: 0.9 !important;
+}
+
+.contacto-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  margin-bottom: 20px !important;
+  text-align: left !important;
+}
+
+.contacto-label {
+  color: #c8a261 !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  margin-bottom: 3px !important;
+}
+
+.contacto-val {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.contacto-val a {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.mapa-container {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 1px solid #c8a261 !important;
+}
