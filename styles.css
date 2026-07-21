@@ -802,3 +802,95 @@ MEDIA QUERIES COMPACTADAS (RESPONSIVE)
     .icono{ font-size:22px; line-height:1; text-decoration:none; }
     .texto{ text-align:center; line-height:1.1; }
 }
+
+/* --- ESTILOS CONTACTO JAMONERÍA SAMAÍN --- */
+
+/* Regla para ocultar la ventana por defecto */
+.hidden {
+  display: none !important;
+}
+
+/* Botón de la barra superior */
+.btn-contacto-nav {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Fondo oscuro transparente que cubre toda la pantalla */
+.modal-contacto {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* Cuadro blanco/crema del contenido */
+.modal-contacto-content {
+  background-color: #f7f4ed;
+  color: #4a1525;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 850px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* Botón X de cerrar */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Diseño de 3 columnas para los datos */
+.contacto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.contacto-col h3 {
+  border-bottom: 2px solid #c8a261;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.contacto-col p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.contacto-col a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Contenedor del Mapa */
+.mapa-container {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #c8a261;
+}
