@@ -1,238 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Samaín La Cormelana</title>
 
-<meta charset="UTF-8">
-  
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Menu - Samaín La Cormelana</title>
-
+  <!-- Fuentes e Iconos FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<header>
+<header class="header-principal">
+  <div class="top-bar">
+    <div class="top-nav-left">
+      <a href="index.html" class="nav-link">🏠 Home</a>
+      <button id="btn-contacto-carta" type="button" class="nav-link-btn">🪪 Contact</button>
+    </div>
 
-<nav>
+    <div class="top-nav-right">
+      <a href="carta.html" class="btn-flag" title="Español">🇪🇸</a>
+      <a href="carta-en.html" class="btn-flag" title="English">🇬🇧</a>
+    </div>
+  </div>
 
-<a href="index.html">🏠 Home</a>
+  <div class="logo-container">
+    <img src="LOGO.png" alt="Samaín Jamonería" class="logo-brillo">
+  </div>
 
-<div class="idiomas">
-
-  <a href="carta.html">🇪🇸</a>
-
-  <a href="carta-en.html">🇬🇧</a>
-
-</div>
-
-</nav>
-  
-<img src="LOGO.png">
-
-<h1>Our Menu</h1>
-
-<p>Iberian Specialists</p>
-
+  <h1>Our Menu</h1>
+  <p>Iberian Ham Specialists</p>
 </header>
 
 <div class="menu-sticky">
-
-    <button class="flecha-menu izquierda" id="flecha-izquierda">
-        ‹
-    </button>
-
-    <div class="contenedor-menu">
-
-        <section class="menu-categorias" id="menu-categorias">
-
-        </section>
-
-    </div>
-
-    <button class="flecha-menu derecha" id="flecha-derecha">
-        ›
-    </button>
-
+  <button class="flecha-menu izquierda" id="flecha-izquierda">‹</button>
+  <div class="contenedor-menu">
+    <section class="menu-categorias" id="menu-categorias"></section>
+  </div>
+  <button class="flecha-menu derecha" id="flecha-derecha">›</button>
 </div>
-  
+
 <section class="buscador">
-
-    <input
-        type="text"
-        id="buscar"
-        placeholder="🔍 Search for a dish..."
-    >
-
+  <input type="text" id="buscar" placeholder="🔍 Search for a dish...">
 </section>
 
 <section class="destino-samain">
-
-    <p class="texto-destino">
-        🎲 Can't decide what to order?<br>
-        <strong>Let fate choose for you.</strong>
-    </p>
-
-    <button id="btn-destino" class="btn-destino">
-        🎲 THE SAMAÍN FATE
-    </button>
-
+  <p class="texto-destino">
+    🎲 Can't decide what to order?<br>
+    <strong>Let fate choose for you.</strong>
+  </p>
+  <button id="btn-destino" class="btn-destino">
+    🎲 SAMAÍN DESTINY
+  </button>
 </section>
 
-  
-  
 <div id="resultado-busqueda" class="resultado-busqueda"></div>
 
-<main id="carta">
+<main id="carta"></main>
 
-</main>
-  
-
- <section class="alergenos">
-
-    <h2>⚠️ Allergen Information</h2>
-
-    <img
-        src="alergenos.jpg"
-        id="imagen-alergenos"
-        alt="Allergen chart"
-    >
-
-    <p>🔎 Tap on the image to zoom in.</p>
-
+<section class="alergenos">
+  <h2>⚠️ Allergen Information</h2>
+  <img src="alergenos.jpg" id="imagen-alergenos" alt="Allergen chart">
+  <p>🔎 Click on the image to enlarge.</p>
 </section>
 
-<!-- Ventana emergente (Modal) -->
-
+<!-- Modal Alérgenos -->
 <div id="modal-alergenos" class="modal-alergenos">
-
-    <div class="modal-contenido">
-
-        <span id="cerrar-modal">&times;</span>
-
-        <img src="alergenos.jpg" alt="Allergens">
-
-        <div class="mensaje-alergenos">
-
-            ⚠️ <strong>Please, if you are allergic to any of these products, inform our staff before placing your order.</strong>
-
-        </div>
-
+  <div class="modal-contenido">
+    <span id="cerrar-modal">&times;</span>
+    <img src="alergenos.jpg" alt="Allergens">
+    <div class="mensaje-alergenos">
+      ⚠️ <strong>Please, if you have any food allergies, inform our staff before placing your order.</strong>
     </div>
-
+  </div>
 </div> 
 
- <div id="modal-destino" class="modal-destino">
-
-    <div class="ventana-destino">
-
-        <button class="cerrar-destino" id="cerrar-destino">
-            ✕
-        </button>
-
-        <h2>🍴 How many guests are you?</h2>
-
-        <button class="opcion-comensales" data-comensales="1">
-            👤 Just me
-        </button>
-
-        <button class="opcion-comensales" data-comensales="2">
-            👥 Two people
-        </button>
-
-        <button class="opcion-comensales" data-comensales="3">
-            👨‍👩‍👧‍👦 Three or more
-        </button>
-
-    </div>
-
+<!-- Modal Destino -->
+<div id="modal-destino" class="modal-destino">
+  <div class="ventana-destino">
+    <button class="cerrar-destino" id="cerrar-destino">✕</button>
+    <h2>🍴 How many guests are you?</h2>
+    <button class="opcion-comensales" data-comensales="1">👤 Just me</button>
+    <button class="opcion-comensales" data-comensales="2">👥 Two people</button>
+    <button class="opcion-comensales" data-comensales="3">👨‍👩‍👧‍👦 Three or more</button>
+  </div>
 </div> 
- 
 
 <div id="resultado-destino" class="resultado-destino">
+  <div class="tarjeta-destino">
+    <div class="ruleta-destino">
+      <div class="flecha-ruleta" id="flecha-ruleta">
+        <span class="puntero">▼</span>
+      </div>
+      <div class="disco-ruleta" id="disco-ruleta">
+        <div class="gajo-quesito" data-index="0"></div>
+        <div class="gajo-quesito" data-index="1"></div>
+        <div class="gajo-quesito" data-index="2"></div>
+        <div class="gajo-quesito" data-index="3"></div>
+        <div class="gajo-quesito" data-index="4"></div>
+        <div class="gajo-quesito" data-index="5"></div>
+        <div class="gajo-quesito" data-index="6"></div>
+        <div class="gajo-quesito" data-index="7"></div>
 
-    <div class="tarjeta-destino">
-
-        <div class="ruleta-destino">
-
-            <!-- La flecha envuelve al puntero para girar desde el centro como una aguja -->
-            <div class="flecha-ruleta" id="flecha-ruleta">
-                <span class="puntero">▼</span>
-            </div>
-
-            <div class="disco-ruleta" id="disco-ruleta">
-                <!-- Los 8 gajos físicos de fondo para iluminarse de forma independiente -->
-                <div class="gajo-quesito" data-index="0"></div>
-                <div class="gajo-quesito" data-index="1"></div>
-                <div class="gajo-quesito" data-index="2"></div>
-                <div class="gajo-quesito" data-index="3"></div>
-                <div class="gajo-quesito" data-index="4"></div>
-                <div class="gajo-quesito" data-index="5"></div>
-                <div class="gajo-quesito" data-index="6"></div>
-                <div class="gajo-quesito" data-index="7"></div>
-
-                <!-- Los 8 iconos fijos en sus porciones -->
-                <div class="icono-ruleta">🥖</div>
-                <div class="icono-ruleta">🍽️</div>
-                <div class="icono-ruleta">🍖</div>
-                <div class="icono-ruleta">🧀</div>
-                <div class="icono-ruleta">🌯</div>
-                <div class="icono-ruleta">🍫</div>
-                <div class="icono-ruleta">🥪</div>
-                <div class="icono-ruleta">🍰</div>
-            </div>
-
-        </div>
-          
-          
-        <p class="titulo-destino">✨ Fate has decided...</p>
-
-        <!-- 1. CATEGORÍA COLOCADA AQUÍ (ENCIMA DEL PRODUCTO) -->
-        <div id="categoria-destino" class="categoria-destino"></div>
-
-        <!-- 2. DATOS DEL PRODUCTO -->
-        <h1 id="nombre-destino"></h1>
-
-        <p id="descripcion-destino"></p>
-
-        <div id="precio-destino"></div>
-
-        <small>Tap anywhere to continue</small>
-
+        <div class="icono-ruleta">🥖</div>
+        <div class="icono-ruleta">🍽️</div>
+        <div class="icono-ruleta">🍖</div>
+        <div class="icono-ruleta">🧀</div>
+        <div class="icono-ruleta">🌯</div>
+        <div class="icono-ruleta">🍫</div>
+        <div class="icono-ruleta">🥪</div>
+        <div class="icono-ruleta">🍰</div>
+      </div>
     </div>
+    
+    <p class="titulo-destino">✨ Destiny has spoken...</p>
+    <div id="categoria-destino" class="categoria-destino"></div>
+    <h1 id="nombre-destino"></h1>
+    <p id="descripcion-destino"></p>
+    <div id="precio-destino"></div>
+    <small>Tap anywhere to continue</small>
+  </div>
 </div>
 
 <footer>
-
-Jamonería Samaín · A Coruña
-
-
-<br><br>
-
-📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">
-
-Follow us on Insta
-
-</a>
-
- 
+  Jamonería Samaín · A Coruña
+  <br><br>
+  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Follow us on Insta</a>
 </footer>
-  
-<!-- REQUISITO CRÍTICO: Aquí cargamos la traducción del menú antes que el motor -->
-<script src="menu-en.js"></script>
+
+<div id="confeti"></div>
+
+<!-- VENTANA EMERGENTE DE CONTACTO -->
+<div id="modal-contacto" class="modal-contacto hidden">
+  <div class="modal-contacto-content">
+    <span class="close-btn" id="cerrar-contacto">&times;</span>
+    
+    <h2>RESERVATIONS / CONTACT</h2>
+    
+    <div class="contacto-grid">
+      <div class="contacto-item">
+        <p class="contacto-label">PHONE</p>
+        <p><a href="tel:+34881125487" class="contacto-val">📞 +34 881 125 487</a></p>
+      </div>
+
+      <div class="contacto-item">
+        <p class="contacto-label">ADDRESS</p>
+        <p class="contacto-val">📍 Praza da Cormelana, 6<br>15001 A Coruña</p>
+      </div>
+
+      <div class="contacto-item">
+        <p class="contacto-label">OPENING HOURS</p>
+        <p class="contacto-val"><strong>Monday to Friday:</strong> 10:00 to Close</p>
+        <p class="contacto-val"><strong>Saturdays, Sundays & Holidays:</strong> 11:00 to Close</p>
+      </div>
+    </div>
+
+    <!-- Mapa de Google Maps -->
+    <div class="mapa-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2900.8655208226065!2d-8.4059281!3d43.3685114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7d00116529a5%3A0x355a57c6fce86bce!2sJamoner%C3%ADa%20Sama%C3%ADn!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
+        width="100%" 
+        height="220" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script src="menu.js"></script>
 <script src="script.js"></script>
 <script src="destino.js"></script>
 
-<div id="confeti"></div>
-  
 </body>
 </html>
