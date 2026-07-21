@@ -804,7 +804,7 @@ EFECTO DINÁMICO CONFETI
 }
 
 /*==================================================
-MODAL CONTACTO SAMAÍN (ESTILO CORPORATIVO)
+MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 ==================================================*/
 
 .hidden {
@@ -827,37 +827,42 @@ MODAL CONTACTO SAMAÍN (ESTILO CORPORATIVO)
 }
 
 .modal-contacto-content {
-    background-color: var(--color-principal); 
-    color: var(--color-fondo);
+    background-color: #ffffff; /* Fondo Blanco */
+    color: var(--color-texto);
     padding: 25px 20px;
     border-radius: 16px;
-    border: 1px solid var(--color-dorado); 
+    border: 2px solid var(--color-principal); /* Borde azul corporativo */
     width: 90%;
     max-width: 440px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
 .modal-contacto-content h2 {
-    color: var(--color-dorado);
-    font-size: 1.1rem;
+    color: var(--color-principal); /* Título principal en Azul */
+    font-size: 1.2rem;
+    font-weight: 800;
     letter-spacing: 1px;
     margin-top: 0;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(216, 179, 92, 0.3);
+    border-bottom: 2px solid var(--color-dorado); /* Línea dorada de contraste */
     padding-bottom: 8px;
     text-align: center;
 }
 
 .close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
+    top: 12px;
+    right: 18px;
+    font-size: 26px;
     font-weight: bold;
     cursor: pointer;
-    color: var(--color-dorado);
-    opacity: 0.9;
+    color: #888888;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: var(--color-precio); /* Rojo al pasar el ratón */
 }
 
 .contacto-grid {
@@ -869,29 +874,36 @@ MODAL CONTACTO SAMAÍN (ESTILO CORPORATIVO)
 }
 
 .contacto-label {
-    color: var(--color-dorado);
-    font-size: 0.75rem;
-    font-weight: 700;
+    color: var(--color-principal); /* Títulos de cada sección en Azul */
+    font-size: 0.8rem;
+    font-weight: 800;
     letter-spacing: 0.5px;
     margin-bottom: 3px;
+    text-transform: uppercase;
 }
 
 .contacto-val {
-    color: #ffffff;
+    color: #222222; /* Texto en tono oscuro para buena legibilidad */
     font-size: 0.95rem;
     margin: 0;
     line-height: 1.4;
 }
 
 .contacto-val a {
-    color: #ffffff;
+    color: #222222;
     text-decoration: none;
+    font-weight: 600;
+}
+
+.contacto-val a:hover {
+    color: var(--color-principal);
+    text-decoration: underline;
 }
 
 .mapa-container {
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid var(--color-dorado);
+    border: 1px solid #e0e0e0;
 }
 
 /*==================================================
