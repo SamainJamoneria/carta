@@ -894,3 +894,88 @@ MEDIA QUERIES COMPACTADAS (RESPONSIVE)
   overflow: hidden;
   border: 1px solid #c8a261;
 }
+
+/* --- CABECERA SUPERIOR Y DISTRIBUCIÓN --- */
+.header-principal {
+  position: relative;
+  padding-top: 10px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.top-nav-left {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.top-nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* --- BOTONES CON LA ESTÉTICA DE LA CARTA --- */
+.btn-top-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid #c8a261; /* Borde dorado corporativo */
+  color: #ffffff !important;
+  padding: 6px 12px;
+  border-radius: 20px; /* Estilo píldora como las categorías */
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none !important; /* Elimina subrayados */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.btn-top-header:hover, 
+.btn-top-header:active {
+  background-color: #c8a261;
+  color: #33000d !important;
+}
+
+/* --- BANDERAS DE IDIOMA --- */
+.btn-flag {
+  font-size: 1.3rem;
+  text-decoration: none !important; /* Elimina subrayados */
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.btn-flag:hover {
+  transform: scale(1.15);
+}
+
+/* Ajuste del logo para que mantenga el brillo centrado */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.logo-brillo {
+  max-width: 250px;
+  width: 75%;
+  height: auto;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.25) drop-shadow(0 0 12px rgba(200, 162, 97, 0.5)); }
+  100% { filter: brightness(1); }
+}
