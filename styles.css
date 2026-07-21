@@ -980,42 +980,42 @@ MEDIA QUERIES COMPACTADAS (RESPONSIVE)
   100% { filter: brightness(1); }
 }
 
-/* ==========================================
-   ESTILOS CABECERA (ALINEACIÓN Y ENLACES)
-   ========================================== */
+/* --- CABECERA Y NAVEGACIÓN DUPICADA DE CARTA-EN --- */
 .header-principal {
   position: relative;
-  padding-top: 15px;
+  padding-top: 12px;
+  text-align: center;
 }
 
 .top-bar {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding: 0 20px !important;
+  padding: 0 16px !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  margin-bottom: 12px !important;
 }
 
 .top-nav-left {
   display: flex !important;
   align-items: center !important;
-  gap: 15px !important;
+  gap: 12px !important;
 }
 
 .top-nav-right {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
 }
 
-/* Enlaces limpios sin fondo, borde ni subrayado */
+/* Enlaces superiores idénticos al estilo en.html */
 .nav-link, 
 .nav-link-btn {
   background: none !important;
   border: none !important;
   color: #ffffff !important;
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
   font-weight: 600 !important;
   text-decoration: none !important;
   cursor: pointer !important;
@@ -1023,20 +1023,47 @@ MEDIA QUERIES COMPACTADAS (RESPONSIVE)
   margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 5px !important;
+  gap: 4px !important;
   outline: none !important;
   box-shadow: none !important;
+  font-family: inherit !important;
 }
 
 .nav-link:hover, 
 .nav-link-btn:hover {
-  color: #c8a261 !important; /* Tono dorado al hacer hover */
+  opacity: 0.85;
 }
 
 .btn-flag {
-  font-size: 1.3rem !important;
+  font-size: 1.25rem !important;
   text-decoration: none !important;
   line-height: 1 !important;
+  display: inline-block;
+}
+
+/* --- LOGO: TAMAÑO Y MÁRGENES IDÉNTICOS --- */
+.logo-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto 15px auto !important;
+  width: 100% !important;
+}
+
+.logo-brillo {
+  width: 82% !important;
+  max-width: 320px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+  border-radius: 4px !important;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.2) drop-shadow(0 0 10px rgba(200, 162, 97, 0.4)); }
+  100% { filter: brightness(1); }
 }
 
 /* ==========================================
