@@ -267,3 +267,28 @@ if (btnGaleria && modalGaleria) {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalVisor = document.getElementById("modal-visor-imagen");
+  const imagenAmpliada = document.getElementById("imagen-ampliada");
+  const cerrarVisor = document.getElementById("cerrar-visor");
+
+  // Escuchar clics en cualquier imagen dentro de la galería
+  document.querySelectorAll(".galeria-grid img").forEach((img) => {
+    img.addEventListener("click", (e) => {
+      e.stopPropagation(); // Evita interferencias con otros modales
+      imagenAmpliada.src = img.src;
+      modalVisor.classList.remove("hidden");
+    });
+  });
+
+  // Función para cerrar el visor
+  const cerrarModalImagen = () => {
+    modalVisor.classList.add("hidden");
+    imagenAmpliada.src = "";
+  };
+
+  // Cerrar al pulsar la 'X' o al tocar cualquier parte del fondo oscuro
+  cerrarVisor.addEventListener("click", cerrarModalImagen);
+  modalVisor.addEventListener("click", cerrarModalImagen);
+});
