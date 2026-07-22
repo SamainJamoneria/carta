@@ -1073,3 +1073,14 @@ VISOR DE IMAGEN AMPLIADA (LIGHTBOX MÓVIL)
         transform: scale(1);
     }
 }
+
+/* Destacado especial para la tarjeta de eventos */
+.tienda-evento-destacado {
+    background: #fffdf5;
+    border: 1px solid var(--color-dorado);
+    box-shadow: 0 2px 8px rgba(216, 179, 92, 0.15);
+}
+
+.tienda-evento-destacado h3 {
+    color: #8b0000; /* Rojo corporativo para darle impacto al título */
+}
