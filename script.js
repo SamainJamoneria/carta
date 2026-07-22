@@ -271,3 +271,38 @@ function normalizarTexto(texto) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
+
+// ======================================================
+// CONTROL DEL MODAL TIENDA Y PARA LLEVAR
+// ======================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const btnTienda = document.getElementById('btn-tienda');
+    const modalTienda = document.getElementById('modal-tienda');
+    const cerrarTienda = document.getElementById('cerrar-tienda');
+
+    // Función para abrir el modal
+    if (btnTienda && modalTienda) {
+        btnTienda.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalTienda.classList.remove('hidden');
+        });
+    }
+
+    // Función para cerrar el modal haciendo clic en la X
+    if (cerrarTienda && modalTienda) {
+        cerrarTienda.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Evita interferencias con el contenedor
+            modalTienda.classList.add('hidden');
+        });
+    }
+
+    // Función para cerrar el modal haciendo clic fuera de la tarjeta (fondo oscuro)
+    if (modalTienda) {
+        modalTienda.addEventListener('click', (e) => {
+            if (e.target === modalTienda) {
+                modalTienda.classList.add('hidden');
+            }
+        });
+    }
+});
