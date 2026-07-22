@@ -64,10 +64,11 @@ Cabecera Principal (Header)
     margin-bottom: 12px;
 }
 
+/* Agrupa Inicio, Contacto y Galería con separación uniforme */
 .top-nav-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 12px; /* Misma distancia entre cada elemento */
 }
 
 .top-nav-right {
@@ -76,13 +77,13 @@ Cabecera Principal (Header)
     gap: 8px;
 }
 
-/* Enlaces superiores idénticos a carta-en.html */
+/* Enlaces superiores idénticos */
 .nav-link, 
 .nav-link-btn {
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
@@ -93,7 +94,8 @@ Cabecera Principal (Header)
     gap: 4px;
     outline: none;
     font-family: inherit;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Evita saltos de línea no deseados en pantallas estrechas */
 }
 
 .nav-link:hover, 
@@ -827,11 +829,11 @@ MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 }
 
 .modal-contacto-content {
-    background-color: #ffffff; /* Fondo Blanco */
+    background-color: #ffffff;
     color: var(--color-texto);
     padding: 25px 20px;
     border-radius: 16px;
-    border: 2px solid var(--color-principal); /* Borde azul corporativo */
+    border: 2px solid var(--color-principal);
     width: 90%;
     max-width: 440px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -839,13 +841,13 @@ MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 }
 
 .modal-contacto-content h2 {
-    color: var(--color-principal); /* Título principal en Azul */
+    color: var(--color-principal);
     font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 1px;
     margin-top: 0;
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--color-dorado); /* Línea dorada de contraste */
+    border-bottom: 2px solid var(--color-dorado);
     padding-bottom: 8px;
     text-align: center;
 }
@@ -862,7 +864,7 @@ MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 }
 
 .close-btn:hover {
-    color: var(--color-precio); /* Rojo al pasar el ratón */
+    color: var(--color-precio);
 }
 
 .contacto-grid {
@@ -874,7 +876,7 @@ MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 }
 
 .contacto-label {
-    color: var(--color-principal); /* Títulos de cada sección en Azul */
+    color: var(--color-principal);
     font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.5px;
@@ -883,7 +885,7 @@ MODAL CONTACTO SAMAÍN (FONDO BLANCO Y AZUL CORPORATIVO)
 }
 
 .contacto-val {
-    color: #222222; /* Texto en tono oscuro para buena legibilidad */
+    color: #222222;
     font-size: 0.95rem;
     margin: 0;
     line-height: 1.4;
@@ -932,6 +934,9 @@ MEDIA QUERIES (RESPONSIVE)
 }
 
 @media(max-width:500px){
+    .top-bar { padding: 0 10px; }
+    .top-nav-left { gap: 10px; } /* Ajuste fino de espacio para móviles estrechos */
+    .nav-link, .nav-link-btn { font-size: 0.82rem; }
     .menu-categorias{ grid-template-columns:repeat(2,1fr); gap:10px; }
     .categoria{ padding:12px 8px; }
     .icono{ font-size:22px; line-height:1; text-decoration:none; }
@@ -950,7 +955,7 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
     width: 92%;
     max-width: 520px;
     max-height: 85vh;
-    overflow-y: auto; /* Permite scroll si la pantalla del móvil es pequeña */
+    overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
     box-sizing: border-box;
@@ -971,7 +976,7 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
 /* Grilla responsive de fotos */
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
@@ -979,7 +984,7 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    aspect-ratio: 1 / 1; /* Mantiene proporciones cuadradas y alineadas */
+    aspect-ratio: 1 / 1;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -995,7 +1000,7 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
 /* Efecto suave al interactuar / pulsar */
 .galeria-item:hover img,
 .galeria-item:active img {
-    transform: scale(1.08); /* Zoom sutil sin deformar */
+    transform: scale(1.08);
     filter: brightness(1.05);
 }
 
@@ -1010,5 +1015,5 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
 }
 
 .galeria-item:hover::after {
-    border-color: var(--color-dorado); /* Borde dorado sutil al tocar */
+    border-color: var(--color-dorado);
 }
