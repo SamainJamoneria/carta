@@ -244,3 +244,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });    
 }
+
+// MODAL GALERÍA
+const btnGaleria = document.getElementById('btn-galeria');
+const modalGaleria = document.getElementById('modal-galeria');
+const closeGaleria = document.getElementById('close-galeria');
+
+if (btnGaleria && modalGaleria) {
+    btnGaleria.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalGaleria.classList.remove('hidden');
+    });
+
+    closeGaleria.addEventListener('click', () => {
+        modalGaleria.classList.add('hidden');
+    });
+
+    // Cerrar si hace clic fuera de la ventana
+    modalGaleria.addEventListener('click', (e) => {
+        if (e.target === modalGaleria) {
+            modalGaleria.classList.add('hidden');
+        }
+    });
+}
