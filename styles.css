@@ -1102,3 +1102,38 @@ MEDIA QUERIES (RESPONSIVE)
     .icono{ font-size: 22px; line-height: 1; text-decoration: none; }
     .texto{ text-align: center; line-height: 1.1; }
 }
+
+/* ======================================================
+   BOTÓN DE CIERRE (X) Y CONTENEDOR MODAL
+   ====================================================== */
+
+.modal-contacto-content {
+    position: relative; /* Indispensable para posicionar la X dentro */
+    background-color: #ffffff;
+    color: var(--color-texto);
+    padding: 25px 20px;
+    border-radius: 16px;
+    border: 2px solid var(--color-principal);
+    width: 90%;
+    max-width: 440px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #888888;
+    z-index: 10; /* Garantiza que quede por encima de los títulos y texto */
+    line-height: 1;
+    padding: 5px;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: var(--color-precio, #8b0000);
+}
