@@ -995,14 +995,86 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     }
 }
 
-.tienda-evento-destacado {
-    background: #fffdf5;
-    border: 1px solid var(--color-dorado);
-    box-shadow: 0 2px 8px rgba(216, 179, 92, 0.15);
+/*==================================================
+  ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
+==================================================*/
+
+.tienda-seccion {
+    margin-bottom: 18px;
+    text-align: left;
 }
 
-.tienda-evento-destacado h3 {
-    color: #8b0000;
+.tienda-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-principal);
+    margin-bottom: 4px;
+}
+
+.tienda-icono {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.tienda-seccion p {
+    color: var(--color-texto);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.tienda-evento-destacado {
+    background-color: #f8f7f3;
+    border: 2px dashed var(--color-dorado);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.tienda-titulo-destacado {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-principal);
+    margin-bottom: 6px;
+}
+
+.tienda-evento-destacado p {
+    color: var(--color-texto);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.tienda-contacto-texto {
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.tienda-telefono {
+    display: inline-block;
+    color: var(--color-principal);
+    font-weight: 800;
+    font-size: 1.15rem;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #f0eff8;
+    transition: background 0.2s ease, color 0.2s ease;
+    text-align: center;
+}
+
+.tienda-telefono:hover {
+    background: var(--color-principal);
+    color: #ffffff;
 }
 
 /*==================================================
