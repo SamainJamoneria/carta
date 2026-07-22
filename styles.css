@@ -1017,3 +1017,59 @@ MODAL GALERÍA SAMAÍN (ESTILO CORPORATIVO)
 .galeria-item:hover::after {
     border-color: var(--color-dorado);
 }
+
+/*==================================================
+VISOR DE IMAGEN AMPLIADA (LIGHTBOX MÓVIL)
+==================================================*/
+
+.modal-visor {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.92);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999; /* Por encima de todo */
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+.modal-visor img {
+    max-width: 95%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--color-dorado, #d8b35c);
+    animation: zoomIn 0.25s ease-out;
+}
+
+.cerrar-visor {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1000000;
+    transition: color 0.2s ease;
+}
+
+.cerrar-visor:hover {
+    color: var(--color-dorado, #d8b35c);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
