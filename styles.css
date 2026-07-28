@@ -312,9 +312,9 @@ MENÚ STICKY Y CATEGORÍAS
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 999px;
-    background: #ffffff;                /* Fondo claro */
+    background: #ffffff;                /* Fondo claro por defecto */
     border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);      /* Texto azul */
+    color: var(--color-principal);      /* Texto e icono en azul */
     text-decoration: none;
     font-weight: 700;
     white-space: nowrap;
@@ -329,20 +329,25 @@ MENÚ STICKY Y CATEGORÍAS
     transform: translateY(-2px);
 }
 
-/* Estado activo */
+/* Estado activo: Resalta en dorado al hacer scroll */
 .categoria.activa {
-    background: #ffffff;
-    color: var(--color-principal);
-    border-color: var(--color-dorado);
-    transform: scale(1.03);
-    box-shadow: 0 4px 12px rgba(216,179,92,.4);
+    background: var(--color-dorado) !important; /* Fondo dorado */
+    color: #ffffff !important;                  /* Texto e icono en blanco */
+    border-color: var(--color-dorado) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 14px rgba(216, 179, 92, 0.55);
     animation: activa .35s ease;
+}
+
+.categoria.activa:hover {
+    background: var(--color-dorado) !important;
+    color: #ffffff !important;
 }
 
 @keyframes activa {
     0% { transform: scale(.95); }
-    70% { transform: scale(1.05); }
-    100% { transform: scale(1.03); }
+    70% { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
 }
 
 .flecha-menu {
