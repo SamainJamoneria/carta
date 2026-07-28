@@ -248,72 +248,17 @@ MENÚ STICKY Y CATEGORÍAS
     padding: 12px 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,.08);
     border-bottom: 1px solid rgba(216,179,92,.35);
-}
-
-.menu-categorias {
     display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-}
-
-.menu-categorias::-webkit-scrollbar {
-    display: none;
-}
-
-.categoria {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-    flex: 0 0 auto;
-    padding: 12px 18px;
-    border-radius: 999px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    color: var(--color-principal);
-    text-decoration: none;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: all .25s ease;
-}
-
-.categoria:hover {
-    background: var(--color-principal);
-    color: #ffffff;
-}
-
-.categoria.activa {
-    background: var(--color-dorado);
-    color: #ffffff;
-    border-color: var(--color-dorado);
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(216,179,92,.35);
-    animation: activa .35s ease;
-}
-
-@keyframes activa {
-    0% { transform: scale(.92); }
-    70% { transform: scale(1.08); }
-    100% { transform: scale(1.05); }
-}
-
-.flecha-menu {
-    transition: opacity .25s ease;
-}
-
-.flecha-menu.oculta {
-    opacity: 0;
-    pointer-events: none;
+    gap: 8px;
 }
 
 .contenedor-menu {
     position: relative;
     flex: 1;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .contenedor-menu::before,
@@ -341,6 +286,88 @@ MENÚ STICKY Y CATEGORÍAS
 
 .contenedor-menu.mostrar-izquierda::before { opacity: 1; }
 .contenedor-menu.mostrar-derecha::after { opacity: 1; }
+
+.menu-categorias {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    width: 100%;
+    padding: 4px 0;
+}
+
+.menu-categorias::-webkit-scrollbar {
+    display: none;
+}
+
+/* Categorías en azul con letra blanca por defecto */
+.categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--color-principal); /* Fondo Azul */
+    border: 2px solid var(--color-dorado);
+    color: #ffffff;                     /* Texto Blanco */
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all .25s ease;
+}
+
+.categoria:hover {
+    background: var(--color-principal-hover);
+    color: #ffffff;
+}
+
+/* Estado activo resaltado en dorado */
+.categoria.activa {
+    background: var(--color-dorado);
+    color: #ffffff;
+    border-color: var(--color-dorado);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(216,179,92,.35);
+    animation: activa .35s ease;
+}
+
+@keyframes activa {
+    0% { transform: scale(.92); }
+    70% { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+}
+
+.flecha-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-principal);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    cursor: pointer;
+    align-self: center;
+    transition: opacity .25s ease, background-color .2s ease;
+}
+
+.flecha-menu:hover {
+    background: var(--color-principal-hover);
+}
+
+.flecha-menu.oculta {
+    opacity: 0;
+    pointer-events: none;
+}
 
 .resultado-busqueda {
     max-width: 900px;
@@ -1172,28 +1199,14 @@ MEDIA QUERIES (RESPONSIVE)
         align-self: flex-start;
     }
 
-    .menu-sticky,
-    .contenedor-menu {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
+    .menu-sticky {
+        padding: 8px 10px;
     }
 
     .flecha-menu {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        background: var(--color-principal) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 50% !important;
-        width: 24px !important;
-        height: 24px !important;
-        font-size: 12px !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
-        flex-shrink: 0;
-        cursor: pointer;
-        align-self: center;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
     }
 }
 
@@ -1201,7 +1214,7 @@ MEDIA QUERIES (RESPONSIVE)
     .top-bar { padding: 0 10px; }
     .top-nav-left { gap: 10px; }
     .nav-link, .nav-link-btn { font-size: 0.82rem; }
-    .categoria { padding: 12px 8px; }
+    .categoria { padding: 10px 14px; font-size: 0.9rem; }
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
 }
