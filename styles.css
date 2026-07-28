@@ -1091,17 +1091,16 @@ MEDIA QUERIES (RESPONSIVE)
     .seccion{ padding: 22px; }
     .seccion h2{ font-size: 26px; }
     
-    /* Mantenemos nombre y precio alineados horizontalmente en móvil */
+    /* Disposición vertical: precio debajo del nombre */
     .cabecera-producto{ 
-        flex-direction: row; 
-        justify-content: space-between; 
-        align-items: baseline; 
+        flex-direction: column; 
+        align-items: flex-start; 
     }
     .nombre{ font-size: 20px; }
     
-    /* Precio estilizado y sutil en móviles */
+    /* Precio debajo pero contenido y sofisticado */
     .precio{ 
-        margin-top: 0; 
+        margin-top: 4px; 
         font-size: 18px; 
         font-weight: 600; 
     }
