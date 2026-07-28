@@ -320,3 +320,65 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
+
+/* ======================================================
+   LÓGICA DEL MENÚ HAMBURGUESA Y SUS MODALES EN SCRIPT.JS
+====================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
+    const modalMenuPrincipal = document.getElementById('modal-menu-principal');
+    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
+
+    const modalContacto = document.getElementById('modal-contacto');
+    const modalGaleria = document.getElementById('modal-galeria');
+    const modalTienda = document.getElementById('modal-tienda');
+
+    // Abrir menú al pulsar las 3 rayas
+    if (btnHamburguesa && modalMenuPrincipal) {
+        btnHamburguesa.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalMenuPrincipal.classList.remove('hidden');
+        });
+    }
+
+    // Cerrar menú con la X
+    if (cerrarMenuPrincipal && modalMenuPrincipal) {
+        cerrarMenuPrincipal.addEventListener('click', () => {
+            modalMenuPrincipal.classList.add('hidden');
+        });
+    }
+
+    // Acciones para los botones de dentro del modal emergente
+    const btnContactoModal = document.querySelector('#modal-menu-principal #btn-contacto-carta');
+    const btnGaleriaModal = document.querySelector('#modal-menu-principal #btn-galeria');
+    const btnTiendaModal = document.querySelector('#modal-menu-principal #btn-tienda');
+
+    if (btnContactoModal && modalContacto) {
+        btnContactoModal.addEventListener('click', () => {
+            modalMenuPrincipal.classList.add('hidden');
+            modalContacto.classList.remove('hidden');
+        });
+    }
+
+    if (btnGaleriaModal && modalGaleria) {
+        btnGaleriaModal.addEventListener('click', () => {
+            modalMenuPrincipal.classList.add('hidden');
+            modalGaleria.classList.remove('hidden');
+        });
+    }
+
+    if (btnTiendaModal && modalTienda) {
+        btnTiendaModal.addEventListener('click', () => {
+            modalMenuPrincipal.classList.add('hidden');
+            modalTienda.classList.remove('hidden');
+        });
+    }
+
+    // Cerrar si pinchas fuera del modal
+    window.addEventListener('click', (e) => {
+        if (e.target === modalMenuPrincipal) {
+            modalMenuPrincipal.classList.add('hidden');
+        }
+    });
+});
