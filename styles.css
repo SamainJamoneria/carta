@@ -221,8 +221,8 @@ SECCIONES Y PRODUCTOS
 
 .precio {
     flex-shrink: 0;
-    font-size: 22px;
-    font-weight: 800;
+    font-size: 18px; /* Reducido desde 24px */
+    font-weight: 600; /* Suavizado desde 800 para quitarle dureza */
     color: var(--color-precio);
     white-space: nowrap;
 }
