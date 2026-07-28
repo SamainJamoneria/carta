@@ -1158,3 +1158,72 @@ MEDIA QUERIES (RESPONSIVE)
     .icono{ font-size: 22px; line-height: 1; text-decoration: none; }
     .texto{ text-align: center; line-height: 1.1; }
 }
+
+/* ======================================================
+   ESTILOS PARA EL BOTÓN HAMBURGUESA
+====================================================== */
+
+.btn-hamburguesa {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px !important;
+    height: 20px !important;
+    padding: 0 !important;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.btn-hamburguesa span {
+    display: block !important;
+    width: 100% !important;
+    height: 3px !important;
+    background-color: #ffffff !important;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-hamburguesa:hover span,
+.btn-hamburguesa:active span {
+    background-color: var(--color-dorado, #d8b35c) !important;
+}
+
+/* Modal del menú en pantalla completa / emergente */
+.modal-menu-content {
+    text-align: center;
+    max-width: 320px !important;
+}
+
+.nav-modal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.link-modal-item {
+    background: #f8f7f3;
+    border: 1px solid #d8b35c;
+    color: #2d2b72;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.link-modal-item:hover,
+.link-modal-item:active {
+    background: #2d2b72;
+    color: #ffffff;
+}
