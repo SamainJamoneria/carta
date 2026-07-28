@@ -1086,6 +1086,16 @@ MEDIA QUERIES (RESPONSIVE)
 ==================================================*/
 
 @media(max-width:700px){
+    /* Espaciado del header para que respire el logo */
+    .top-bar { 
+        margin-bottom: 25px !important; 
+    }
+    
+    .logo-container { 
+        margin-top: 10px !important;
+        margin-bottom: 20px !important; 
+    }
+
     .header-principal { padding-bottom: 45px; }
     .logo-brillo { width: 170px; }
     .header-principal h1 { font-size: 30px; }
@@ -1130,8 +1140,8 @@ MEDIA QUERIES (RESPONSIVE)
         color: #ffffff !important;
         border: none !important;
         border-radius: 50% !important;
-        width: 20px !important;
-        height: 20px !important;
+        width: 24px !important;
+        height: 24px !important;
         font-size: 12px !important;
         box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
         flex-shrink: 0;
