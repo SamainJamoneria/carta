@@ -35,7 +35,7 @@ const carta = [
             alergenos: ["g", "l", "p"]
         },
         {
-            nombre:"Vegetariana",
+            nombre:"Vegetal",
             descripcion:"Queso crema, guacamole, mermelada de tomate, tomates cherry y semillas de amapola",
             precio:"11,00 €",
             alergenos: ["g", "l"]
@@ -150,14 +150,13 @@ const carta = [
     titulo:"Bocadillos",
     icono:"🥪",
     productos:[
-        { nombre:"Jamón Ibérico 100% de Bellota", descripcion:"", precio:"12,00 €", alergenos: ["g"] },
         { nombre:"Jamón Curado de Granada", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Salchichón Ibérico", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
         { nombre:"Chorizo Ibérico", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
         { nombre:"Lomo Ibérico", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Queso", descripcion:"", precio:"4,00 €", alergenos: ["g", "l"] },
         { nombre:"Mortadela", descripcion:"", precio:"4,50 €", alergenos: ["g"] },
-        { nombre:"Bacon", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
+        { nombre:"Bacon", descripcion:"", precio:"6,00 €", alergenos: ["g"] },
         { nombre:"Ingrediente Extra", descripcion:"", precio:"0,50 €", alergenos: [] }
     ]
 },
