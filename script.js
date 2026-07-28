@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ==========================================
     // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS
+    // ==========================================
     const menu = document.getElementById("menu-categorias");
 
     if (menu && typeof carta !== "undefined") {
@@ -76,7 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. INTERSECTION OBSERVER (Scroll suave e indicador activo)
+    // ==========================================
+    // 2. INTERSECTION OBSERVER (Scroll e indicador activo)
+    // ==========================================
     const observer = new IntersectionObserver((entradas) => {
         entradas.forEach(entrada => {
             if (entrada.isIntersecting) {
@@ -104,7 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(seccion);
     });
 
+    // ==========================================
     // 3. FLECHAS DEL MENÚ DE CATEGORÍAS
+    // ==========================================
     const contenedorMenu = document.querySelector(".menu-categorias");
     const flechaIzquierda = document.getElementById("flecha-izquierda");
     const flechaDerecha = document.getElementById("flecha-derecha");
@@ -139,7 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ==========================================
     // 4. BUSCADOR
+    // ==========================================
     const buscador = document.getElementById("buscar");
     const resultado = document.getElementById("resultado-busqueda");
 
@@ -179,22 +187,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. MODAL ALÉRGENOS
-    const modalAlergenos = document.getElementById("modal-alergenos");
+    // ==========================================
+    // 5. GESTIÓN DE MODALES
+    // ==========================================
+    const modalContacto = document.getElementById('modal-contacto');
+    const modalGaleria = document.getElementById('modal-galeria');
+    const modalTienda = document.getElementById('modal-tienda');
+    const modalAlergenos = document.getElementById('modal-alergenos');
+    const modalMenuPrincipal = document.getElementById('modal-menu-principal');
+
+    // --- Modal Alérgenos ---
     const imagenAlergenos = document.getElementById("imagen-alergenos");
     const cerrarAlergenos = document.getElementById("cerrar-modal");
 
-    if (imagenAlergenos && modalAlergenos && cerrarAlergenos) {
+    if (imagenAlergenos && modalAlergenos) {
         imagenAlergenos.addEventListener("click", () => modalAlergenos.classList.add("abierto"));
+    }
+    if (cerrarAlergenos && modalAlergenos) {
         cerrarAlergenos.addEventListener("click", () => modalAlergenos.classList.remove("abierto"));
-        modalAlergenos.addEventListener("click", (e) => {
-            if (e.target === modalAlergenos) modalAlergenos.classList.remove("abierto");
-        });
     }
 
-    // 6. MODAL CONTACTO
+    // --- Modal Contacto ---
     const btnContacto = document.getElementById('btn-contacto-carta');
-    const modalContacto = document.getElementById('modal-contacto');
     const cerrarContacto = document.getElementById('cerrar-contacto');
 
     if (btnContacto && modalContacto) {
@@ -204,9 +218,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cerrarContacto.addEventListener('click', () => modalContacto.classList.add('hidden'));
     }
 
-    // 7. MODAL GALERÍA
+    // --- Modal Galería ---
     const btnGaleria = document.getElementById('btn-galeria');
-    const modalGaleria = document.getElementById('modal-galeria');
     const closeGaleria = document.getElementById('close-galeria');
 
     if (btnGaleria && modalGaleria) {
@@ -214,13 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             modalGaleria.classList.remove('hidden');
         });
-
-        if (closeGaleria) {
-            closeGaleria.addEventListener('click', () => modalGaleria.classList.add('hidden'));
-        }
+    }
+    if (closeGaleria && modalGaleria) {
+        closeGaleria.addEventListener('click', () => modalGaleria.classList.add('hidden'));
     }
 
-    // 8. MODAL VISOR DE IMAGEN AMPLIADA (GALERÍA)
+    // --- Modal Visor Galería ---
     const modalVisor = document.getElementById("modal-visor-imagen");
     const imagenAmpliada = document.getElementById("imagen-ampliada");
     const cerrarVisor = document.getElementById("cerrar-visor");
@@ -243,98 +255,27 @@ document.addEventListener("DOMContentLoaded", () => {
         modalVisor.addEventListener("click", cerrarModalImagen);
     }
 
-    // 9. MODAL TIENDA / PARA LLEVAR (NUEVO)
+    // --- Modal Tienda / Para Llevar ---
     const btnTienda = document.getElementById('btn-tienda');
-    const modalTienda = document.getElementById('modal-tienda');
-    const closeTienda = document.getElementById('close-tienda');
+    const closeTienda = document.getElementById('close-tienda') || document.getElementById('cerrar-tienda');
 
-    if (btnTienda && modalTienda) {
-        btnTienda.addEventListener('click', () => modalTienda.classList.remove('hidden'));
-    }
-    if (closeTienda && modalTienda) {
-        closeTienda.addEventListener('click', () => modalTienda.classList.add('hidden'));
-    }
-
-    // 10. CIERRE GLOBAL DE MODALES HACIENDO CLIC FUERA
-    window.addEventListener('click', (event) => {
-        if (event.target === modalContacto) modalContacto.classList.add('hidden');
-        if (event.target === modalGaleria) modalGaleria.classList.add('hidden');
-        if (event.target === modalTienda) modalTienda.classList.add('hidden');
-    });
-
-});
-
-// FUNCIÓN AUXILIAR DE NORMALIZACIÓN
-function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-}
-
-// ======================================================
-// CONTROL DEL MODAL TIENDA Y PARA LLEVAR
-// ======================================================
-document.addEventListener('DOMContentLoaded', () => {
-    const btnTienda = document.getElementById('btn-tienda');
-    const modalTienda = document.getElementById('modal-tienda');
-    const cerrarTienda = document.getElementById('cerrar-tienda');
-
-    // Función para abrir el modal
     if (btnTienda && modalTienda) {
         btnTienda.addEventListener('click', (e) => {
             e.preventDefault();
             modalTienda.classList.remove('hidden');
         });
     }
-
-    // Función para cerrar el modal haciendo clic en la X
-    if (cerrarTienda && modalTienda) {
-        cerrarTienda.addEventListener('click', (e) => {
+    if (closeTienda && modalTienda) {
+        closeTienda.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation(); // Evita interferencias con el contenedor
             modalTienda.classList.add('hidden');
         });
     }
 
-    // Función para cerrar el modal haciendo clic fuera de la tarjeta (fondo oscuro)
-    if (modalTienda) {
-        modalTienda.addEventListener('click', (e) => {
-            if (e.target === modalTienda) {
-                modalTienda.classList.add('hidden');
-            }
-        });
-    }
-});
-
-// Deshabilitar clic derecho
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, Ctrl+U, etc.)
-document.addEventListener('keydown', (e) => {
-    if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && e.key === 'u')
-    ) {
-        e.preventDefault();
-    }
-});
-
-/* ======================================================
-   LÓGICA DEL MENÚ HAMBURGUESA Y SUS MODALES EN SCRIPT.JS
-====================================================== */
-
-document.addEventListener('DOMContentLoaded', () => {
+    // --- Menú Hamburguesa ---
     const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
-    const modalMenuPrincipal = document.getElementById('modal-menu-principal');
     const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
 
-    const modalContacto = document.getElementById('modal-contacto');
-    const modalGaleria = document.getElementById('modal-galeria');
-    const modalTienda = document.getElementById('modal-tienda');
-
-    // Abrir menú al pulsar las 3 rayas
     if (btnHamburguesa && modalMenuPrincipal) {
         btnHamburguesa.addEventListener('click', (e) => {
             e.preventDefault();
@@ -342,14 +283,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cerrar menú con la X
     if (cerrarMenuPrincipal && modalMenuPrincipal) {
         cerrarMenuPrincipal.addEventListener('click', () => {
             modalMenuPrincipal.classList.add('hidden');
         });
     }
 
-    // Acciones para los botones de dentro del modal emergente
+    // Enlaces dentro del Menú Hamburguesa
     const btnContactoModal = document.querySelector('#modal-menu-principal #btn-contacto-carta');
     const btnGaleriaModal = document.querySelector('#modal-menu-principal #btn-galeria');
     const btnTiendaModal = document.querySelector('#modal-menu-principal #btn-tienda');
@@ -375,10 +315,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cerrar si pinchas fuera del modal
-    window.addEventListener('click', (e) => {
-        if (e.target === modalMenuPrincipal) {
-            modalMenuPrincipal.classList.add('hidden');
-        }
+    // ==========================================
+    // 6. CIERRE GLOBAL DE MODALES (Clic fuera)
+    // ==========================================
+    window.addEventListener('click', (event) => {
+        if (event.target === modalContacto) modalContacto.classList.add('hidden');
+        if (event.target === modalGaleria) modalGaleria.classList.add('hidden');
+        if (event.target === modalTienda) modalTienda.classList.add('hidden');
+        if (event.target === modalAlergenos) modalAlergenos.classList.remove('abierto');
+        if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
+
+});
+
+// ==========================================
+// 7. FUNCIONES AUXILIARES Y PROTECCIONES
+// ==========================================
+function normalizarTexto(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+// Deshabilitar clic derecho
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, Ctrl+U, etc.)
+document.addEventListener('keydown', (e) => {
+    if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && e.key === 'u')
+    ) {
+        e.preventDefault();
+    }
 });
