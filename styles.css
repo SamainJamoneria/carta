@@ -1112,6 +1112,23 @@ MEDIA QUERIES (RESPONSIVE)
         font-weight: 600; 
         align-self: flex-start;
     }
+
+    /* Estilo limpio en botón circular para las flechas en móvil */
+    .flecha-menu {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-principal) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 16px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
 }
 
 @media(max-width:500px){
