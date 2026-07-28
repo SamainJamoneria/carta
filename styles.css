@@ -3,9 +3,8 @@
 ====================================================== */
 
 /*==========================
-Variables
+Variables Globales
 ==========================*/
-
 :root {
     --color-principal: #2d2b72;
     --color-principal-hover: #4442a4;
@@ -13,18 +12,17 @@ Variables
     --color-precio: #8b0000;
     --color-fondo: #f6f4ef;
     --color-tarjeta: #ffffff;
-    --color-texto: #333;
-    --color-secundario: #666;
+    --color-texto: #333333;
+    --color-secundario: #666666;
     --radio: 18px;
     --sombra: 0 8px 22px rgba(0,0,0,.08);
     --ancho-maximo: 1100px;
 }
 
 /*==========================
-Reset
+Reset Global
 ==========================*/
-
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -44,14 +42,13 @@ body {
 /*==========================
 Cabecera Principal (Header)
 ==========================*/
-
 .header-principal {
     position: relative;
     padding-top: 12px;
     padding-bottom: 60px;
     text-align: center;
     background: linear-gradient(rgba(34,34,80,.82), rgba(34,34,80,.82)), url("cabecera.jpg") center/cover;
-    color: white;
+    color: #ffffff;
 }
 
 .top-bar {
@@ -60,7 +57,6 @@ Cabecera Principal (Header)
     align-items: center;
     padding: 0 16px;
     width: 100%;
-    box-sizing: border-box;
     margin-bottom: 12px;
 }
 
@@ -145,7 +141,6 @@ Cabecera Principal (Header)
 /*==================================================
 CONTENIDO Y BUSCADOR
 ==================================================*/
-
 main {
     max-width: var(--ancho-maximo);
     margin: auto;
@@ -163,11 +158,11 @@ main {
     padding: 18px 22px;
     border: none;
     outline: none;
-    border-radius: 18px;
-    background: white;
+    border-radius: var(--radio);
+    background: #ffffff;
     font-size: 18px;
     box-shadow: var(--sombra);
-    transition: .25s;
+    transition: box-shadow .25s ease;
 }
 
 #buscar:focus {
@@ -177,9 +172,8 @@ main {
 /*==================================================
 SECCIONES Y PRODUCTOS
 ==================================================*/
-
 .seccion {
-    background: white;
+    background: #ffffff;
     border-radius: 22px;
     padding: 35px;
     margin-bottom: 35px;
@@ -197,7 +191,7 @@ SECCIONES Y PRODUCTOS
 
 .producto {
     padding: 20px 0;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 1px dashed #dddddd;
 }
 
 .producto:last-child {
@@ -238,13 +232,12 @@ footer {
     margin-top: 40px;
     padding: 40px 20px;
     text-align: center;
-    color: #777;
+    color: #777777;
 }
 
 /*==================================================
 MENÚ STICKY Y CATEGORÍAS
 ==================================================*/
-
 .menu-sticky {
     position: sticky;
     top: 0;
@@ -279,24 +272,24 @@ MENÚ STICKY Y CATEGORÍAS
     flex: 0 0 auto;
     padding: 12px 18px;
     border-radius: 999px;
-    background: white;
-    border: 2px solid #d8b35c;
-    color: #2d2b72;
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     text-decoration: none;
     font-weight: 700;
     white-space: nowrap;
-    transition: .25s;
+    transition: all .25s ease;
 }
 
 .categoria:hover {
-    background: #2d2b72;
-    color: white;
+    background: var(--color-principal);
+    color: #ffffff;
 }
 
 .categoria.activa {
-    background: #d8b35c;
-    color: white;
-    border-color: #d8b35c;
+    background: var(--color-dorado);
+    color: #ffffff;
+    border-color: var(--color-dorado);
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(216,179,92,.35);
     animation: activa .35s ease;
@@ -305,11 +298,11 @@ MENÚ STICKY Y CATEGORÍAS
 @keyframes activa {
     0% { transform: scale(.92); }
     70% { transform: scale(1.08); }
-    100% { transform: scale(1.03); }
+    100% { transform: scale(1.05); }
 }
 
 .flecha-menu {
-    transition: .25s;
+    transition: opacity .25s ease;
 }
 
 .flecha-menu.oculta {
@@ -358,7 +351,7 @@ MENÚ STICKY Y CATEGORÍAS
 }
 
 .texto-busqueda {
-    color: #666;
+    color: #666666;
     font-size: 16px;
 }
 
@@ -367,7 +360,7 @@ MENÚ STICKY Y CATEGORÍAS
     margin-top: 8px;
     font-size: 20px;
     font-weight: bold;
-    color: #2d2b72;
+    color: var(--color-principal);
 }
 
 .sin-resultados {
@@ -381,7 +374,6 @@ MENÚ STICKY Y CATEGORÍAS
 /*==================================================
 EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 ==================================================*/
-
 .destino-samain {
     max-width: 900px;
     margin: 45px auto;
@@ -391,7 +383,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .texto-destino {
     font-size: 22px;
-    color: #2d2b72;
+    color: var(--color-principal);
     margin-bottom: 18px;
     line-height: 1.5;
 }
@@ -402,12 +394,12 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     padding: 18px 38px;
     border-radius: 999px;
     background: linear-gradient(135deg, #2d2b72, #4a47b8);
-    color: white;
+    color: #ffffff;
     font-size: 20px;
     font-weight: 700;
     letter-spacing: .5px;
     box-shadow: 0 12px 30px rgba(45,43,114,.30);
-    transition: .30s;
+    transition: all .30s ease;
 }
 
 .btn-destino:hover {
@@ -428,7 +420,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: .35s;
+    transition: opacity .35s ease, visibility .35s ease;
     z-index: 5000;
 }
 
@@ -439,7 +431,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .ventana-destino {
     width: min(90%, 420px);
-    background: white;
+    background: #ffffff;
     border-radius: 24px;
     padding: 35px;
     text-align: center;
@@ -455,14 +447,14 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     height: 36px;
     border: none;
     border-radius: 50%;
-    background: #eee;
+    background: #eeeeee;
     cursor: pointer;
     font-size: 18px;
 }
 
 .ventana-destino h2 {
     margin-bottom: 30px;
-    color: #2d2b72;
+    color: var(--color-principal);
 }
 
 .opcion-comensales {
@@ -472,12 +464,12 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     padding: 18px;
     border: none;
     border-radius: 14px;
-    background: #2d2b72;
-    color: white;
+    background: var(--color-principal);
+    color: #ffffff;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: .25s;
+    transition: background .25s ease;
 }
 
 .opcion-comensales:hover {
@@ -506,7 +498,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .tarjeta-destino {
     width: min(92%, 480px);
-    background: white;
+    background: #ffffff;
     border-radius: 24px;
     padding: 45px;
     text-align: center;
@@ -519,20 +511,20 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .titulo-destino {
-    color: #777;
+    color: #777777;
     font-size: 18px;
     margin-bottom: 18px;
 }
 
 #nombre-destino {
     font-size: 34px;
-    color: #2d2b72;
+    color: var(--color-principal);
     margin: 18px 0;
     line-height: 1.2;
 }
 
 #descripcion-destino {
-    color: #666;
+    color: #666666;
     margin: 18px auto;
     max-width: 320px;
     line-height: 1.6;
@@ -541,7 +533,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 #precio-destino {
     font-size: 36px;
     font-weight: 800;
-    color: #8b0000;
+    color: var(--color-precio);
     margin: 25px 0;
 }
 
@@ -550,7 +542,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     padding: 10px 18px;
     border-radius: 999px;
     background: var(--color-dorado);
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -558,7 +550,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 .tarjeta-destino small {
     display: block;
     margin-top: 35px;
-    color: #999;
+    color: #999999;
 }
 
 .ruleta-destino {
@@ -648,7 +640,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .flecha-ruleta .puntero {
-    color: #8b0000;
+    color: var(--color-precio);
     font-size: 30px;
     text-shadow: 0 2px 6px rgba(0,0,0,.35);
     margin-top: -2px;
@@ -667,7 +659,6 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 /*==================================
 ALÉRGENOS Y CONFETI
 ==================================*/
-
 .alergenos {
     max-width: 900px;
     margin: 60px auto;
@@ -682,7 +673,7 @@ ALÉRGENOS Y CONFETI
     border-radius: 18px;
     border: 2px solid var(--color-dorado);
     cursor: pointer;
-    transition: .25s;
+    transition: transform .25s ease;
     box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
 
@@ -692,7 +683,7 @@ ALÉRGENOS Y CONFETI
 
 .alergenos p {
     margin-top: 15px;
-    color: #666;
+    color: #666666;
 }
 
 .modal-alergenos {
@@ -720,24 +711,24 @@ ALÉRGENOS Y CONFETI
 .modal-contenido img {
     width: 100%;
     border-radius: 18px;
-    background: white;
+    background: #ffffff;
 }
 
 #cerrar-modal {
     position: absolute;
     right: 10px;
     top: -45px;
-    color: white;
+    color: #ffffff;
     font-size: 42px;
     cursor: pointer;
 }
 
 .mensaje-alergenos {
     margin-top: 20px;
-    background: #fff;
+    background: #ffffff;
     padding: 18px;
     border-radius: 15px;
-    color: #222;
+    color: #222222;
     font-size: 18px;
     font-weight: bold;
 }
@@ -773,7 +764,6 @@ ALÉRGENOS Y CONFETI
 /*==================================================
 MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 ==================================================*/
-
 .hidden {
     display: none !important;
 }
@@ -790,7 +780,6 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     align-items: center;
     z-index: 99999;
     padding: 15px;
-    box-sizing: border-box;
 }
 
 .modal-contacto-content {
@@ -833,7 +822,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 .close-btn:hover {
-    color: var(--color-precio, #8b0000);
+    color: var(--color-precio);
 }
 
 .contacto-grid {
@@ -888,7 +877,6 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    box-sizing: border-box;
 }
 
 .modal-galeria-content h2 {
@@ -955,7 +943,6 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     align-items: center;
     z-index: 999999;
     padding: 20px;
-    box-sizing: border-box;
     backdrop-filter: blur(5px);
     cursor: pointer;
 }
@@ -966,7 +953,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     object-fit: contain;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    border: 2px solid var(--color-dorado, #d8b35c);
+    border: 2px solid var(--color-dorado);
     animation: zoomIn 0.25s ease-out;
     will-change: transform, opacity;
 }
@@ -985,7 +972,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 .cerrar-visor:hover {
-    color: var(--color-dorado, #d8b35c);
+    color: var(--color-dorado);
 }
 
 @keyframes zoomIn {
@@ -1000,9 +987,8 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 /*==================================================
-   ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
+ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 ==================================================*/
-
 .tienda-seccion {
     margin-bottom: 18px;
     text-align: left;
@@ -1082,87 +1068,8 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 /*==================================================
-MEDIA QUERIES (RESPONSIVE)
+ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
 ==================================================*/
-
-@media(max-width:700px){
-    /* Espaciado del header para que respire el logo */
-    .top-bar { 
-        margin-bottom: 25px !important; 
-    }
-    
-    .logo-container { 
-        margin-top: 10px !important;
-        margin-bottom: 20px !important; 
-    }
-
-    .header-principal { padding-bottom: 45px; }
-    .logo-brillo { width: 170px; }
-    .header-principal h1 { font-size: 30px; }
-    .header-principal p { font-size: 17px; }
-    
-    .seccion{ padding: 22px; }
-    .seccion h2{ font-size: 26px; }
-    
-    /* Disposición vertical en móvil para productos */
-    .cabecera-producto { 
-        display: flex !important;
-        flex-direction: column !important; 
-        align-items: flex-start !important; 
-    }
-    
-    .nombre { 
-        font-size: 20px; 
-        width: 100%;
-    }
-    
-    .precio { 
-        margin-top: 4px; 
-        font-size: 18px; 
-        font-weight: 600; 
-        align-self: flex-start;
-    }
-
-    /* Forzar alineación horizontal del contenedor del menú */
-    .menu-sticky,
-    .contenedor-menu {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-    }
-
-    /* Flechas compactas, discretas y bien centradas */
-    .flecha-menu {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        background: var(--color-principal) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 50% !important;
-        width: 24px !important;
-        height: 24px !important;
-        font-size: 12px !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
-        flex-shrink: 0;
-        cursor: pointer;
-        align-self: center;
-    }
-}
-
-@media(max-width:500px){
-    .top-bar { padding: 0 10px; }
-    .top-nav-left { gap: 10px; }
-    .nav-link, .nav-link-btn { font-size: 0.82rem; }
-    .categoria{ padding: 12px 8px; }
-    .icono{ font-size: 22px; line-height: 1; text-decoration: none; }
-    .texto{ text-align: center; line-height: 1.1; }
-}
-
-/* ======================================================
-   ESTILOS PARA EL BOTÓN HAMBURGUESA
-====================================================== */
-
 .btn-hamburguesa {
     background: transparent !important;
     border: none !important;
@@ -1188,10 +1095,9 @@ MEDIA QUERIES (RESPONSIVE)
 
 .btn-hamburguesa:hover span,
 .btn-hamburguesa:active span {
-    background-color: var(--color-dorado, #d8b35c) !important;
+    background-color: var(--color-dorado) !important;
 }
 
-/* Modal del menú en pantalla completa / emergente */
 .modal-menu-content {
     text-align: center;
     max-width: 320px !important;
@@ -1206,8 +1112,8 @@ MEDIA QUERIES (RESPONSIVE)
 
 .link-modal-item {
     background: #f8f7f3;
-    border: 1px solid #d8b35c;
-    color: #2d2b72;
+    border: 1px solid var(--color-dorado);
+    color: var(--color-principal);
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
@@ -1217,13 +1123,85 @@ MEDIA QUERIES (RESPONSIVE)
     display: block;
     width: 100%;
     text-align: center;
-    box-sizing: border-box;
     font-family: inherit;
     transition: all 0.2s ease;
 }
 
 .link-modal-item:hover,
 .link-modal-item:active {
-    background: #2d2b72;
+    background: var(--color-principal);
     color: #ffffff;
+}
+
+/*==================================================
+MEDIA QUERIES (RESPONSIVE)
+==================================================*/
+@media (max-width: 700px) {
+    .top-bar { 
+        margin-bottom: 25px !important; 
+    }
+    
+    .logo-container { 
+        margin-top: 10px !important;
+        margin-bottom: 20px !important; 
+    }
+
+    .header-principal { padding-bottom: 45px; }
+    .logo-brillo { width: 170px; }
+    .header-principal h1 { font-size: 30px; }
+    .header-principal p { font-size: 17px; }
+    
+    .seccion { padding: 22px; }
+    .seccion h2 { font-size: 26px; }
+    
+    .cabecera-producto { 
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
+    }
+    
+    .nombre { 
+        font-size: 20px; 
+        width: 100%;
+    }
+    
+    .precio { 
+        margin-top: 4px; 
+        font-size: 18px; 
+        font-weight: 600; 
+        align-self: flex-start;
+    }
+
+    .menu-sticky,
+    .contenedor-menu {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    .flecha-menu {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-principal) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 50% !important;
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 12px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+        flex-shrink: 0;
+        cursor: pointer;
+        align-self: center;
+    }
+}
+
+@media (max-width: 500px) {
+    .top-bar { padding: 0 10px; }
+    .top-nav-left { gap: 10px; }
+    .nav-link, .nav-link-btn { font-size: 0.82rem; }
+    .categoria { padding: 12px 8px; }
+    .icono { font-size: 22px; line-height: 1; text-decoration: none; }
+    .texto { text-align: center; line-height: 1.1; }
 }
