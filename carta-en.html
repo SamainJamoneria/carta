@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu - Samaín La Cormelana</title>
 
-  <!-- Fuentes e Iconos FontAwesome -->
+  <!-- Google Fonts & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,10 +19,12 @@
 <header class="header-principal">
   <div class="top-bar">
     <div class="top-nav-left">
-      <a href="index.html" class="nav-link">🏠 Home</a>
-      <button id="btn-contacto-carta" type="button" class="nav-link-btn"> ✉️ Contact</button>
-      <a href="#" id="btn-galeria" class="nav-link">📸 Gallery</a>
-      <button id="btn-tienda" type="button" class="nav-link-btn">🛒 Shop</button>
+      <!-- Hamburger Button -->
+      <button id="btn-menu-hamburguesa" class="btn-hamburguesa" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
 
     <div class="top-nav-right">
@@ -36,7 +38,7 @@
   </div>
 
   <h1>Our Menu</h1>
-  <p>- Specialists in Iberian Products -</p>
+  <p>- Iberian Pork Specialists -</p>
 </header>
 
 <div class="menu-sticky">
@@ -48,12 +50,12 @@
 </div>
 
 <section class="buscador">
-  <input type="text" id="buscar" placeholder="🔍 Search for a dish...">
+  <input type="text" id="buscar" placeholder="🔍 Search product...">
 </section>
 
 <section class="destino-samain">
   <p class="texto-destino">
-    🎲 Can't decide what to order?<br>
+    🎲 Can't decide?<br>
     <strong>Let fate choose for you.</strong>
   </p>
   <button id="btn-destino" class="btn-destino">
@@ -71,18 +73,18 @@
   <p>🔎 Click on the image to enlarge.</p>
 </section>
 
-<!-- Modal Alérgenos -->
+<!-- Allergen Modal -->
 <div id="modal-alergenos" class="modal-alergenos">
   <div class="modal-contenido">
     <span id="cerrar-modal">&times;</span>
     <img src="alergenos.jpg" alt="Allergens">
     <div class="mensaje-alergenos">
-      ⚠️ <strong>Please, if you have any food allergies, inform our staff before placing your order.</strong>
+      ⚠️ <strong>Please inform our staff before placing your order if you have any food allergies.</strong>
     </div>
   </div>
 </div> 
 
-<!-- Modal Destino -->
+<!-- Destiny Modal -->
 <div id="modal-destino" class="modal-destino">
   <div class="ventana-destino">
     <button class="cerrar-destino" id="cerrar-destino">✕</button>
@@ -120,7 +122,7 @@
       </div>
     </div>
     
-    <p class="titulo-destino">✨ Destiny has spoken...</p>
+    <p class="titulo-destino">✨ Fate has decided...</p>
     <div id="categoria-destino" class="categoria-destino"></div>
     <h1 id="nombre-destino"></h1>
     <p id="descripcion-destino"></p>
@@ -132,22 +134,36 @@
 <footer>
   Jamonería Samaín · A Coruña
   <br><br>
-  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Follow us on Insta</a>
+  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Follow us on Instagram</a>
 </footer>
 
 <div id="confeti"></div>
 
-<!-- VENTANA EMERGENTE DE CONTACTO -->
+<!-- MAIN HAMBURGER NAVIGATION MODAL -->
+<div id="modal-menu-principal" class="modal-contacto hidden">
+  <div class="modal-contacto-content modal-menu-content">
+    <span id="cerrar-menu-principal" class="close-btn">&times;</span>
+    <h2>MENU</h2>
+    <nav class="nav-modal-links">
+      <a href="index.html" class="link-modal-item">🏠 Home</a>
+      <button id="btn-contacto-carta" type="button" class="link-modal-item">✉️ Contact</button>
+      <button id="btn-galeria" type="button" class="link-modal-item">📸 Gallery</button>
+      <button id="btn-tienda" type="button" class="link-modal-item">🛒 Takeaway</button>
+    </nav>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
 <div id="modal-contacto" class="modal-contacto hidden">
   <div class="modal-contacto-content">
     <span class="close-btn" id="cerrar-contacto">&times;</span>
     
-    <h2>CONTACT</h2>
+    <h2>CONTACT & LOCATION</h2>
     
     <div class="contacto-grid">
       <div class="contacto-item">
         <p class="contacto-label">PHONE</p>
-        <p><a href="tel:+34881963414" class="contacto-val">📞 +34 881 96 34 14</a></p>
+        <p><a href="tel:+34881963414" class="contacto-val">📞 881 96 34 14</a></p>
       </div>
 
       <div class="contacto-item">
@@ -157,12 +173,12 @@
 
       <div class="contacto-item">
         <p class="contacto-label">OPENING HOURS</p>
-        <p class="contacto-val"><strong>🕒 Monday to Friday:</strong> 10:00 to Close</p>
-        <p class="contacto-val"><strong>🕒 Saturdays, Sundays & Holidays:</strong> 11:00 to Close</p>
+        <p class="contacto-val"><strong>🕒 Monday to Friday:</strong> 10:00 to Closing</p>
+        <p class="contacto-val"><strong>🕒 Weekends & Holidays:</strong> 11:00 to Closing</p>
       </div>
     </div>
 
-    <!-- Mapa de Google Maps -->
+    <!-- Google Maps Embed -->
     <div class="mapa-container">
       <iframe 
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2900.8655208226065!2d-8.4059281!3d43.3685114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7d00116529a5%3A0x355a57c6fce86bce!2sJamoner%C3%ADa%20Sama%C3%ADn!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
@@ -176,7 +192,7 @@
   </div>
 </div>
 
-<!-- Modal de la Galería -->
+<!-- Gallery Modal -->
 <div id="modal-galeria" class="modal-contacto hidden">
     <div class="modal-galeria-content">
         <span class="close-btn" id="close-galeria">&times;</span>
@@ -187,60 +203,60 @@
                 <img src="jamon.jpeg" alt="Iberian Ham Jamonería Samaín" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="cecina.jpeg" alt="Cured Beef (Cecina)" loading="lazy">
+                <img src="cecina.jpeg" alt="Cured beef cecina" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="anchoas.jpeg" alt="House Anchovies" loading="lazy">
+                <img src="anchoas.jpeg" alt="House anchovies" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="tabla.jpeg" alt="Assorted Iberian Platter" loading="lazy">
+                <img src="tabla.jpeg" alt="Iberian charcuterie board" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="tablas.jpeg" alt="Cold Cured Meats and Cheese Platters" loading="lazy">
+                <img src="tablas.jpeg" alt="Cold cuts and cheese platters" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="samain.jpeg" alt="Special Dish Jamonería Samaín" loading="lazy">
+                <img src="samain.jpeg" alt="Special dish Jamonería Samaín" loading="lazy">
             </div>
             <div class="galeria-item">
-                <img src="mesa.jpeg" alt="Table with Assorted Dishes" loading="lazy">
+                <img src="mesa.jpeg" alt="Table with food variety" loading="lazy">
             </div>
         </div>
     </div>
 </div>  
 
-<!-- Modal Visor de Imagen Ampliada -->
+<!-- Image Viewer Modal -->
 <div id="modal-visor-imagen" class="modal-visor hidden">
   <span id="cerrar-visor" class="cerrar-visor">&times;</span>
-  <img id="imagen-ampliada" src="" alt="Imagen ampliada" />
+  <img id="imagen-ampliada" src="" alt="Enlarged image" />
 </div>  
 
-<!-- Modal Shop and Takeaway -->
+<!-- Takeaway & Shop Modal -->
 <div id="modal-tienda" class="modal-contacto hidden">
     <div class="modal-contacto-content">
         <span id="cerrar-tienda" class="close-btn">&times;</span>
-        <h2>SHOP & TAKEAWAY</h2>
+        <h2>TAKEAWAY & SHOP</h2>
         
         <div class="tienda-seccion">
             <h3 class="tienda-titulo"><span class="tienda-icono">🍷</span> Gourmet Products</h3>
-            <p>We offer a selection of Gourmet products available for retail purchase.</p>
+            <p>We offer a range of Gourmet products for retail sale.</p>
         </div>
 
         <div class="tienda-seccion">
             <h3 class="tienda-titulo"><span class="tienda-icono">🛍️</span> Takeaway Menu</h3>
-            <p>You can order any items from our menu to take away.</p>
+            <p>You can order any of our menu items to take away.</p>
         </div>
 
         <div class="tienda-evento-destacado">
-            <h3 class="tienda-titulo-destacado"><span class="tienda-icono">🎉</span> Planning an event or having a craving?</h3>
-            <p>Reserve our products and charcuterie boards for birthdays, celebrations, and special occasions... or simply to treat yourself, because you deserve it!</p>
+            <h3 class="tienda-titulo-destacado"><span class="tienda-icono">🎉</span> Hosting an event or craving something special?</h3>
+            <p>Reserve our products and platters for birthdays, celebrations, and special events... or simply treat yourself!</p>
         </div>
 
-        <p class="tienda-contacto-texto">Call us to order or speak with our staff:</p>
+        <p class="tienda-contacto-texto">Call to reserve or speak with our staff:</p>
         <a href="tel:881963414" class="tienda-telefono">📞 881 96 34 14</a>
     </div>
-</div>
+</div> 
 
-<script src="menu-en.js"></script>
+<script src="menu.js"></script>
 <script src="script.js"></script>
 <script src="destino.js"></script>
 
