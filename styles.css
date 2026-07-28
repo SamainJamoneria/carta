@@ -295,14 +295,14 @@ MENÚ STICKY Y CATEGORÍAS
     scroll-behavior: smooth;
     scrollbar-width: none;
     width: 100%;
-    padding: 4px 0;
+    padding: 6px 0;
 }
 
 .menu-categorias::-webkit-scrollbar {
     display: none;
 }
 
-/* Categorías en azul con letra blanca por defecto */
+/* Categorías deslizantes: Fondo clarito con texto azul y borde dorado */
 .categoria {
     display: flex;
     flex-direction: column;
@@ -310,36 +310,39 @@ MENÚ STICKY Y CATEGORÍAS
     justify-content: center;
     gap: 6px;
     flex: 0 0 auto;
-    padding: 12px 18px;
+    padding: 10px 20px;
     border-radius: 999px;
-    background: var(--color-principal); /* Fondo Azul */
-    border: 2px solid var(--color-dorado);
-    color: #ffffff;                     /* Texto Blanco */
+    background: #ffffff;                /* Fondo claro */
+    border: 2px solid var(--color-dorado); /* Borde dorado */
+    color: var(--color-principal);      /* Texto azul */
     text-decoration: none;
     font-weight: 700;
     white-space: nowrap;
     transition: all .25s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .categoria:hover {
-    background: var(--color-principal-hover);
-    color: #ffffff;
+    background: #fcfbfa;
+    border-color: var(--color-dorado);
+    color: var(--color-principal);
+    transform: translateY(-2px);
 }
 
-/* Estado activo resaltado en dorado */
+/* Estado activo */
 .categoria.activa {
-    background: var(--color-dorado);
-    color: #ffffff;
+    background: #ffffff;
+    color: var(--color-principal);
     border-color: var(--color-dorado);
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(216,179,92,.35);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(216,179,92,.4);
     animation: activa .35s ease;
 }
 
 @keyframes activa {
-    0% { transform: scale(.92); }
-    70% { transform: scale(1.08); }
-    100% { transform: scale(1.05); }
+    0% { transform: scale(.95); }
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1.03); }
 }
 
 .flecha-menu {
@@ -1137,10 +1140,11 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
+/* Botones del menú hamburguesa: Fondo azul y letra blanca */
 .link-modal-item {
-    background: #f8f7f3;
+    background: var(--color-principal); /* Fondo azul */
     border: 1px solid var(--color-dorado);
-    color: var(--color-principal);
+    color: #ffffff;                      /* Texto blanco */
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
@@ -1156,7 +1160,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
 
 .link-modal-item:hover,
 .link-modal-item:active {
-    background: var(--color-principal);
+    background: var(--color-principal-hover);
     color: #ffffff;
 }
 
@@ -1214,7 +1218,7 @@ MEDIA QUERIES (RESPONSIVE)
     .top-bar { padding: 0 10px; }
     .top-nav-left { gap: 10px; }
     .nav-link, .nav-link-btn { font-size: 0.82rem; }
-    .categoria { padding: 10px 14px; font-size: 0.9rem; }
+    .categoria { padding: 8px 14px; font-size: 0.9rem; }
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
 }
