@@ -1077,6 +1077,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     color: #ffffff;
 }
 
+
 /*==================================================
 MEDIA QUERIES (RESPONSIVE)
 ==================================================*/
@@ -1089,9 +1090,21 @@ MEDIA QUERIES (RESPONSIVE)
     
     .seccion{ padding: 22px; }
     .seccion h2{ font-size: 26px; }
-    .cabecera-producto{ flex-direction: column; align-items: flex-start; }
-    .nombre{ font-size: 21px; }
-    .precio{ margin-top: 8px; font-size: 28px; }
+    
+    /* Mantenemos nombre y precio alineados horizontalmente en móvil */
+    .cabecera-producto{ 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: baseline; 
+    }
+    .nombre{ font-size: 20px; }
+    
+    /* Precio estilizado y sutil en móviles */
+    .precio{ 
+        margin-top: 0; 
+        font-size: 18px; 
+        font-weight: 600; 
+    }
 }
 
 @media(max-width:500px){
