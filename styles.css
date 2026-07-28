@@ -221,8 +221,8 @@ SECCIONES Y PRODUCTOS
 
 .precio {
     flex-shrink: 0;
-    font-size: 18px; /* Reducido desde 24px */
-    font-weight: 600; /* Suavizado desde 800 para quitarle dureza */
+    font-size: 18px;
+    font-weight: 600;
     color: var(--color-precio);
     white-space: nowrap;
 }
@@ -794,6 +794,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 .modal-contacto-content {
+    position: relative;
     background-color: #ffffff;
     color: var(--color-texto);
     padding: 25px 20px;
@@ -802,7 +803,6 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     width: 90%;
     max-width: 440px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    position: relative;
 }
 
 .modal-contacto-content h2 {
@@ -821,15 +821,19 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     position: absolute;
     top: 12px;
     right: 18px;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     color: #888888;
+    z-index: 10;
+    line-height: 1;
+    padding: 5px;
+    user-select: none;
     transition: color 0.2s ease;
 }
 
 .close-btn:hover {
-    color: var(--color-precio);
+    color: var(--color-precio, #8b0000);
 }
 
 .contacto-grid {
@@ -996,7 +1000,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 /*==================================================
-  ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
+   ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 ==================================================*/
 
 .tienda-seccion {
@@ -1077,7 +1081,6 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     color: #ffffff;
 }
 
-
 /*==================================================
 MEDIA QUERIES (RESPONSIVE)
 ==================================================*/
@@ -1091,18 +1094,23 @@ MEDIA QUERIES (RESPONSIVE)
     .seccion{ padding: 22px; }
     .seccion h2{ font-size: 26px; }
     
-    /* Disposición vertical: precio debajo del nombre */
-    .cabecera-producto{ 
-        flex-direction: column; 
-        align-items: flex-start; 
+    /* Disposición vertical garantizada en móvil */
+    .cabecera-producto { 
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
     }
-    .nombre{ font-size: 20px; }
     
-    /* Precio debajo pero contenido y sofisticado */
-    .precio{ 
+    .nombre { 
+        font-size: 20px; 
+        width: 100%;
+    }
+    
+    .precio { 
         margin-top: 4px; 
         font-size: 18px; 
         font-weight: 600; 
+        align-self: flex-start;
     }
 }
 
@@ -1113,39 +1121,4 @@ MEDIA QUERIES (RESPONSIVE)
     .categoria{ padding: 12px 8px; }
     .icono{ font-size: 22px; line-height: 1; text-decoration: none; }
     .texto{ text-align: center; line-height: 1.1; }
-}
-
-/* ======================================================
-   BOTÓN DE CIERRE (X) Y CONTENEDOR MODAL
-   ====================================================== */
-
-.modal-contacto-content {
-    position: relative; /* Indispensable para posicionar la X dentro */
-    background-color: #ffffff;
-    color: var(--color-texto);
-    padding: 25px 20px;
-    border-radius: 16px;
-    border: 2px solid var(--color-principal);
-    width: 90%;
-    max-width: 440px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.close-btn {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #888888;
-    z-index: 10; /* Garantiza que quede por encima de los títulos y texto */
-    line-height: 1;
-    padding: 5px;
-    user-select: none;
-    transition: color 0.2s ease;
-}
-
-.close-btn:hover {
-    color: var(--color-precio, #8b0000);
 }
