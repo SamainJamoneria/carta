@@ -150,14 +150,13 @@ const carta = [
     titulo:"Sandwiches",
     icono:"🥪",
     productos:[
-        { nombre:"100% Acorn-fed Iberian Ham", descripcion:"", precio:"12,00 €", alergenos: ["g"] },
         { nombre:"Granada Cured Ham", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Iberian Salchichón", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
         { nombre:"Iberian Chorizo", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
         { nombre:"Iberian Pork Loin", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Cheese", descripcion:"", precio:"4,00 €", alergenos: ["g", "l"] },
         { nombre:"Mortadella", descripcion:"", precio:"4,50 €", alergenos: ["g"] },
-        { nombre:"Bacon", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
+        { nombre:"Bacon", descripcion:"", precio:"6,00 €", alergenos: ["g"] },
         { nombre:"Extra Ingredient", descripcion:"", precio:"0,50 €", alergenos: [] }
     ]
 },
