@@ -1252,54 +1252,67 @@ MEDIA QUERIES (RESPONSIVE)
 
 /* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
 .detalle-temporada {
-  display: none; /* Oculto por defecto el resto del año */
-  margin: 8px auto 0;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  width: fit-content;
-  animation: fadeIn 0.5s ease-in-out;
+    display: none; /* Oculto por defecto el resto del año */
+    margin: 8px auto 0;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Modos específicos para el detalle */
 body.modo-navidad .detalle-temporada {
-  display: inline-block;
-  background: rgba(212, 175, 55, 0.15);
-  color: #d4af37;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 body.modo-sanjuan .detalle-temporada {
-  display: inline-block;
-  background: rgba(243, 156, 18, 0.15);
-  color: #f39c12;
-  border: 1px solid rgba(243, 156, 18, 0.4);
+    display: inline-block;
+    background: rgba(243, 156, 18, 0.15);
+    color: #f39c12;
+    border: 1px solid rgba(243, 156, 18, 0.4);
 }
 
 body.modo-carnaval .detalle-temporada {
-  display: inline-block;
-  background: rgba(253, 121, 168, 0.15);
-  color: #fd79a8;
-  border: 1px solid rgba(253, 121, 168, 0.4);
+    display: inline-block;
+    background: rgba(253, 121, 168, 0.15);
+    color: #fd79a8;
+    border: 1px solid rgba(253, 121, 168, 0.4);
+}
+
+body.modo-samain .detalle-temporada {
+    display: inline-block;
+    background: rgba(230, 126, 34, 0.18);
+    color: #e67e22;
+    border: 1px solid rgba(230, 126, 34, 0.45);
 }
 
 /* Partículas flotantes de scroll */
 .particula-scroll {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  user-select: none;
-  animation: caidaParticula linear forwards;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    will-change: transform, opacity;
+    animation: caidaParticula linear forwards;
 }
 
 @keyframes caidaParticula {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(120px) scale(0.3) rotate(360deg);
-  }
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(120px) scale(0.3) rotate(360deg);
+    }
 }
