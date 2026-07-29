@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu - Samaín La Cormelana</title>
 
-  <!-- Fuentes e Iconos FontAwesome -->
+  <!-- Google Fonts & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,12 +14,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<!-- El script se encarga de inyectar el modo (modo-sanjuan, modo-samain, etc.) -->
 <body>
 
 <header class="header-principal">
   <div class="top-bar">
     <div class="top-nav-left">
+      <!-- Hamburger Button -->
       <button id="btn-menu-hamburguesa" class="btn-hamburguesa" aria-label="Open menu">
         <span></span>
         <span></span>
@@ -38,9 +38,9 @@
   </div>
 
   <h1>Our Menu</h1>
-  <p>- Iberian Ham Specialists -</p>
+  <p>- Iberian Pork Specialists -</p>
 
-  <!-- Inyectado dinámicamente por script.js -->
+  <!-- SEASONAL DETAIL (Appears automatically when activated via class in <body>) -->
   <div class="detalle-temporada" id="detalle-temporada"></div>
 </header>
 
@@ -53,22 +53,21 @@
 </div>
 
 <section class="buscador">
-  <input type="text" id="buscar" placeholder="🔍 Search for an item...">
+  <input type="text" id="buscar" placeholder="🔍 Search product...">
 </section>
 
 <section class="destino-samain">
   <p class="texto-destino">
-    🎲 Don't know what to order?<br>
-    <strong>Let fate decide.</strong>
+    🎲 Can't decide?<br>
+    <strong>Let fate choose for you.</strong>
   </p>
   <button id="btn-destino" class="btn-destino">
-    🎲 SAMAÍN FATE
+    🎲 SAMAÍN DESTINY
   </button>
 </section>
 
 <div id="resultado-busqueda" class="resultado-busqueda"></div>
 
-<!-- Contenedor principal del menú cargado por JS -->
 <main id="carta"></main>
 
 <section class="alergenos">
@@ -77,18 +76,18 @@
   <p>🔎 Click on the image to enlarge.</p>
 </section>
 
-<!-- Modal Alérgenos -->
+<!-- Allergen Modal -->
 <div id="modal-alergenos" class="modal-alergenos">
   <div class="modal-contenido">
     <span id="cerrar-modal">&times;</span>
     <img src="alergenos.jpg" alt="Allergens">
     <div class="mensaje-alergenos">
-      ⚠️ <strong>If you have any food allergies, please inform our staff before placing your order.</strong>
+      ⚠️ <strong>Please inform our staff before placing your order if you have any food allergies.</strong>
     </div>
   </div>
 </div> 
 
-<!-- Modal Destino (Selección) -->
+<!-- Destiny Modal -->
 <div id="modal-destino" class="modal-destino">
   <div class="ventana-destino">
     <button class="cerrar-destino" id="cerrar-destino">✕</button>
@@ -99,52 +98,51 @@
   </div>
 </div> 
 
-<!-- Ruleta del Destino -->
 <div id="resultado-destino" class="resultado-destino">
   <div class="tarjeta-destino">
     <div class="ruleta-destino">
       <div class="flecha-ruleta" id="flecha-ruleta">
         <span class="puntero">▼</span>
       </div>
-      
-     <div class="disco-ruleta" id="disco-ruleta">
-  <div class="gajo-quesito gajo-1" data-categoria="Tostas Premium"></div>
-  <div class="gajo-quesito gajo-2" data-categoria="Tablas para Compartir"></div>
-  <div class="gajo-quesito gajo-3" data-categoria="Raciones"></div>
-  <div class="gajo-quesito gajo-4" data-categoria="Selección de Quesos"></div>
-  <div class="gajo-quesito gajo-5" data-categoria="Piadinas"></div>
-  <div class="gajo-quesito gajo-6" data-categoria="Piadinas Dulces"></div>
-  <div class="gajo-quesito gajo-7" data-categoria="Bocadillos"></div>
-  <div class="gajo-quesito gajo-8" data-categoria="Postres"></div>
+      <div class="disco-ruleta" id="disco-ruleta">
+        <div class="gajo-quesito" data-index="0"></div>
+        <div class="gajo-quesito" data-index="1"></div>
+        <div class="gajo-quesito" data-index="2"></div>
+        <div class="gajo-quesito" data-index="3"></div>
+        <div class="gajo-quesito" data-index="4"></div>
+        <div class="gajo-quesito" data-index="5"></div>
+        <div class="gajo-quesito" data-index="6"></div>
+        <div class="gajo-quesito" data-index="7"></div>
 
-  <div class="icono-ruleta icono-1">🥖</div>
-  <div class="icono-ruleta icono-2">🍽️</div>
-  <div class="icono-ruleta icono-3">🍖</div>
-  <div class="icono-ruleta icono-4">🧀</div>
-  <div class="icono-ruleta icono-5">🌯</div>
-  <div class="icono-ruleta icono-6">🍫</div>
-  <div class="icono-ruleta icono-7">🥪</div>
-  <div class="icono-ruleta icono-8">🍰</div>
-</div>
+        <div class="icono-ruleta">🥖</div>
+        <div class="icono-ruleta">🍽️</div>
+        <div class="icono-ruleta">🍖</div>
+        <div class="icono-ruleta">🧀</div>
+        <div class="icono-ruleta">🌯</div>
+        <div class="icono-ruleta">🍫</div>
+        <div class="icono-ruleta">🥪</div>
+        <div class="icono-ruleta">🍰</div>
+      </div>
+    </div>
     
-    <p class="titulo-destino">✨ El destino ha decidido...</p>
+    <p class="titulo-destino">✨ Fate has decided...</p>
     <div id="categoria-destino" class="categoria-destino"></div>
     <h1 id="nombre-destino"></h1>
     <p id="descripcion-destino"></p>
     <div id="precio-destino"></div>
-    <small>Pulsa cualquier lugar para continuar</small>
+    <small>Tap anywhere to continue</small>
   </div>
 </div>
 
 <footer>
   Jamonería Samaín · A Coruña
   <br><br>
-  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank" rel="noopener">Follow us on Insta</a>
+  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Follow us on Instagram</a>
 </footer>
 
 <div id="confeti"></div>
 
-<!-- MODAL NAVEGACIÓN HAMBURGUESA -->
+<!-- MAIN HAMBURGER NAVIGATION MODAL -->
 <div id="modal-menu-principal" class="modal-contacto hidden">
   <div class="modal-contacto-content modal-menu-content">
     <span id="cerrar-menu-principal" class="close-btn">&times;</span>
@@ -153,22 +151,22 @@
       <a href="index.html" class="link-modal-item">🏠 Home</a>
       <button id="btn-contacto-carta" type="button" class="link-modal-item">✉️ Contact</button>
       <button id="btn-galeria" type="button" class="link-modal-item">📸 Gallery</button>
-      <button id="btn-tienda" type="button" class="link-modal-item">🛒 Shop</button>
+      <button id="btn-tienda" type="button" class="link-modal-item">🛒 Takeaway</button>
     </nav>
   </div>
 </div>
 
-<!-- VENTANA EMERGENTE DE CONTACTO -->
+<!-- CONTACT MODAL -->
 <div id="modal-contacto" class="modal-contacto hidden">
   <div class="modal-contacto-content">
     <span class="close-btn" id="cerrar-contacto">&times;</span>
     
-    <h2>CONTACT</h2>
+    <h2>CONTACT & LOCATION</h2>
     
     <div class="contacto-grid">
       <div class="contacto-item">
         <p class="contacto-label">PHONE</p>
-        <p><a href="tel:+34881125487" class="contacto-val">📞 +34 881 12 54 87</a></p>
+        <p><a href="tel:+34881125487" class="contacto-val">📞 881 12 54 87</a></p>
       </div>
 
       <div class="contacto-item">
@@ -179,10 +177,11 @@
       <div class="contacto-item">
         <p class="contacto-label">OPENING HOURS</p>
         <p class="contacto-val"><strong>🕒 Monday to Friday:</strong> 10:00 to Closing</p>
-        <p class="contacto-val"><strong>🕒 Saturdays, Sundays & Holidays:</strong> 11:00 to Closing</p>
+        <p class="contacto-val"><strong>🕒 Weekends & Holidays:</strong> 11:00 to Closing</p>
       </div>
     </div>
 
+    <!-- Google Maps Embed -->
     <div class="mapa-container">
       <iframe 
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2900.8655208226065!2d-8.4059281!3d43.3685114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7d00116529a5%3A0x355a57c6fce86bce!2sJamoner%C3%ADa%20Sama%C3%ADn!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
@@ -196,57 +195,70 @@
   </div>
 </div>
 
-<!-- Modal Galería -->
+<!-- Gallery Modal -->
 <div id="modal-galeria" class="modal-contacto hidden">
     <div class="modal-galeria-content">
         <span class="close-btn" id="close-galeria">&times;</span>
         <h2>OUR PRODUCTS</h2>
         
         <div class="galeria-grid">
-            <div class="galeria-item"><img src="jamon.jpeg" alt="Iberian Ham Jamonería Samaín" loading="lazy"></div>
-            <div class="galeria-item"><img src="cecina.jpeg" alt="Cured Beef (Cecina)" loading="lazy"></div>
-            <div class="galeria-item"><img src="anchoas.jpeg" alt="House Anchovies" loading="lazy"></div>
-            <div class="galeria-item"><img src="tabla.jpeg" alt="Assorted Iberian Platter" loading="lazy"></div>
-            <div class="galeria-item"><img src="tablas.jpeg" alt="Cured Meats and Cheese Platters" loading="lazy"></div>
-            <div class="galeria-item"><img src="samain.jpeg" alt="Special Dish Jamonería Samaín" loading="lazy"></div>
-            <div class="galeria-item"><img src="mesa.jpeg" alt="Table with dynamic variety of dishes" loading="lazy"></div>
+            <div class="galeria-item">
+                <img src="jamon.jpeg" alt="Iberian Ham Jamonería Samaín" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="cecina.jpeg" alt="Cured beef cecina" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="anchoas.jpeg" alt="House anchovies" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="tabla.jpeg" alt="Iberian charcuterie board" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="tablas.jpeg" alt="Cold cuts and cheese platters" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="samain.jpeg" alt="Special dish Jamonería Samaín" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="mesa.jpeg" alt="Table with food variety" loading="lazy">
+            </div>
         </div>
     </div>
 </div>  
 
-<!-- Modal Visor de Imagen Ampliada -->
+<!-- Image Viewer Modal -->
 <div id="modal-visor-imagen" class="modal-visor hidden">
   <span id="cerrar-visor" class="cerrar-visor">&times;</span>
   <img id="imagen-ampliada" src="" alt="Enlarged image" />
 </div>  
 
-<!-- Modal Tienda y Para Llevar -->
+<!-- Takeaway & Shop Modal -->
 <div id="modal-tienda" class="modal-contacto hidden">
     <div class="modal-contacto-content">
         <span id="cerrar-tienda" class="close-btn">&times;</span>
-        <h2>SHOP & TAKEAWAY</h2>
+        <h2>TAKEAWAY & SHOP</h2>
         
         <div class="tienda-seccion">
             <h3 class="tienda-titulo"><span class="tienda-icono">🍷</span> Gourmet Products</h3>
-            <p>We offer a selection of retail gourmet products.</p>
+            <p>We offer a range of Gourmet products for retail sale.</p>
         </div>
 
         <div class="tienda-seccion">
             <h3 class="tienda-titulo"><span class="tienda-icono">🛍️</span> Takeaway Menu</h3>
-            <p>You can order any item from our menu to take away.</p>
+            <p>You can order any of our menu items to take away.</p>
         </div>
 
         <div class="tienda-evento-destacado">
-            <h3 class="tienda-titulo-destacado"><span class="tienda-icono">🎉</span> Planning an event or having a craving?</h3>
-            <p>Book our products and platters for birthdays, celebrations, special events... or simply treat yourself because you deserve it!</p>
+            <h3 class="tienda-titulo-destacado"><span class="tienda-icono">🎉</span> Hosting an event or craving something special?</h3>
+            <p>Reserve our products and platters for birthdays, celebrations, and special events... or simply treat yourself!</p>
         </div>
 
-        <p class="tienda-contacto-texto">Call to make a reservation or ask our staff:</p>
-        <a href="tel:+34881125487" class="tienda-telefono">📞 +34 881 12 54 87</a>
+        <p class="tienda-contacto-texto">Call to reserve or speak with our staff:</p>
+        <a href="tel:+34881125487" class="tienda-telefono">📞 881 12 54 87</a>
     </div>
 </div> 
 
-<!-- ARCHIVOS DE LÓGICA -->
 <script src="menu-en.js"></script>
 <script src="script.js"></script>
 <script src="destino.js"></script>
