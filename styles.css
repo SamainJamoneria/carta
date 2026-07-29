@@ -1318,3 +1318,16 @@ MEDIA QUERIES (RESPONSIVE)
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
 }
+
+/* PARCHE DE VISIBILIDAD PARA LA CARTA */
+main {
+    display: block !important;
+}
+
+.seccion {
+    display: block !important;
+}
+
+.producto {
+    display: block !important;
+}
