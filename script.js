@@ -326,10 +326,103 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
+    // ==========================================
+    // 7. EFECTOS DE TEMPORADA EN SCROLL (MULTILINGÜE)
+    // ==========================================
+    const body = document.body;
+    const detalleEl = document.getElementById("detalle-temporada");
+    
+    // Detección de idioma
+    const esIngles = document.documentElement.lang === "en";
+
+    // Configuración de efectos y frases por temporada
+    const configuracionTemporadas = {
+        "modo-navidad": {
+            texto: esIngles 
+                ? "🎄 Happy Holidays from the Samaín team" 
+                : "🎄 Felices Fiestas de parte del equipo de Samaín",
+            particulas: ["❄", "❅", "❆", "🤍"] // Copos de nieve y destellos
+        },
+        "modo-sanjuan": {
+            texto: esIngles 
+                ? "🔥 Celebrating San Juan" 
+                : "🔥 ¡Llega la mágica Noche de San Juan!",
+            particulas: ["💥", "✨", "🔥", "⚡"] // Chispas de fuego y destellos
+        },
+        "modo-carnaval": {
+            texto: esIngles 
+                ? "🎭 Happy Carnival Season!" 
+                : "🎭 ¡Feliz Carnaval!",
+            particulas: ["🎉", "🎊", "✨", "🎈", "🔴", "🟡", "🔵"] // Confeti de colores
+        },
+        "modo-samain": {
+            texto: esIngles 
+                ? "🎃 Happy Samaín / Halloween!" 
+                : "🎃 ¡Feliz Samaín / Halloween!",
+            particulas: ["🎃", "👻", "🍂", "✨"] // Calabazas, fantasmas y hojas
+        }
+    };
+
+    // Identificar qué modo activo hay en <body>
+    let modoActivo = null;
+    for (const clase of body.classList) {
+        if (configuracionTemporadas[clase]) {
+            modoActivo = clase;
+            break;
+        }
+    }
+
+    if (!modoActivo) return; // Si no hay clase especial en el body, salimos
+
+    // 1. Asignar el texto a la cabecera
+    const config = configuracionTemporadas[modoActivo];
+    if (detalleEl && config) {
+        detalleEl.textContent = config.texto;
+    }
+
+    // 2. Generador de partículas al hacer scroll hacia abajo
+    let ultimoScroll = window.scrollY;
+    let contadorScroll = 0;
+
+    window.addEventListener("scroll", () => {
+        const scrollActual = window.scrollY;
+
+        if (scrollActual > ultimoScroll) {
+            contadorScroll++;
+            // Genera una partícula cada 5 ticks de scroll hacia abajo
+            if (contadorScroll % 5 === 0) {
+                crearParticulaScroll(config.particulas);
+            }
+        }
+        ultimoScroll = scrollActual;
+    }, { passive: true });
+
+    function crearParticulaScroll(listaSimbolos) {
+        const particula = document.createElement("div");
+        particula.className = "particula-scroll";
+
+        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
+        particula.textContent = simbolo;
+
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * 80 + 20; // Cerca de la parte superior
+
+        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
+        const duracion = (Math.random() * 800 + 1000).toFixed(0); // 1.0s a 1.8s
+
+        particula.style.left = `${posX}px`;
+        particula.style.top = `${posY}px`;
+        particula.style.fontSize = `${tamano}rem`;
+        particula.style.animationDuration = `${duracion}ms`;
+
+        document.body.appendChild(particula);
+
+        setTimeout(() => particula.remove(), parseInt(duracion));
+    }
 });
 
 // ==========================================
-// 7. FUNCIONES AUXILIARES Y PROTECCIONES
+// 8. FUNCIONES AUXILIARES Y PROTECCIONES
 // ==========================================
 function normalizarTexto(texto) {
     return texto
@@ -341,7 +434,7 @@ function normalizarTexto(texto) {
 // Deshabilitar clic derecho
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, Ctrl+U, etc.)
+// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
 document.addEventListener('keydown', (e) => {
     if (
         e.key === 'F12' || 
@@ -349,187 +442,5 @@ document.addEventListener('keydown', (e) => {
         (e.ctrlKey && e.key === 'u')
     ) {
         e.preventDefault();
-    }
-});
-
-// =========================================
-// EFECTOS DE TEMPORADA EN SCROLL
-// =========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const body = document.body;
-    const detalleEl = document.getElementById("detalle-temporada");
-
-    // Configuración de mensajes e iconos por temporada
-    const configuracionTemporadas = {
-        "modo-navidad": {
-            texto: "🎄 Felices Fiestas de parte del equipo de Samaín",
-            particulas: ["❄", "❅", "✨"]
-        },
-        "modo-sanjuan": {
-            texto: "🔥 ¡Llega la mágica Noche de San Juan!",
-            particulas: ["🔥", "✨", "💥", "🪔"]
-        },
-        "modo-carnaval": {
-            texto: "🎭 ¡Feliz Entroido / Carnaval!",
-            particulas: ["🎉", "🎊", "✨", "🎈"]
-        }
-    };
-
-    // Identificar modo activo
-    let modoActivo = null;
-    for (const clase of body.classList) {
-        if (configuracionTemporadas[clase]) {
-            modoActivo = clase;
-            break;
-        }
-    }
-
-    if (!modoActivo) return; // Si no hay modo activo, no hace nada
-
-    // 1. Insertar el mensaje del detalle en la cabecera
-    const config = configuracionTemporadas[modoActivo];
-    if (detalleEl && config) {
-        detalleEl.textContent = config.texto;
-    }
-
-    // 2. Generador de partículas al hacer scroll
-    let ultimoScroll = window.scrollY;
-    let contadorScroll = 0;
-
-    window.addEventListener("scroll", () => {
-        const scrollActual = window.scrollY;
-
-        // Solo se activa si el usuario hace scroll HACIA ABAJO
-        if (scrollActual > ultimoScroll) {
-            contadorScroll++;
-
-            // Frecuencia: genera una partícula cada 6 ticks de scroll para no saturar
-            if (contadorScroll % 6 === 0) {
-                crearParticulaScroll(config.particulas);
-            }
-        }
-        ultimoScroll = scrollActual;
-    }, { passive: true });
-
-    function crearParticulaScroll(listaSimbolos) {
-        const particula = document.createElement("div");
-        particula.className = "particula-scroll";
-
-        // Elegir un símbolo al azar de la lista
-        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
-        particula.textContent = simbolo;
-
-        // Posición horizontal aleatoria en la pantalla
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20; // Aparecen cerca de la parte superior
-
-        // Tamaño aleatorio
-        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0); // 1.0s a 1.8s
-
-        particula.style.left = `${posX}px`;
-        particula.style.top = `${posY}px`;
-        particula.style.fontSize = `${tamano}rem`;
-        particula.style.animationDuration = `${duracion}ms`;
-
-        document.body.appendChild(particula);
-
-        // Limpiar la partícula del HTML cuando acaba la animación
-        setTimeout(() => particula.remove(), parseInt(duracion));
-    }
-});
-
-// =========================================
-// EFECTOS DE TEMPORADA Y DETALLE MULTILINGÜE
-// =========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const body = document.body;
-    const detalleEl = document.getElementById("detalle-temporada");
-    
-    // Detectar si estamos en carta-en.html (lang="en") o carta.html (lang="es")
-    const esIngles = document.documentElement.lang === "en";
-
-    // Configuración de mensajes (ES / EN) e iconos por temporada
-    const configuracionTemporadas = {
-        "modo-navidad": {
-            texto: esIngles 
-                ? "🎄 Happy Holidays from the Samaín team" 
-                : "🎄 Felices Fiestas de parte del equipo de Samaín",
-            particulas: ["❄", "❅", "✨","🎅🏼"]
-        },
-        "modo-sanjuan": {
-            texto: esIngles 
-                ? "🔥 Celebrating San Juan" 
-                : "🔥 ¡Llega la mágica Noche de San Juan!",
-            particulas: ["🔥", "✨", "💥", "🐟"]
-        },
-        "modo-carnaval": {
-            texto: esIngles 
-                ? "🎭 Happy Carnival Season!" 
-                : "🎭 ¡Feliz  Carnaval!",
-            particulas: ["🎉", "🎊", "✨", "🎈"]
-        },
-        "modo-samain": {
-            texto: esIngles 
-                ? "🎃 Happy Samaín / Halloween!" 
-                : "🎃 ¡Feliz Samaín / Halloween!",
-            particulas: ["🎃", "👻", "🍂", "✨"]
-        }
-    };
-
-    // Identificar qué modo está activo en el body
-    let modoActivo = null;
-    for (const clase of body.classList) {
-        if (configuracionTemporadas[clase]) {
-            modoActivo = clase;
-            break;
-        }
-    }
-
-    if (!modoActivo) return; // Si no hay festividad activa, no hace nada
-
-    // 1. Mostrar el mensaje traducido en el detalle de la cabecera
-    const config = configuracionTemporadas[modoActivo];
-    if (detalleEl && config) {
-        detalleEl.textContent = config.texto;
-    }
-
-    // 2. Generador de partículas en scroll (funciona exactamente igual en ES y EN)
-    let ultimoScroll = window.scrollY;
-    let contadorScroll = 0;
-
-    window.addEventListener("scroll", () => {
-        const scrollActual = window.scrollY;
-
-        if (scrollActual > ultimoScroll) {
-            contadorScroll++;
-            if (contadorScroll % 6 === 0) {
-                crearParticulaScroll(config.particulas);
-            }
-        }
-        ultimoScroll = scrollActual;
-    }, { passive: true });
-
-    function crearParticulaScroll(listaSimbolos) {
-        const particula = document.createElement("div");
-        particula.className = "particula-scroll";
-
-        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
-        particula.textContent = simbolo;
-
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20;
-
-        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0);
-
-        particula.style.left = `${posX}px`;
-        particula.style.top = `${posY}px`;
-        particula.style.fontSize = `${tamano}rem`;
-        particula.style.animationDuration = `${duracion}ms`;
-
-        document.body.appendChild(particula);
-
-        setTimeout(() => particula.remove(), parseInt(duracion));
     }
 });
