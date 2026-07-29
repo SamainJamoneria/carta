@@ -99,23 +99,41 @@
   </div>
 </div> 
 
-<!-- Ruleta del Destino (Estructura simplificada para generación por JS) -->
+<!-- Ruleta del Destino -->
 <div id="resultado-destino" class="resultado-destino">
   <div class="tarjeta-destino">
     <div class="ruleta-destino">
       <div class="flecha-ruleta" id="flecha-ruleta">
         <span class="puntero">▼</span>
       </div>
-      <!-- Los gajos e iconos se renderizan desde destino.js si está automatizado -->
-      <div class="disco-ruleta" id="disco-ruleta"></div>
+      
+      <!-- Disco con sus gajos e iconos para que styles.css los pinte -->
+      <div class="disco-ruleta" id="disco-ruleta">
+        <div class="gajo-quesito gajo-1"></div>
+        <div class="gajo-quesito gajo-2"></div>
+        <div class="gajo-quesito gajo-3"></div>
+        <div class="gajo-quesito gajo-4"></div>
+        <div class="gajo-quesito gajo-5"></div>
+        <div class="gajo-quesito gajo-6"></div>
+        <div class="gajo-quesito gajo-7"></div>
+        <div class="gajo-quesito gajo-8"></div>
+        <div class="icono-ruleta icono-1">🧀</div>
+        <div class="icono-ruleta icono-2">🥓</div>
+        <div class="icono-ruleta icono-3">🍷</div>
+        <div class="icono-ruleta icono-4">🍺</div>
+        <div class="icono-ruleta icono-5">🥖</div>
+        <div class="icono-ruleta icono-6">🥩</div>
+        <div class="icono-ruleta icono-7">🥐</div>
+        <div class="icono-ruleta icono-8">☕</div>
+      </div>
     </div>
     
-    <p class="titulo-destino">✨ Fate has decided...</p>
+    <p class="titulo-destino">✨ El destino ha decidido...</p>
     <div id="categoria-destino" class="categoria-destino"></div>
     <h1 id="nombre-destino"></h1>
     <p id="descripcion-destino"></p>
     <div id="precio-destino"></div>
-    <small>Tap anywhere to continue</small>
+    <small>Pulsa cualquier lugar para continuar</small>
   </div>
 </div>
 
