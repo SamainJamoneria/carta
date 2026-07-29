@@ -372,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const configuracionTemporadas = {
         "modo-navidad": {
             texto: esIngles 
-                ? "🎄 Happy Holidays from the Samaín team" 
+                ? "🎄 Merry Christmas from the Samaín team" 
                 : "🎄 Felices Fiestas de parte del equipo de Samaín",
             particulas: ["❄", "❅", "❆", "🤍"]
         },
@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "modo-samain": {
             texto: esIngles 
-                ? "🎃 Happy Samaín / Halloween!" 
+                ? "🎃 Happy Samain / Halloween!" 
                 : "🎃 ¡Feliz Samaín / Halloween!",
             particulas: ["🎃", "👻", "🍂", "✨"]
         }
