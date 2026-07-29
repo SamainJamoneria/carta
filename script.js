@@ -116,10 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ======================================================
-    // 2. BUSCADOR EN TIEMPO REAL
+    // 2. BUSCADOR EN TIEMPO REAL (CORREGIDO PARA MOSTRAR SECCIONES)
     // ======================================================
     const inputBuscar = document.getElementById('buscar');
-    const productos = document.querySelectorAll('.producto');
+    const secciones = document.querySelectorAll('.seccion');
     const contenedorBusqueda = document.querySelector('.resultado-busqueda');
 
     if (inputBuscar) {
@@ -127,22 +127,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const texto = e.target.value.toLowerCase().trim();
             let encontrados = 0;
 
-            productos.forEach(producto => {
-                const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
-                const desc = producto.querySelector('.descripcion')?.textContent.toLowerCase() || '';
+            if (texto === '') {
+                // Restaurar visibilidad completa
+                secciones.forEach(seccion => {
+                    seccion.style.display = '';
+                    const prods = seccion.querySelectorAll('.producto');
+                    prods.forEach(p => p.style.display = '');
+                });
+                if (contenedorBusqueda) contenedorBusqueda.innerHTML = '';
+                return;
+            }
 
-                if (nombre.includes(texto) || desc.includes(texto)) {
-                    producto.style.display = '';
-                    encontrados++;
-                } else {
-                    producto.style.display = 'none';
-                }
+            secciones.forEach(seccion => {
+                const prods = seccion.querySelectorAll('.producto');
+                let tieneCoincidencias = false;
+
+                prods.forEach(producto => {
+                    const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                    const desc = producto.querySelector('.descripcion')?.textContent.toLowerCase() || '';
+
+                    if (nombre.includes(texto) || desc.includes(texto)) {
+                        producto.style.display = '';
+                        tieneCoincidencias = true;
+                        encontrados++;
+                    } else {
+                        producto.style.display = 'none';
+                    }
+                });
+
+                // Si una sección no tiene ningún producto coincidente, la ocultamos entera
+                seccion.style.display = tieneCoincidencias ? '' : 'none';
             });
 
             if (contenedorBusqueda) {
-                if (texto === '') {
-                    contenedorBusqueda.innerHTML = '';
-                } else if (encontrados > 0) {
+                if (encontrados > 0) {
                     contenedorBusqueda.innerHTML = `<span class="con-resultados">Se han encontrado ${encontrados} productos</span>`;
                 } else {
                     contenedorBusqueda.innerHTML = `<span class="sin-resultados">No se encontraron productos con "${texto}"</span>`;
@@ -155,13 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. CATEGORÍAS STICKY Y SCROLL
     // ======================================================
     const categorias = document.querySelectorAll('.categoria');
-    const secciones = document.querySelectorAll('.seccion');
 
     window.addEventListener('scroll', () => {
         let actual = '';
         secciones.forEach(seccion => {
             const top = seccion.offsetTop - 150;
-            if (window.scrollY >= top) {
+            if (window.scrollY >= top && seccion.style.display !== 'none') {
                 actual = seccion.getAttribute('id');
             }
         });
