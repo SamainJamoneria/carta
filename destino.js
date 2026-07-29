@@ -1,11 +1,11 @@
 // =========================================
-// DESTINO SAMAÍN
+// DESTINO SAMAÍN (Con efectos de sonido integrados)
 // =========================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
     //================================================
-    // ELEMENTOS (Con selectores seguros)
+    // ELEMENTOS
     //================================================
     const btnDestino = document.getElementById("btn-destino");
     const modalDestino = document.getElementById("modal-destino");
@@ -22,8 +22,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let timerFinalizacion = null;
     let frameId = null;
+    let audioCtx = null; // Contexto de Web Audio API
 
     console.log("Destino.js cargado e inicializado correctamente.");
+
+    //================================================
+    // MOTOR DE SONIDO (Web Audio API)
+    //================================================
+    function initAudio() {
+        if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    // Sonido seco tipo madera/trinquete para cada gajo
+    function reproducirSonidoClick() {
+        if (!audioCtx) return;
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.04);
+
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        } catch (e) {
+            // Ignorar bloqueo de reproducción si el usuario no interactuó
+        }
+    }
+
+    // Acorde de victoria al revelar el premio
+    function reproducirSonidoVictoria() {
+        if (!audioCtx) return;
+        try {
+            const notas = [523.25, 659.25, 783.99, 1046.50]; // Acorde Do Mayor (C5, E5, G5, C6)
+            notas.forEach((freq, i) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (i * 0.08));
+
+                gain.gain.setValueAtTime(0, audioCtx.currentTime + (i * 0.08));
+                gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + (i * 0.08) + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (i * 0.08) + 0.35);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(audioCtx.currentTime + (i * 0.08));
+                osc.stop(audioCtx.currentTime + (i * 0.08) + 0.35);
+            });
+        } catch (e) {}
+    }
 
     //================================================
     // CONTROL DE APERTURA
@@ -31,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnDestino && modalDestino) {
         btnDestino.addEventListener("click", (e) => {
             e.preventDefault();
+            initAudio(); // Activa el audio tras gesto del usuario
             modalDestino.classList.add("visible");
         });
     }
@@ -52,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Seleccionar cuántos comensales
     document.querySelectorAll(".opcion-comensales").forEach(boton => {
         boton.addEventListener("click", () => {
+            initAudio(); // Confirmación de contexto de audio
             document.querySelectorAll(".opcion-comensales").forEach(b => b.classList.remove("seleccionado"));
             boton.classList.add("seleccionado");
             cerrarModal();
@@ -60,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //================================================
-    // LOGICA DE GIRO (Girando el Disco de la Ruleta)
+    // LOGICA DE GIRO
     //================================================
     function iniciarRuleta(){
         const resultado = obtenerProducto();
@@ -73,15 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        // MAPEO EXACTO: Según el orden de los iconos de tu HTML
-        // 0: 🥖 Tostas/Pan
-        // 1: 🍽️ Entrantes/Cubiertos
-        // 2: 🍖 Raciones/Jamón
-        // 3: 🧀 Quesos
-        // 4: 🌯 Piadinas
-        // 5: 🍫 Chocolates/Dulces
-        // 6: 🥪 Bocadillos
-        // 7: 🍰 Dulces/Postres
         const categoriesOrden = [
             "tostas",     // Index 0 (🥖)
             "entrantes",  // Index 1 (🍽️)
@@ -100,12 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const indice = categoriesOrden.indexOf(categoriaId);
         const indiceSeguro = indice !== -1 ? indice : 0;
 
-        // CÁLCULO DE ÁNGULO DE ROTACIÓN DEL DISCO
-        const gradosPorGajo = 360 / 8; // 45deg por sector
-        
-        // Para traer el gajo "indiceSeguro" a la posición superior (12:00) bajo el indicador
+        const gradosPorGajo = 360 / 8;
         const gradosDestino = (360 - (indiceSeguro * gradosPorGajo)) % 360;
-        const gradosFinal = (360 * 5) + gradosDestino; // 5 vueltas completas + alineación
+        const gradosFinal = (360 * 5) + gradosDestino;
 
         if (discoRuleta) {
             discoRuleta.style.transition = "none";
@@ -134,10 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3500); 
     }
 
-    // Iluminación dinámica mientras gira el disco
+    // Iluminación y sonido dinámico
     function rastrearPasoDeGajo(gradosObjetivo) {
         const tiempoInicial = performance.now();
         const duracionTotal = 3500;
+        let ultimoGajoIndex = -1;
 
         function obtenerGradosActuales(progreso) {
             return gradosObjetivo * (1 - Math.pow(1 - progreso, 3.5));
@@ -149,10 +203,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (progreso > 1) progreso = 1;
 
             const gradosActuales = obtenerGradosActuales(progreso);
-            
-            // Calculamos qué sector está pasando en este momento por la parte superior (12:00)
             const anguloNormalizado = (360 - (gradosActuales % 360)) % 360;
             const indiceGajoActual = Math.floor(anguloNormalizado / 45) % 8;
+
+            // Si cambia de gajo respecto al frame anterior, dispara el sonido de click
+            if (indiceGajoActual !== ultimoGajoIndex) {
+                reproducirSonidoClick();
+                ultimoGajoIndex = indiceGajoActual;
+            }
 
             if (gajos) {
                 gajos.forEach((gajo, i) => {
@@ -168,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         frameId = requestAnimationFrame(actualizarGlow);
     }
 
-    // Finalizar tirada y mostrar textos
+    // Finalizar tirada
     function finalizarRuleta(resultado){
         if (ruleta) {
             ruleta.classList.remove("girando");
@@ -177,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if(navigator.vibrate) navigator.vibrate([120, 60, 120]);
+        reproducirSonidoVictoria();
         lanzarConfeti();    
 
         if (nombreDestino) nombreDestino.textContent = resultado.producto.nombre;
@@ -205,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Obtención ponderada del producto según número de comensales
+    // Obtención de producto
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
@@ -214,11 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
 
-        // 1. Filtrar carta para EXCLUIR siempre postres/dulces
         const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres" && c.id !== "chocolates");
         if (cartaFiltrada.length === 0) return null;
 
-        // 2. Pesos y probabilidades
         const configuracionPesos = {
             "1": { "bocadillos": 4, "tostas": 3, "piadinas": 3, "quesos": 3 },
             "2": { "tostas": 3, "raciones": 3, "tablas": 4, "quesos": 3 },
@@ -227,7 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pesosActuales = configuracionPesos[personas] || configuracionPesos["2"];
 
-        // 3. Asignar pesos
         const categoriasConPeso = cartaFiltrada.map(cat => {
             let idBuscado = cat.id;
             if (idBuscado === "tablas") idBuscado = "raciones";
@@ -235,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return { categoria: cat, peso: peso };
         });
 
-        // 4. Selección aleatoria
         const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
         let aleatorio = Math.random() * sumaPesos;
         
@@ -248,7 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
             aleatorio -= item.peso;
         }
 
-        // 5. Seleccionar producto válido
         const productosValidos = categoriaElegida.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
