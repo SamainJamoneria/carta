@@ -73,34 +73,32 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        // --- NUEVO ORDEN FÍSICO CORREGIDO ---
-        // (Empezando desde arriba en 12:00, sentido horario)
+        // Orden de porciones físicas en la ruleta (desde arriba 12:00 en sentido horario)
         const categoriesOrden = [
-            "dulces",     // 🍰 Gajo 0 (Arriba)
+            "dulces",     // 🍰 Gajo 0
             "tostas",     // 🥖 Gajo 1
             "entrantes",  // 🍽️ Gajo 2
-            "raciones",   // 🍖 Gajo 3 (Donde debería estar la aguja en tu foto)
+            "raciones",   // 🍖 Gajo 3
             "quesos",     // 🧀 Gajo 4
             "piadinas",   // 🌯 Gajo 5
-            "chocolates", // 🍫 Gajo 6 (o el ID que uses para el otro dulce)
+            "chocolates", // 🍫 Gajo 6
             "bocadillos"  // 🥪 Gajo 7
         ];
 
         let categoriaId = resultado.categoria.id;
-        // Mapeo adaptativo para los IDs de inglés y excepciones
+        // Mapeo adaptativo para IDs
         if (categoriaId === "tablas")  categoriaId = "raciones";
         if (categoriaId === "postres") categoriaId = "dulces";
 
         const indice = categoriesOrden.indexOf(categoriaId);
         const indiceSeguro = indice !== -1 ? indice : 0;
 
-        // --- CÁLCULO DE ÁNGULO CORREGIDO ---
-        const gradosPorCategoria = 360 / 8; 
+        // CÁLCULO DE ÁNGULO Y CENTRADO DE AGUJA
+        const gradosPorCategoria = 360 / 8; // 45deg
+        const gradosObjetivoSector = ((8 - indiceSeguro) % 8) * gradosPorCategoria;
         
-        // Al girar la aguja en sentido horario, las secciones pasan en orden invertido
-        const anguloGajo = (360 - (indiceSeguro * gradosPorCategoria)) % 360;
-        const gradosIcono = anguloGajo + (gradosPorCategoria / 2);
-        const gradosFinal = (360 * 5) + gradosIcono;
+        // Centramos en medio del gajo (+22.5deg) y añadimos 5 vueltas
+        const gradosFinal = (360 * 5) + gradosObjetivoSector + (gradosPorCategoria / 2);
 
         if (flechaAguja) {
             flechaAguja.style.transition = "none";
@@ -146,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const gradosActuales = obtenerGradosActuales(progreso);
             const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
             
-            // --- CÁLCULO DE ILUMINACIÓN CORREGIDO ---
-            const indiceGajoActual = Math.floor(((360 - anguloNormalizado) % 360) / 45) % 8;
+            // Sincronización del gajo iluminado con la posición real de la flecha
+            const indiceGajoActual = (8 - Math.floor(anguloNormalizado / 45)) % 8;
 
             if (gajos) {
                 gajos.forEach((gajo, i) => {
@@ -200,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-   // Obtención ponderada del producto según número de comensales
+    // Obtención ponderada del producto según número de comensales
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
@@ -210,12 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 1. Filtrar carta para EXCLUIR siempre postres/dulces
-        const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres");
+        const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres" && c.id !== "chocolates");
 
         if (cartaFiltrada.length === 0) return null;
 
         // 2. Definir pesos (probabilidades) según el número de comensales
-        // Peso por defecto = 1. A mayor peso, mayor probabilidad.
         const configuracionPesos = {
             "1": {
                 "bocadillos": 4,
@@ -230,16 +227,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 "quesos": 3
             },
             "3": {
-                "tablas": 6,   // Prioridad muy alta para tablas/compartir
+                "tablas": 6,
                 "raciones": 3
             }
         };
 
         const pesosActuales = configuracionPesos[personas] || configuracionPesos["2"];
 
-        // 3. Crear lista de categorías con sus pesos asignados
+        // 3. Asignar pesos a la carta filtrada
         const categoriasConPeso = cartaFiltrada.map(cat => {
-            // Mapeo de equivalencias por si varían los IDs
             let idBuscado = cat.id;
             if (idBuscado === "tablas") idBuscado = "raciones";
 
@@ -247,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return { categoria: cat, peso: peso };
         });
 
-        // 4. Algoritmo de ruleta ponderada (Weighted Random Selection)
+        // 4. Selección aleatoria con peso
         const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
         let aleatorio = Math.random() * sumaPesos;
         
@@ -260,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             aleatorio -= item.peso;
         }
 
-        // 5. Seleccionar un producto válido dentro de la categoría ganadora
+        // 5. Seleccionar producto válido dentro de la categoría
         const productosValidos = categoriaElegida.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
