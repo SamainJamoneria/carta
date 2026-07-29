@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cerrarDestino = document.getElementById("cerrar-destino");
     const resultadoDestino = document.getElementById("resultado-destino");
     const ruleta = document.querySelector(".ruleta-destino");
-    const flechaAguja = document.getElementById("flecha-ruleta");
+    const discoRuleta = document.getElementById("disco-ruleta");
     const gajos = document.querySelectorAll(".gajo-quesito");
 
     const nombreDestino = document.getElementById("nombre-destino");
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //================================================
-    // LOGICA DE GIRO
+    // LOGICA DE GIRO (Girando el Disco de la Ruleta)
     //================================================
     function iniciarRuleta(){
         const resultado = obtenerProducto();
@@ -73,46 +73,59 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        // Buscar el gajo en el HTML que coincida con la categoría elegida
-        let indiceObjetivo = 0;
+        // MAPEO EXACTO: Según el orden de los iconos de tu HTML
+        // 0: 🥖 Tostas/Pan
+        // 1: 🍽️ Entrantes/Cubiertos
+        // 2: 🍖 Raciones/Jamón
+        // 3: 🧀 Quesos
+        // 4: 🌯 Piadinas
+        // 5: 🍫 Chocolates/Dulces
+        // 6: 🥪 Bocadillos
+        // 7: 🍰 Dulces/Postres
+        const categoriesOrden = [
+            "tostas",     // Index 0 (🥖)
+            "entrantes",  // Index 1 (🍽️)
+            "raciones",   // Index 2 (🍖)
+            "quesos",     // Index 3 (🧀)
+            "piadinas",   // Index 4 (🌯)
+            "chocolates", // Index 5 (🍫)
+            "bocadillos", // Index 6 (🥪)
+            "dulces"      // Index 7 (🍰)
+        ];
+
         let categoriaId = resultado.categoria.id;
+        if (categoriaId === "tablas")  categoriaId = "raciones";
+        if (categoriaId === "postres") categoriaId = "dulces";
 
-        if (gajos && gajos.length > 0) {
-            gajos.forEach((gajo, index) => {
-                const catGajo = gajo.dataset.categoria || gajo.id || "";
-                if (catGajo.toLowerCase().includes(categoriaId.toLowerCase())) {
-                    indiceObjetivo = index;
-                }
-            });
-        }
+        const indice = categoriesOrden.indexOf(categoriaId);
+        const indiceSeguro = indice !== -1 ? indice : 0;
 
-        // CÁLCULO DE ÁNGULO ABSOLUTO
-        const totalGajos = gajos.length || 8;
-        const gradosPorGajo = 360 / totalGajos;
+        // CÁLCULO DE ÁNGULO DE ROTACIÓN DEL DISCO
+        const gradosPorGajo = 360 / 8; // 45deg por sector
+        
+        // Para traer el gajo "indiceSeguro" a la posición superior (12:00) bajo el indicador
+        const gradosDestino = (360 - (indiceSeguro * gradosPorGajo)) % 360;
+        const gradosFinal = (360 * 5) + gradosDestino; // 5 vueltas completas + alineación
 
-        // Calculamos los grados necesarios para que la aguja pare en el índice objetivo
-        const gradosDestino = (indiceObjetivo * gradosPorGajo) + (gradosPorGajo / 2);
-        const gradosFinal = (360 * 5) + gradosDestino;
-
-        if (flechaAguja) {
-            flechaAguja.style.transition = "none";
-            flechaAguja.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
-            flechaAguja.getBoundingClientRect(); // Reflow
+        if (discoRuleta) {
+            discoRuleta.style.transition = "none";
+            discoRuleta.style.transform = "rotate(0deg)";
+            discoRuleta.getBoundingClientRect(); // Reflow
 
             requestAnimationFrame(() => {
-                flechaAguja.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
-                flechaAguja.style.transform = `translate3d(0, 0, 0) rotate(${gradosFinal}deg)`;
+                discoRuleta.style.transition = "transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)";
+                discoRuleta.style.transform = `rotate(${gradosFinal}deg)`;
             });
         }
 
-        rastrearPasoDeAguja(gradosFinal, totalGajos);
+        rastrearPasoDeGajo(gradosFinal);
 
         timerFinalizacion = setTimeout(() => {
             if (frameId) cancelAnimationFrame(frameId);
             
             if (gajos) {
                 gajos.forEach((gajo, i) => {
-                    if (i === indiceObjetivo) gajo.classList.add("iluminado");
+                    if (i === indiceSeguro) gajo.classList.add("iluminado");
                     else gajo.classList.remove("iluminado");
                 });
             }
@@ -121,11 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3500); 
     }
 
-    // Efecto Glow dinámico al girar
-    function rastrearPasoDeAguja(gradosObjetivo, totalGajos) {
+    // Iluminación dinámica mientras gira el disco
+    function rastrearPasoDeGajo(gradosObjetivo) {
         const tiempoInicial = performance.now();
         const duracionTotal = 3500;
-        const gradosPorGajo = 360 / totalGajos;
 
         function obtenerGradosActuales(progreso) {
             return gradosObjetivo * (1 - Math.pow(1 - progreso, 3.5));
@@ -137,10 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (progreso > 1) progreso = 1;
 
             const gradosActuales = obtenerGradosActuales(progreso);
-            const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
             
-            // Sincronización matemática directa con los índices del HTML
-            const indiceGajoActual = Math.floor(anguloNormalizado / gradosPorGajo) % totalGajos;
+            // Calculamos qué sector está pasando en este momento por la parte superior (12:00)
+            const anguloNormalizado = (360 - (gradosActuales % 360)) % 360;
+            const indiceGajoActual = Math.floor(anguloNormalizado / 45) % 8;
 
             if (gajos) {
                 gajos.forEach((gajo, i) => {
@@ -193,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Obtención ponderada del producto
+    // Obtención ponderada del producto según número de comensales
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
@@ -202,9 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
 
+        // 1. Filtrar carta para EXCLUIR siempre postres/dulces
         const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres" && c.id !== "chocolates");
         if (cartaFiltrada.length === 0) return null;
 
+        // 2. Pesos y probabilidades
         const configuracionPesos = {
             "1": { "bocadillos": 4, "tostas": 3, "piadinas": 3, "quesos": 3 },
             "2": { "tostas": 3, "raciones": 3, "tablas": 4, "quesos": 3 },
@@ -213,6 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pesosActuales = configuracionPesos[personas] || configuracionPesos["2"];
 
+        // 3. Asignar pesos
         const categoriasConPeso = cartaFiltrada.map(cat => {
             let idBuscado = cat.id;
             if (idBuscado === "tablas") idBuscado = "raciones";
@@ -220,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return { categoria: cat, peso: peso };
         });
 
+        // 4. Selección aleatoria
         const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
         let aleatorio = Math.random() * sumaPesos;
         
@@ -232,6 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
             aleatorio -= item.peso;
         }
 
+        // 5. Seleccionar producto válido
         const productosValidos = categoriaElegida.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
@@ -251,9 +268,9 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (ruleta) ruleta.classList.remove("girando", "finalizada");
             if (gajos) gajos.forEach(g => g.classList.remove("iluminado"));
-            if (flechaAguja) {
-                flechaAguja.style.transition = "none";
-                flechaAguja.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+            if (discoRuleta) {
+                discoRuleta.style.transition = "none";
+                discoRuleta.style.transform = "rotate(0deg)";
             }
             
             if (nombreDestino) nombreDestino.textContent = "";
