@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Destino.js cargado e inicializado correctamente.");
 
     //================================================
-    // CONTROL DE APERTURA: EL PRIMER PASO
+    // CONTROL DE APERTURA
     //================================================
     if (btnDestino && modalDestino) {
         btnDestino.addEventListener("click", (e) => {
@@ -73,32 +73,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        // Orden de porciones físicas en la ruleta (desde arriba 12:00 en sentido horario)
-        const categoriesOrden = [
-            "dulces",     // 🍰 Gajo 0
-            "tostas",     // 🥖 Gajo 1
-            "entrantes",  // 🍽️ Gajo 2
-            "raciones",   // 🍖 Gajo 3
-            "quesos",     // 🧀 Gajo 4
-            "piadinas",   // 🌯 Gajo 5
-            "chocolates", // 🍫 Gajo 6
-            "bocadillos"  // 🥪 Gajo 7
-        ];
-
+        // Buscar el gajo en el HTML que coincida con la categoría elegida
+        let indiceObjetivo = 0;
         let categoriaId = resultado.categoria.id;
-        // Mapeo adaptativo para IDs
-        if (categoriaId === "tablas")  categoriaId = "raciones";
-        if (categoriaId === "postres") categoriaId = "dulces";
 
-        const indice = categoriesOrden.indexOf(categoriaId);
-        const indiceSeguro = indice !== -1 ? indice : 0;
+        if (gajos && gajos.length > 0) {
+            gajos.forEach((gajo, index) => {
+                const catGajo = gajo.dataset.categoria || gajo.id || "";
+                if (catGajo.toLowerCase().includes(categoriaId.toLowerCase())) {
+                    indiceObjetivo = index;
+                }
+            });
+        }
 
-        // CÁLCULO DE ÁNGULO Y CENTRADO DE AGUJA
-        const gradosPorCategoria = 360 / 8; // 45deg
-        const gradosObjetivoSector = ((8 - indiceSeguro) % 8) * gradosPorCategoria;
-        
-        // Centramos en medio del gajo (+22.5deg) y añadimos 5 vueltas
-        const gradosFinal = (360 * 5) + gradosObjetivoSector + (gradosPorCategoria / 2);
+        // CÁLCULO DE ÁNGULO ABSOLUTO
+        const totalGajos = gajos.length || 8;
+        const gradosPorGajo = 360 / totalGajos;
+
+        // Calculamos los grados necesarios para que la aguja pare en el índice objetivo
+        const gradosDestino = (indiceObjetivo * gradosPorGajo) + (gradosPorGajo / 2);
+        const gradosFinal = (360 * 5) + gradosDestino;
 
         if (flechaAguja) {
             flechaAguja.style.transition = "none";
@@ -111,14 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        rastrearPasoDeAguja(gradosFinal);
+        rastrearPasoDeAguja(gradosFinal, totalGajos);
 
         timerFinalizacion = setTimeout(() => {
             if (frameId) cancelAnimationFrame(frameId);
             
             if (gajos) {
                 gajos.forEach((gajo, i) => {
-                    if (i === indiceSeguro) gajo.classList.add("iluminado");
+                    if (i === indiceObjetivo) gajo.classList.add("iluminado");
                     else gajo.classList.remove("iluminado");
                 });
             }
@@ -128,9 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Efecto Glow dinámico al girar
-    function rastrearPasoDeAguja(gradosObjetivo) {
+    function rastrearPasoDeAguja(gradosObjetivo, totalGajos) {
         const tiempoInicial = performance.now();
         const duracionTotal = 3500;
+        const gradosPorGajo = 360 / totalGajos;
 
         function obtenerGradosActuales(progreso) {
             return gradosObjetivo * (1 - Math.pow(1 - progreso, 3.5));
@@ -144,8 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const gradosActuales = obtenerGradosActuales(progreso);
             const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
             
-            // Sincronización del gajo iluminado con la posición real de la flecha
-            const indiceGajoActual = (8 - Math.floor(anguloNormalizado / 45)) % 8;
+            // Sincronización matemática directa con los índices del HTML
+            const indiceGajoActual = Math.floor(anguloNormalizado / gradosPorGajo) % totalGajos;
 
             if (gajos) {
                 gajos.forEach((gajo, i) => {
@@ -178,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (categoriaDestino) categoriaDestino.textContent = resultado.categoria.icono + " " + resultado.categoria.titulo;
     }
 
-    // Efecto partículas de confeti
+    // Confeti
     function lanzarConfeti(){
         const contenedor = document.getElementById("confeti");
         if(!contenedor) return;
@@ -198,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Obtención ponderada del producto según número de comensales
+    // Obtención ponderada del producto
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
@@ -207,43 +202,24 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
 
-        // 1. Filtrar carta para EXCLUIR siempre postres/dulces
         const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres" && c.id !== "chocolates");
-
         if (cartaFiltrada.length === 0) return null;
 
-        // 2. Definir pesos (probabilidades) según el número de comensales
         const configuracionPesos = {
-            "1": {
-                "bocadillos": 4,
-                "tostas": 3,
-                "piadinas": 3,
-                "quesos": 3
-            },
-            "2": {
-                "tostas": 3,
-                "raciones": 3,
-                "tablas": 4,
-                "quesos": 3
-            },
-            "3": {
-                "tablas": 6,
-                "raciones": 3
-            }
+            "1": { "bocadillos": 4, "tostas": 3, "piadinas": 3, "quesos": 3 },
+            "2": { "tostas": 3, "raciones": 3, "tablas": 4, "quesos": 3 },
+            "3": { "tablas": 6, "raciones": 3 }
         };
 
         const pesosActuales = configuracionPesos[personas] || configuracionPesos["2"];
 
-        // 3. Asignar pesos a la carta filtrada
         const categoriasConPeso = cartaFiltrada.map(cat => {
             let idBuscado = cat.id;
             if (idBuscado === "tablas") idBuscado = "raciones";
-
             const peso = pesosActuales[cat.id] || pesosActuales[idBuscado] || 1;
             return { categoria: cat, peso: peso };
         });
 
-        // 4. Selección aleatoria con peso
         const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
         let aleatorio = Math.random() * sumaPesos;
         
@@ -256,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
             aleatorio -= item.peso;
         }
 
-        // 5. Seleccionar producto válido dentro de la categoría
         const productosValidos = categoriaElegida.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
@@ -268,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return { categoria: categoriaElegida, producto };
     }
 
-    // Vaciar datos al cerrar la ventana de resultados
+    // Resetear al cerrar
     if (resultadoDestino) {
         resultadoDestino.addEventListener("click", () => {
             if (timerFinalizacion) clearTimeout(timerFinalizacion);
