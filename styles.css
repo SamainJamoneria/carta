@@ -1,5 +1,5 @@
 /* ======================================================
-   SAMAÍN LA CORMELANA
+   SAMAÍN LA CORMELANA - ESTILOS PRINCIPALES
 ====================================================== */
 
 /*==========================
@@ -302,7 +302,7 @@ MENÚ STICKY Y CATEGORÍAS
     display: none;
 }
 
-/* Categorías deslizantes: Fondo clarito con texto azul y borde dorado */
+/* Categorías deslizantes */
 .categoria {
     display: flex;
     flex-direction: column;
@@ -312,9 +312,9 @@ MENÚ STICKY Y CATEGORÍAS
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 999px;
-    background: #ffffff;                /* Fondo claro por defecto */
-    border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);      /* Texto e icono en azul */
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     text-decoration: none;
     font-weight: 700;
     white-space: nowrap;
@@ -329,10 +329,10 @@ MENÚ STICKY Y CATEGORÍAS
     transform: translateY(-2px);
 }
 
-/* Estado activo: Resalta en dorado al hacer scroll */
+/* Estado activo */
 .categoria.activa {
-    background: var(--color-dorado) !important; /* Fondo dorado */
-    color: #ffffff !important;                  /* Texto e icono en blanco */
+    background: var(--color-dorado) !important;
+    color: #ffffff !important;
     border-color: var(--color-dorado) !important;
     transform: scale(1.05);
     box-shadow: 0 4px 14px rgba(216, 179, 92, 0.55);
@@ -901,9 +901,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     border: 1px solid #e0e0e0;
 }
 
-/*==================================================
-MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
-==================================================*/
+/* Modal Galería (Ajustado a pantalla sin scroll) */
 .modal-galeria-content {
     background-color: #ffffff;
     padding: 20px 15px 15px 15px;
@@ -911,13 +909,12 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border: 2px solid var(--color-principal);
     width: 92%;
     max-width: 440px;
-    /* Limitamos el alto máximo al 85% de la pantalla para dejar margen */
     max-height: 85vh; 
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden; /* Evitamos el scrollbar */
+    overflow: hidden;
 }
 
 .modal-galeria-content h2 {
@@ -930,15 +927,15 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border-bottom: 2px solid var(--color-dorado);
     padding-bottom: 6px;
     text-align: center;
-    flex-shrink: 0; /* Asegura que el título no se encoja */
+    flex-shrink: 0;
 }
 
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    flex: 1; /* Ocupa el espacio vertical disponible */
-    min-height: 0; /* Permite que el grid flexione hacia abajo */
+    flex: 1;
+    min-height: 0;
 }
 
 .galeria-item {
@@ -947,7 +944,7 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     overflow: hidden;
     width: 100%;
     height: 100%;
-    max-height: 15vh; /* Limita la altura de cada miniatura según el alto de pantalla */
+    max-height: 15vh;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -1156,19 +1153,18 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
-/* Botones del menú hamburguesa: Mismo estilo que las categorías deslizables */
 .link-modal-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;                    /* Fondo claro */
-    border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);          /* Texto e icono en azul */
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
-    border-radius: 999px;                  /* Mismo acabado redondeado estilo píldora */
+    border-radius: 999px;
     text-decoration: none;
     cursor: pointer;
     width: 100%;
@@ -1185,6 +1181,73 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     color: var(--color-principal);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(216,179,92,0.25);
+}
+
+/*==================================================
+DETALLE TEMÁTICO Y EFECTOS PARTÍCULAS
+==================================================*/
+.detalle-temporada {
+    display: none;
+    margin: 8px auto 0;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.modo-navidad .detalle-temporada {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+body.modo-sanjuan .detalle-temporada {
+    display: inline-block;
+    background: rgba(243, 156, 18, 0.15);
+    color: #f39c12;
+    border: 1px solid rgba(243, 156, 18, 0.4);
+}
+
+body.modo-carnaval .detalle-temporada {
+    display: inline-block;
+    background: rgba(253, 121, 168, 0.15);
+    color: #fd79a8;
+    border: 1px solid rgba(253, 121, 168, 0.4);
+}
+
+body.modo-samain .detalle-temporada {
+    display: inline-block;
+    background: rgba(230, 126, 34, 0.18);
+    color: #e67e22;
+    border: 1px solid rgba(230, 126, 34, 0.45);
+}
+
+.particula-scroll {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    will-change: transform, opacity;
+    animation: caidaParticula linear forwards;
+}
+
+@keyframes caidaParticula {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(120px) scale(0.3) rotate(360deg);
+    }
 }
 
 /*==================================================
@@ -1244,75 +1307,4 @@ MEDIA QUERIES (RESPONSIVE)
     .categoria { padding: 8px 14px; font-size: 0.9rem; }
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
-}
-
-/* ==========================================================================
-   DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
-   ========================================================================== */
-
-/* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
-.detalle-temporada {
-    display: none; /* Oculto por defecto el resto del año */
-    margin: 8px auto 0;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    width: fit-content;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Modos específicos para el detalle */
-body.modo-navidad .detalle-temporada {
-    display: inline-block;
-    background: rgba(212, 175, 55, 0.15);
-    color: #d4af37;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-}
-
-body.modo-sanjuan .detalle-temporada {
-    display: inline-block;
-    background: rgba(243, 156, 18, 0.15);
-    color: #f39c12;
-    border: 1px solid rgba(243, 156, 18, 0.4);
-}
-
-body.modo-carnaval .detalle-temporada {
-    display: inline-block;
-    background: rgba(253, 121, 168, 0.15);
-    color: #fd79a8;
-    border: 1px solid rgba(253, 121, 168, 0.4);
-}
-
-body.modo-samain .detalle-temporada {
-    display: inline-block;
-    background: rgba(230, 126, 34, 0.18);
-    color: #e67e22;
-    border: 1px solid rgba(230, 126, 34, 0.45);
-}
-
-/* Partículas flotantes de scroll */
-.particula-scroll {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    user-select: none;
-    will-change: transform, opacity;
-    animation: caidaParticula linear forwards;
-}
-
-@keyframes caidaParticula {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(120px) scale(0.3) rotate(360deg);
-    }
 }
