@@ -1,30 +1,60 @@
 /* ======================================================
-   LÓGICA DEL DESTINO SAMAÍN 
+    LÓGICA DEL DESTINO SAMAÍN (Español / Inglés)
 ====================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const btnDestino = document.querySelector('.btn-destino');
-    const modalDestino = document.querySelector('.modal-destino');
-    const cerrarDestino = document.querySelector('.cerrar-destino');
+    const btnDestino = document.getElementById('btn-destino') || document.querySelector('.btn-destino');
+    const modalDestino = document.getElementById('modal-destino') || document.querySelector('.modal-destino');
+    const cerrarDestino = document.getElementById('cerrar-destino') || document.querySelector('.cerrar-destino');
     const opcionesComensales = document.querySelectorAll('.opcion-comensales');
 
-    const resultadoDestino = document.querySelector('.resultado-destino');
-    const flechaRuleta = document.querySelector('.flecha-ruleta');
+    const resultadoDestino = document.getElementById('resultado-destino') || document.querySelector('.resultado-destino');
+    const flechaRuleta = document.getElementById('flecha-ruleta') || document.querySelector('.flecha-ruleta');
     const ruletaContainer = document.querySelector('.ruleta-destino');
     const discoRuleta = document.getElementById('disco-ruleta');
     const gajos = document.querySelectorAll('.gajo-quesito');
 
-    const elemCategoria = document.getElementById('categoria-destino');
+    const elemCategoria = document.getElementById('categoria-destino') || document.querySelector('.categoria-destino');
     const elemNombre = document.getElementById('nombre-destino');
     const elemDesc = document.getElementById('descripcion-destino');
     const elemPrecio = document.getElementById('precio-destino');
 
-    const sonidoRuleta = document.getElementById('sonido-ruleta');
-    const sonidoPremio = document.getElementById('sonido-premio');
-
+    let audioCtx = null;
     let girando = false;
 
-    // 1. Abrir / Cerrar Modal de Elección de Comensales
+    // Función de sonido sintético tipo TIC
+    function sonarTick() {
+        try {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.04);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        } catch (e) {
+            // Ignorar políticas de audio
+        }
+    }
+
+    // Obtener la carta según el idioma activo
+    function obtenerCartaActiva() {
+        if (typeof carta !== 'undefined' && Array.isArray(carta) && carta.length > 0) return carta;
+        if (typeof cartaEn !== 'undefined' && Array.isArray(cartaEn) && cartaEn.length > 0) return cartaEn;
+        return [];
+    }
+
+    // 1. Abrir y Cerrar Modal de Comensales
     if (btnDestino && modalDestino) {
         btnDestino.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -45,22 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             if (girando) return;
 
-            modalDestino.classList.remove('visible');
+            if (modalDestino) modalDestino.classList.remove('visible');
 
+            const cartaActiva = obtenerCartaActiva();
             const totalGajos = gajos.length || 8;
             const indiceGajoGanador = Math.floor(Math.random() * totalGajos);
             const gajoSeleccionado = gajos[indiceGajoGanador];
-
             const nombreCategoriaHTML = gajoSeleccionado ? gajoSeleccionado.dataset.categoria : null;
 
             let productosFiltrados = [];
             let tituloCategoriaReal = '';
 
-            if (typeof carta !== 'undefined' && Array.isArray(carta)) {
-                const catEncontrada = carta.find(c => 
-                    c.titulo && nombreCategoriaHTML && 
-                    c.titulo.toLowerCase().trim() === nombreCategoriaHTML.toLowerCase().trim()
-                );
+            if (cartaActiva.length > 0) {
+                let catEncontrada = cartaActiva[indiceGajoGanador % cartaActiva.length];
+
+                if (nombreCategoriaHTML) {
+                    const porNombre = cartaActiva.find(c => 
+                        c.titulo && c.titulo.toLowerCase().trim() === nombreCategoriaHTML.toLowerCase().trim()
+                    );
+                    if (porNombre) catEncontrada = porNombre;
+                }
 
                 if (catEncontrada && catEncontrada.productos && catEncontrada.productos.length > 0) {
                     productosFiltrados = catEncontrada.productos;
@@ -68,12 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Fallback si no encuentra productos en esa sección exacta
-            if (productosFiltrados.length === 0 && typeof carta !== 'undefined') {
-                carta.forEach(c => {
-                    if (c.productos) productosFiltrados.push(...c.productos);
-                });
-                tituloCategoriaReal = nombreCategoriaHTML || 'Sugerencia Samaín';
+            // Fallback si no hay coincidencias directas
+            if (productosFiltrados.length === 0 && cartaActiva.length > 0) {
+                const catAzar = cartaActiva[Math.floor(Math.random() * cartaActiva.length)];
+                productosFiltrados = catAzar.productos || [];
+                tituloCategoriaReal = catAzar.titulo || 'Sugerencia';
             }
 
             if (productosFiltrados.length === 0) return;
@@ -81,28 +114,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const platoGanador = productosFiltrados[Math.floor(Math.random() * productosFiltrados.length)];
 
             girando = true;
-            
-            // MANTENER OCULTO EL RESULTADO HASTA QUE ACABE DE GIRAR
-            if (resultadoDestino) resultadoDestino.classList.remove('visible');
+            if (resultadoDestino) {
+                resultadoDestino.classList.remove('mostrar-resultado');
+                resultadoDestino.classList.add('visible');
+            }
 
             iniciarGiroRuleta(platoGanador, tituloCategoriaReal, indiceGajoGanador, totalGajos);
         });
     });
 
-    // 3. Giro de Ruleta y Centrado Angular
+    // 3. Animación y Giro de Ruleta
     function iniciarGiroRuleta(plato, categoriaNombre, gajoIndice, totalGajos) {
         if (ruletaContainer) ruletaContainer.classList.remove('finalizada');
         gajos.forEach(g => g.classList.remove('iluminado'));
-
-        if (sonidoRuleta) {
-            sonidoRuleta.currentTime = 0;
-            sonidoRuleta.play().catch(() => {});
-        }
 
         const gradosPorGajo = 360 / totalGajos;
         const centroGajo = (gajoIndice * gradosPorGajo) + (gradosPorGajo / 2);
         const anguloDestino = 360 - centroGajo;
         const anguloFinal = (360 * 5) + anguloDestino;
+
+        let tiempoSonido = 0;
+        const intervaloSonido = setInterval(() => {
+            sonarTick();
+            tiempoSonido += 120;
+            if (tiempoSonido >= 3400) {
+                clearInterval(intervaloSonido);
+            }
+        }, 120);
 
         let pasada = 0;
         const intervaloGajos = setInterval(() => {
@@ -115,22 +153,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const elementoGiro = discoRuleta || flechaRuleta;
         if (elementoGiro) {
-            elementoGiro.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
-            elementoGiro.style.transform = `rotate(${anguloFinal}deg)`;
+            elementoGiro.style.transition = 'none';
+            elementoGiro.style.transform = 'rotate(0deg)';
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    elementoGiro.style.transition = 'transform 3.5s cubic-bezier(0.12, 0.8, 0.2, 1)';
+                    elementoGiro.style.transform = `rotate(${anguloFinal}deg)`;
+                });
+            });
         }
 
-        // AL TERMINAR EL GIRO (3.5 segundos)
         setTimeout(() => {
             clearInterval(intervaloGajos);
-
-            if (sonidoRuleta) {
-                sonidoRuleta.pause();
-                sonidoRuleta.currentTime = 0;
-            }
-            if (sonidoPremio) {
-                sonidoPremio.currentTime = 0;
-                sonidoPremio.play().catch(() => {});
-            }
+            clearInterval(intervaloSonido);
 
             gajos.forEach(g => g.classList.remove('iluminado'));
             if (gajos[gajoIndice]) {
@@ -139,14 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (ruletaContainer) ruletaContainer.classList.add('finalizada');
 
-            // Cargar datos del plato
             if (elemCategoria) elemCategoria.textContent = categoriaNombre;
             if (elemNombre) elemNombre.textContent = plato.nombre;
             if (elemDesc) elemDesc.textContent = plato.descripcion || '';
             if (elemPrecio) elemPrecio.textContent = plato.precio;
 
-            // AHORA SÍ: MOSTRAR TARJETA DE RESULTADO
-            if (resultadoDestino) resultadoDestino.classList.add('visible');
+            if (resultadoDestino) resultadoDestino.classList.add('mostrar-resultado');
 
             dispararConfeti();
             girando = false;
@@ -158,32 +192,38 @@ document.addEventListener('DOMContentLoaded', () => {
         resultadoDestino.addEventListener('click', (e) => {
             e.stopPropagation();
             if (girando) return;
-            resultadoDestino.classList.remove('visible');
+            resultadoDestino.classList.remove('visible', 'mostrar-resultado');
 
             const elementoGiro = discoRuleta || flechaRuleta;
             if (elementoGiro) {
                 elementoGiro.style.transition = 'none';
                 elementoGiro.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    elementoGiro.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
-                }, 50);
             }
         });
     }
 
     // 5. Confeti
     function dispararConfeti() {
-        const contenedorConfeti = document.getElementById('confeti');
-        if (!contenedorConfeti) return;
+        let contenedorConfeti = document.getElementById('confeti');
+        if (!contenedorConfeti) {
+            contenedorConfeti = document.createElement('div');
+            contenedorConfeti.id = 'confeti';
+            document.body.appendChild(contenedorConfeti);
+        }
         contenedorConfeti.innerHTML = '';
-        const colores = ['#2d2b72', '#d8b35c', '#8b0000', '#ffffff'];
+        const colores = ['#2d2b72', '#d8b35c', '#8b0000', '#ffffff', '#27ae60'];
+
         for (let i = 0; i < 40; i++) {
             const particula = document.createElement('div');
             particula.classList.add('particula');
             particula.style.left = Math.random() * 100 + 'vw';
             particula.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-            particula.style.animationDelay = Math.random() * 300 + 'ms';
+            particula.style.animationDuration = (0.7 + Math.random() * 0.6) + 's';
             contenedorConfeti.appendChild(particula);
         }
+
+        setTimeout(() => {
+            if (contenedorConfeti) contenedorConfeti.innerHTML = '';
+        }, 1500);
     }
 });
