@@ -1,160 +1,136 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Selección de elementos
-    const btnDestino = document.getElementById("btn-destino");
-    const modalComensales = document.getElementById("modal-destino");
-    const btnCerrarComensales = document.getElementById("cerrar-destino");
-    const opcionesComensales = document.querySelectorAll(".opcion-comensales");
+/* ======================================================
+   LÓGICA DEL DESTINO SAMAÍN (RULETA)
+====================================================== */
 
-    const modalResultado = document.getElementById("resultado-destino");
-    const discoRuleta = document.getElementById("disco-ruleta");
-    const categoriaEl = document.getElementById("categoria-destino");
-    const nombreEl = document.getElementById("nombre-destino");
-    const descripcionEl = document.getElementById("descripcion-destino");
-    const precioEl = document.getElementById("precio-destino");
+// 1. Referencias a los elementos del HTML
+const btnDestino = document.querySelector('.btn-destino');
+const modalDestino = document.querySelector('.modal-destino');
+const cerrarDestino = document.querySelector('.cerrar-destino');
+const opcionesComensales = document.querySelectorAll('.opcion-comensales');
 
-    if (!btnDestino || !modalResultado || !discoRuleta) return;
+const resultadoDestino = document.querySelector('.resultado-destino');
+const flechaRuleta = document.querySelector('.flecha-ruleta');
+const ruletaContainer = document.querySelector('.ruleta-destino');
+const gajos = document.querySelectorAll('.gajo-quesito');
 
-    let girando = false;
-    let audioContext = null;
+const elemNombre = document.getElementById('nombre-destino');
+const elemDesc = document.getElementById('descripcion-destino');
+const elemPrecio = document.getElementById('precio-destino');
 
-    // Funciones auxiliares para mostrar/ocultar modales independientemente del CSS
-    function abrirModal(elem) {
-        if (!elem) return;
-        elem.classList.add("activo", "abierto", "open", "show");
-        elem.classList.remove("hidden");
-        elem.style.display = "flex";
-    }
+let girando = false;
 
-    function cerrarModal(elem) {
-        if (!elem) return;
-        elem.classList.remove("activo", "abierto", "open", "show");
-        elem.style.display = "none";
-    }
-
-    // Reproductor de sonido (Tick)
-    function reproducirTick() {
-        try {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioContext.state === "suspended") {
-                audioContext.resume();
-            }
-
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-
-            osc.type = "triangle";
-            osc.frequency.setValueAtTime(1200, audioContext.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.03);
-
-            gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
-
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-
-            osc.start();
-            osc.stop(audioContext.currentTime + 0.03);
-        } catch (e) {
-            // Silenciar si no hay permisos de audio
-        }
-    }
-
-    // Evento al hacer clic en EL DESTINO SAMAÍN
-    btnDestino.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (modalComensales) {
-            abrirModal(modalComensales);
-        } else {
-            ejecutarRuleta();
-        }
+// 2. Abrir y Cerrar Ventana de Selección de Comensales
+if (btnDestino && modalDestino) {
+    btnDestino.addEventListener('click', () => {
+        modalDestino.classList.add('visible');
     });
+}
 
-    // Cerrar el modal de comensales (botón X)
-    if (btnCerrarComensales && modalComensales) {
-        btnCerrarComensales.addEventListener("click", () => {
-            cerrarModal(modalComensales);
-        });
-    }
-
-    // Al seleccionar comensales -> Iniciar ruleta
-    opcionesComensales.forEach(boton => {
-        boton.addEventListener("click", () => {
-            if (modalComensales) {
-                cerrarModal(modalComensales);
-            }
-            ejecutarRuleta();
-        });
+if (cerrarDestino && modalDestino) {
+    cerrarDestino.addEventListener('click', () => {
+        modalDestino.classList.remove('visible');
     });
+}
 
-    // Lógica del giro
-    function ejecutarRuleta() {
-        if (typeof carta === "undefined" || !Array.isArray(carta) || carta.length === 0) {
-            return;
-        }
+// 3. Selección de Comensales y Elección del Producto
+opcionesComensales.forEach(boton => {
+    boton.addEventListener('click', () => {
+        if (girando) return;
 
+        // Ocultar modal de comensales usando tu CSS (.visible)
+        modalDestino.classList.remove('visible');
+
+        // Extraer los productos de tu carta de menu.js
         const todosLosProductos = [];
-        carta.forEach(cat => {
-            if (cat.productos && cat.productos.length > 0) {
-                cat.productos.forEach(prod => {
-                    todosLosProductos.push({
-                        ...prod,
-                        categoriaTitulo: cat.titulo
-                    });
-                });
-            }
-        });
+        if (typeof carta !== 'undefined' && Array.isArray(carta)) {
+            carta.forEach(cat => {
+                if (cat.productos) {
+                    cat.productos.forEach(prod => todosLosProductos.push(prod));
+                }
+            });
+        }
 
         if (todosLosProductos.length === 0) return;
 
-        const productoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
+        // Seleccionar plato aleatorio
+        const platoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
 
-        categoriaEl.textContent = "";
-        nombreEl.textContent = "";
-        descripcionEl.textContent = "";
-        precioEl.textContent = "";
-
-        abrirModal(modalResultado);
+        // Abrir ruleta y lanzar tiro
         girando = true;
-
-        discoRuleta.style.transition = "none";
-        discoRuleta.style.transform = "rotate(0deg)";
-        void discoRuleta.offsetWidth;
-
-        const vueltas = 5 + Math.floor(Math.random() * 3);
-        const gradosFinales = vueltas * 360 + Math.floor(Math.random() * 360);
-        const duracionMs = 4000;
-
-        discoRuleta.style.transition = `transform ${duracionMs}ms cubic-bezier(0.15, 0.9, 0.2, 1)`;
-        discoRuleta.style.transform = `rotate(${gradosFinales}deg)`;
-
-        let ticksTotales = 28;
-        let tickActual = 0;
-
-        function emitirTicks() {
-            if (tickActual < ticksTotales && girando) {
-                reproducirTick();
-                tickActual++;
-                const proximoDelay = 80 + Math.pow(tickActual / ticksTotales, 2.5) * 350;
-                setTimeout(emitirTicks, proximoDelay);
-            }
-        }
-        emitirTicks();
-
-        setTimeout(() => {
-            girando = false;
-            categoriaEl.textContent = productoGanador.categoriaTitulo;
-            nombreEl.textContent = productoGanador.nombre;
-            descripcionEl.textContent = productoGanador.descripcion || "";
-            precioEl.textContent = productoGanador.precio;
-        }, duracionMs);
-    }
-
-    // Cerrar resultado al hacer clic
-    modalResultado.addEventListener("click", () => {
-        if (!girando) {
-            cerrarModal(modalResultado);
-        }
+        resultadoDestino.classList.add('visible');
+        iniciarGiroRuleta(platoGanador);
     });
 });
+
+// 4. Giro de la Ruleta y Animación de Luces
+function iniciarGiroRuleta(plato) {
+    ruletaContainer.classList.remove('finalizada');
+    gajos.forEach(gajo => gajo.classList.remove('iluminado'));
+
+    // Calcular vueltas + ángulo aleatorio
+    const vueltas = 360 * (Math.floor(Math.random() * 4) + 5);
+    const anguloFinal = vueltas + Math.floor(Math.random() * 360);
+
+    // Parpadeo de gajos mientras gira
+    let gajoActual = 0;
+    const intervaloGajos = setInterval(() => {
+        gajos.forEach(g => g.classList.remove('iluminado'));
+        gajos[gajoActual].classList.add('iluminado');
+        gajoActual = (gajoActual + 1) % gajos.length;
+    }, 100);
+
+    // Girar la flecha (3.5 segundos exactos según tu CSS)
+    flechaRuleta.style.transform = `rotate(${anguloFinal}deg)`;
+
+    // Cuando termina de girar
+    setTimeout(() => {
+        clearInterval(intervaloGajos);
+        
+        // Animación de rebote final de tu CSS
+        ruletaContainer.classList.add('finalizada');
+
+        // Poner datos del plato ganador
+        if (elemNombre) elemNombre.textContent = plato.nombre;
+        if (elemDesc) elemDesc.textContent = plato.descripcion;
+        if (elemPrecio) elemPrecio.textContent = plato.precio;
+
+        // Confeti
+        dispararConfeti();
+
+        girando = false;
+    }, 3500);
+}
+
+// 5. Cerrar Resultado al Hacer Clic Fuera
+if (resultadoDestino) {
+    resultadoDestino.addEventListener('click', () => {
+        if (girando) return;
+        
+        resultadoDestino.classList.remove('visible');
+        
+        // Resetear flecha
+        flechaRuleta.style.transition = 'none';
+        flechaRuleta.style.transform = 'rotate(0deg)';
+        setTimeout(() => {
+            flechaRuleta.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
+        }, 50);
+    });
+}
+
+// 6. Confeti con tus clases CSS
+function dispararConfeti() {
+    const contenedorConfeti = document.getElementById('confeti');
+    if (!contenedorConfeti) return;
+
+    contenedorConfeti.innerHTML = '';
+    const colores = ['#2d2b72', '#d8b35c', '#8b0000', '#ffffff'];
+
+    for (let i = 0; i < 40; i++) {
+        const particula = document.createElement('div');
+        particula.classList.add('particula');
+        particula.style.left = Math.random() * 100 + 'vw';
+        particula.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        particula.style.animationDelay = Math.random() * 300 + 'ms';
+        contenedorConfeti.appendChild(particula);
+    }
+}
