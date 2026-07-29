@@ -1,30 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Elementos del DOM
+    // 1. Selección de elementos del DOM
     const btnDestino = document.getElementById("btn-destino");
-    const modalSeleccion = document.getElementById("modal-destino");
-    const btnCerrarSeleccion = document.getElementById("cerrar-destino");
+    const modalComensales = document.getElementById("modal-destino");
+    const btnCerrarComensales = document.getElementById("cerrar-destino");
     const opcionesComensales = document.querySelectorAll(".opcion-comensales");
 
-    const modalRuleta = document.getElementById("resultado-destino");
+    const modalResultado = document.getElementById("resultado-destino");
     const discoRuleta = document.getElementById("disco-ruleta");
     const categoriaEl = document.getElementById("categoria-destino");
     const nombreEl = document.getElementById("nombre-destino");
     const descripcionEl = document.getElementById("descripcion-destino");
     const precioEl = document.getElementById("precio-destino");
 
-    if (!btnDestino || !modalRuleta || !discoRuleta) return;
-
-    const esIngles = document.documentElement.lang === "en";
-    const iconosRuleta = ["🧀", "🥓", "🍷", "🍺", "🥖", "🥩", "🥐", "☕"];
-    const coloresGajos = [
-        "#c0392b", "#e67e22", "#f1c40f", "#27ae60", 
-        "#2980b9", "#8e44ad", "#d35400", "#16a085"
-    ];
+    if (!btnDestino || !modalResultado || !discoRuleta) return;
 
     let girando = false;
     let audioContext = null;
 
-    // 2. Audio sintetizado para los clicks del giro
+    // 2. Reproductor de sonido sintético (Tick al girar)
     function reproducirTick() {
         try {
             if (!audioContext) {
@@ -50,91 +43,44 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioContext.currentTime + 0.03);
         } catch (e) {
-            // Silenciar si hay restricciones de audio
+            // Silenciar si el navegador bloquea audio sin interacción previa
         }
     }
 
-    // 3. Renderizar el disco visualmente (Colores e iconos)
-    function construirRuletaHTML() {
-        discoRuleta.innerHTML = "";
-
-        const totalGajos = 8;
-        const anguloPaso = 360 / totalGajos;
-
-        let degradadoCss = "conic-gradient(";
-        coloresGajos.forEach((color, i) => {
-            const inicio = i * anguloPaso;
-            const fin = (i + 1) * anguloPaso;
-            degradadoCss += `${color} ${inicio}deg ${fin}deg${i === totalGajos - 1 ? "" : ", "}`;
-        });
-        degradadoCss += ")";
-
-        discoRuleta.style.background = degradadoCss;
-        discoRuleta.style.borderRadius = "50%";
-        discoRuleta.style.position = "relative";
-        discoRuleta.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.3)";
-
-        for (let i = 0; i < totalGajos; i++) {
-            const contenedorIcono = document.createElement("div");
-            const anguloCentro = (i * anguloPaso) + (anguloPaso / 2);
-
-            contenedorIcono.style.position = "absolute";
-            contenedorIcono.style.top = "50%";
-            contenedorIcono.style.left = "50%";
-            contenedorIcono.style.width = "30px";
-            contenedorIcono.style.height = "30px";
-            contenedorIcono.style.marginLeft = "-15px";
-            contenedorIcono.style.marginTop = "-15px";
-            contenedorIcono.style.fontSize = "1.3rem";
-            contenedorIcono.style.display = "flex";
-            contenedorIcono.style.alignItems = "center";
-            contenedorIcono.style.justifyContent = "center";
-            contenedorIcono.style.pointerEvents = "none";
-            
-            contenedorIcono.style.transform = `rotate(${anguloCentro}deg) translateY(-85px) rotate(-${anguloCentro}deg)`;
-            contenedorIcono.textContent = iconosRuleta[i % iconosRuleta.length];
-
-            discoRuleta.appendChild(contenedorIcono);
-        }
-    }
-
-    // 4. PASO 1: Abrir modal de selección de comensales
+    // 3. Abrir selector de comensales al pulsar en SAMAÍN FATE
     btnDestino.addEventListener("click", (e) => {
         e.preventDefault();
-        if (modalSeleccion) {
-            modalSeleccion.style.display = "flex";
-            modalSeleccion.classList.add("activo");
+        if (modalComensales) {
+            modalComensales.classList.add("activo");
         } else {
-            iniciarRuleta(); // Si no existe el modal de comensales, salta directo
+            ejecutarRuleta();
         }
     });
 
-    // Cerrar modal de comensales
-    if (btnCerrarSeleccion && modalSeleccion) {
-        btnCerrarSeleccion.addEventListener("click", () => {
-            modalSeleccion.style.display = "none";
-            modalSeleccion.classList.remove("activo");
+    // Cerrar selector de comensales (botón X)
+    if (btnCerrarComensales && modalComensales) {
+        btnCerrarComensales.addEventListener("click", () => {
+            modalComensales.classList.remove("activo");
         });
     }
 
-    // PASO 2: Elegir comensales e iniciar la ruleta
+    // Al seleccionar número de comensales -> Iniciar ruleta
     opcionesComensales.forEach(boton => {
         boton.addEventListener("click", () => {
-            if (modalSeleccion) {
-                modalSeleccion.style.display = "none";
-                modalSeleccion.classList.remove("activo");
+            if (modalComensales) {
+                modalComensales.classList.remove("activo");
             }
-            iniciarRuleta();
+            ejecutarRuleta();
         });
     });
 
-    // 5. PASO 3: Ejecución de la Ruleta
-    function iniciarRuleta() {
+    // 4. Lógica principal del giro
+    function ejecutarRuleta() {
         if (typeof carta === "undefined" || !Array.isArray(carta) || carta.length === 0) {
-            alert(esIngles ? "Menu items are loading..." : "Cargando carta...");
             return;
         }
 
+        // Obtener lista completa de platos
         const todosLosProductos = [];
         carta.forEach(cat => {
             if (cat.productos && cat.productos.length > 0) {
@@ -149,31 +95,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (todosLosProductos.length === 0) return;
 
+        // Selección aleatoria del producto
         const productoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
 
-        construirRuletaHTML();
-
+        // Limpiar textos del modal de resultado
         categoriaEl.textContent = "";
         nombreEl.textContent = "";
         descripcionEl.textContent = "";
         precioEl.textContent = "";
 
-        // Mostrar la ventana de la ruleta (Asegurando display y clase)
-        modalRuleta.style.display = "flex";
-        modalRuleta.classList.add("activo", "open", "show");
+        // Mostrar el modal de la ruleta
+        modalResultado.classList.add("activo");
         girando = true;
 
+        // Resetear la posición del disco sin transición
         discoRuleta.style.transition = "none";
         discoRuleta.style.transform = "rotate(0deg)";
-        void discoRuleta.offsetWidth;
+        void discoRuleta.offsetWidth; // Forzar renderizado
 
+        // Calcular ángulo de parada
         const vueltas = 5 + Math.floor(Math.random() * 3);
         const gradosFinales = vueltas * 360 + Math.floor(Math.random() * 360);
         const duracionMs = 4000;
 
+        // Animación de giro
         discoRuleta.style.transition = `transform ${duracionMs}ms cubic-bezier(0.15, 0.9, 0.2, 1)`;
         discoRuleta.style.transform = `rotate(${gradosFinales}deg)`;
 
+        // Sonido de los ticks ralentizándose
         let ticksTotales = 28;
         let tickActual = 0;
 
@@ -187,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         emitirTicks();
 
+        // Al terminar el giro, escribir el plato elegido
         setTimeout(() => {
             girando = false;
             categoriaEl.textContent = productoGanador.categoriaTitulo;
@@ -196,11 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }, duracionMs);
     }
 
-    // 6. Cerrar modal al hacer clic tras terminar
-    modalRuleta.addEventListener("click", () => {
+    // 5. Cerrar el resultado al hacer clic
+    modalResultado.addEventListener("click", () => {
         if (!girando) {
-            modalRuleta.style.display = "none";
-            modalRuleta.classList.remove("activo", "open", "show");
+            modalResultado.classList.remove("activo");
         }
     });
 });
