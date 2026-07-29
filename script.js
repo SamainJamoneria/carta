@@ -351,3 +351,90 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
+
+// =========================================
+// EFECTOS DE TEMPORADA EN SCROLL
+// =========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    const detalleEl = document.getElementById("detalle-temporada");
+
+    // Configuración de mensajes e iconos por temporada
+    const configuracionTemporadas = {
+        "modo-navidad": {
+            texto: "🎄 Felices Fiestas de parte del equipo de Samaín",
+            particulas: ["❄", "❅", "✨"]
+        },
+        "modo-sanjuan": {
+            texto: "🔥 ¡Llega la mágica Noche de San Juan!",
+            particulas: ["🔥", "✨", "💥", "🪔"]
+        },
+        "modo-carnaval": {
+            texto: "🎭 ¡Feliz Entroido / Carnaval!",
+            particulas: ["🎉", "🎊", "✨", "🎈"]
+        }
+    };
+
+    // Identificar modo activo
+    let modoActivo = null;
+    for (const clase of body.classList) {
+        if (configuracionTemporadas[clase]) {
+            modoActivo = clase;
+            break;
+        }
+    }
+
+    if (!modoActivo) return; // Si no hay modo activo, no hace nada
+
+    // 1. Insertar el mensaje del detalle en la cabecera
+    const config = configuracionTemporadas[modoActivo];
+    if (detalleEl && config) {
+        detalleEl.textContent = config.texto;
+    }
+
+    // 2. Generador de partículas al hacer scroll
+    let ultimoScroll = window.scrollY;
+    let contadorScroll = 0;
+
+    window.addEventListener("scroll", () => {
+        const scrollActual = window.scrollY;
+
+        // Solo se activa si el usuario hace scroll HACIA ABAJO
+        if (scrollActual > ultimoScroll) {
+            contadorScroll++;
+
+            // Frecuencia: genera una partícula cada 6 ticks de scroll para no saturar
+            if (contadorScroll % 6 === 0) {
+                crearParticulaScroll(config.particulas);
+            }
+        }
+        ultimoScroll = scrollActual;
+    }, { passive: true });
+
+    function crearParticulaScroll(listaSimbolos) {
+        const particula = document.createElement("div");
+        particula.className = "particula-scroll";
+
+        // Elegir un símbolo al azar de la lista
+        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
+        particula.textContent = simbolo;
+
+        // Posición horizontal aleatoria en la pantalla
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * 80 + 20; // Aparecen cerca de la parte superior
+
+        // Tamaño aleatorio
+        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
+        const duracion = (Math.random() * 800 + 1000).toFixed(0); // 1.0s a 1.8s
+
+        particula.style.left = `${posX}px`;
+        particula.style.top = `${posY}px`;
+        particula.style.fontSize = `${tamano}rem`;
+        particula.style.animationDuration = `${duracion}ms`;
+
+        document.body.appendChild(particula);
+
+        // Limpiar la partícula del HTML cuando acaba la animación
+        setTimeout(() => particula.remove(), parseInt(duracion));
+    }
+});
