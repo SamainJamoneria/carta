@@ -1,5 +1,5 @@
 /* ======================================================
-   LÓGICA DEL DESTINO SAMAÍN (RULETA Y CATEGORÍAS REALES)
+   LÓGICA DEL DESTINO SAMAÍN (RULETA 100% CORRESPONDIDA)
 ====================================================== */
 
 const btnDestino = document.querySelector('.btn-destino');
@@ -10,8 +10,10 @@ const opcionesComensales = document.querySelectorAll('.opcion-comensales');
 const resultadoDestino = document.querySelector('.resultado-destino');
 const flechaRuleta = document.querySelector('.flecha-ruleta');
 const ruletaContainer = document.querySelector('.ruleta-destino');
+const discoRuleta = document.getElementById('disco-ruleta');
 const gajos = document.querySelectorAll('.gajo-quesito');
 
+const elemCategoria = document.getElementById('categoria-destino');
 const elemNombre = document.getElementById('nombre-destino');
 const elemDesc = document.getElementById('descripcion-destino');
 const elemPrecio = document.getElementById('precio-destino');
@@ -21,7 +23,7 @@ const sonidoPremio = document.getElementById('sonido-premio');
 
 let girando = false;
 
-// 1. Abrir / Cerrar Modal
+// 1. Abrir y Cerrar Modal de Selección
 if (btnDestino && modalDestino) {
     btnDestino.addEventListener('click', () => modalDestino.classList.add('visible'));
 }
@@ -29,49 +31,57 @@ if (cerrarDestino && modalDestino) {
     cerrarDestino.addEventListener('click', () => modalDestino.classList.remove('visible'));
 }
 
-// 2. Selección de Comensales
+// 2. Selección de Comensales y Búsqueda por Categoría Real
 opcionesComensales.forEach(boton => {
     boton.addEventListener('click', () => {
         if (girando) return;
 
         modalDestino.classList.remove('visible');
 
-        // Elegir un gajo/icono al azar de los 8 disponibles
         const totalGajos = gajos.length || 8;
+        // Seleccionar índice del gajo (0 a 7)
         const indiceGajoGanador = Math.floor(Math.random() * totalGajos);
         const gajoSeleccionado = gajos[indiceGajoGanador];
 
-        // Leer la categoría asociada a ese icono en el HTML (data-categoria)
-        const nombreCategoria = gajoSeleccionado ? gajoSeleccionado.dataset.categoria : null;
+        const nombreCategoriaHTML = gajoSeleccionado ? gajoSeleccionado.dataset.categoria : null;
 
-        // Buscar los productos de ESA categoría en la variable 'carta'
         let productosFiltrados = [];
+        let tituloCategoriaReal = '';
+
         if (typeof carta !== 'undefined' && Array.isArray(carta)) {
+            // Buscar la categoría coincidente en el array 'carta'
             const catEncontrada = carta.find(c => 
-                c.titulo && nombreCategoria && 
-                c.titulo.toLowerCase().trim() === nombreCategoria.toLowerCase().trim()
+                c.titulo && nombreCategoriaHTML && 
+                c.titulo.toLowerCase().trim() === nombreCategoriaHTML.toLowerCase().trim()
             );
-            if (catEncontrada && catEncontrada.productos) {
+
+            if (catEncontrada && catEncontrada.productos && catEncontrada.productos.length > 0) {
                 productosFiltrados = catEncontrada.productos;
+                tituloCategoriaReal = catEncontrada.titulo;
             }
         }
 
-        // Si la categoría no existe o está vacía, coger cualquier producto como respaldo
-        if (productosFiltrados.length === 0) {
-            carta.forEach(c => c.productos && productosFiltrados.push(...c.productos));
+        // Si por algún motivo no hay productos en esa categoría, usar respaldo de la carta
+        if (productosFiltrados.length === 0 && typeof carta !== 'undefined') {
+            carta.forEach(c => {
+                if (c.productos) productosFiltrados.push(...c.productos);
+            });
+            tituloCategoriaReal = nombreCategoriaHTML || 'Sugerencia Samaín';
         }
 
-        // Elegir plato de esa categoría concreta
+        if (productosFiltrados.length === 0) return;
+
+        // Seleccionar un plato al azar de la categoría correspondiente al icono
         const platoGanador = productosFiltrados[Math.floor(Math.random() * productosFiltrados.length)];
 
         girando = true;
         resultadoDestino.classList.add('visible');
-        iniciarGiroRuleta(platoGanador, indiceGajoGanador, totalGajos);
+        iniciarGiroRuleta(platoGanador, tituloCategoriaReal, indiceGajoGanador, totalGajos);
     });
 });
 
-// 3. Giro y Animación de Ruleta
-function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
+// 3. Giro de Ruleta y Centrado Angular Perfecto
+function iniciarGiroRuleta(plato, categoriaNombre, gajoIndice, totalGajos) {
     ruletaContainer.classList.remove('finalizada');
     gajos.forEach(g => g.classList.remove('iluminado'));
 
@@ -80,13 +90,13 @@ function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
         sonidoRuleta.play().catch(() => {});
     }
 
-    // Centrado angular exacto del gajo
+    // Cálculo angular: Cada gajo mide 45° (360/8). El centro está a (i * 45) + 22.5
     const gradosPorGajo = 360 / totalGajos;
     const centroGajo = (gajoIndice * gradosPorGajo) + (gradosPorGajo / 2);
     const anguloDestino = 360 - centroGajo;
-    const anguloFinal = (360 * 5) + anguloDestino;
+    const anguloFinal = (360 * 5) + anguloDestino; // 5 vueltas completas
 
-    // Parpadeo de luces
+    // Efecto de parpadeo de luces en los gajos mientras gira
     let pasada = 0;
     const intervaloGajos = setInterval(() => {
         gajos.forEach(g => g.classList.remove('iluminado'));
@@ -96,7 +106,11 @@ function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
         pasada++;
     }, 100);
 
-    flechaRuleta.style.transform = `rotate(${anguloFinal}deg)`;
+    // Aplicar rotación
+    const elementoGiro = discoRuleta || flechaRuleta;
+    if (elementoGiro) {
+        elementoGiro.style.transform = `rotate(${anguloFinal}deg)`;
+    }
 
     setTimeout(() => {
         clearInterval(intervaloGajos);
@@ -110,7 +124,7 @@ function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
             sonidoPremio.play().catch(() => {});
         }
 
-        // Iluminar el gajo/icono del icono ganador
+        // Iluminar fijamente el gajo del producto ganador
         gajos.forEach(g => g.classList.remove('iluminado'));
         if (gajos[gajoIndice]) {
             gajos[gajoIndice].classList.add('iluminado');
@@ -119,6 +133,7 @@ function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
         ruletaContainer.classList.add('finalizada');
 
         // Mostrar datos en la tarjeta
+        if (elemCategoria) elemCategoria.textContent = categoriaNombre;
         if (elemNombre) elemNombre.textContent = plato.nombre;
         if (elemDesc) elemDesc.textContent = plato.descripcion || '';
         if (elemPrecio) elemPrecio.textContent = plato.precio;
@@ -128,16 +143,20 @@ function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
     }, 3500);
 }
 
-// 4. Cerrar Resultado
+// 4. Cerrar Resultado al Hacer Clic
 if (resultadoDestino) {
     resultadoDestino.addEventListener('click', () => {
         if (girando) return;
         resultadoDestino.classList.remove('visible');
-        flechaRuleta.style.transition = 'none';
-        flechaRuleta.style.transform = 'rotate(0deg)';
-        setTimeout(() => {
-            flechaRuleta.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
-        }, 50);
+
+        const elementoGiro = discoRuleta || flechaRuleta;
+        if (elementoGiro) {
+            elementoGiro.style.transition = 'none';
+            elementoGiro.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                elementoGiro.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
+            }, 50);
+        }
     });
 }
 
