@@ -1,8 +1,8 @@
 /* ======================================================
-   LÓGICA DEL DESTINO SAMAÍN (RULETA)
+   LÓGICA DEL DESTINO SAMAÍN (RULETA) - FIX GEOMETRÍA
 ====================================================== */
 
-// 1. Referencias a los elementos del HTML
+// 1. Referencias al DOM
 const btnDestino = document.querySelector('.btn-destino');
 const modalDestino = document.querySelector('.modal-destino');
 const cerrarDestino = document.querySelector('.cerrar-destino');
@@ -17,9 +17,13 @@ const elemNombre = document.getElementById('nombre-destino');
 const elemDesc = document.getElementById('descripcion-destino');
 const elemPrecio = document.getElementById('precio-destino');
 
+// Referencias de audio
+const sonidoRuleta = document.getElementById('sonido-ruleta');
+const sonidoPremio = document.getElementById('sonido-premio');
+
 let girando = false;
 
-// 2. Abrir y Cerrar Ventana de Selección de Comensales
+// 2. Abrir y Cerrar Ventana de Selección
 if (btnDestino && modalDestino) {
     btnDestino.addEventListener('click', () => {
         modalDestino.classList.add('visible');
@@ -37,78 +41,110 @@ opcionesComensales.forEach(boton => {
     boton.addEventListener('click', () => {
         if (girando) return;
 
-        // Ocultar modal de comensales usando tu CSS (.visible)
         modalDestino.classList.remove('visible');
 
-        // Extraer los productos de tu carta de menu.js
-        const todosLosProductos = [];
-        if (typeof carta !== 'undefined' && Array.isArray(carta)) {
-            carta.forEach(cat => {
-                if (cat.productos) {
-                    cat.productos.forEach(prod => todosLosProductos.push(prod));
-                }
-            });
+        // Mapear categorías de tu variable 'carta'
+        if (typeof carta === 'undefined' || !Array.isArray(carta) || carta.length === 0) return;
+
+        // Seleccionar una categoría al azar (0 a 7 según los 8 gajos de la ruleta)
+        const totalGajos = gajos.length || 8;
+        const gajoGanadorIndice = Math.floor(Math.random() * totalGajos);
+
+        // Elegir una categoría/producto acorde
+        const categoria = carta[gajoGanadorIndice % carta.length];
+        let platoGanador = null;
+
+        if (categoria && categoria.productos && categoria.productos.length > 0) {
+            platoGanador = categoria.productos[Math.floor(Math.random() * categoria.productos.length)];
+        } else {
+            // Si la categoría no tiene platos, coger de cualquier otra
+            const todos = [];
+            carta.forEach(c => c.productos && todos.push(...c.productos));
+            platoGanador = todos[Math.floor(Math.random() * todos.length)];
         }
 
-        if (todosLosProductos.length === 0) return;
+        if (!platoGanador) return;
 
-        // Seleccionar plato aleatorio
-        const platoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
-
-        // Abrir ruleta y lanzar tiro
         girando = true;
         resultadoDestino.classList.add('visible');
-        iniciarGiroRuleta(platoGanador);
+        iniciarGiroRuleta(platoGanador, gajoGanadorIndice, totalGajos);
     });
 });
 
-// 4. Giro de la Ruleta y Animación de Luces
-function iniciarGiroRuleta(plato) {
+// 4. Giro de la Ruleta y Alineación Angular Exacta
+function iniciarGiroRuleta(plato, gajoIndice, totalGajos) {
     ruletaContainer.classList.remove('finalizada');
     gajos.forEach(gajo => gajo.classList.remove('iluminado'));
 
-    // Calcular vueltas + ángulo aleatorio
-    const vueltas = 360 * (Math.floor(Math.random() * 4) + 5);
-    const anguloFinal = vueltas + Math.floor(Math.random() * 360);
+    if (sonidoRuleta) {
+        sonidoRuleta.currentTime = 0;
+        sonidoRuleta.play().catch(() => {});
+    }
 
-    // Parpadeo de gajos mientras gira
-    let gajoActual = 0;
+    // Cada gajo mide 360 / totalGajos (45 grados para 8 gajos)
+    const gradosPorGajo = 360 / totalGajos;
+    
+    // El centro del gajo 'i' está en (i * gradosPorGajo) + (gradosPorGajo / 2)
+    // Para que la flecha apunte arriba (0 deg), restamos para alinear el centro exacto:
+    const centroGajo = (gajoIndice * gradosPorGajo) + (gradosPorGajo / 2);
+    const anguloDestino = 360 - centroGajo;
+
+    // 5 vueltas completas de giro + ángulo exacto del centro del gajo
+    const vueltasCompletas = 360 * 5;
+    const anguloFinal = vueltasCompletas + anguloDestino;
+
+    // Animación de parpadeo secuencial
+    let pasada = 0;
     const intervaloGajos = setInterval(() => {
         gajos.forEach(g => g.classList.remove('iluminado'));
-        gajos[gajoActual].classList.add('iluminado');
-        gajoActual = (gajoActual + 1) % gajos.length;
+        if (gajos.length > 0) {
+            gajos[pasada % gajos.length].classList.add('iluminado');
+        }
+        pasada++;
     }, 100);
 
-    // Girar la flecha (3.5 segundos exactos según tu CSS)
+    // Aplicar la rotación a la flecha/ruleta
     flechaRuleta.style.transform = `rotate(${anguloFinal}deg)`;
 
-    // Cuando termina de girar
+    // Al finalizar la animación (3.5s)
     setTimeout(() => {
         clearInterval(intervaloGajos);
-        
-        // Animación de rebote final de tu CSS
+
+        if (sonidoRuleta) {
+            sonidoRuleta.pause();
+            sonidoRuleta.currentTime = 0;
+        }
+        if (sonidoPremio) {
+            sonidoPremio.currentTime = 0;
+            sonidoPremio.play().catch(() => {});
+        }
+
+        // Iluminar ÚNICAMENTE el gajo ganador centrado
+        gajos.forEach(g => g.classList.remove('iluminado'));
+        if (gajos[gajoIndice]) {
+            gajos[gajoIndice].classList.add('iluminado');
+        }
+
         ruletaContainer.classList.add('finalizada');
 
-        // Poner datos del plato ganador
+        // Cargar los datos del plato
         if (elemNombre) elemNombre.textContent = plato.nombre;
-        if (elemDesc) elemDesc.textContent = plato.descripcion;
+        if (elemDesc) elemDesc.textContent = plato.descripcion || plato.categoria || '';
         if (elemPrecio) elemPrecio.textContent = plato.precio;
 
-        // Confeti
         dispararConfeti();
 
         girando = false;
     }, 3500);
 }
 
-// 5. Cerrar Resultado al Hacer Clic Fuera
+// 5. Cerrar Resultado
 if (resultadoDestino) {
     resultadoDestino.addEventListener('click', () => {
         if (girando) return;
         
         resultadoDestino.classList.remove('visible');
         
-        // Resetear flecha
         flechaRuleta.style.transition = 'none';
         flechaRuleta.style.transform = 'rotate(0deg)';
         setTimeout(() => {
@@ -117,7 +153,7 @@ if (resultadoDestino) {
     });
 }
 
-// 6. Confeti con tus clases CSS
+// 6. Confeti
 function dispararConfeti() {
     const contenedorConfeti = document.getElementById('confeti');
     if (!contenedorConfeti) return;
