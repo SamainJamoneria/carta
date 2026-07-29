@@ -14,13 +14,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<!-- CAMBIA LA CLASE DEL BODY SEGÚN LA ÉPOCA: modo-sanjuan, modo-navidad, modo-carnaval, modo-samain -->
-<body class="modo-navidad">
+<!-- El script se encarga de inyectar el modo (modo-sanjuan, modo-samain, etc.) -->
+<body>
 
 <header class="header-principal">
   <div class="top-bar">
     <div class="top-nav-left">
-      <!-- Botón Hamburguesa -->
       <button id="btn-menu-hamburguesa" class="btn-hamburguesa" aria-label="Abrir menú">
         <span></span>
         <span></span>
@@ -41,7 +40,7 @@
   <h1>Nuestra carta</h1>
   <p>- Especialistas en Ibéricos -</p>
 
-  <!-- DETALLE TEMÁTICO (Aparece automáticamente mediante script.js) -->
+  <!-- Inyectado dinámicamente por script.js -->
   <div class="detalle-temporada" id="detalle-temporada"></div>
 </header>
 
@@ -69,6 +68,7 @@
 
 <div id="resultado-busqueda" class="resultado-busqueda"></div>
 
+<!-- Contenedor principal del menú cargado por JS -->
 <main id="carta"></main>
 
 <section class="alergenos">
@@ -88,7 +88,7 @@
   </div>
 </div> 
 
-<!-- Modal Destino -->
+<!-- Modal Destino (Selección) -->
 <div id="modal-destino" class="modal-destino">
   <div class="ventana-destino">
     <button class="cerrar-destino" id="cerrar-destino">✕</button>
@@ -99,31 +99,15 @@
   </div>
 </div> 
 
+<!-- Ruleta del Destino (Estructura simplificada para generación por JS) -->
 <div id="resultado-destino" class="resultado-destino">
   <div class="tarjeta-destino">
     <div class="ruleta-destino">
       <div class="flecha-ruleta" id="flecha-ruleta">
         <span class="puntero">▼</span>
       </div>
-      <div class="disco-ruleta" id="disco-ruleta">
-        <div class="gajo-quesito" data-index="0"></div>
-        <div class="gajo-quesito" data-index="1"></div>
-        <div class="gajo-quesito" data-index="2"></div>
-        <div class="gajo-quesito" data-index="3"></div>
-        <div class="gajo-quesito" data-index="4"></div>
-        <div class="gajo-quesito" data-index="5"></div>
-        <div class="gajo-quesito" data-index="6"></div>
-        <div class="gajo-quesito" data-index="7"></div>
-
-        <div class="icono-ruleta">🥖</div>
-        <div class="icono-ruleta">🍽️</div>
-        <div class="icono-ruleta">🍖</div>
-        <div class="icono-ruleta">🧀</div>
-        <div class="icono-ruleta">🌯</div>
-        <div class="icono-ruleta">🍫</div>
-        <div class="icono-ruleta">🥪</div>
-        <div class="icono-ruleta">🍰</div>
-      </div>
+      <!-- Los gajos e iconos se renderizan desde destino.js si está automatizado -->
+      <div class="disco-ruleta" id="disco-ruleta"></div>
     </div>
     
     <p class="titulo-destino">✨ El destino ha decidido...</p>
@@ -182,7 +166,6 @@
       </div>
     </div>
 
-    <!-- Mapa de Google Maps -->
     <div class="mapa-container">
       <iframe 
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2900.8655208226065!2d-8.4059281!3d43.3685114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7d00116529a5%3A0x355a57c6fce86bce!2sJamoner%C3%ADa%20Sama%C3%ADn!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
@@ -203,27 +186,13 @@
         <h2>NUESTROS PRODUCTOS</h2>
         
         <div class="galeria-grid">
-            <div class="galeria-item">
-                <img src="jamon.jpeg" alt="Jamón Ibérico Jamonería Samaín" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="cecina.jpeg" alt="Cecina de vaca" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="anchoas.jpeg" alt="Anchoas de la casa" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="tabla.jpeg" alt="Tabla surtida ibérica" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="tablas.jpeg" alt="Tablas de embutidos y quesos" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="samain.jpeg" alt="Plato especial Jamonería Samaín" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="mesa.jpeg" alt="Mesa con variedad de platos" loading="lazy">
-            </div>
+            <div class="galeria-item"><img src="jamon.jpeg" alt="Jamón Ibérico Jamonería Samaín" loading="lazy"></div>
+            <div class="galeria-item"><img src="cecina.jpeg" alt="Cecina de vaca" loading="lazy"></div>
+            <div class="galeria-item"><img src="anchoas.jpeg" alt="Anchoas de la casa" loading="lazy"></div>
+            <div class="galeria-item"><img src="tabla.jpeg" alt="Tabla surtida ibérica" loading="lazy"></div>
+            <div class="galeria-item"><img src="tablas.jpeg" alt="Tablas de embutidos y quesos" loading="lazy"></div>
+            <div class="galeria-item"><img src="samain.jpeg" alt="Plato especial Jamonería Samaín" loading="lazy"></div>
+            <div class="galeria-item"><img src="mesa.jpeg" alt="Mesa con variedad de platos" loading="lazy"></div>
         </div>
     </div>
 </div>  
