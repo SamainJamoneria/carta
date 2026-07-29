@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Selección de elementos del DOM
     const btnDestino = document.getElementById("btn-destino");
     const modalComensales = document.getElementById("modal-destino");
     const btnCerrarComensales = document.getElementById("cerrar-destino");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let girando = false;
     let audioContext = null;
 
-    // 2. Reproductor de sonido sintético (Tick al girar)
     function reproducirTick() {
         try {
             if (!audioContext) {
@@ -43,11 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioContext.currentTime + 0.03);
         } catch (e) {
-            // Silenciar si el navegador bloquea audio sin interacción previa
+            // Silenciar si hay restricciones de audio
         }
     }
 
-    // 3. Abrir selector de comensales al pulsar en SAMAÍN FATE
     btnDestino.addEventListener("click", (e) => {
         e.preventDefault();
         if (modalComensales) {
@@ -57,14 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Cerrar selector de comensales (botón X)
     if (btnCerrarComensales && modalComensales) {
         btnCerrarComensales.addEventListener("click", () => {
             modalComensales.classList.remove("activo");
         });
     }
 
-    // Al seleccionar número de comensales -> Iniciar ruleta
     opcionesComensales.forEach(boton => {
         boton.addEventListener("click", () => {
             if (modalComensales) {
@@ -74,13 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 4. Lógica principal del giro
     function ejecutarRuleta() {
         if (typeof carta === "undefined" || !Array.isArray(carta) || carta.length === 0) {
             return;
         }
 
-        // Obtener lista completa de platos
         const todosLosProductos = [];
         carta.forEach(cat => {
             if (cat.productos && cat.productos.length > 0) {
@@ -95,34 +88,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (todosLosProductos.length === 0) return;
 
-        // Selección aleatoria del producto
         const productoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
 
-        // Limpiar textos del modal de resultado
         categoriaEl.textContent = "";
         nombreEl.textContent = "";
         descripcionEl.textContent = "";
         precioEl.textContent = "";
 
-        // Mostrar el modal de la ruleta
         modalResultado.classList.add("activo");
         girando = true;
 
-        // Resetear la posición del disco sin transición
         discoRuleta.style.transition = "none";
         discoRuleta.style.transform = "rotate(0deg)";
-        void discoRuleta.offsetWidth; // Forzar renderizado
+        void discoRuleta.offsetWidth;
 
-        // Calcular ángulo de parada
         const vueltas = 5 + Math.floor(Math.random() * 3);
         const gradosFinales = vueltas * 360 + Math.floor(Math.random() * 360);
         const duracionMs = 4000;
 
-        // Animación de giro
         discoRuleta.style.transition = `transform ${duracionMs}ms cubic-bezier(0.15, 0.9, 0.2, 1)`;
         discoRuleta.style.transform = `rotate(${gradosFinales}deg)`;
 
-        // Sonido de los ticks ralentizándose
         let ticksTotales = 28;
         let tickActual = 0;
 
@@ -136,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         emitirTicks();
 
-        // Al terminar el giro, escribir el plato elegido
         setTimeout(() => {
             girando = false;
             categoriaEl.textContent = productoGanador.categoriaTitulo;
@@ -146,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, duracionMs);
     }
 
-    // 5. Cerrar el resultado al hacer clic
     modalResultado.addEventListener("click", () => {
         if (!girando) {
             modalResultado.classList.remove("activo");
