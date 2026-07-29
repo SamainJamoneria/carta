@@ -93,8 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const indice = categoriesOrden.indexOf(categoriaId);
         const indiceSeguro = indice !== -1 ? indice : 0;
 
+        // --- CÁLCULO DE ÁNGULO CORREGIDO ---
         const gradosPorCategoria = 360 / 8; 
-        const gradosIcono = (indiceSeguro * gradosPorCategoria) + 22.5;
+        
+        // Al girar la aguja en sentido horario, las secciones pasan en orden invertido
+        const anguloGajo = (360 - (indiceSeguro * gradosPorCategoria)) % 360;
+        const gradosIcono = anguloGajo + (gradosPorCategoria / 2);
         const gradosFinal = (360 * 5) + gradosIcono;
 
         if (flechaAguja) {
@@ -140,7 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const gradosActuales = obtenerGradosActuales(progreso);
             const anguloNormalizado = (gradosActuales % 360 + 360) % 360;
-            const indiceGajoActual = Math.floor(anguloNormalizado / 45) % 8;
+            
+            // --- CÁLCULO DE ILUMINACIÓN CORREGIDO ---
+            const indiceGajoActual = Math.floor(((360 - anguloNormalizado) % 360) / 45) % 8;
 
             if (gajos) {
                 gajos.forEach((gajo, i) => {
