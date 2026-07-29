@@ -10,16 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!btnDestino || !modalDestino || !discoRuleta) return;
 
-    // Detectar idioma si estamos en la versión en inglés
     const esIngles = document.documentElement.lang === "en";
-
-    // Iconos por defecto para los gajos
     const iconosRuleta = ["🧀", "🥓", "🍷", "🍺", "🥖", "🥩", "🥐", "☕"];
+    
+    // Paleta de colores elegantes para los 8 gajos alternados
+    const coloresGajos = [
+        "#c0392b", "#e67e22", "#f1c40f", "#27ae60", 
+        "#2980b9", "#8e44ad", "#d35400", "#16a085"
+    ];
 
     let girando = false;
     let audioContext = null;
 
-    // 2. Función para reproducir el tick de sonido sintético al girar
+    // 2. Audio sintetizado para el "tick" al girar
     function reproducirTick() {
         try {
             if (!audioContext) {
@@ -45,47 +48,69 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioContext.currentTime + 0.03);
         } catch (e) {
-            // Ignorar silenciando si el navegador bloquea el audio
+            // Silenciar si hay bloqueo de auto-play en el navegador
         }
     }
 
-    // 3. Renderizar los gajos y los iconos dentro del disco de la ruleta
+    // 3. Renderizar la ruleta con CSS dinámico (Garantiza los colores y gajos al 100%)
     function construirRuletaHTML() {
-        discoRuleta.innerHTML = ""; // Limpiar contenido previo
+        discoRuleta.innerHTML = "";
 
         const totalGajos = 8;
         const anguloPaso = 360 / totalGajos;
 
-        // Crear los 8 gajos
-        for (let i = 0; i < totalGajos; i++) {
-            const gajo = document.createElement("div");
-            gajo.className = `gajo-quesito gajo-${i + 1}`;
-            gajo.style.transform = `rotate(${i * anguloPaso}deg)`;
-            discoRuleta.appendChild(gajo);
-        }
+        // Crear el fondo multicolor de sectores usando Conic Gradient
+        let degradadoCss = "conic-gradient(";
+        coloresGajos.forEach((color, i) => {
+            const inicio = i * anguloPaso;
+            const fin = (i + 1) * anguloPaso;
+            degradadoCss += `${color} ${inicio}deg ${fin}deg${i === totalGajos - 1 ? "" : ", "}`;
+        });
+        degradadoCss += ")";
 
-        // Crear los 8 iconos centrados en cada sector
+        // Aplicar estilos base directos al disco
+        discoRuleta.style.background = degradadoCss;
+        discoRuleta.style.borderRadius = "50%";
+        discoRuleta.style.position = "relative";
+        discoRuleta.style.boxShadow = "inset 0 0 10px rgba(0,0,0,0.3)";
+
+        // Colocar los 8 iconos centrados dentro de cada sector
         for (let i = 0; i < totalGajos; i++) {
-            const icono = document.createElement("div");
-            icono.className = `icono-ruleta icono-${i + 1}`;
+            const contenedorIcono = document.createElement("div");
             const anguloCentro = (i * anguloPaso) + (anguloPaso / 2);
-            icono.style.transform = `rotate(${anguloCentro}deg) translateY(-80px) rotate(-${anguloCentro}deg)`;
-            icono.textContent = iconosRuleta[i % iconosRuleta.length];
-            discoRuleta.appendChild(icono);
+
+            contenedorIcono.style.position = "absolute";
+            contenedorIcono.style.top = "50%";
+            contenedorIcono.style.left = "50%";
+            contenedorIcono.style.width = "30px";
+            contenedorIcono.style.height = "30px";
+            contenedorIcono.style.marginLeft = "-15px";
+            contenedorIcono.style.marginTop = "-15px";
+            contenedorIcono.style.fontSize = "1.3rem";
+            contenedorIcono.style.display = "flex";
+            contenedorIcono.style.alignItems = "center";
+            contenedorIcono.style.justifyContent = "center";
+            contenedorIcono.style.pointerEvents = "none";
+            
+            // Posicionar mediante rotación y desplazamiento vertical
+            contenedorIcono.style.transform = `rotate(${anguloCentro}deg) translateY(-85px) rotate(-${anguloCentro}deg)`;
+            contenedorIcono.textContent = iconosRuleta[i % iconosRuleta.length];
+
+            discoRuleta.appendChild(contenedorIcono);
         }
     }
 
-    // 4. Lógica de activación al hacer clic en "Elige por mí"
+    // 4. Lógica de activación al hacer clic en el botón
     btnDestino.addEventListener("click", (e) => {
         e.preventDefault();
 
-        // Verificar que la carta existe y tiene productos
+        // Validar existencia de la carta
         if (typeof carta === "undefined" || !Array.isArray(carta) || carta.length === 0) {
             alert(esIngles ? "Menu items are loading..." : "Cargando carta...");
             return;
         }
 
-        // Obtener todos los productos disponibles
+        // Unificar todos los productos en una sola lista
         const todosLosProductos = [];
         carta.forEach(cat => {
             if (cat.productos && cat.productos.length > 0) {
@@ -100,10 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (todosLosProductos.length === 0) return;
 
-        // Seleccionar producto aleatorio
+        // Elegir ganador al azar
         const productoGanador = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
 
-        // Construir la ruleta visualmente
+        // Dibujar el disco visualmente
         construirRuletaHTML();
 
         // Resetear textos mientras gira
@@ -112,27 +137,25 @@ document.addEventListener("DOMContentLoaded", () => {
         descripcionEl.textContent = "";
         precioEl.textContent = "";
 
-        // Abrir el modal
+        // Mostrar modal
         modalDestino.classList.add("activo");
         girando = true;
 
-        // Resetear la rotación inicial sin animación
+        // Resetear animación de giro
         discoRuleta.style.transition = "none";
         discoRuleta.style.transform = "rotate(0deg)";
+        void discoRuleta.offsetWidth; // Forzar repaint
 
-        // Forzar reflow para asegurar el reset de CSS
-        void discoRuleta.offsetWidth;
-
-        // Calcular vueltas y ángulo final
-        const vueltas = 5 + Math.floor(Math.random() * 3); // Entre 5 y 7 vueltas completas
+        // Calcular vueltas y ángulo final de parada
+        const vueltas = 5 + Math.floor(Math.random() * 3);
         const gradosFinales = vueltas * 360 + Math.floor(Math.random() * 360);
         const duracionMs = 4000;
 
-        // Iniciar animación de giro
+        // Iniciar giro fluido con Bezier
         discoRuleta.style.transition = `transform ${duracionMs}ms cubic-bezier(0.15, 0.9, 0.2, 1)`;
         discoRuleta.style.transform = `rotate(${gradosFinales}deg)`;
 
-        // Efecto de sonido mientras rueda
+        // Control de efectos de sonido secuenciales
         let ticksTotales = 28;
         let tickActual = 0;
 
@@ -140,14 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (tickActual < ticksTotales && girando) {
                 reproducirTick();
                 tickActual++;
-                // Los ticks se van ralentizando exponencialmente
                 const proximoDelay = 80 + Math.pow(tickActual / ticksTotales, 2.5) * 350;
                 setTimeout(emitirTicks, proximoDelay);
             }
         }
         emitirTicks();
 
-        // Al finalizar el giro, mostrar el resultado
+        // Al finalizar la animación, revelar el premio
         setTimeout(() => {
             girando = false;
             categoriaEl.textContent = productoGanador.categoriaTitulo;
@@ -157,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, duracionMs);
     });
 
-    // 5. Cerrar modal al hacer clic en cualquier lugar tras finalizar
+    // 5. Cerrar el modal al hacer clic en la pantalla al terminar
     modalDestino.addEventListener("click", () => {
         if (!girando) {
             modalDestino.classList.remove("activo");
