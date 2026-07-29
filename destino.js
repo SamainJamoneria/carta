@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Selección de elementos
     const btnDestino = document.getElementById("btn-destino");
     const modalComensales = document.getElementById("modal-destino");
     const btnCerrarComensales = document.getElementById("cerrar-destino");
@@ -16,6 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
     let girando = false;
     let audioContext = null;
 
+    // Funciones auxiliares para mostrar/ocultar modales independientemente del CSS
+    function abrirModal(elem) {
+        if (!elem) return;
+        elem.classList.add("activo", "abierto", "open", "show");
+        elem.classList.remove("hidden");
+        elem.style.display = "flex";
+    }
+
+    function cerrarModal(elem) {
+        if (!elem) return;
+        elem.classList.remove("activo", "abierto", "open", "show");
+        elem.style.display = "none";
+    }
+
+    // Reproductor de sonido (Tick)
     function reproducirTick() {
         try {
             if (!audioContext) {
@@ -41,34 +57,38 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioContext.currentTime + 0.03);
         } catch (e) {
-            // Silenciar si hay restricciones de audio
+            // Silenciar si no hay permisos de audio
         }
     }
 
+    // Evento al hacer clic en EL DESTINO SAMAÍN
     btnDestino.addEventListener("click", (e) => {
         e.preventDefault();
         if (modalComensales) {
-            modalComensales.classList.add("activo");
+            abrirModal(modalComensales);
         } else {
             ejecutarRuleta();
         }
     });
 
+    // Cerrar el modal de comensales (botón X)
     if (btnCerrarComensales && modalComensales) {
         btnCerrarComensales.addEventListener("click", () => {
-            modalComensales.classList.remove("activo");
+            cerrarModal(modalComensales);
         });
     }
 
+    // Al seleccionar comensales -> Iniciar ruleta
     opcionesComensales.forEach(boton => {
         boton.addEventListener("click", () => {
             if (modalComensales) {
-                modalComensales.classList.remove("activo");
+                cerrarModal(modalComensales);
             }
             ejecutarRuleta();
         });
     });
 
+    // Lógica del giro
     function ejecutarRuleta() {
         if (typeof carta === "undefined" || !Array.isArray(carta) || carta.length === 0) {
             return;
@@ -95,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         descripcionEl.textContent = "";
         precioEl.textContent = "";
 
-        modalResultado.classList.add("activo");
+        abrirModal(modalResultado);
         girando = true;
 
         discoRuleta.style.transition = "none";
@@ -131,9 +151,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }, duracionMs);
     }
 
+    // Cerrar resultado al hacer clic
     modalResultado.addEventListener("click", () => {
         if (!girando) {
-            modalResultado.classList.remove("activo");
+            cerrarModal(modalResultado);
         }
     });
 });
