@@ -73,16 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        // Orden de porciones físicas en el CSS de la ruleta
+        // --- NUEVO ORDEN FÍSICO CORREGIDO ---
+        // (Empezando desde arriba en 12:00, sentido horario)
         const categoriesOrden = [
-            "entrantes",
-            "raciones",
-            "ibericos",
-            "quesos",
-            "tostas",
-            "piadinas",
-            "dulces",
-            "bocadillos"
+            "dulces",     // 🍰 Gajo 0 (Arriba)
+            "tostas",     // 🥖 Gajo 1
+            "entrantes",  // 🍽️ Gajo 2
+            "raciones",   // 🍖 Gajo 3 (Donde debería estar la aguja en tu foto)
+            "quesos",     // 🧀 Gajo 4
+            "piadinas",   // 🌯 Gajo 5
+            "chocolates", // 🍫 Gajo 6 (o el ID que uses para el otro dulce)
+            "bocadillos"  // 🥪 Gajo 7
         ];
 
         let categoriaId = resultado.categoria.id;
