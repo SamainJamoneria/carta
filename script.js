@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Modal Tienda / Para Llevar ---
     const btnTienda = document.getElementById('btn-tienda');
-    const closeTienda = document.getElementById('close-tienda') || document.getElementById('cerrar-tienda');
+    const closeTienda = document.getElementById('cerrar-tienda');
 
     if (btnTienda && modalTienda) {
         btnTienda.addEventListener('click', (e) => {
@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-   // ==========================================
+    // ==========================================
     // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS / MANUALES
     // ==========================================
     const body = document.body;
@@ -359,8 +359,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Navidad (1 de Diciembre al 7 de Enero)
         if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
 
-        // 4. Carnaval / Entroido (Del 10 al 25 de Febrero)
-        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
+        // 4. Carnaval / Entroido (Febrero)
+        if (mes === 2 && dia >= 5 && dia <= 25) return "modo-carnaval";
 
         return null; // Resto del año
     }
@@ -426,8 +426,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const posX = Math.random() * window.innerWidth;
             const posY = Math.random() * 60 + 20;
 
-            const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-            const duracion = (Math.random() * 800 + 1000).toFixed(0);
+            const tamano = Math.random() * 0.8 + 0.8;
+            const duracion = Math.floor(Math.random() * 800 + 1000);
 
             particula.style.left = `${posX}px`;
             particula.style.top = `${posY}px`;
@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             document.body.appendChild(particula);
 
-            setTimeout(() => particula.remove(), parseInt(duracion));
+            setTimeout(() => particula.remove(), duracion);
         }
     }
 });
