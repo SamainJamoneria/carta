@@ -326,54 +326,50 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-    // ==========================================
-    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
+   // ==========================================
+    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS / MANUALES
     // ==========================================
     const body = document.body;
     const detalleEl = document.getElementById("detalle-temporada");
     const esIngles = document.documentElement.lang === "en";
 
-    // Función que calcula qué modo corresponde según la fecha actual
+    // Detectar si hay una clase forzada en el <body> (ej: <body class="modo-sanjuan">)
+    const clasesTemporada = ["modo-sanjuan", "modo-samain", "modo-navidad", "modo-carnaval"];
+    let modoActivo = clasesTemporada.find(clase => body.classList.contains(clase));
+
+    // Si no hay clase en el HTML, calcular según la fecha actual
+    if (!modoActivo) {
+        modoActivo = obtenerModoPorFecha();
+        if (modoActivo) {
+            body.classList.add(modoActivo);
+        }
+    }
+
     function obtenerModoPorFecha() {
         const ahora = new Date();
         const mes = ahora.getMonth() + 1; // 1 = Enero, 12 = Diciembre
         const dia = ahora.getDate();
 
         // 1. San Juan (15 al 25 de Junio)
-        if (mes === 6 && dia >= 15 && dia <= 25) {
-            return "modo-sanjuan";
-        }
+        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
 
         // 2. Samaín / Halloween (20 de Octubre al 2 de Noviembre)
-        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) {
-            return "modo-samain";
-        }
+        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
 
         // 3. Navidad (1 de Diciembre al 7 de Enero)
-        if (mes === 12 || (mes === 1 && dia <= 7)) {
-            return "modo-navidad";
-        }
+        if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
 
         // 4. Carnaval / Entroido (Del 10 al 25 de Febrero)
-        if (mes === 2 && dia >= 10 && dia <= 25) {
-            return "modo-carnaval";
-        }
+        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
 
-        return null; // Resto del año -> Sin efectos
-    }
-
-    // Activar modo automático (si no hay una clase forzada manualmente en el HTML)
-    let modoActivo = obtenerModoPorFecha();
-
-    if (modoActivo) {
-        body.classList.add(modoActivo);
+        return null; // Resto del año
     }
 
     const configuracionTemporadas = {
         "modo-navidad": {
             texto: esIngles 
-                ? "🎄 Happy Holidays from the Samaín team" 
-                : "🎄 Felices Fiestas de parte del equipo de Samaín",
+                ? "🎄 Merry Christmas from the Samain team" 
+                : "🎄 Feliz Navidad de parte del equipo de Samaín",
             particulas: ["❄", "❅", "❆", "🤍"]
         },
         "modo-sanjuan": {
@@ -390,56 +386,58 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "modo-samain": {
             texto: esIngles 
-                ? "🎃 Happy Samaín / Halloween!" 
+                ? "🎃 Happy Samain / Halloween!" 
                 : "🎃 ¡Feliz Samaín / Halloween!",
             particulas: ["🎃", "👻", "🍂", "✨"]
         }
     };
 
-    if (!modoActivo || !configuracionTemporadas[modoActivo]) return;
-
-    const config = configuracionTemporadas[modoActivo];
-    if (detalleEl) {
-        detalleEl.textContent = config.texto;
-    }
-
-    // Generador de partículas al scroll
-    let ultimoScroll = window.scrollY;
-    let contadorScroll = 0;
-
-    window.addEventListener("scroll", () => {
-        const scrollActual = window.scrollY;
-
-        if (scrollActual > ultimoScroll) {
-            contadorScroll++;
-            if (contadorScroll % 5 === 0) {
-                crearParticulaScroll(config.particulas);
-            }
+    // Solo activamos frase y partículas si hay una temporada activa reconocida
+    if (modoActivo && configuracionTemporadas[modoActivo]) {
+        const config = configuracionTemporadas[modoActivo];
+        
+        if (detalleEl) {
+            detalleEl.textContent = config.texto;
         }
-        ultimoScroll = scrollActual;
-    }, { passive: true });
 
-    function crearParticulaScroll(listaSimbolos) {
-        const particula = document.createElement("div");
-        particula.className = "particula-scroll";
+        // Generador de partículas al hacer scroll
+        let ultimoScroll = window.scrollY;
+        let contadorScroll = 0;
 
-        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
-        particula.textContent = simbolo;
+        window.addEventListener("scroll", () => {
+            const scrollActual = window.scrollY;
 
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20;
+            if (scrollActual > ultimoScroll) {
+                contadorScroll++;
+                if (contadorScroll % 4 === 0) { // Genera partícula cada 4 pasos de scroll
+                    crearParticulaScroll(config.particulas);
+                }
+            }
+            ultimoScroll = scrollActual;
+        }, { passive: true });
 
-        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0);
+        function crearParticulaScroll(listaSimbolos) {
+            const particula = document.createElement("div");
+            particula.className = "particula-scroll";
 
-        particula.style.left = `${posX}px`;
-        particula.style.top = `${posY}px`;
-        particula.style.fontSize = `${tamano}rem`;
-        particula.style.animationDuration = `${duracion}ms`;
+            const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
+            particula.textContent = simbolo;
 
-        document.body.appendChild(particula);
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * 60 + 20;
 
-        setTimeout(() => particula.remove(), parseInt(duracion));
+            const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
+            const duracion = (Math.random() * 800 + 1000).toFixed(0);
+
+            particula.style.left = `${posX}px`;
+            particula.style.top = `${posY}px`;
+            particula.style.fontSize = `${tamano}rem`;
+            particula.style.animationDuration = `${duracion}ms`;
+
+            document.body.appendChild(particula);
+
+            setTimeout(() => particula.remove(), parseInt(duracion));
+        }
     }
 });
 
