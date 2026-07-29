@@ -327,60 +327,83 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 7. EFECTOS DE TEMPORADA EN SCROLL (MULTILINGÜE)
+    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
     // ==========================================
     const body = document.body;
     const detalleEl = document.getElementById("detalle-temporada");
-    
-    // Detección de idioma
     const esIngles = document.documentElement.lang === "en";
 
-    // Configuración de efectos y frases por temporada
+    // Función que calcula qué modo corresponde según la fecha actual
+    function obtenerModoPorFecha() {
+        const ahora = new Date();
+        const mes = ahora.getMonth() + 1; // 1 = Enero, 12 = Diciembre
+        const dia = ahora.getDate();
+
+        // 1. San Juan (15 al 25 de Junio)
+        if (mes === 6 && dia >= 15 && dia <= 25) {
+            return "modo-sanjuan";
+        }
+
+        // 2. Samaín / Halloween (20 de Octubre al 2 de Noviembre)
+        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) {
+            return "modo-samain";
+        }
+
+        // 3. Navidad (1 de Diciembre al 7 de Enero)
+        if (mes === 12 || (mes === 1 && dia <= 7)) {
+            return "modo-navidad";
+        }
+
+        // 4. Carnaval / Entroido (Del 10 al 25 de Febrero)
+        if (mes === 2 && dia >= 10 && dia <= 25) {
+            return "modo-carnaval";
+        }
+
+        return null; // Resto del año -> Sin efectos
+    }
+
+    // Activar modo automático (si no hay una clase forzada manualmente en el HTML)
+    let modoActivo = obtenerModoPorFecha();
+
+    if (modoActivo) {
+        body.classList.add(modoActivo);
+    }
+
     const configuracionTemporadas = {
         "modo-navidad": {
             texto: esIngles 
                 ? "🎄 Happy Holidays from the Samaín team" 
                 : "🎄 Felices Fiestas de parte del equipo de Samaín",
-            particulas: ["❄", "❅", "❆", "🤍"] // Copos de nieve y destellos
+            particulas: ["❄", "❅", "❆", "🤍"]
         },
         "modo-sanjuan": {
             texto: esIngles 
                 ? "🔥 Celebrating San Juan" 
                 : "🔥 ¡Llega la mágica Noche de San Juan!",
-            particulas: ["💥", "✨", "🔥", "⚡"] // Chispas de fuego y destellos
+            particulas: ["💥", "✨", "🔥", "⚡"]
         },
         "modo-carnaval": {
             texto: esIngles 
                 ? "🎭 Happy Carnival Season!" 
                 : "🎭 ¡Feliz Carnaval!",
-            particulas: ["🎉", "🎊", "✨", "🎈", "🔴", "🟡", "🔵"] // Confeti de colores
+            particulas: ["🎉", "🎊", "✨", "🎈", "🔴", "🟡", "🔵"]
         },
         "modo-samain": {
             texto: esIngles 
                 ? "🎃 Happy Samaín / Halloween!" 
                 : "🎃 ¡Feliz Samaín / Halloween!",
-            particulas: ["🎃", "👻", "🍂", "✨"] // Calabazas, fantasmas y hojas
+            particulas: ["🎃", "👻", "🍂", "✨"]
         }
     };
 
-    // Identificar qué modo activo hay en <body>
-    let modoActivo = null;
-    for (const clase of body.classList) {
-        if (configuracionTemporadas[clase]) {
-            modoActivo = clase;
-            break;
-        }
-    }
+    if (!modoActivo || !configuracionTemporadas[modoActivo]) return;
 
-    if (!modoActivo) return; // Si no hay clase especial en el body, salimos
-
-    // 1. Asignar el texto a la cabecera
     const config = configuracionTemporadas[modoActivo];
-    if (detalleEl && config) {
+    if (detalleEl) {
         detalleEl.textContent = config.texto;
     }
 
-    // 2. Generador de partículas al hacer scroll hacia abajo
+    // Generador de partículas al scroll
     let ultimoScroll = window.scrollY;
     let contadorScroll = 0;
 
@@ -389,7 +412,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (scrollActual > ultimoScroll) {
             contadorScroll++;
-            // Genera una partícula cada 5 ticks de scroll hacia abajo
             if (contadorScroll % 5 === 0) {
                 crearParticulaScroll(config.particulas);
             }
@@ -405,10 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
         particula.textContent = simbolo;
 
         const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20; // Cerca de la parte superior
+        const posY = Math.random() * 80 + 20;
 
         const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0); // 1.0s a 1.8s
+        const duracion = (Math.random() * 800 + 1000).toFixed(0);
 
         particula.style.left = `${posX}px`;
         particula.style.top = `${posY}px`;
