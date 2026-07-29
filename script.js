@@ -455,18 +455,18 @@ document.addEventListener("DOMContentLoaded", () => {
             texto: esIngles 
                 ? "🎄 Happy Holidays from the Samaín team" 
                 : "🎄 Felices Fiestas de parte del equipo de Samaín",
-            particulas: ["❄", "❅", "✨"]
+            particulas: ["❄", "❅", "✨","🎅🏼"]
         },
         "modo-sanjuan": {
             texto: esIngles 
-                ? "🔥 Celebrating Midsummer / St. John's Eve!" 
+                ? "🔥 Celebrating San Juan" 
                 : "🔥 ¡Llega la mágica Noche de San Juan!",
-            particulas: ["🔥", "✨", "💥", "🪔"]
+            particulas: ["🔥", "✨", "💥", "🐟"]
         },
         "modo-carnaval": {
             texto: esIngles 
                 ? "🎭 Happy Carnival Season!" 
-                : "🎭 ¡Feliz Entroido / Carnaval!",
+                : "🎭 ¡Feliz  Carnaval!",
             particulas: ["🎉", "🎊", "✨", "🎈"]
         },
         "modo-samain": {
