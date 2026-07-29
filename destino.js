@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Obtención segura del producto aleatorio
+   // Obtención ponderada del producto según número de comensales
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
@@ -208,26 +208,67 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
 
-        let ServerCategorias;
-        if(personas === "1"){
-            ServerCategorias = carta.filter(c => [ "tostas", "piadinas", "dulces", "bocadillos" ].includes(c.id));
-        } else {
-            ServerCategorias = carta;
+        // 1. Filtrar carta para EXCLUIR siempre postres/dulces
+        const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres");
+
+        if (cartaFiltrada.length === 0) return null;
+
+        // 2. Definir pesos (probabilidades) según el número de comensales
+        // Peso por defecto = 1. A mayor peso, mayor probabilidad.
+        const configuracionPesos = {
+            "1": {
+                "bocadillos": 4,
+                "tostas": 3,
+                "piadinas": 3,
+                "quesos": 3
+            },
+            "2": {
+                "tostas": 3,
+                "raciones": 3,
+                "tablas": 4,
+                "quesos": 3
+            },
+            "3": {
+                "tablas": 6,   // Prioridad muy alta para tablas/compartir
+                "raciones": 3
+            }
+        };
+
+        const pesosActuales = configuracionPesos[personas] || configuracionPesos["2"];
+
+        // 3. Crear lista de categorías con sus pesos asignados
+        const categoriasConPeso = cartaFiltrada.map(cat => {
+            // Mapeo de equivalencias por si varían los IDs
+            let idBuscado = cat.id;
+            if (idBuscado === "tablas") idBuscado = "raciones";
+
+            const peso = pesosActuales[cat.id] || pesosActuales[idBuscado] || 1;
+            return { categoria: cat, peso: peso };
+        });
+
+        // 4. Algoritmo de ruleta ponderada (Weighted Random Selection)
+        const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
+        let aleatorio = Math.random() * sumaPesos;
+        
+        let categoriaElegida = categoriasConPeso[0].categoria;
+        for (const item of categoriasConPeso) {
+            if (aleatorio < item.peso) {
+                categoriaElegida = item.categoria;
+                break;
+            }
+            aleatorio -= item.peso;
         }
 
-        if (ServerCategorias.length === 0) ServerCategorias = carta;
-
-        const categoria = ServerCategorias[Math.floor(Math.random()*ServerCategorias.length)];
-        
-        const productosValidos = categoria.productos.filter(p => {
+        // 5. Seleccionar un producto válido dentro de la categoría ganadora
+        const productosValidos = categoriaElegida.productos.filter(p => {
             const nom = p.nombre.toLowerCase();
             return !nom.includes("extra") && !nom.includes("ingrediente") && !nom.includes("ingredient");
         });
 
-        const listaFinal = productosValidos.length > 0 ? productosValidos : categoria.productos;
-        const producto = listaFinal[Math.floor(Math.random()*listaFinal.length)];
+        const listaFinal = productosValidos.length > 0 ? productosValidos : categoriaElegida.productos;
+        const producto = listaFinal[Math.floor(Math.random() * listaFinal.length)];
 
-        return { categoria, producto };
+        return { categoria: categoriaElegida, producto };
     }
 
     // Vaciar datos al cerrar la ventana de resultados
