@@ -302,7 +302,6 @@ MENÚ STICKY Y CATEGORÍAS
     display: none;
 }
 
-/* Categorías deslizantes */
 .categoria {
     display: flex;
     flex-direction: column;
@@ -329,7 +328,6 @@ MENÚ STICKY Y CATEGORÍAS
     transform: translateY(-2px);
 }
 
-/* Estado activo */
 .categoria.activa {
     background: var(--color-dorado) !important;
     color: #ffffff !important;
@@ -516,6 +514,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     to { transform: translateY(0); opacity: 1; }
 }
 
+/* OVERLAY DE RESULTADO FINAL */
 .resultado-destino {
     position: fixed;
     inset: 0;
@@ -528,16 +527,19 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .resultado-destino.visible {
-    display: flex;
+    display: flex !important;
 }
 
 .tarjeta-destino {
     width: min(92%, 480px);
-    background: #ffffff;
+    background: #ffffff !important;
     border-radius: 24px;
-    padding: 45px;
+    padding: 45px 30px;
     text-align: center;
+    position: relative;
+    z-index: 6001;
     animation: zoomDestino .45s ease-out;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
 @keyframes zoomDestino {
@@ -552,16 +554,17 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 #nombre-destino {
-    font-size: 34px;
+    font-size: 30px;
     color: var(--color-principal);
     margin: 18px 0;
     line-height: 1.2;
+    font-weight: 800;
 }
 
 #descripcion-destino {
     color: #666666;
     margin: 18px auto;
-    max-width: 320px;
+    max-width: 340px;
     line-height: 1.6;
 }
 
@@ -588,11 +591,18 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     color: #999999;
 }
 
+/* RULETA Y GIRO */
 .ruleta-destino {
     position: relative;
     width: 240px;
     height: 240px;
     margin: 0 auto 35px;
+    transition: opacity 0.3s ease;
+}
+
+/* Ocultar contenedor de la ruleta cuando ya se muestra el premio final */
+.resultado-destino.mostrar-resultado .ruleta-destino {
+    display: none !important;
 }
 
 .disco-ruleta {
@@ -901,7 +911,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     border: 1px solid #e0e0e0;
 }
 
-/* Modal Galería (Ajustado a pantalla sin scroll) */
+/* Modal Galería */
 .modal-galeria-content {
     background-color: #ffffff;
     padding: 20px 15px 15px 15px;
