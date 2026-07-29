@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<!-- CAMBIA LA CLASE DEL BODY SEGÚN LA ÉPOCA: modo-sanjuan, modo-navidad, modo-carnaval, modo-samain -->
+<body class="modo-sanjuan">
 
 <header class="header-principal">
   <div class="top-bar">
@@ -40,7 +41,7 @@
   <h1>Nuestra carta</h1>
   <p>- Especialistas en Ibéricos -</p>
 
-  <!-- DETALLE TEMÁTICO (Aparece automáticamente cuando activas la clase en el <body>) -->
+  <!-- DETALLE TEMÁTICO (Aparece automáticamente mediante script.js) -->
   <div class="detalle-temporada" id="detalle-temporada"></div>
 </header>
 
@@ -137,7 +138,7 @@
 <footer>
   Jamonería Samaín · A Coruña
   <br><br>
-  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank">Síguenos en Insta</a>
+  📸 <a href="https://www.instagram.com/samaincormelana" target="_blank" rel="noopener">Síguenos en Insta</a>
 </footer>
 
 <div id="confeti"></div>
@@ -259,6 +260,7 @@
     </div>
 </div> 
 
+<!-- ARCHIVOS DE LÓGICA -->
 <script src="menu.js"></script>
 <script src="script.js"></script>
 <script src="destino.js"></script>
