@@ -439,75 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ==========================================
-    // 8. EASTER EGG (VÍDEO PIXEL ART)
-    // ==========================================
-    const heartTrigger = document.getElementById('pixelHeart');
-    const modalEasterEgg = document.getElementById('easterEggModal');
-    const closeBtnEasterEgg = document.getElementById('closeHeartModal');
-    const videoPixel = document.getElementById('pixelVideo');
-
-    if (heartTrigger && modalEasterEgg && videoPixel) {
-
-        const reseteartVideo = () => {
-            videoPixel.pause();
-            videoPixel.currentTime = 0;
-            videoPixel.muted = true;
-            modalEasterEgg.style.display = 'none';
-        };
-
-        // Estado inicial de seguridad al cargar
-        reseteartVideo();
-
-        // Clic en el corazón: Autoreproducción con sonido
-        heartTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            // 1. Mostrar modal primero
-            modalEasterEgg.style.display = 'flex';
-            
-            // 2. Resetear tiempo y activar sonido explícitamente
-            videoPixel.currentTime = 0;
-            videoPixel.muted = false;
-            videoPixel.volume = 1.0;
-
-            // 3. Disparo inmediato de la autoreproducción
-            const playPromise = videoPixel.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Autoreproducción iniciada con éxito y con sonido
-                }).catch(error => {
-                    console.warn("Autoreproducción bloqueada con audio, reintentando:", error);
-                    // Si el navegador bloquea el sonido, reproduce de forma silenciada
-                    videoPixel.muted = true;
-                    videoPixel.play();
-                });
-            }
-        });
-
-        // Controles de cierre
-        if (closeBtnEasterEgg) {
-            closeBtnEasterEgg.addEventListener('click', reseteartVideo);
-        }
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modalEasterEgg) {
-                reseteartVideo();
-            }
-        });
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalEasterEgg.style.display === 'flex') {
-                reseteartVideo();
-            }
-        });
-
-        // Garantiza que al navegar o ir atrás NO se auto-reproduzca solo
-        window.addEventListener('pageshow', reseteartVideo);
-        window.addEventListener('pagehide', reseteartVideo);
-    }
-
+    
     // ==========================================
     // 9. FUNCIONES AUXILIARES Y PROTECCIONES
     // ==========================================
