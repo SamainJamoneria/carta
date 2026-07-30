@@ -74,11 +74,29 @@ h1{
     background:#4442a4;
 }
 
+/* ESTILOS DE LA SECCIÓN DE INFORMACIÓN */
 .info{
-    margin-top:30px;
+    margin-top:25px;
     border-top:1px solid #ddd;
-    padding-top:25px;
-    line-height:1.8;
+    padding-top:20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #333333;
+    text-align: center;
+}
+
+.info-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
 }
 
 .info a{
@@ -87,8 +105,13 @@ h1{
     font-weight:bold;
 }
 
+.info a:hover {
+    text-decoration: underline;
+}
+
+/* BOTÓN DE INSTAGRAM */
 .instagram-container {
-    margin-top: 15px;
+    margin-top: 8px;
     text-align: center;
 }
 
@@ -125,9 +148,9 @@ h1{
 
 .footer{
     text-align:center;
-    margin-top:25px;
+    margin-top:20px;
     color:#888;
-    font-size:18px;
+    font-size:14px;
 }
 
 /* ======================================================
@@ -160,14 +183,17 @@ h1{
     }
     
     .info {
-        margin-top: 16px;
-        padding-top: 14px;
-        line-height: 1.5;
-        font-size: 0.9rem;
+        margin-top: 14px;
+        padding-top: 12px;
+        gap: 8px;
+    }
+    
+    .info-item {
+        font-size: 0.88rem;
     }
     
     .instagram-container {
-        margin-top: 10px;
+        margin-top: 6px;
     }
     
     .btn-instagram {
@@ -176,7 +202,7 @@ h1{
     }
     
     .footer {
-        margin-top: 14px;
+        margin-top: 12px;
         font-size: 12px;
     }
 }
@@ -189,16 +215,14 @@ h1{
 
 <div class="tarjeta">
 
-<img src="LOGO.png" class="logo">
+<img src="LOGO.png" class="logo" alt="Samaín La Cormelana">
 
 <div class="contenido">
 
 <h1>Samaín</h1>
 
 <div class="subtitulo">
-
 - Especialistas en Ibérico -
-
 </div>
 
 <a class="boton" href="carta.html" target="_blank">
@@ -211,37 +235,34 @@ h1{
 
 <div class="info">
 
-📍 <a href="https://maps.google.com/?q=Plaza+de+la+Cormelana+6+A+Coruña" target="_blank">
-      Plaza de la Cormelana nº6<br> 15003 · A Coruña
+  <div class="info-item">
+    <span class="info-icon">📍</span>
+    <a href="https://maps.google.com/?q=Plaza+de+la+Cormelana+6+A+Coruña" target="_blank">
+      Plaza de la Cormelana nº6 · 15003 A Coruña
     </a>
+  </div>
 
-<br><br>
+  <div class="info-item">
+    <span class="info-icon">☎️</span>
+    <a href="tel:+34881125487">881 125 487</a>
+  </div>
 
-☎️ <a href="tel:+34881125487">
+  <div class="info-item">
+    <span class="info-icon">🕒</span>
+    <span>Abierto todos los días</span>
+  </div>
 
-881 125 487
-
-</a>
-
-<br><br>
-
-🕒 Abierto todos los días
-
-<br><br>
-
-<div class="instagram-container">
-  <a href="https://www.instagram.com/samaincormelana" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-    <img src="instagram.svg" alt="Instagram Jamonería Samaín" class="icon-ig">
-    <span>Instagram</span>
-  </a>
-</div>
+  <div class="instagram-container">
+    <a href="https://www.instagram.com/samaincormelana" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+      <img src="instagram.svg" alt="Instagram Jamonería Samaín" class="icon-ig">
+      <span>Instagram</span>
+    </a>
+  </div>
 
 </div>
 
 <div class="footer">
-
 Gracias por visitarnos ❤️
-
 </div>
 
 </div>
