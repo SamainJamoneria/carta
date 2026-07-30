@@ -473,16 +473,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('closeHeartModal');
   const video = document.getElementById('pixelVideo');
 
- // Abrir el Easter Egg al hacer clic/tocar el corazón
+// Abrir el Easter Egg al hacer clic/tocar el corazón
 heartTrigger.addEventListener('click', () => {
   modal.style.display = 'flex';
-  video.load(); // Fuerza la recarga del archivo
   
-  // Promesa para gestionar políticas de auto-play del navegador
+  video.muted = false; // Nos aseguramos de que el sonido esté activo
+  video.volume = 1.0;  // Volumen al máximo
+  video.currentTime = 0;
+
   const playPromise = video.play();
   if (playPromise !== undefined) {
     playPromise.catch(error => {
-      console.log("El navegador requirió interacción previa o silencio:", error);
+      // Si por política estricta del móvil aún bloquea el sonido, 
+      // reproducimos silenciado para que al menos se vea el vídeo.
+      console.log("El navegador bloqueó el audio automático. Reproduciendo sin sonido...");
+      video.muted = true;
+      video.play();
     });
   }
 });
