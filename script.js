@@ -466,3 +466,39 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const heartTrigger = document.getElementById('pixelHeart');
+  const modal = document.getElementById('easterEggModal');
+  const closeBtn = document.getElementById('closeHeartModal');
+  const video = document.getElementById('pixelVideo');
+
+  // Abrir el Easter Egg al hacer clic en el corazón
+  heartTrigger.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    video.currentTime = 0; // Reiniciar el vídeo
+    video.play();
+  });
+
+  // Función para cerrar la ventana emergente y pausar el vídeo
+  const closeModal = () => {
+    modal.style.display = 'none';
+    video.pause();
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // Cerrar al hacer clic fuera del recuadro del vídeo
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Cerrar al pulsar la tecla ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+});
