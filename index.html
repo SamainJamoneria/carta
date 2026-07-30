@@ -154,6 +154,84 @@ h1{
 }
 
 /* ======================================================
+   ESTILOS DEL EASTER EGG (PIXEL ART MODAL)
+====================================================== */
+.heart-trigger {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    user-select: none;
+}
+
+.heart-trigger:hover {
+    transform: scale(1.35);
+    filter: drop-shadow(0 0 6px rgba(230, 0, 0, 0.7));
+}
+
+.pixel-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    padding: 15px;
+}
+
+.pixel-modal-content {
+    position: relative;
+    background: #1d1b40;
+    border: 4px solid #d8b35c;
+    box-shadow: 6px 6px 0px #2d2b72, -6px -6px 0px #d8b35c;
+    padding: 20px;
+    max-width: 90%;
+    width: 420px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.pixel-close-btn {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #d8b35c;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.pixel-close-btn:hover {
+    color: #fff;
+}
+
+.pixel-title {
+    margin-top: 5px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #d8b35c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#pixelVideo {
+    width: 100%;
+    border: 2px solid #2d2b72;
+    border-radius: 4px;
+    background-color: #000;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/* ======================================================
    AJUSTES RESPONSIVE PARA PANTALLAS DE MÓVIL (Sin Scroll)
 ====================================================== */
 @media (max-height: 850px), (max-width: 600px) {
@@ -262,12 +340,65 @@ h1{
 </div>
 
 <div class="footer">
-Gracias por visitarnos ❤️
+Gracias por visitarnos <span id="pixelHeart" class="heart-trigger" title="¡Un secreto!">❤️</span>
 </div>
 
 </div>
 
 </div>
+
+<!-- VENTANA EMERGENTE (EASTER EGG) -->
+<div id="easterEggModal" class="pixel-modal-overlay">
+  <div class="pixel-modal-content">
+    <button class="pixel-close-btn" id="closeHeartModal">&times;</button>
+    <div class="pixel-frame">
+      <h3 class="pixel-title">👾 Jamonería Samaín 👾</h3>
+      <video id="pixelVideo" controls loop playsinline>
+        <source src="assets/videos/local-pixel.mp4" type="video/mp4">
+        Tu navegador no soporta vídeo.
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT DE CONTROL -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const heartTrigger = document.getElementById('pixelHeart');
+  const modal = document.getElementById('easterEggModal');
+  const closeBtn = document.getElementById('closeHeartModal');
+  const video = document.getElementById('pixelVideo');
+
+  // Abrir el Easter Egg al hacer clic/tocar el corazón
+  heartTrigger.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    video.currentTime = 0;
+    video.play();
+  });
+
+  // Función para cerrar la ventana emergente y pausar el vídeo
+  const closeModal = () => {
+    modal.style.display = 'none';
+    video.pause();
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // Cerrar si se toca fuera de la ventana retro
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Cerrar al pulsar la tecla ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+});
+</script>
 
 </body>
 </html>
