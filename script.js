@@ -333,7 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const detalleEl = document.getElementById("detalle-temporada");
     const esIngles = document.documentElement.lang === "en";
 
-    // Función que calcula qué modo corresponde según la fecha actual
     function obtenerModoPorFecha() {
         const ahora = new Date();
         const mes = ahora.getMonth() + 1; // 1 = Enero, 12 = Diciembre
@@ -359,10 +358,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return "modo-carnaval";
         }
 
-        return null; // Resto del año -> Sin efectos
+        return null;
     }
 
-    // Activar modo automático (si no hay una clase forzada manualmente en el HTML)
     let modoActivo = obtenerModoPorFecha();
 
     if (modoActivo) {
@@ -396,55 +394,115 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    if (!modoActivo || !configuracionTemporadas[modoActivo]) return;
+    if (modoActivo && configuracionTemporadas[modoActivo]) {
+        const config = configuracionTemporadas[modoActivo];
+        if (detalleEl) {
+            detalleEl.textContent = config.texto;
+        }
 
-    const config = configuracionTemporadas[modoActivo];
-    if (detalleEl) {
-        detalleEl.textContent = config.texto;
+        let ultimoScroll = window.scrollY;
+        let contadorScroll = 0;
+
+        window.addEventListener("scroll", () => {
+            const scrollActual = window.scrollY;
+
+            if (scrollActual > ultimoScroll) {
+                contadorScroll++;
+                if (contadorScroll % 5 === 0) {
+                    crearParticulaScroll(config.particulas);
+                }
+            }
+            ultimoScroll = scrollActual;
+        }, { passive: true });
+
+        function crearParticulaScroll(listaSimbolos) {
+            const particula = document.createElement("div");
+            particula.className = "particula-scroll";
+
+            const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
+            particula.textContent = simbolo;
+
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * 80 + 20;
+
+            const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
+            const duracion = (Math.random() * 800 + 1000).toFixed(0);
+
+            particula.style.left = `${posX}px`;
+            particula.style.top = `${posY}px`;
+            particula.style.fontSize = `${tamano}rem`;
+            particula.style.animationDuration = `${duracion}ms`;
+
+            document.body.appendChild(particula);
+
+            setTimeout(() => particula.remove(), parseInt(duracion));
+        }
     }
 
-    // Generador de partículas al scroll
-    let ultimoScroll = window.scrollY;
-    let contadorScroll = 0;
+    // ==========================================
+    // 8. EASTER EGG (VÍDEO PIXEL ART)
+    // ==========================================
+    const heartTrigger = document.getElementById('pixelHeart');
+    const modalEasterEgg = document.getElementById('easterEggModal');
+    const closeBtnEasterEgg = document.getElementById('closeHeartModal');
+    const videoPixel = document.getElementById('pixelVideo');
 
-    window.addEventListener("scroll", () => {
-        const scrollActual = window.scrollY;
+    if (heartTrigger && modalEasterEgg && videoPixel) {
+        // Estado inicial de seguridad
+        modalEasterEgg.style.display = 'none';
+        videoPixel.pause();
 
-        if (scrollActual > ultimoScroll) {
-            contadorScroll++;
-            if (contadorScroll % 5 === 0) {
-                crearParticulaScroll(config.particulas);
+        const closeModalEasterEgg = () => {
+            modalEasterEgg.style.display = 'none';
+            videoPixel.pause();
+            videoPixel.currentTime = 0;
+        };
+
+        heartTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modalEasterEgg.style.display = 'flex';
+            
+            videoPixel.currentTime = 0;
+            videoPixel.muted = false;
+            videoPixel.volume = 1.0;
+
+            const playPromise = videoPixel.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Si el navegador requiere interacción estricta previa, intenta en silencio
+                    videoPixel.muted = true;
+                    videoPixel.play();
+                });
             }
+        });
+
+        if (closeBtnEasterEgg) {
+            closeBtnEasterEgg.addEventListener('click', closeModalEasterEgg);
         }
-        ultimoScroll = scrollActual;
-    }, { passive: true });
 
-    function crearParticulaScroll(listaSimbolos) {
-        const particula = document.createElement("div");
-        particula.className = "particula-scroll";
+        window.addEventListener('click', (e) => {
+            if (e.target === modalEasterEgg) {
+                closeModalEasterEgg();
+            }
+        });
 
-        const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
-        particula.textContent = simbolo;
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalEasterEgg.style.display === 'flex') {
+                closeModalEasterEgg();
+            }
+        });
 
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20;
-
-        const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0);
-
-        particula.style.left = `${posX}px`;
-        particula.style.top = `${posY}px`;
-        particula.style.fontSize = `${tamano}rem`;
-        particula.style.animationDuration = `${duracion}ms`;
-
-        document.body.appendChild(particula);
-
-        setTimeout(() => particula.remove(), parseInt(duracion));
+        // Asegura que al navegar hacia atrás la animación/sonido no se reanude sola
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted) {
+                closeModalEasterEgg();
+            }
+        });
     }
 });
 
 // ==========================================
-// 8. FUNCIONES AUXILIARES Y PROTECCIONES
+// 9. FUNCIONES AUXILIARES Y PROTECCIONES
 // ==========================================
 function normalizarTexto(texto) {
     return texto
@@ -465,53 +523,4 @@ document.addEventListener('keydown', (e) => {
     ) {
         e.preventDefault();
     }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const heartTrigger = document.getElementById('pixelHeart');
-  const modal = document.getElementById('easterEggModal');
-  const closeBtn = document.getElementById('closeHeartModal');
-  const video = document.getElementById('pixelVideo');
-
-// Abrir el Easter Egg al hacer clic/tocar el corazón
-heartTrigger.addEventListener('click', () => {
-  modal.style.display = 'flex';
-  
-  video.muted = false; // Nos aseguramos de que el sonido esté activo
-  video.volume = 1.0;  // Volumen al máximo
-  video.currentTime = 0;
-
-  const playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(error => {
-      // Si por política estricta del móvil aún bloquea el sonido, 
-      // reproducimos silenciado para que al menos se vea el vídeo.
-      console.log("El navegador bloqueó el audio automático. Reproduciendo sin sonido...");
-      video.muted = true;
-      video.play();
-    });
-  }
-});
-
-  // Función para cerrar la ventana emergente y pausar el vídeo
-  const closeModal = () => {
-    modal.style.display = 'none';
-    video.pause();
-  };
-
-  closeBtn.addEventListener('click', closeModal);
-
-  // Cerrar al hacer clic fuera del recuadro del vídeo
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-
-  // Cerrar al pulsar la tecla ESC
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') {
-      closeModal();
-    }
-  });
 });
