@@ -335,28 +335,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function obtenerModoPorFecha() {
         const ahora = new Date();
-        const mes = ahora.getMonth() + 1; // 1 = Enero, 12 = Diciembre
+        const mes = ahora.getMonth() + 1;
         const dia = ahora.getDate();
 
-        // 1. San Juan (15 al 25 de Junio)
-        if (mes === 6 && dia >= 15 && dia <= 25) {
-            return "modo-sanjuan";
-        }
-
-        // 2. Samaín / Halloween (20 de Octubre al 2 de Noviembre)
-        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) {
-            return "modo-samain";
-        }
-
-        // 3. Navidad (1 de Diciembre al 7 de Enero)
-        if (mes === 12 || (mes === 1 && dia <= 7)) {
-            return "modo-navidad";
-        }
-
-        // 4. Carnaval / Entroido (Del 10 al 25 de Febrero)
-        if (mes === 2 && dia >= 10 && dia <= 25) {
-            return "modo-carnaval";
-        }
+        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
+        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
+        if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
+        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
 
         return null;
     }
@@ -439,29 +424,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    
-    // ==========================================
-    // 9. FUNCIONES AUXILIARES Y PROTECCIONES
-    // ==========================================
-    function normalizarTexto(texto) {
-        return texto
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+});
+
+// ==========================================
+// 8. FUNCIONES AUXILIARES Y PROTECCIONES
+// ==========================================
+function normalizarTexto(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+// Deshabilitar clic derecho
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
+document.addEventListener('keydown', (e) => {
+    if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && e.key === 'u')
+    ) {
+        e.preventDefault();
     }
-
-    // Deshabilitar clic derecho
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-    // Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
-    document.addEventListener('keydown', (e) => {
-        if (
-            e.key === 'F12' || 
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-            (e.ctrlKey && e.key === 'u')
-        ) {
-            e.preventDefault();
-        }
-    });
-
 });
