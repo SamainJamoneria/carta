@@ -15,140 +15,120 @@
 }
 
 body{
-
     font-family:Arial,Helvetica,sans-serif;
-
     background:linear-gradient(180deg,#2d2b72,#23235b);
-
     color:white;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     min-height:100vh;
-
     padding:25px;
-
 }
 
 .tarjeta{
-
     width:100%;
     max-width:520px;
-
     background:white;
-
     color:#333;
-
     border-radius:20px;
-
     overflow:hidden;
-
     box-shadow:0 20px 60px rgba(0,0,0,.35);
-
 }
 
 .logo{
-
     width:100%;
-
     display:block;
-
 }
 
 .contenido{
-
     padding:30px;
-
 }
 
 h1{
-
     text-align:center;
-
     color:#2d2b72;
-
     margin-bottom:8px;
-
 }
 
 .subtitulo{
-
     text-align:center;
-
     color:#666;
-
     margin-bottom:30px;
-
 }
 
 .boton{
-
     display:block;
-
     text-decoration:none;
-
     background:#2d2b72;
-
     color:white;
-
     padding:18px;
-
     border-radius:12px;
-
     text-align:center;
-
     margin-bottom:15px;
-
     font-size:20px;
-
     font-weight:bold;
-
     transition:.2s;
-
 }
 
 .boton:hover{
-
     background:#4442a4;
-
 }
 
 .info{
-
     margin-top:30px;
-
     border-top:1px solid #ddd;
-
     padding-top:25px;
-
     line-height:1.8;
-
 }
 
 .info a{
-
     color:#2d2b72;
-
     text-decoration:none;
-
     font-weight:bold;
+}
 
+/* ESTILOS AÑADIDOS PARA EL BOTÓN DE INSTAGRAM */
+.instagram-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 2px solid #d8b35c;
+    color: #2d2b72;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
+}
+
+.btn-instagram:hover,
+.btn-instagram:active {
+    background: #2d2b72;
+    color: #ffffff;
+    border-color: #2d2b72;
+    transform: translateY(-2px);
+}
+
+.icon-ig {
+    width: 22px;
+    height: 22px;
+    display: block;
 }
 
 .footer{
-
     text-align:center;
-
     margin-top:25px;
-
     color:#888;
-
     font-size:14px;
-
 }
 
 </style>
@@ -201,12 +181,14 @@ Plaza de la Cormelana nº6<br>
 
 🕒 Abierto todos los días
 
-<br><br>
+<br>
 
+<div class="instagram-container">
   <a href="https://www.instagram.com/samaincormelana" target="_blank" rel="noopener noreferrer" class="btn-instagram">
     <img src="instagram.svg" alt="Instagram Jamonería Samaín" class="icon-ig">
     <span>Instagram</span>
   </a>
+</div>
 
 </div>
 
