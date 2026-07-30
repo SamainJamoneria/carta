@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-   // ==========================================
+    // ==========================================
     // 8. EASTER EGG (VÍDEO PIXEL ART)
     // ==========================================
     const heartTrigger = document.getElementById('pixelHeart');
@@ -479,8 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Autoreproducción iniciada con éxito y con sonido
                 }).catch(error => {
                     console.warn("Autoreproducción bloqueada con audio, reintentando:", error);
-                    // Si el navegador de un móvil específico bloquea el sonido de golpe, 
-                    // reproduce automáticamente de todas formas
+                    // Si el navegador bloquea el sonido, reproduce de forma silenciada
                     videoPixel.muted = true;
                     videoPixel.play();
                 });
@@ -508,27 +507,29 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('pageshow', reseteartVideo);
         window.addEventListener('pagehide', reseteartVideo);
     }
-    
-// ==========================================
-// 9. FUNCIONES AUXILIARES Y PROTECCIONES
-// ==========================================
-function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-}
 
-// Deshabilitar clic derecho
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
-document.addEventListener('keydown', (e) => {
-    if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && e.key === 'u')
-    ) {
-        e.preventDefault();
+    // ==========================================
+    // 9. FUNCIONES AUXILIARES Y PROTECCIONES
+    // ==========================================
+    function normalizarTexto(texto) {
+        return texto
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
     }
+
+    // Deshabilitar clic derecho
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
+    document.addEventListener('keydown', (e) => {
+        if (
+            e.key === 'F12' || 
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+            (e.ctrlKey && e.key === 'u')
+        ) {
+            e.preventDefault();
+        }
+    });
+
 });
