@@ -449,56 +449,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (heartTrigger && modalEasterEgg && videoPixel) {
 
-        // Función estricta para apagar y silenciar el vídeo
         const reseteartVideo = () => {
             videoPixel.pause();
             videoPixel.currentTime = 0;
-            videoPixel.muted = true; // Silenciar por seguridad
+            videoPixel.muted = true;
             modalEasterEgg.style.display = 'none';
         };
 
-        // Ejecutar apagado inmediato al cargar la página por si acaso
+        // Estado inicial de seguridad al cargar
         reseteartVideo();
 
-        // 1. Abrir SOLO al hacer clic/tocar el corazón
+        // Clic en el corazón: Autoreproducción con sonido
         heartTrigger.addEventListener('click', (e) => {
             e.stopPropagation();
+            
+            // 1. Mostrar modal primero
             modalEasterEgg.style.display = 'flex';
             
+            // 2. Resetear tiempo y activar sonido explícitamente
             videoPixel.currentTime = 0;
-            videoPixel.muted = false; // Dessilenciar SOLO en el clic
+            videoPixel.muted = false;
             videoPixel.volume = 1.0;
 
+            // 3. Disparo inmediato de la autoreproducción
             const playPromise = videoPixel.play();
+
             if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // Si el móvil bloquea el audio, reproduce silenciado
+                playPromise.then(() => {
+                    // Autoreproducción iniciada con éxito y con sonido
+                }).catch(error => {
+                    console.warn("Autoreproducción bloqueada con audio, reintentando:", error);
+                    // Si el navegador de un móvil específico bloquea el sonido de golpe, 
+                    // reproduce automáticamente de todas formas
                     videoPixel.muted = true;
                     videoPixel.play();
                 });
             }
         });
 
-        // 2. Cerrar con el botón X
+        // Controles de cierre
         if (closeBtnEasterEgg) {
             closeBtnEasterEgg.addEventListener('click', reseteartVideo);
         }
 
-        // 3. Cerrar al hacer clic fuera
         window.addEventListener('click', (e) => {
             if (e.target === modalEasterEgg) {
                 reseteartVideo();
             }
         });
 
-        // 4. Cerrar con ESC
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modalEasterEgg.style.display === 'flex') {
                 reseteartVideo();
             }
         });
 
-        // 5. PARCHE ANTI-CACHE (Bfcache): Si la página se recupera de la memoria al ir hacia atrás/inicio
+        // Garantiza que al navegar o ir atrás NO se auto-reproduzca solo
         window.addEventListener('pageshow', reseteartVideo);
         window.addEventListener('pagehide', reseteartVideo);
     }
