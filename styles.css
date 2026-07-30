@@ -1305,20 +1305,47 @@ body.modo-carnaval .detalle-temporada {
 }
 
 /*==================================================
-ICONO DE INSTAGRAM EN HEADER Y MODALES
+BOTÓN DE INSTAGRAM EN EL FOOTER
 ==================================================*/
-.social-icon-header {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    vertical-align: middle;
-    /* Convierte el icono SVG a color blanco usando filtros CSS */
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease, filter 0.2s ease;
+.instagram-footer {
+  margin: 20px auto 10px;
+  text-align: center;
 }
 
-/* Efecto hover: Cambia a dorado (--color-dorado) al pasar el ratón */
-.nav-link:hover .social-icon-header {
-    transform: scale(1.15);
-    filter: invert(79%) sepia(50%) saturate(485%) hue-rotate(6deg) brightness(92%) contrast(88%);
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 2px solid var(--color-dorado);
+  color: var(--color-principal);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.btn-instagram:hover,
+.btn-instagram:active {
+  background: var(--color-principal);
+  color: #ffffff;
+  border-color: var(--color-principal);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
+}
+
+.icon-ig {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+/* En el hover cambiamos el color del SVG si fuera necesario, o mantenemos el icono limpio */
+.btn-instagram:hover .icon-ig {
+  transform: scale(1.1);
 }
