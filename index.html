@@ -354,15 +354,70 @@ Gracias por visitarnos <span id="pixelHeart" class="heart-trigger" title="¡Un s
     <div class="pixel-frame">
       <h3 class="pixel-title">👾 Jamonería Samaín 👾</h3>
       <video id="pixelVideo" controls controlsList="nodownload" oncontextmenu="return false;" loop playsinline preload="metadata">
-          <source src="local-pixel.mp4" type="video/mp4">
-          Tu navegador no soporta vídeo.
+        <source src="local-pixel.mp4" type="video/mp4">
+        Tu navegador no soporta vídeo.
       </video>
     </div>
   </div>
 </div>
-    
-<!-- VINCULACIÓN DEL SCRIPT JS -->
-<script src="script.js"></script>
-    
+
+<!-- SCRIPT EXCLUSIVO PARA INDEX.HTML (Evita romper la carta) -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const heartTrigger = document.getElementById('pixelHeart');
+  const modalEasterEgg = document.getElementById('easterEggModal');
+  const closeBtnEasterEgg = document.getElementById('closeHeartModal');
+  const videoPixel = document.getElementById('pixelVideo');
+
+  if (heartTrigger && modalEasterEgg && videoPixel) {
+    const reseteartVideo = () => {
+      videoPixel.pause();
+      videoPixel.currentTime = 0;
+      videoPixel.muted = true;
+      modalEasterEgg.style.display = 'none';
+    };
+
+    reseteartVideo();
+
+    heartTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalEasterEgg.style.display = 'flex';
+      videoPixel.currentTime = 0;
+      videoPixel.muted = false;
+      videoPixel.volume = 1.0;
+
+      const playPromise = videoPixel.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          videoPixel.muted = true;
+          videoPixel.play();
+        });
+      }
+    });
+
+    if (closeBtnEasterEgg) closeBtnEasterEgg.addEventListener('click', reseteartVideo);
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modalEasterEgg) reseteartVideo();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalEasterEgg.style.display === 'flex') reseteartVideo();
+    });
+
+    window.addEventListener('pageshow', reseteartVideo);
+    window.addEventListener('pagehide', reseteartVideo);
+  }
+
+  // Bloqueos de seguridad solo en la portada
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) || (e.ctrlKey && e.key === 'u')) {
+      e.preventDefault();
+    }
+  });
+});
+</script>
 </body>
 </html>
+    
