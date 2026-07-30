@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ==========================================
+   // ==========================================
     // 8. EASTER EGG (VÍDEO PIXEL ART)
     // ==========================================
     const heartTrigger = document.getElementById('pixelHeart');
@@ -448,59 +448,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoPixel = document.getElementById('pixelVideo');
 
     if (heartTrigger && modalEasterEgg && videoPixel) {
-        // Estado inicial de seguridad
-        modalEasterEgg.style.display = 'none';
-        videoPixel.pause();
 
-        const closeModalEasterEgg = () => {
-            modalEasterEgg.style.display = 'none';
+        // Función estricta para apagar y silenciar el vídeo
+        const reseteartVideo = () => {
             videoPixel.pause();
             videoPixel.currentTime = 0;
+            videoPixel.muted = true; // Silenciar por seguridad
+            modalEasterEgg.style.display = 'none';
         };
 
+        // Ejecutar apagado inmediato al cargar la página por si acaso
+        reseteartVideo();
+
+        // 1. Abrir SOLO al hacer clic/tocar el corazón
         heartTrigger.addEventListener('click', (e) => {
             e.stopPropagation();
             modalEasterEgg.style.display = 'flex';
             
             videoPixel.currentTime = 0;
-            videoPixel.muted = false;
+            videoPixel.muted = false; // Dessilenciar SOLO en el clic
             videoPixel.volume = 1.0;
 
             const playPromise = videoPixel.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
-                    // Si el navegador requiere interacción estricta previa, intenta en silencio
+                    // Si el móvil bloquea el audio, reproduce silenciado
                     videoPixel.muted = true;
                     videoPixel.play();
                 });
             }
         });
 
+        // 2. Cerrar con el botón X
         if (closeBtnEasterEgg) {
-            closeBtnEasterEgg.addEventListener('click', closeModalEasterEgg);
+            closeBtnEasterEgg.addEventListener('click', reseteartVideo);
         }
 
+        // 3. Cerrar al hacer clic fuera
         window.addEventListener('click', (e) => {
             if (e.target === modalEasterEgg) {
-                closeModalEasterEgg();
+                reseteartVideo();
             }
         });
 
+        // 4. Cerrar con ESC
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modalEasterEgg.style.display === 'flex') {
-                closeModalEasterEgg();
+                reseteartVideo();
             }
         });
 
-        // Asegura que al navegar hacia atrás la animación/sonido no se reanude sola
-        window.addEventListener('pageshow', (e) => {
-            if (e.persisted) {
-                closeModalEasterEgg();
-            }
-        });
+        // 5. PARCHE ANTI-CACHE (Bfcache): Si la página se recupera de la memoria al ir hacia atrás/inicio
+        window.addEventListener('pageshow', reseteartVideo);
+        window.addEventListener('pagehide', reseteartVideo);
     }
-});
-
+    
 // ==========================================
 // 9. FUNCIONES AUXILIARES Y PROTECCIONES
 // ==========================================
