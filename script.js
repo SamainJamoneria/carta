@@ -473,12 +473,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('closeHeartModal');
   const video = document.getElementById('pixelVideo');
 
-  // Abrir el Easter Egg al hacer clic en el corazón
-  heartTrigger.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    video.currentTime = 0; // Reiniciar el vídeo
-    video.play();
-  });
+ // Abrir el Easter Egg al hacer clic/tocar el corazón
+heartTrigger.addEventListener('click', () => {
+  modal.style.display = 'flex';
+  video.load(); // Fuerza la recarga del archivo
+  
+  // Promesa para gestionar políticas de auto-play del navegador
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.log("El navegador requirió interacción previa o silencio:", error);
+    });
+  }
+});
 
   // Función para cerrar la ventana emergente y pausar el vídeo
   const closeModal = () => {
