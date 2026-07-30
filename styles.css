@@ -1303,3 +1303,22 @@ body.modo-carnaval .detalle-temporada {
     transform: translateY(120px) scale(0.3) rotate(360deg);
   }
 }
+
+/*==================================================
+ICONO DE INSTAGRAM EN HEADER Y MODALES
+==================================================*/
+.social-icon-header {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    /* Convierte el icono SVG a color blanco usando filtros CSS */
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Efecto hover: Cambia a dorado (--color-dorado) al pasar el ratón */
+.nav-link:hover .social-icon-header {
+    transform: scale(1.15);
+    filter: invert(79%) sepia(50%) saturate(485%) hue-rotate(6deg) brightness(92%) contrast(88%);
+}
