@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.frequency.setValueAtTime(120, audioCtx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.04);
 
-            gain.gain.setValueAtTime(0.20, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.30, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
 
             osc.connect(gain);
