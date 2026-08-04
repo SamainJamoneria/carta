@@ -15,7 +15,7 @@ Variables Globales
     --color-texto: #333333;
     --color-secundario: #666666;
     --radio: 18px;
-    --sombra: 0 8px 22px rgba(0,0,0,.08);
+    --sombra: 0 8px 22px rgba(0, 0, 0, 0.08);
     --ancho-maximo: 1100px;
 }
 
@@ -47,7 +47,7 @@ Cabecera Principal (Header)
     padding-top: 12px;
     padding-bottom: 60px;
     text-align: center;
-    background: linear-gradient(rgba(34,34,80,.82), rgba(34,34,80,.82)), url("cabecera.jpg") center/cover;
+    background: linear-gradient(rgba(34, 34, 80, 0.82), rgba(34, 34, 80, 0.82)), url("cabecera.jpg") center/cover;
     color: #ffffff;
 }
 
@@ -162,11 +162,11 @@ main {
     background: #ffffff;
     font-size: 18px;
     box-shadow: var(--sombra);
-    transition: box-shadow .25s ease;
+    transition: box-shadow 0.25s ease;
 }
 
 #buscar:focus {
-    box-shadow: 0 12px 30px rgba(45,43,114,.20);
+    box-shadow: 0 12px 30px rgba(45, 43, 114, 0.20);
 }
 
 /*==================================================
@@ -258,7 +258,7 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 .contenedor-menu {
     position: relative;
     flex: 1;
-    min-width: 0; /* IMPRESCINDIBLE: Evita que Flexbox colapse */
+    min-width: 0; /* Evita colapso en Flexbox */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -273,18 +273,18 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
     height: 100%;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .25s;
+    transition: opacity 0.25s;
     z-index: 5;
 }
 
 .contenedor-menu::before {
     left: 0;
-    background: linear-gradient(to right, #f6f4ef 0%, rgba(246,244,239,0) 100%);
+    background: linear-gradient(to right, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
 }
 
 .contenedor-menu::after {
     right: 0;
-    background: linear-gradient(to left, #f6f4ef 0%, rgba(246,244,239,0) 100%);
+    background: linear-gradient(to left, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
 }
 
 .contenedor-menu.mostrar-izquierda::before { opacity: 1; }
@@ -307,7 +307,7 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
     display: none; /* Chrome/Safari */
 }
 
-/* Estilo de los botones de flecha */
+/* Botones de flecha */
 .flecha-menu {
     display: inline-flex;
     align-items: center;
@@ -319,11 +319,11 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
     width: 32px;
     height: 32px;
     font-size: 18px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     flex-shrink: 0;
     cursor: pointer;
     z-index: 10;
-    transition: opacity .25s ease, background-color .2s ease;
+    transition: opacity 0.25s ease, background-color 0.2s ease;
 }
 
 .flecha-menu:hover {
@@ -361,30 +361,30 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     color: #ffffff;
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: .5px;
-    box-shadow: 0 12px 30px rgba(45,43,114,.30);
-    transition: all .30s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 12px 30px rgba(45, 43, 114, 0.30);
+    transition: all 0.30s ease;
 }
 
 .btn-destino:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 20px 45px rgba(45,43,114,.35);
+    box-shadow: 0 20px 45px rgba(45, 43, 114, 0.35);
 }
 
 .btn-destino:active {
-    transform: scale(.97);
+    transform: scale(0.97);
 }
 
 .modal-destino {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.65);
+    background: rgba(0, 0, 0, 0.65);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .35s ease, visibility .35s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
     z-index: 5000;
 }
 
@@ -400,7 +400,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     padding: 35px;
     text-align: center;
     position: relative;
-    animation: subir .35s ease;
+    animation: subir 0.35s ease;
 }
 
 .cerrar-destino {
@@ -433,7 +433,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background .25s ease;
+    transition: background 0.25s ease;
 }
 
 .opcion-comensales:hover {
@@ -448,7 +448,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 .resultado-destino {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.82);
+    background: rgba(0, 0, 0, 0.82);
     display: none;
     justify-content: center;
     align-items: center;
@@ -466,11 +466,11 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     border-radius: 24px;
     padding: 45px;
     text-align: center;
-    animation: zoomDestino .45s ease-out;
+    animation: zoomDestino 0.45s ease-out;
 }
 
 @keyframes zoomDestino {
-    from { opacity: 0; transform: scale(.8); }
+    from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
 }
 
@@ -534,7 +534,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     left: 20px;
     overflow: hidden;
     background: #ffffff;
-    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
 .gajo-quesito {
@@ -559,7 +559,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .gajo-quesito.iluminado {
     background-color: var(--color-dorado) !important;
-    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216,179,92,0.5));
+    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216, 179, 92, 0.5));
 }
 
 .icono-ruleta {
@@ -606,7 +606,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 .flecha-ruleta .puntero {
     color: var(--color-precio);
     font-size: 30px;
-    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     margin-top: -2px;
 }
 
@@ -617,7 +617,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .ruleta-destino.finalizada {
-    animation: reboteRuleta .45s ease;
+    animation: reboteRuleta 0.45s ease;
 }
 
 /*==================================
@@ -637,8 +637,8 @@ ALÉRGENOS Y CONFETI
     border-radius: 18px;
     border: 2px solid var(--color-dorado);
     cursor: pointer;
-    transition: transform .25s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    transition: transform 0.25s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .alergenos img:hover {
@@ -654,7 +654,7 @@ ALÉRGENOS Y CONFETI
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.82);
+    background: rgba(0, 0, 0, 0.82);
     z-index: 99999;
     justify-content: center;
     align-items: center;
@@ -831,7 +831,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 /*==================================================
-MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
+MODAL GALERÍA
 ==================================================*/
 .modal-galeria-content {
     background-color: #ffffff;
@@ -877,7 +877,7 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     height: 100%;
     max-height: 15vh;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .galeria-item img {
@@ -1102,7 +1102,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     width: 100%;
     text-align: center;
     font-family: inherit;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.25s ease;
 }
 
@@ -1112,7 +1112,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     border-color: var(--color-dorado);
     color: var(--color-principal);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(216,179,92,0.25);
+    box-shadow: 0 4px 12px rgba(216, 179, 92, 0.25);
 }
 
 /* ==========================================================================
@@ -1120,95 +1120,95 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
    ========================================================================== */
 
 .detalle-temporada {
-  display: none;
-  margin: 8px auto 0;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  width: fit-content;
-  animation: fadeIn 0.5s ease-in-out;
+    display: none;
+    margin: 8px auto 0;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 body.modo-navidad .detalle-temporada {
-  display: inline-block;
-  background: rgba(212, 175, 55, 0.15);
-  color: #d4af37;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 body.modo-sanjuan .detalle-temporada {
-  display: inline-block;
-  background: rgba(243, 156, 18, 0.15);
-  color: #f39c12;
-  border: 1px solid rgba(243, 156, 18, 0.4);
+    display: inline-block;
+    background: rgba(243, 156, 18, 0.15);
+    color: #f39c12;
+    border: 1px solid rgba(243, 156, 18, 0.4);
 }
 
 body.modo-carnaval .detalle-temporada {
-  display: inline-block;
-  background: rgba(253, 121, 168, 0.15);
-  color: #fd79a8;
-  border: 1px solid rgba(253, 121, 168, 0.4);
+    display: inline-block;
+    background: rgba(253, 121, 168, 0.15);
+    color: #fd79a8;
+    border: 1px solid rgba(253, 121, 168, 0.4);
 }
 
 .particula-scroll {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  user-select: none;
-  animation: caidaParticula linear forwards;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    animation: caidaParticula linear forwards;
 }
 
 @keyframes caidaParticula {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(120px) scale(0.3) rotate(360deg);
-  }
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(120px) scale(0.3) rotate(360deg);
+    }
 }
 
 /*==================================================
 BOTÓN DE INSTAGRAM EN EL FOOTER
 ==================================================*/
 .instagram-footer {
-  margin: 20px auto 10px;
-  text-align: center;
+    margin: 20px auto 10px;
+    text-align: center;
 }
 
 .btn-instagram {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #ffffff;
-  border: 2px solid var(--color-dorado);
-  color: var(--color-principal);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
 }
 
 .btn-instagram:hover,
 .btn-instagram:active {
-  background: var(--color-principal);
-  color: #ffffff;
-  border-color: var(--color-principal);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
+    background: var(--color-principal);
+    color: #ffffff;
+    border-color: var(--color-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
 }
 
 .icon-ig {
-  width: 24px;
-  height: 24px;
-  display: block;
-  transition: transform 0.25s ease;
+    width: 24px;
+    height: 24px;
+    display: block;
+    transition: transform 0.25s ease;
 }
 
 /* ==========================================================================
