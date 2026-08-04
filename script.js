@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.addEventListener("DOMContentLoaded", () => {
-
     // ==========================================
     // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS
     // ==========================================
     const menu = document.getElementById("menu-categorias");
 
     if (menu && typeof carta !== "undefined") {
+        menu.innerHTML = ""; // Limpia el contenedor antes de renderizar
         carta.forEach(categoria => {
             menu.innerHTML += `
                 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
-                    <div class="icono"><img src="${categoria.icono}" alt="${categoria.titulo}" class="img-icono-cat"></div>
-                    <div class="texto">${categoria.titulo}</div>
+                    <img src="${categoria.icono}" alt="${categoria.titulo}" class="img-icono-cat" onerror="this.style.display='none'">
+                    <span>${categoria.titulo}</span>
                 </a>
             `;
         });
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             seccion.id = categoria.id;
 
             const titulo = document.createElement("h2");
-            titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat"> ${categoria.titulo}`;
+            titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat" onerror="this.style.display='none'"> ${categoria.titulo}`;
             seccion.appendChild(titulo);
 
             categoria.productos.forEach(producto => {
@@ -113,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. FLECHAS DEL MENÚ DE CATEGORÍAS
     // ==========================================
-    const contenedorMenu = document.querySelector(".menu-categorias");
+    const contenedorMenu = document.getElementById("menu-categorias");
     const flechaIzquierda = document.getElementById("flecha-izquierda");
     const flechaDerecha = document.getElementById("flecha-derecha");
 
