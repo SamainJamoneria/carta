@@ -1,5 +1,5 @@
 /* ======================================================
-   SAMAÍN LA CORMELANA
+   SAMAÍN LA CORMELANA - CSS DEFINITIVO Y CORREGIDO
 ====================================================== */
 
 /*==========================
@@ -187,6 +187,8 @@ SECCIONES Y PRODUCTOS
     margin-bottom: 28px;
     padding-bottom: 12px;
     border-bottom: 4px solid var(--color-dorado);
+    display: flex;
+    align-items: center;
 }
 
 .producto {
@@ -258,7 +260,7 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 .contenedor-menu {
     position: relative;
     flex: 1;
-    min-width: 0; /* Evita colapso en Flexbox */
+    min-width: 0;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -291,23 +293,22 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 .contenedor-menu.mostrar-derecha::after { opacity: 1; }
 
 .menu-categorias {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
     width: 100%;
-    padding: 6px 0;
+    padding: 6px 4px !important;
     -webkit-overflow-scrolling: touch;
 }
 
 .menu-categorias::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
-/* Botones de flecha */
 .flecha-menu {
     display: inline-flex;
     align-items: center;
@@ -336,7 +337,93 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 }
 
 /*==================================================
-EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
+CÁPSULAS Y CATEGORÍAS UNIFORMES
+==================================================*/
+#menu-categorias .categoria,
+.categoria {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 110px !important;
+    width: 110px !important;
+    height: 105px !important;
+    padding: 8px 10px !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+    text-decoration: none !important;
+    border-radius: 20px !important;
+    background: #ffffff !important;
+    border: 2px solid var(--color-dorado) !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer;
+}
+
+#menu-categorias .categoria img.img-icono-cat,
+#menu-categorias .categoria img.icono-categoria,
+.categoria img.icono-categoria,
+.img-icono-cat {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    transition: transform 0.2s ease;
+}
+
+#menu-categorias .categoria span,
+.categoria span {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    color: var(--color-principal) !important;
+    display: block !important;
+}
+
+#menu-categorias .categoria:hover img.img-icono-cat,
+#menu-categorias .categoria:hover img.icono-categoria,
+.categoria:hover img.icono-categoria {
+    transform: scale(1.1);
+}
+
+#menu-categorias .categoria.activa,
+.categoria.activa {
+    background-color: var(--color-dorado) !important;
+    box-shadow: 0 4px 15px rgba(216, 179, 92, 0.45) !important;
+    border-color: transparent !important;
+    transform: translateY(-2px);
+}
+
+#menu-categorias .categoria.activa span,
+.categoria.activa span {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.seccion h2 img.img-titulo-cat,
+.seccion h2 img.icono-categoria,
+.img-titulo-cat {
+    width: 36px !important;
+    height: 36px !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+    margin-right: 10px !important;
+    display: inline-block !important;
+}
+
+/*==================================================
+EL DESTINO SAMAÍN (RULETA)
 ==================================================*/
 .destino-samain {
     max-width: 900px;
@@ -894,20 +981,6 @@ MODAL GALERÍA
     filter: brightness(1.05);
 }
 
-.galeria-item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    transition: border-color 0.3s ease;
-    pointer-events: none;
-}
-
-.galeria-item:hover::after {
-    border-color: var(--color-dorado);
-}
-
 .modal-visor {
     position: fixed;
     inset: 0;
@@ -929,7 +1002,6 @@ MODAL GALERÍA
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     border: 2px solid var(--color-dorado);
     animation: zoomIn 0.25s ease-out;
-    will-change: transform, opacity;
 }
 
 .cerrar-visor {
@@ -942,26 +1014,15 @@ MODAL GALERÍA
     cursor: pointer;
     line-height: 1;
     z-index: 1000000;
-    transition: color 0.2s ease;
-}
-
-.cerrar-visor:hover {
-    color: var(--color-dorado);
 }
 
 @keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /*==================================================
-ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
+TIENDA Y CONTACTO
 ==================================================*/
 .tienda-seccion {
     margin-bottom: 18px;
@@ -976,11 +1037,6 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     font-weight: 700;
     color: var(--color-principal);
     margin-bottom: 4px;
-}
-
-.tienda-icono {
-    font-size: 1.25rem;
-    line-height: 1;
 }
 
 .tienda-seccion p {
@@ -1009,20 +1065,6 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     margin-bottom: 6px;
 }
 
-.tienda-evento-destacado p {
-    color: var(--color-texto);
-    font-size: 0.9rem;
-    line-height: 1.45;
-    margin: 0;
-}
-
-.tienda-contacto-texto {
-    font-size: 0.9rem;
-    color: var(--color-secundario);
-    margin-bottom: 8px;
-    text-align: center;
-}
-
 .tienda-telefono {
     display: inline-block;
     color: var(--color-principal);
@@ -1042,7 +1084,7 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 }
 
 /*==================================================
-ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
+BOTÓN HAMBURGUESA Y MODAL MENÚ
 ==================================================*/
 .btn-hamburguesa {
     background: transparent !important;
@@ -1084,7 +1126,6 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
-/* Botones del menú hamburguesa */
 .link-modal-item {
     display: flex;
     align-items: center;
@@ -1115,10 +1156,9 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     box-shadow: 0 4px 12px rgba(216, 179, 92, 0.25);
 }
 
-/* ==========================================================================
-   DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
-   ========================================================================== */
-
+/*==================================================
+DETALLE TEMÁTICO Y PARTICULAS
+==================================================*/
 .detalle-temporada {
     display: none;
     margin: 8px auto 0;
@@ -1171,7 +1211,7 @@ body.modo-carnaval .detalle-temporada {
 }
 
 /*==================================================
-BOTÓN DE INSTAGRAM EN EL FOOTER
+BOTÓN INSTAGRAM FOOTER
 ==================================================*/
 .instagram-footer {
     margin: 20px auto 10px;
@@ -1209,95 +1249,6 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     height: 24px;
     display: block;
     transition: transform 0.25s ease;
-}
-
-/* ==========================================================================
-   DISEÑO DEFINITIVO DE CÁPSULAS Y CATEGORÍAS UNIFORMES CON ILUSTRACIÓN GRANDE
-   ========================================================================== */
-
-/* 1. Botón/Cápsula de categoría simétrica */
-#menu-categorias .categoria,
-.categoria {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 120px !important;    /* Tamaño uniforme mínimo */
-    height: 110px !important;       /* Altura idéntica para todas las cápsulas */
-    padding: 8px 12px !important;
-    gap: 8px !important;
-    flex-shrink: 0 !important;
-    text-decoration: none !important;
-    border-radius: 55px !important;  /* Forma de cápsula uniforme */
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    box-sizing: border-box !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 2. Ilustración grande respetando colores de la imagen original */
-#menu-categorias .categoria img.img-icono-cat,
-#menu-categorias .categoria img.icono-categoria,
-.categoria img.icono-categoria,
-.img-icono-cat {
-    width: 64px !important;         /* Tamaño grande para apreciar trazo y detalle */
-    height: 64px !important;
-    min-width: 64px !important;
-    min-height: 64px !important;
-    object-fit: contain !important;
-    display: block !important;
-    
-    /* Previene tintados o alteración de color en el navegador */
-    filter: none !important;
-    -webkit-filter: none !important;
-    mix-blend-mode: normal !important;
-    opacity: 1 !important;
-    
-    transition: transform 0.25s ease;
-}
-
-/* 3. Estilo del texto dentro de la cápsula */
-#menu-categorias .categoria span,
-.categoria span {
-    font-size: 0.85rem !important;
-    line-height: 1.1 !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-    color: var(--color-principal);
-}
-
-/* 4. Interacción Hover */
-#menu-categorias .categoria:hover img.img-icono-cat,
-#menu-categorias .categoria:hover img.icono-categoria,
-.categoria:hover img.icono-categoria {
-    transform: scale(1.1);
-}
-
-/* 5. Estado Activo (Botón dorado encendido con resplandor) */
-#menu-categorias .categoria.activa,
-.categoria.activa {
-    background-color: #d9ab55 !important;
-    box-shadow: 0 4px 18px rgba(217, 171, 85, 0.5) !important;
-    border-color: transparent !important;
-    transform: scale(1.02);
-}
-
-#menu-categorias .categoria.activa span,
-.categoria.activa span {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-/* 6. Iconos en los títulos H2 de las secciones */
-.seccion h2 img.img-titulo-cat,
-.seccion h2 img.icono-categoria,
-.img-titulo-cat {
-    width: 36px !important;
-    height: 36px !important;
-    object-fit: contain !important;
-    vertical-align: middle !important;
-    margin-right: 10px !important;
-    display: inline-block !important;
 }
 
 /*==================================================
