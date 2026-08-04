@@ -138,7 +138,7 @@ const carta = [
 {
     id:"dulces",
     titulo:"Piadinas Dulces",
-    icono:"🍫",
+    icono: "piadinas_dulces.svg",
     productos:[
         { nombre:"Membrillo", descripcion:"Dos quesos con finas láminas de membrillo", precio:"8,00 €", alergenos: ["g", "l"] },
         { nombre:"Nutella", descripcion:"", precio:"6,00 €", alergenos: ["g", "l", "f"] },
@@ -148,7 +148,7 @@ const carta = [
 {
     id:"bocadillos",
     titulo:"Bocadillos",
-    icono:"🥪",
+    icono: "bocadillos.svg",
     productos:[
         { nombre:"Jamón Curado de Granada", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Salchichón Ibérico", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
@@ -163,7 +163,7 @@ const carta = [
 {
     id:"postres",
     titulo:"Postres",
-    icono:"🍰",
+    icono: "postres.svg",
     productos:[
         { nombre:"Queso con Membrillo", descripcion:"", precio:"5,00 €", alergenos: ["l"] },
         { nombre:"Helados", descripcion:"Por favor, pregunte por nuestros sabores disponibles", precio:"Consultar", alergenos: ["l"] }
