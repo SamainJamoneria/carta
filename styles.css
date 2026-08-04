@@ -1,5 +1,5 @@
 /* ======================================================
-   SAMAÍN LA CORMELANA - CSS DEFINITIVO Y CORREGIDO
+   SAMAÍN LA CORMELANA
 ====================================================== */
 
 /*==========================
@@ -15,7 +15,7 @@ Variables Globales
     --color-texto: #333333;
     --color-secundario: #666666;
     --radio: 18px;
-    --sombra: 0 8px 22px rgba(0, 0, 0, 0.08);
+    --sombra: 0 8px 22px rgba(0,0,0,.08);
     --ancho-maximo: 1100px;
 }
 
@@ -47,7 +47,7 @@ Cabecera Principal (Header)
     padding-top: 12px;
     padding-bottom: 60px;
     text-align: center;
-    background: linear-gradient(rgba(34, 34, 80, 0.82), rgba(34, 34, 80, 0.82)), url("cabecera.jpg") center/cover;
+    background: linear-gradient(rgba(34,34,80,.82), rgba(34,34,80,.82)), url("cabecera.jpg") center/cover;
     color: #ffffff;
 }
 
@@ -162,11 +162,11 @@ main {
     background: #ffffff;
     font-size: 18px;
     box-shadow: var(--sombra);
-    transition: box-shadow 0.25s ease;
+    transition: box-shadow .25s ease;
 }
 
 #buscar:focus {
-    box-shadow: 0 12px 30px rgba(45, 43, 114, 0.20);
+    box-shadow: 0 12px 30px rgba(45,43,114,.20);
 }
 
 /*==================================================
@@ -187,8 +187,6 @@ SECCIONES Y PRODUCTOS
     margin-bottom: 28px;
     padding-bottom: 12px;
     border-bottom: 4px solid var(--color-dorado);
-    display: flex;
-    align-items: center;
 }
 
 .producto {
@@ -238,32 +236,32 @@ footer {
 }
 
 /*==================================================
-MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
+MENÚ STICKY Y CATEGORÍAS
 ==================================================*/
 .menu-sticky {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(246, 244, 239, 0.95);
+    background: rgba(246,244,239,.90);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 10px 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid rgba(216, 179, 92, 0.35);
+    padding: 8px 15px; /* Ajustado ligeramente */
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    border-bottom: 1px solid rgba(216,179,92,.35);
     display: flex;
     align-items: center;
     gap: 8px;
     width: 100%;
-    box-sizing: border-box;
+    min-height: 60px; /* EVITA QUE SE APLASTE EL CONTENEDOR */
 }
 
 .contenedor-menu {
     position: relative;
     flex: 1;
-    min-width: 0;
+    min-width: 0; /* IMPRESCINDIBLE en Flexbox para que los hijos con scroll horizontal no colapsen */
     display: flex;
     align-items: center;
-    overflow: hidden;
+    /* Eliminado overflow: hidden que colapsaba el bloque */
 }
 
 .contenedor-menu::before,
@@ -275,184 +273,61 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
     height: 100%;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.25s;
+    transition: opacity .25s;
     z-index: 5;
 }
 
 .contenedor-menu::before {
     left: 0;
-    background: linear-gradient(to right, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
+    background: linear-gradient(to right, #f6f4ef 0%, rgba(246,244,239,0) 100%);
 }
 
 .contenedor-menu::after {
     right: 0;
-    background: linear-gradient(to left, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
+    background: linear-gradient(to left, #f6f4ef 0%, rgba(246,244,239,0) 100%);
 }
 
 .contenedor-menu.mostrar-izquierda::before { opacity: 1; }
 .contenedor-menu.mostrar-derecha::after { opacity: 1; }
 
 .menu-categorias {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     scrollbar-width: none;
     width: 100%;
-    padding: 6px 4px !important;
-    -webkit-overflow-scrolling: touch;
+    padding: 6px 0;
+    -webkit-overflow-scrolling: touch; /* Fluidez en iOS */
 }
 
 .menu-categorias::-webkit-scrollbar {
     display: none;
 }
 
-.flecha-menu {
-    display: inline-flex;
+/* Categorías deslizantes */
+.categoria {
+    display: inline-flex; /* Cambiado a inline-flex para mejor alineación */
     align-items: center;
     justify-content: center;
-    background: var(--color-principal, #1a2a3a);
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 18px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    flex-shrink: 0;
-    cursor: pointer;
-    z-index: 10;
-    transition: opacity 0.25s ease, background-color 0.2s ease;
-}
-
-.flecha-menu:hover {
-    background: var(--color-principal-hover, #2c435e);
-}
-
-.flecha-menu.oculta {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/*==================================================
-CÁPSULAS DE CATEGORÍA (MENÚ STICKY)
-==================================================*/
-#menu-categorias .categoria,
-.menu-categorias .categoria {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    min-width: 115px !important;
-    width: 115px !important;
-    height: 120px !important; /* Altura optimizada para icono grande + 2 líneas de texto */
-    padding: 10px 6px !important;
-    flex-shrink: 0 !important;
-    text-decoration: none !important;
-    border-radius: 20px !important;
-    background: #ffffff !important;
-    border: 2px solid var(--color-dorado) !important;
-    box-sizing: border-box !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    cursor: pointer;
-    overflow: hidden !important;
-}
-
-/* Iconos de las cápsulas (Grande, uniforme y centrado) */
-#menu-categorias .categoria img,
-.menu-categorias .categoria img {
-    width: 60px !important;
-    height: 60px !important;
-    min-width: 60px !important;
-    min-height: 60px !important;
-    max-width: 60px !important;
-    max-height: 60px !important;
-    object-fit: contain !important;
-    display: block !important;
-    margin: 0 auto !important;
-    flex-shrink: 0 !important;
-    /* Tintado al azul corporativo */
-    filter: invert(16%) sepia(48%) saturate(2450%) hue-rotate(222deg) brightness(92%) contrast(92%) !important;
-    transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-/* Texto dentro de la cápsula */
-#menu-categorias .categoria span,
-.menu-categorias .categoria span {
-    font-size: 0.76rem !important;
-    font-weight: 700 !important;
-    line-height: 1.15 !important;
-    text-align: center !important;
-    white-space: normal !important;
-    word-break: break-word !important;
-    color: var(--color-principal) !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    width: 100%;
-}
-
-/* Estado Hover */
-#menu-categorias .categoria:hover img,
-.menu-categorias .categoria:hover img {
-    transform: scale(1.08);
-}
-
-/* Estado Activo (Fondo Dorado) */
-#menu-categorias .categoria.activa,
-.menu-categorias .categoria.activa {
-    background-color: var(--color-dorado) !important;
-    box-shadow: 0 4px 15px rgba(216, 179, 92, 0.45) !important;
-    border-color: transparent !important;
-    transform: translateY(-2px);
-}
-
-#menu-categorias .categoria.activa span,
-.menu-categorias .categoria.activa span {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-/* Icono blanco al activarse la cápsula */
-#menu-categorias .categoria.activa img,
-.menu-categorias .categoria.activa img {
-    filter: brightness(0) invert(1) !important;
-}
-
-/*==================================================
-TÍTULOS DE SECCIÓN (CORREGIDO ICONO GIGANTE)
-==================================================*/
-.seccion h2 {
-    font-size: 32px;
+    gap: 6px;
+    flex: 0 0 auto; /* Evita que las píldoras se deformen */
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
     color: var(--color-principal);
-    margin-bottom: 28px;
-    padding-bottom: 12px;
-    border-bottom: 4px solid var(--color-dorado);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Control de tamaño estricto para el icono junto al título */
-.seccion h2 img {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
-    object-fit: contain !important;
-    display: inline-block !important;
-    margin: 0 !important;
-    flex-shrink: 0 !important;
-    filter: invert(16%) sepia(48%) saturate(2450%) hue-rotate(222deg) brightness(92%) contrast(92%) !important;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all .25s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 /*==================================================
-EL DESTINO SAMAÍN (RULETA)
+EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 ==================================================*/
 .destino-samain {
     max-width: 900px;
@@ -477,30 +352,30 @@ EL DESTINO SAMAÍN (RULETA)
     color: #ffffff;
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 12px 30px rgba(45, 43, 114, 0.30);
-    transition: all 0.30s ease;
+    letter-spacing: .5px;
+    box-shadow: 0 12px 30px rgba(45,43,114,.30);
+    transition: all .30s ease;
 }
 
 .btn-destino:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 20px 45px rgba(45, 43, 114, 0.35);
+    box-shadow: 0 20px 45px rgba(45,43,114,.35);
 }
 
 .btn-destino:active {
-    transform: scale(0.97);
+    transform: scale(.97);
 }
 
 .modal-destino {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0,0,0,.65);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
+    transition: opacity .35s ease, visibility .35s ease;
     z-index: 5000;
 }
 
@@ -516,7 +391,7 @@ EL DESTINO SAMAÍN (RULETA)
     padding: 35px;
     text-align: center;
     position: relative;
-    animation: subir 0.35s ease;
+    animation: subir .35s ease;
 }
 
 .cerrar-destino {
@@ -549,7 +424,7 @@ EL DESTINO SAMAÍN (RULETA)
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.25s ease;
+    transition: background .25s ease;
 }
 
 .opcion-comensales:hover {
@@ -564,7 +439,7 @@ EL DESTINO SAMAÍN (RULETA)
 .resultado-destino {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.82);
+    background: rgba(0,0,0,.82);
     display: none;
     justify-content: center;
     align-items: center;
@@ -582,11 +457,11 @@ EL DESTINO SAMAÍN (RULETA)
     border-radius: 24px;
     padding: 45px;
     text-align: center;
-    animation: zoomDestino 0.45s ease-out;
+    animation: zoomDestino .45s ease-out;
 }
 
 @keyframes zoomDestino {
-    from { opacity: 0; transform: scale(0.8); }
+    from { opacity: 0; transform: scale(.8); }
     to { opacity: 1; transform: scale(1); }
 }
 
@@ -650,7 +525,7 @@ EL DESTINO SAMAÍN (RULETA)
     left: 20px;
     overflow: hidden;
     background: #ffffff;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
 }
 
 .gajo-quesito {
@@ -675,7 +550,7 @@ EL DESTINO SAMAÍN (RULETA)
 
 .gajo-quesito.iluminado {
     background-color: var(--color-dorado) !important;
-    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216, 179, 92, 0.5));
+    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216,179,92,0.5));
 }
 
 .icono-ruleta {
@@ -722,7 +597,7 @@ EL DESTINO SAMAÍN (RULETA)
 .flecha-ruleta .puntero {
     color: var(--color-precio);
     font-size: 30px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
     margin-top: -2px;
 }
 
@@ -733,7 +608,7 @@ EL DESTINO SAMAÍN (RULETA)
 }
 
 .ruleta-destino.finalizada {
-    animation: reboteRuleta 0.45s ease;
+    animation: reboteRuleta .45s ease;
 }
 
 /*==================================
@@ -753,8 +628,8 @@ ALÉRGENOS Y CONFETI
     border-radius: 18px;
     border: 2px solid var(--color-dorado);
     cursor: pointer;
-    transition: transform 0.25s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform .25s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
 
 .alergenos img:hover {
@@ -770,7 +645,7 @@ ALÉRGENOS Y CONFETI
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.82);
+    background: rgba(0,0,0,.82);
     z-index: 99999;
     justify-content: center;
     align-items: center;
@@ -947,7 +822,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 /*==================================================
-MODAL GALERÍA
+MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
 ==================================================*/
 .modal-galeria-content {
     background-color: #ffffff;
@@ -956,12 +831,13 @@ MODAL GALERÍA
     border: 2px solid var(--color-principal);
     width: 92%;
     max-width: 440px;
+    /* Limitamos el alto máximo al 85% de la pantalla para dejar margen */
     max-height: 85vh; 
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Evitamos el scrollbar */
 }
 
 .modal-galeria-content h2 {
@@ -974,15 +850,15 @@ MODAL GALERÍA
     border-bottom: 2px solid var(--color-dorado);
     padding-bottom: 6px;
     text-align: center;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Asegura que el título no se encoja */
 }
 
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    flex: 1;
-    min-height: 0;
+    flex: 1; /* Ocupa el espacio vertical disponible */
+    min-height: 0; /* Permite que el grid flexione hacia abajo */
 }
 
 .galeria-item {
@@ -991,9 +867,9 @@ MODAL GALERÍA
     overflow: hidden;
     width: 100%;
     height: 100%;
-    max-height: 15vh;
+    max-height: 15vh; /* Limita la altura de cada miniatura según el alto de pantalla */
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .galeria-item img {
@@ -1008,6 +884,20 @@ MODAL GALERÍA
 .galeria-item:active img {
     transform: scale(1.08);
     filter: brightness(1.05);
+}
+
+.galeria-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+}
+
+.galeria-item:hover::after {
+    border-color: var(--color-dorado);
 }
 
 .modal-visor {
@@ -1031,6 +921,7 @@ MODAL GALERÍA
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     border: 2px solid var(--color-dorado);
     animation: zoomIn 0.25s ease-out;
+    will-change: transform, opacity;
 }
 
 .cerrar-visor {
@@ -1043,15 +934,26 @@ MODAL GALERÍA
     cursor: pointer;
     line-height: 1;
     z-index: 1000000;
+    transition: color 0.2s ease;
+}
+
+.cerrar-visor:hover {
+    color: var(--color-dorado);
 }
 
 @keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.85); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /*==================================================
-TIENDA Y CONTACTO
+ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 ==================================================*/
 .tienda-seccion {
     margin-bottom: 18px;
@@ -1066,6 +968,11 @@ TIENDA Y CONTACTO
     font-weight: 700;
     color: var(--color-principal);
     margin-bottom: 4px;
+}
+
+.tienda-icono {
+    font-size: 1.25rem;
+    line-height: 1;
 }
 
 .tienda-seccion p {
@@ -1094,6 +1001,20 @@ TIENDA Y CONTACTO
     margin-bottom: 6px;
 }
 
+.tienda-evento-destacado p {
+    color: var(--color-texto);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.tienda-contacto-texto {
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
 .tienda-telefono {
     display: inline-block;
     color: var(--color-principal);
@@ -1113,7 +1034,7 @@ TIENDA Y CONTACTO
 }
 
 /*==================================================
-BOTÓN HAMBURGUESA Y MODAL MENÚ
+ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
 ==================================================*/
 .btn-hamburguesa {
     background: transparent !important;
@@ -1155,24 +1076,25 @@ BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
+/* Botones del menú hamburguesa: Mismo estilo que las categorías deslizables */
 .link-modal-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    color: var(--color-principal);
+    background: #ffffff;                    /* Fondo claro */
+    border: 2px solid var(--color-dorado); /* Borde dorado */
+    color: var(--color-principal);          /* Texto e icono en azul */
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
-    border-radius: 999px;
+    border-radius: 999px;                  /* Mismo acabado redondeado estilo píldora */
     text-decoration: none;
     cursor: pointer;
     width: 100%;
     text-align: center;
     font-family: inherit;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     transition: all 0.25s ease;
 }
 
@@ -1182,102 +1104,7 @@ BOTÓN HAMBURGUESA Y MODAL MENÚ
     border-color: var(--color-dorado);
     color: var(--color-principal);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(216, 179, 92, 0.25);
-}
-
-/*==================================================
-DETALLE TEMÁTICO Y PARTICULAS
-==================================================*/
-.detalle-temporada {
-    display: none;
-    margin: 8px auto 0;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    width: fit-content;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-body.modo-navidad .detalle-temporada {
-    display: inline-block;
-    background: rgba(212, 175, 55, 0.15);
-    color: #d4af37;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-}
-
-body.modo-sanjuan .detalle-temporada {
-    display: inline-block;
-    background: rgba(243, 156, 18, 0.15);
-    color: #f39c12;
-    border: 1px solid rgba(243, 156, 18, 0.4);
-}
-
-body.modo-carnaval .detalle-temporada {
-    display: inline-block;
-    background: rgba(253, 121, 168, 0.15);
-    color: #fd79a8;
-    border: 1px solid rgba(253, 121, 168, 0.4);
-}
-
-.particula-scroll {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    user-select: none;
-    animation: caidaParticula linear forwards;
-}
-
-@keyframes caidaParticula {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(120px) scale(0.3) rotate(360deg);
-    }
-}
-
-/*==================================================
-BOTÓN INSTAGRAM FOOTER
-==================================================*/
-.instagram-footer {
-    margin: 20px auto 10px;
-    text-align: center;
-}
-
-.btn-instagram {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    color: var(--color-principal);
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 10px 22px;
-    border-radius: 999px;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    transition: all 0.25s ease;
-}
-
-.btn-instagram:hover,
-.btn-instagram:active {
-    background: var(--color-principal);
-    color: #ffffff;
-    border-color: var(--color-principal);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
-}
-
-.icon-ig {
-    width: 24px;
-    height: 24px;
-    display: block;
-    transition: transform 0.25s ease;
+    box-shadow: 0 4px 12px rgba(216,179,92,0.25);
 }
 
 /*==================================================
@@ -1334,6 +1161,127 @@ MEDIA QUERIES (RESPONSIVE)
     .top-bar { padding: 0 10px; }
     .top-nav-left { gap: 10px; }
     .nav-link, .nav-link-btn { font-size: 0.82rem; }
+    .categoria { padding: 8px 14px; font-size: 0.9rem; }
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
+}
+
+/* ==========================================================================
+   DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
+   ========================================================================== */
+
+/* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
+.detalle-temporada {
+  display: none; /* Oculto por defecto el resto del año */
+  margin: 8px auto 0;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Modos específicos para el detalle */
+body.modo-navidad .detalle-temporada {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+body.modo-sanjuan .detalle-temporada {
+  display: inline-block;
+  background: rgba(243, 156, 18, 0.15);
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.4);
+}
+
+body.modo-carnaval .detalle-temporada {
+  display: inline-block;
+  background: rgba(253, 121, 168, 0.15);
+  color: #fd79a8;
+  border: 1px solid rgba(253, 121, 168, 0.4);
+}
+
+/* Partículas flotantes de scroll */
+.particula-scroll {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  animation: caidaParticula linear forwards;
+}
+
+@keyframes caidaParticula {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) scale(0.3) rotate(360deg);
+  }
+}
+
+/*==================================================
+BOTÓN DE INSTAGRAM EN EL FOOTER
+==================================================*/
+.instagram-footer {
+  margin: 20px auto 10px;
+  text-align: center;
+}
+
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 2px solid var(--color-dorado);
+  color: var(--color-principal);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.btn-instagram:hover,
+.btn-instagram:active {
+  background: var(--color-principal);
+  color: #ffffff;
+  border-color: var(--color-principal);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
+}
+
+.icon-ig {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+/* En el hover cambiamos el color del SVG si fuera necesario, o mantenemos el icono limpio */
+.btn-instagram:hover .icon-ig {
+  transform: scale(1.1);
+}
+
+/* Estilos para los iconos SVG de las categorías */
+.categoria .icono img.img-icono-cat {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.seccion h2 img.img-titulo-cat {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
 }
