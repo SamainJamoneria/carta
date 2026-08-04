@@ -1320,54 +1320,59 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
   transition: transform 0.25s ease;
 }
 
-/* En el hover cambiamos el color del SVG si fuera necesario, o mantenemos el icono limpio */
-.btn-instagram:hover .icon-ig {
-  transform: scale(1.1);
-}
-
-/* Limitar y estructurar el botón de cada categoría */
+/* Limitar y estructurar la píldora de cada categoría */
 #menu-categorias .categoria {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 90px;
-    text-decoration: none;
-    padding: 8px 12px;
+    min-width: 110px;           /* Un poco más ancho para albergar la ilustración */
+    padding: 10px 16px;
     gap: 6px;
-    flex-shrink: 0; /* Impide que los botones se deformen en horizontal */
+    flex-shrink: 0;
+    text-decoration: none;
+    border-radius: 40px;        /* Bordes bien redondeados estilo cápsula */
+    transition: all 0.3s ease;
 }
 
-/* Control estricto del tamaño de los iconos en el menú (forzado con !important) */
+/* Ilustración circular destacada en el menú */
 #menu-categorias .categoria img.img-icono-cat,
 .img-icono-cat {
-    width: 28px !important;
-    height: 28px !important;
-    max-width: 28px !important;
-    max-height: 28px !important;
+    width: 56px !important;     /* Tamaño grande para apreciar los detalles */
+    height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
     object-fit: contain;
     display: block;
+    /* Mantiene los colores originales de la imagen SVG */
+    filter: none !important;    
+    mix-blend-mode: normal;
+    transition: transform 0.3s ease;
 }
 
-/* Tamaño de los iconos dentro de los títulos H2 de la carta */
+/* Efecto al pasar el cursor (Hover) */
+#menu-categorias .categoria:hover img.img-icono-cat {
+    transform: scale(1.08);     /* Pequeño zoom a la ilustración */
+}
+
+/* ESTADO ACTIVO: Píldora encendida con brillo / dorado */
+#menu-categorias .categoria.activa {
+    background-color: #d9ab55;   /* Tu color dorado/mostaza de fondo */
+    box-shadow: 0 4px 15px rgba(217, 171, 85, 0.45); /* Brillo / resplandor alrededor */
+}
+
+#menu-categorias .categoria.activa span {
+    color: #ffffff !important;  /* Texto en blanco cuando está activo */
+    font-weight: 600;
+}
+
+/* Iconos de los títulos H2 en la carta principal */
 .seccion h2 img.img-titulo-cat,
 .img-titulo-cat {
-    width: 32px !important;
-    height: 32px !important;
-    max-width: 32px !important;
-    max-height: 32px !important;
+    width: 36px !important;
+    height: 36px !important;
     object-fit: contain;
     vertical-align: middle;
-    margin-right: 8px;
+    margin-right: 10px;
     display: inline-block;
-}
-
-/* Control y posicionamiento de las flechas del menú */
-.flecha-menu {
-    z-index: 10;
-    cursor: pointer;
-}
-
-.flecha-menu.oculta {
-    display: none !important;
 }
