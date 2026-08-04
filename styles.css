@@ -236,7 +236,7 @@ footer {
 }
 
 /*==================================================
-MENÚ STICKY Y CATEGORÍAS
+MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 ==================================================*/
 .menu-sticky {
     position: sticky;
@@ -258,7 +258,7 @@ MENÚ STICKY Y CATEGORÍAS
 .contenedor-menu {
     position: relative;
     flex: 1;
-    min-width: 0; /* IMPRESCINDIBLE: Evita que Flexbox colapse a altura 0 */
+    min-width: 0; /* IMPRESCINDIBLE: Evita que Flexbox colapse */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -299,58 +299,12 @@ MENÚ STICKY Y CATEGORÍAS
     scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
     width: 100%;
-    padding: 4px 0;
+    padding: 6px 0;
     -webkit-overflow-scrolling: touch;
 }
 
 .menu-categorias::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
-}
-
-/* Categorías deslizantes con icono */
-.categoria {
-    display: inline-flex;
-    flex-direction: row; /* Icono a la izquierda y texto a la derecha */
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex: 0 0 auto; /* Evita que los botones se aplasten */
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado, #d8b35c);
-    color: var(--color-principal, #1a2a3a);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    white-space: nowrap;
-    transition: all .25s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    cursor: pointer;
-}
-
-/* Estilo para las imágenes SVG dentro del botón */
-.categoria img.icono-categoria {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    display: block;
-}
-
-.categoria:hover {
-    background: #fcfbfa;
-    border-color: var(--color-dorado, #d8b35c);
-    color: var(--color-principal, #1a2a3a);
-    transform: translateY(-2px);
-}
-
-/* Estado activo */
-.categoria.activa {
-    background: var(--color-dorado, #d8b35c) !important;
-    color: #ffffff !important;
-    border-color: var(--color-dorado, #d8b35c) !important;
-    transform: scale(1.03);
-    box-shadow: 0 4px 14px rgba(216, 179, 92, 0.55);
 }
 
 /* Estilo de los botones de flecha */
@@ -886,13 +840,12 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border: 2px solid var(--color-principal);
     width: 92%;
     max-width: 440px;
-    /* Limitamos el alto máximo al 85% de la pantalla para dejar margen */
     max-height: 85vh; 
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden; /* Evitamos el scrollbar */
+    overflow: hidden;
 }
 
 .modal-galeria-content h2 {
@@ -905,15 +858,15 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border-bottom: 2px solid var(--color-dorado);
     padding-bottom: 6px;
     text-align: center;
-    flex-shrink: 0; /* Asegura que el título no se encoja */
+    flex-shrink: 0;
 }
 
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    flex: 1; /* Ocupa el espacio vertical disponible */
-    min-height: 0; /* Permite que el grid flexione hacia abajo */
+    flex: 1;
+    min-height: 0;
 }
 
 .galeria-item {
@@ -922,7 +875,7 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     overflow: hidden;
     width: 100%;
     height: 100%;
-    max-height: 15vh; /* Limita la altura de cada miniatura según el alto de pantalla */
+    max-height: 15vh;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -1131,19 +1084,19 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
-/* Botones del menú hamburguesa: Mismo estilo que las categorías deslizables */
+/* Botones del menú hamburguesa */
 .link-modal-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;                    /* Fondo claro */
-    border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);          /* Texto e icono en azul */
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
-    border-radius: 999px;                  /* Mismo acabado redondeado estilo píldora */
+    border-radius: 999px;
     text-decoration: none;
     cursor: pointer;
     width: 100%;
@@ -1162,72 +1115,12 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     box-shadow: 0 4px 12px rgba(216,179,92,0.25);
 }
 
-/*==================================================
-MEDIA QUERIES (RESPONSIVE)
-==================================================*/
-@media (max-width: 700px) {
-    .top-bar { 
-        margin-bottom: 25px !important; 
-    }
-    
-    .logo-container { 
-        margin-top: 10px !important;
-        margin-bottom: 20px !important; 
-    }
-
-    .header-principal { padding-bottom: 45px; }
-    .logo-brillo { width: 170px; }
-    .header-principal h1 { font-size: 30px; }
-    .header-principal p { font-size: 17px; }
-    
-    .seccion { padding: 22px; }
-    .seccion h2 { font-size: 26px; }
-    
-    .cabecera-producto { 
-        display: flex !important;
-        flex-direction: column !important; 
-        align-items: flex-start !important; 
-    }
-    
-    .nombre { 
-        font-size: 20px; 
-        width: 100%;
-    }
-    
-    .precio { 
-        margin-top: 4px; 
-        font-size: 18px; 
-        font-weight: 600; 
-        align-self: flex-start;
-    }
-
-    .menu-sticky {
-        padding: 8px 10px;
-    }
-
-    .flecha-menu {
-        width: 24px;
-        height: 24px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 500px) {
-    .top-bar { padding: 0 10px; }
-    .top-nav-left { gap: 10px; }
-    .nav-link, .nav-link-btn { font-size: 0.82rem; }
-    .categoria { padding: 8px 14px; font-size: 0.9rem; }
-    .icono { font-size: 22px; line-height: 1; text-decoration: none; }
-    .texto { text-align: center; line-height: 1.1; }
-}
-
 /* ==========================================================================
    DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
    ========================================================================== */
 
-/* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
 .detalle-temporada {
-  display: none; /* Oculto por defecto el resto del año */
+  display: none;
   margin: 8px auto 0;
   padding: 4px 12px;
   border-radius: 15px;
@@ -1237,7 +1130,6 @@ MEDIA QUERIES (RESPONSIVE)
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Modos específicos para el detalle */
 body.modo-navidad .detalle-temporada {
   display: inline-block;
   background: rgba(212, 175, 55, 0.15);
@@ -1259,7 +1151,6 @@ body.modo-carnaval .detalle-temporada {
   border: 1px solid rgba(253, 121, 168, 0.4);
 }
 
-/* Partículas flotantes de scroll */
 .particula-scroll {
   position: fixed;
   pointer-events: none;
@@ -1320,59 +1211,149 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
   transition: transform 0.25s ease;
 }
 
-/* Limitar y estructurar la píldora de cada categoría */
-#menu-categorias .categoria {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 110px;           /* Un poco más ancho para albergar la ilustración */
-    padding: 10px 16px;
-    gap: 6px;
-    flex-shrink: 0;
-    text-decoration: none;
-    border-radius: 40px;        /* Bordes bien redondeados estilo cápsula */
-    transition: all 0.3s ease;
+/* ==========================================================================
+   DISEÑO DEFINITIVO DE CÁPSULAS Y CATEGORÍAS UNIFORMES CON ILUSTRACIÓN GRANDE
+   ========================================================================== */
+
+/* 1. Botón/Cápsula de categoría simétrica */
+#menu-categorias .categoria,
+.categoria {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 120px !important;    /* Tamaño uniforme mínimo */
+    height: 110px !important;       /* Altura idéntica para todas las cápsulas */
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+    text-decoration: none !important;
+    border-radius: 55px !important;  /* Forma de cápsula uniforme */
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    box-sizing: border-box !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Ilustración circular destacada en el menú */
+/* 2. Ilustración grande respetando colores de la imagen original */
 #menu-categorias .categoria img.img-icono-cat,
+#menu-categorias .categoria img.icono-categoria,
+.categoria img.icono-categoria,
 .img-icono-cat {
-    width: 56px !important;     /* Tamaño grande para apreciar los detalles */
-    height: 56px !important;
-    max-width: 56px !important;
-    max-height: 56px !important;
-    object-fit: contain;
-    display: block;
-    /* Mantiene los colores originales de la imagen SVG */
-    filter: none !important;    
-    mix-blend-mode: normal;
-    transition: transform 0.3s ease;
+    width: 64px !important;         /* Tamaño grande para apreciar trazo y detalle */
+    height: 64px !important;
+    min-width: 64px !important;
+    min-height: 64px !important;
+    object-fit: contain !important;
+    display: block !important;
+    
+    /* Previene tintados o alteración de color en el navegador */
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    
+    transition: transform 0.25s ease;
 }
 
-/* Efecto al pasar el cursor (Hover) */
-#menu-categorias .categoria:hover img.img-icono-cat {
-    transform: scale(1.08);     /* Pequeño zoom a la ilustración */
+/* 3. Estilo del texto dentro de la cápsula */
+#menu-categorias .categoria span,
+.categoria span {
+    font-size: 0.85rem !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    color: var(--color-principal);
 }
 
-/* ESTADO ACTIVO: Píldora encendida con brillo / dorado */
-#menu-categorias .categoria.activa {
-    background-color: #d9ab55;   /* Tu color dorado/mostaza de fondo */
-    box-shadow: 0 4px 15px rgba(217, 171, 85, 0.45); /* Brillo / resplandor alrededor */
+/* 4. Interacción Hover */
+#menu-categorias .categoria:hover img.img-icono-cat,
+#menu-categorias .categoria:hover img.icono-categoria,
+.categoria:hover img.icono-categoria {
+    transform: scale(1.1);
 }
 
-#menu-categorias .categoria.activa span {
-    color: #ffffff !important;  /* Texto en blanco cuando está activo */
-    font-weight: 600;
+/* 5. Estado Activo (Botón dorado encendido con resplandor) */
+#menu-categorias .categoria.activa,
+.categoria.activa {
+    background-color: #d9ab55 !important;
+    box-shadow: 0 4px 18px rgba(217, 171, 85, 0.5) !important;
+    border-color: transparent !important;
+    transform: scale(1.02);
 }
 
-/* Iconos de los títulos H2 en la carta principal */
+#menu-categorias .categoria.activa span,
+.categoria.activa span {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* 6. Iconos en los títulos H2 de las secciones */
 .seccion h2 img.img-titulo-cat,
+.seccion h2 img.icono-categoria,
 .img-titulo-cat {
     width: 36px !important;
     height: 36px !important;
-    object-fit: contain;
-    vertical-align: middle;
-    margin-right: 10px;
-    display: inline-block;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+    margin-right: 10px !important;
+    display: inline-block !important;
+}
+
+/*==================================================
+MEDIA QUERIES (RESPONSIVE)
+==================================================*/
+@media (max-width: 700px) {
+    .top-bar { 
+        margin-bottom: 25px !important; 
+    }
+    
+    .logo-container { 
+        margin-top: 10px !important;
+        margin-bottom: 20px !important; 
+    }
+
+    .header-principal { padding-bottom: 45px; }
+    .logo-brillo { width: 170px; }
+    .header-principal h1 { font-size: 30px; }
+    .header-principal p { font-size: 17px; }
+    
+    .seccion { padding: 22px; }
+    .seccion h2 { font-size: 26px; }
+    
+    .cabecera-producto { 
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
+    }
+    
+    .nombre { 
+        font-size: 20px; 
+        width: 100%;
+    }
+    
+    .precio { 
+        margin-top: 4px; 
+        font-size: 18px; 
+        font-weight: 600; 
+        align-self: flex-start;
+    }
+
+    .menu-sticky {
+        padding: 8px 10px;
+    }
+
+    .flecha-menu {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .top-bar { padding: 0 10px; }
+    .top-nav-left { gap: 10px; }
+    .nav-link, .nav-link-btn { font-size: 0.82rem; }
+    .icono { font-size: 22px; line-height: 1; text-decoration: none; }
+    .texto { text-align: center; line-height: 1.1; }
 }
