@@ -70,7 +70,7 @@ const carta = [
 {
     id:"raciones",
     titulo:"Raciones",
-    icono:"🍖",
+    icono: "raciones.svg",
     productos:[
         { nombre:"Lomo Ibérico", descripcion:"Media / Entera", precio:"8,00 € / 15,00 €", alergenos: [] },
         { nombre:"Salchichón Ibérico", descripcion:"Media / Entera", precio:"7,00 € / 14,00 €", alergenos: [] },
@@ -104,7 +104,7 @@ const carta = [
 {
     id:"quesos",
     titulo:"Selección de Quesos",
-    icono:"🧀",
+    icono: "seleccion_quesos.svg",
     productos:[
         { nombre:"Stilton", descripcion:"Media / Entera", precio:"6,00 € / 12,00 €", alergenos: ["l"] },
         { nombre:"Gouda con Trufa", descripcion:"Media / Entera", precio:"7,00 € / 12,50 €", alergenos: ["l"] },
@@ -120,7 +120,7 @@ const carta = [
 {
     id:"piadinas",
     titulo:"Piadinas",
-    icono:"🌯",
+    icono: "piadinas.svg",
     productos:[
         { nombre:"Atún", descripcion:"Tomate, queso y atún", precio:"8,00 €", alergenos: ["g", "l", "p"] },
         { nombre:"Ibérica", descripcion:"Tomate, queso y jamón ibérico al corte", precio:"12,50 €", alergenos: ["g", "l"] },
