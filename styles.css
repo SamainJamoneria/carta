@@ -337,7 +337,7 @@ MENÚ STICKY Y CONTENEDOR DE CATEGORÍAS
 }
 
 /*==================================================
-CÁPSULAS Y CATEGORÍAS UNIFORMES
+CÁPSULAS Y CATEGORÍAS UNIFORMES (CORREGIDO)
 ==================================================*/
 #menu-categorias .categoria,
 .categoria {
@@ -347,8 +347,8 @@ CÁPSULAS Y CATEGORÍAS UNIFORMES
     justify-content: center !important;
     min-width: 110px !important;
     width: 110px !important;
-    height: 105px !important;
-    padding: 8px 10px !important;
+    height: 115px !important; /* Ligeramente más alto para albergar 2 líneas de texto */
+    padding: 8px 6px !important;
     gap: 6px !important;
     flex-shrink: 0 !important;
     text-decoration: none !important;
@@ -358,45 +358,54 @@ CÁPSULAS Y CATEGORÍAS UNIFORMES
     box-sizing: border-box !important;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     cursor: pointer;
+    overflow: hidden !important;
 }
 
+/* Iconos ajustados y tintados con el color del tema */
 #menu-categorias .categoria img.img-icono-cat,
 #menu-categorias .categoria img.icono-categoria,
 .categoria img.icono-categoria,
 .img-icono-cat {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
-    max-width: 48px !important;
-    max-height: 48px !important;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    max-width: 52px !important;
+    max-height: 52px !important;
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto !important;
-    filter: none !important;
-    -webkit-filter: none !important;
-    mix-blend-mode: normal !important;
     opacity: 1 !important;
-    transition: transform 0.2s ease;
+    /* Tinta los iconos trazo negro al color principal #2d2b72 */
+    filter: invert(16%) sepia(48%) saturate(2450%) hue-rotate(222deg) brightness(92%) contrast(92%) !important;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+/* Texto multitrazado (permite saltos de línea limpios) */
 #menu-categorias .categoria span,
 .categoria span {
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    line-height: 1.1 !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
     text-align: center !important;
-    white-space: nowrap !important;
+    white-space: normal !important; /* Permite saltos de línea si el texto es largo */
+    word-break: break-word !important;
     color: var(--color-principal) !important;
-    display: block !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2; /* Máximo 2 líneas de texto */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width: 100%;
 }
 
+/* Hover en las cápsulas */
 #menu-categorias .categoria:hover img.img-icono-cat,
 #menu-categorias .categoria:hover img.icono-categoria,
 .categoria:hover img.icono-categoria {
     transform: scale(1.1);
 }
 
+/* Estado Activo (Botón dorado) */
 #menu-categorias .categoria.activa,
 .categoria.activa {
     background-color: var(--color-dorado) !important;
@@ -405,21 +414,18 @@ CÁPSULAS Y CATEGORÍAS UNIFORMES
     transform: translateY(-2px);
 }
 
+/* Texto blanco al estar activo */
 #menu-categorias .categoria.activa span,
 .categoria.activa span {
     color: #ffffff !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
 }
 
-.seccion h2 img.img-titulo-cat,
-.seccion h2 img.icono-categoria,
-.img-titulo-cat {
-    width: 36px !important;
-    height: 36px !important;
-    object-fit: contain !important;
-    vertical-align: middle !important;
-    margin-right: 10px !important;
-    display: inline-block !important;
+/* Icono blanco al estar activo sobre el fondo dorado */
+#menu-categorias .categoria.activa img.img-icono-cat,
+#menu-categorias .categoria.activa img.icono-categoria,
+.categoria.activa img.icono-categoria {
+    filter: brightness(0) invert(1) !important; /* Vuelve el icono 100% blanco */
 }
 
 /*==================================================
