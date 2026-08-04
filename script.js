@@ -6,12 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const menu = document.getElementById("menu-categorias");
 
     if (menu && typeof carta !== "undefined") {
-        menu.innerHTML = ""; // Limpia el contenedor antes de renderizar
         carta.forEach(categoria => {
             menu.innerHTML += `
                 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
-                    <img src="${categoria.icono}" alt="${categoria.titulo}" class="img-icono-cat" onerror="this.style.display='none'">
-                    <span>${categoria.titulo}</span>
+                    <div class="icono">${categoria.icono}</div>
+                    <div class="texto">${categoria.titulo}</div>
                 </a>
             `;
         });
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             seccion.id = categoria.id;
 
             const titulo = document.createElement("h2");
-            titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat" onerror="this.style.display='none'"> ${categoria.titulo}`;
+            titulo.textContent = categoria.icono + " " + categoria.titulo;
             seccion.appendChild(titulo);
 
             categoria.productos.forEach(producto => {
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contenedor.appendChild(seccion);
         });
     }
-        
+
     // ==========================================
     // 2. INTERSECTION OBSERVER (Scroll e indicador activo)
     // ==========================================
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. FLECHAS DEL MENÚ DE CATEGORÍAS
     // ==========================================
-    const contenedorMenu = document.getElementById("menu-categorias");
+    const contenedorMenu = document.querySelector(".menu-categorias");
     const flechaIzquierda = document.getElementById("flecha-izquierda");
     const flechaDerecha = document.getElementById("flecha-derecha");
 
