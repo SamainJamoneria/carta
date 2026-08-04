@@ -2,7 +2,7 @@ const carta = [
 {
     id:"tostas",
     titulo:"Tostas Premium",
-    icono: "img/categorias/tostas_premium.svg",
+    icono: "🥖",
     productos:[
         {
             nombre:"Burrata con Polvo de Jamón Ibérico",
