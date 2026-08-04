@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    document.addEventListener("DOMContentLoaded", () => {
+
     // ==========================================
     // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS
     // ==========================================
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         carta.forEach(categoria => {
             menu.innerHTML += `
                 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
-                    <div class="icono">${categoria.icono}</div>
+                    <div class="icono"><img src="${categoria.icono}" alt="${categoria.titulo}" class="img-icono-cat"></div>
                     <div class="texto">${categoria.titulo}</div>
                 </a>
             `;
@@ -43,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             seccion.id = categoria.id;
 
             const titulo = document.createElement("h2");
-            titulo.textContent = categoria.icono + " " + categoria.titulo;
+            titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat"> ${categoria.titulo}`;
             seccion.appendChild(titulo);
 
             categoria.productos.forEach(producto => {
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contenedor.appendChild(seccion);
         });
     }
-
+        
     // ==========================================
     // 2. INTERSECTION OBSERVER (Scroll e indicador activo)
     // ==========================================
