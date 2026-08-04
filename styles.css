@@ -245,23 +245,20 @@ MENÚ STICKY Y CATEGORÍAS
     background: rgba(246,244,239,.90);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 8px 15px; /* Ajustado ligeramente */
+    padding: 12px 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,.08);
     border-bottom: 1px solid rgba(216,179,92,.35);
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 100%;
-    min-height: 60px; /* EVITA QUE SE APLASTE EL CONTENEDOR */
 }
 
 .contenedor-menu {
     position: relative;
     flex: 1;
-    min-width: 0; /* IMPRESCINDIBLE en Flexbox para que los hijos con scroll horizontal no colapsen */
+    overflow: hidden;
     display: flex;
     align-items: center;
-    /* Eliminado overflow: hidden que colapsaba el bloque */
 }
 
 .contenedor-menu::before,
@@ -269,7 +266,7 @@ MENÚ STICKY Y CATEGORÍAS
     content: "";
     position: absolute;
     top: 0;
-    width: 30px;
+    width: 40px;
     height: 100%;
     pointer-events: none;
     opacity: 0;
@@ -292,7 +289,6 @@ MENÚ STICKY Y CATEGORÍAS
 
 .menu-categorias {
     display: flex;
-    align-items: center;
     gap: 10px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -300,30 +296,114 @@ MENÚ STICKY Y CATEGORÍAS
     scrollbar-width: none;
     width: 100%;
     padding: 6px 0;
-    -webkit-overflow-scrolling: touch; /* Fluidez en iOS */
 }
 
 .menu-categorias::-webkit-scrollbar {
     display: none;
 }
 
-/* Categorías deslizantes */
+/* Categorías deslizantes: Fondo clarito con texto azul y borde dorado */
 .categoria {
-    display: inline-flex; /* Cambiado a inline-flex para mejor alineación */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    flex: 0 0 auto; /* Evita que las píldoras se deformen */
-    padding: 8px 18px;
+    flex: 0 0 auto;
+    padding: 10px 20px;
     border-radius: 999px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    color: var(--color-principal);
+    background: #ffffff;                /* Fondo claro por defecto */
+    border: 2px solid var(--color-dorado); /* Borde dorado */
+    color: var(--color-principal);      /* Texto e icono en azul */
     text-decoration: none;
     font-weight: 700;
     white-space: nowrap;
     transition: all .25s ease;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.categoria:hover {
+    background: #fcfbfa;
+    border-color: var(--color-dorado);
+    color: var(--color-principal);
+    transform: translateY(-2px);
+}
+
+/* Estado activo: Resalta en dorado al hacer scroll */
+.categoria.activa {
+    background: var(--color-dorado) !important; /* Fondo dorado */
+    color: #ffffff !important;                  /* Texto e icono en blanco */
+    border-color: var(--color-dorado) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 14px rgba(216, 179, 92, 0.55);
+    animation: activa .35s ease;
+}
+
+.categoria.activa:hover {
+    background: var(--color-dorado) !important;
+    color: #ffffff !important;
+}
+
+@keyframes activa {
+    0% { transform: scale(.95); }
+    70% { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+}
+
+.flecha-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-principal);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    cursor: pointer;
+    align-self: center;
+    transition: opacity .25s ease, background-color .2s ease;
+}
+
+.flecha-menu:hover {
+    background: var(--color-principal-hover);
+}
+
+.flecha-menu.oculta {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.resultado-busqueda {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    text-align: center;
+    min-height: 45px;
+}
+
+.texto-busqueda {
+    color: #666666;
+    font-size: 16px;
+}
+
+.con-resultados {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-principal);
+}
+
+.sin-resultados {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #b22222;
 }
 
 /*==================================================
@@ -1265,23 +1345,3 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
   transition: transform 0.25s ease;
 }
 
-/* En el hover cambiamos el color del SVG si fuera necesario, o mantenemos el icono limpio */
-.btn-instagram:hover .icon-ig {
-  transform: scale(1.1);
-}
-
-/* Estilos para los iconos SVG de las categorías */
-.categoria .icono img.img-icono-cat {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    vertical-align: middle;
-}
-
-.seccion h2 img.img-titulo-cat {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    vertical-align: middle;
-    margin-right: 8px;
-}
