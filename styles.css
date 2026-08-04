@@ -1349,3 +1349,19 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
 .btn-instagram:hover .icon-ig {
   transform: scale(1.1);
 }
+
+/* Estilos para los iconos SVG de las categorías */
+.categoria .icono img.img-icono-cat {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.seccion h2 img.img-titulo-cat {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
