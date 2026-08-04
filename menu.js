@@ -45,7 +45,7 @@ const carta = [
 {
     id:"tablas",
     titulo:"Tablas para Compartir",
-    icono:"🍽️",
+    icono: "tablas.svg",
     productos:[
         {
             nombre:"Tabla Samaín",
