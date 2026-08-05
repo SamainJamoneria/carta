@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         frameId = requestAnimationFrame(actualizarGlow);
     }
 
-    // Finalizar tirada
+   // Finalizar tirada
     function finalizarRuleta(resultado){
         if (ruleta) {
             ruleta.classList.remove("girando");
@@ -241,7 +241,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (nombreDestino) nombreDestino.textContent = resultado.producto.nombre;
         if (descripcionDestino) descripcionDestino.textContent = resultado.producto.descripcion || "";
         if (precioDestino) precioDestino.textContent = resultado.producto.precio;
-        if (categoriaDestino) categoriaDestino.textContent = resultado.categoria.icono + " " + resultado.categoria.titulo;
+        
+        // CORRECCIÓN AQUÍ: Si el icono es una ruta de imagen, creamos la etiqueta <img> de forma limpia
+        if (categoriaDestino) {
+            const iconoSrc = resultado.categoria.icono;
+            // Comprobamos si el icono es una imagen o texto/emoji y lo pintamos adecuadamente
+            if (iconoSrc && (iconoSrc.includes('.png') || iconoSrc.includes('.jpg') || iconoSrc.includes('.svg'))) {
+                categoriaDestino.innerHTML = `<img src="${iconoSrc}" alt="" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px; object-fit: contain;"> ${resultado.categoria.titulo}`;
+            } else {
+                categoriaDestino.textContent = (iconoSrc ? iconoSrc + " " : "") + resultado.categoria.titulo;
+            }
+        }
     }
 
     // Confeti
