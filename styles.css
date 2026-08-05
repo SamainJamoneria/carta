@@ -182,23 +182,23 @@ SECCIONES Y PRODUCTOS
 }
 
 .seccion h2 {
-    font-size: 26px; /* Ajustado ligeramente para móvil, o puedes mantener el que tenías */
+    font-size: 26px;
     color: var(--color-principal);
     margin-bottom: 28px;
     padding-bottom: 16px;
     border-bottom: 4px solid var(--color-dorado);
     display: flex;
-    flex-direction: column; /* Cambia la dirección a columna: icono arriba, texto abajo */
-    align-items: center;    /* Centra ambos elementos horizontalmente */
-    text-align: center;     /* Centra el texto por si ocupa varias líneas */
-    gap: 10px;              /* Espacio entre el icono y el texto */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
 }
 
 .seccion h2 img.img-titulo-cat {
-    width: 80px;            /* Puedes ajustar el tamaño si lo prefieres un poco más compacto */
+    width: 80px;
     height: 80px;
     object-fit: contain;
-    margin-right: 0;        /* Al estar en columna, eliminamos el margen derecho anterior */
+    margin-right: 0;
     display: block;
 }
 
@@ -315,7 +315,6 @@ MENÚ STICKY Y CATEGORÍAS
     display: none;
 }
 
-/* Categorías deslizantes: Fondo clarito con texto azul y borde dorado */
 .categoria {
     display: flex;
     flex-direction: column !important;
@@ -349,7 +348,6 @@ MENÚ STICKY Y CATEGORÍAS
     transform: translateY(-2px);
 }
 
-/* Estado activo: Resalta en dorado al hacer scroll */
 .categoria.activa {
     background: var(--color-dorado) !important;
     color: #ffffff !important;
@@ -1287,107 +1285,6 @@ MEDIA QUERIES (RESPONSIVE)
 
 body.modo-navidad .detalle-temporada {
   display: inline-block;
-  background: rgba(212, 175, 55, 0.15);
-  color: #d4af37;
-  border: 1px solid rgba(212, 175, 55, 0.4);
-}
-
-body.modo-sanjuan .detalle-temporada {
-  display: inline-block;
-  background: rgba(243, 156, 18, 0.15);
-  color: #f39c12;
-  border: 1px solid rgba(243, 156, 18, 0.4);
-}
-
-body.modo-carnaval .detalle-temporada {
-  display: inline-block;
-  background: rgba(253, 121, 168, 0.15);
-  color: #fd79a8;
-  border: 1px solid rgba(253, 121, 168, 0.4);
-}
-
-.particula-scroll {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  user-select: none;
-  animation: caidaParticula linear forwards;
-}
-
-@keyframes caidaParticula {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(120px) scale(0.3) rotate(360deg);
-  }
-}
-
-/*==================================================
-BOTÓN DE INSTAGRAM EN EL FOOTER
-==================================================*/
-.instagram-footer {
-  margin: 20px auto 10px;
-  text-align: center;
-}
-
-.btn-instagram {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #ffffff;
-  border: 2px solid var(--color-dorado);
-  color: var(--color-principal);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.25s ease;
-}
-
-.btn-instagram:hover,
-.btn-instagram:active {
-  background: var(--color-principal);
-  color: #ffffff;
-  border-color: var(--color-principal);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
-}
-
-.icon-ig {
-  width: 24px;
-  height: 24px;
-  display: block;
-  transition: transform 0.25s ease;
-}
-
-/* ======================================================
-   ESTILOS AMPLIADOS PARA ICONOS PNG (TRIPLE TAMAÑO)
-   ====================================================== */
-
-.categoria {
-    flex-direction: column !important;
-    padding: 12px 20px !important;
-}
-
-.categoria .icono img.img-icono-cat {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 4px auto;
-}
-
-.seccion h2 img.img-titulo-cat {
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    vertical-align: middle;
-    margin-right: 14px;
-    display: inline-block;
+  background: rgba(216, 179, 92, 0.2);
+  color: var(--color-dorado);
 }
