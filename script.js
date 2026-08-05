@@ -3,8 +3,7 @@
  * @description Lógica principal para la carta digital de Jamonería Samaín.
  * Incluye renderizado dinámico, observadores de scroll, buscador, control de alérgenos
  * y gestión de modales con menú hamburguesa defensivo.
- * @author Principal Software Engineer & Web Architect
- */
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
