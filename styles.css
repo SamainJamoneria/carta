@@ -632,7 +632,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     font-size: 11px;
 }
 
-/* --- Ruleta Optimizada y Centrada (Gradiente Cónico Corregido) --- */
+/* --- Ruleta Definitiva: Sincronización Perfecta de Gajos e Iconos --- */
 .ruleta-destino {
     position: relative;
     width: 290px;
@@ -650,8 +650,8 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     top: 20px;
     left: 20px;
     overflow: hidden;
+    /* Cada gajo ocupa exactamente 45 grados. El gradiente pinta bloques de 45°. */
     background: conic-gradient(
-        from -22.5deg at 50% 50%,
         #ffffff 0deg 45deg,
         #f2edd9 45deg 90deg,
         #ffffff 90deg 135deg,
@@ -664,7 +664,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     box-shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 
-/* --- Contenedor de iconos en la parte ancha exterior --- */
+/* --- Contenedor de iconos posicionado exactamente en el centro de cada gajo --- */
 .icono-ruleta {
     position: absolute;
     width: 44px;
@@ -685,7 +685,10 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     display: block;
 }
 
-/* Alineación exacta al centro de cada gajo simétrico (offset de 22.5°) a un radio de -75px */
+/* 
+  Los centros de los 8 gajos de 45° están en: 
+  22.5°, 67.5°, 112.5°, 157.5°, 202.5°, 247.5°, 292.5° y 337.5°
+*/
 .disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-75px) rotate(-22.5deg); }
 .disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-75px) rotate(-67.5deg); }
 .disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-75px) rotate(-112.5deg); }
