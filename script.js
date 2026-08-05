@@ -1,6 +1,8 @@
 /**
  * @file script.js
- * @description Lógica principal de renderizado de carta, buscadores, modales y menú hamburguesa defensivo.
+ * @description Lógica principal para la carta digital de Jamonería Samaín.
+ * Incluye renderizado dinámico, observadores de scroll, buscador, control de alérgenos
+ * y gestión de modales con menú hamburguesa defensivo.
  * @author Principal Software Engineer & Web Architect
  */
 
@@ -279,9 +281,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Menú Hamburguesa Robusto (Multiselector Defensivo) ---
-    // Soportamos múltiples variantes de ID por si carta.html usa otro selector diferente
-    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa') || document.querySelector('.hamburger') || document.querySelector('.menu-hamburguesa');
-    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal') || document.querySelector('.cerrar-menu');
+    // Soporta tanto el ID principal como clases alternativas por si hubiera diferencias en el HTML
+    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa') || document.querySelector('.btn-hamburguesa') || document.querySelector('.hamburger');
+    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal') || document.querySelector('#modal-menu-principal .close-btn');
 
     if (btnHamburguesa && modalMenuPrincipal) {
         btnHamburguesa.addEventListener('click', (e) => {
@@ -290,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btnHamburguesa.setAttribute('aria-expanded', 'true');
         });
     } else {
-        console.warn('Aviso: El botón del menú hamburguesa o el modal principal no se encontraron en esta vista.');
+        console.warn('Aviso: El botón del menú hamburguesa o el modal principal no se detectaron en esta vista.');
     }
 
     if (cerrarMenuPrincipal && modalMenuPrincipal) {
