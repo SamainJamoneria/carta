@@ -1287,8 +1287,9 @@ MEDIA QUERIES (RESPONSIVE)
    DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
    ========================================================================== */
 
+/* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
 .detalle-temporada {
-  display: none;
+  display: none; /* Oculto por defecto el resto del año */
   margin: 8px auto 0;
   padding: 4px 12px;
   border-radius: 15px;
@@ -1298,12 +1299,47 @@ MEDIA QUERIES (RESPONSIVE)
   animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Modos específicos para el detalle */
 body.modo-navidad .detalle-temporada {
   display: inline-block;
-  background: rgba(216, 179, 92, 0.2);
-  color: var(--color-dorado);
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
+body.modo-sanjuan .detalle-temporada {
+  display: inline-block;
+  background: rgba(243, 156, 18, 0.15);
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.4);
+}
+
+body.modo-carnaval .detalle-temporada {
+  display: inline-block;
+  background: rgba(253, 121, 168, 0.15);
+  color: #fd79a8;
+  border: 1px solid rgba(253, 121, 168, 0.4);
+}
+
+/* Partículas flotantes de scroll */
+.particula-scroll {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  animation: caidaParticula linear forwards;
+}
+
+@keyframes caidaParticula {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) scale(0.3) rotate(360deg);
+  }
+}
 /* ======================================================
    CORRECCIÓN DE TAMAÑO PARA LAS IMÁGENES CIRCULARES DEL MENÚ
 ====================================================== */
