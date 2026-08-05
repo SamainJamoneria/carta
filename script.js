@@ -1,9 +1,10 @@
 /**
  * @file script.js
- * @description Lógica principal para la carta digital de Jamonería Samaín.
- * Incluye renderizado dinámico, observadores de scroll, buscador, control de alérgenos
- * y gestión de modales con menú hamburguesa defensivo.
-
+ * @description Lógica principal y unificada para la carta digital de Jamonería Samaín.
+ * Incluye renderizado dinámico, observadores de intersección, buscador, control de alérgenos,
+ * galerías, efectos estacionales automáticos y gestión robusta de modales bilingües.
+ * @author Principal Software Engineer & Web Architect
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -280,7 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Menú Hamburguesa Robusto (Multiselector Defensivo) ---
-    // Soporta tanto el ID principal como clases alternativas por si hubiera diferencias en el HTML
     const btnHamburguesa = document.getElementById('btn-menu-hamburguesa') || document.querySelector('.btn-hamburguesa') || document.querySelector('.hamburger');
     const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal') || document.querySelector('#modal-menu-principal .close-btn');
 
@@ -290,8 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
             modalMenuPrincipal.classList.remove('hidden');
             btnHamburguesa.setAttribute('aria-expanded', 'true');
         });
-    } else {
-        console.warn('Aviso: El botón del menú hamburguesa o el modal principal no se detectaron en esta vista.');
     }
 
     if (cerrarMenuPrincipal && modalMenuPrincipal) {
@@ -447,17 +445,3 @@ function normalizarTexto(texto) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
-
-// Deshabilitar clic derecho
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// Deshabilitar atajos de inspección (F12, Ctrl+Shift+I, etc.)
-document.addEventListener('keydown', (e) => {
-    if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && e.key === 'u')
-    ) {
-        e.preventDefault();
-    }
-});
