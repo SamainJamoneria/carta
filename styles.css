@@ -655,26 +655,32 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .icono-ruleta {
     position: absolute;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     transform-origin: center center;
-    top: calc(50% - 20px);
-    left: calc(50% - 20px);
+    top: calc(50% - 18px);
+    left: calc(50% - 18px);
     z-index: 5;
 }
 
-.icono-ruleta:nth-child(9)  { transform: rotate(22.5deg) translateY(-65px) rotate(-22.5deg); }
-.icono-ruleta:nth-child(10) { transform: rotate(67.5deg) translateY(-65px) rotate(-67.5deg); }
-.icono-ruleta:nth-child(11) { transform: rotate(112.5deg) translateY(-65px) rotate(-112.5deg); }
-.icono-ruleta:nth-child(12) { transform: rotate(157.5deg) translateY(-65px) rotate(-157.5deg); }
-.icono-ruleta:nth-child(13) { transform: rotate(202.5deg) translateY(-65px) rotate(-202.5deg); }
-.icono-ruleta:nth-child(14) { transform: rotate(247.5deg) translateY(-65px) rotate(-247.5deg); }
-.icono-ruleta:nth-child(15) { transform: rotate(292.5deg) translateY(-65px) rotate(-292.5deg); }
-.icono-ruleta:nth-child(16) { transform: rotate(337.5deg) translateY(-65px) rotate(-337.5deg); }
+.icono-ruleta img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+}
+
+.icono-ruleta:nth-child(9)  { transform: rotate(22.5deg) translateY(-60px) rotate(-22.5deg); }
+.icono-ruleta:nth-child(10) { transform: rotate(67.5deg) translateY(-60px) rotate(-67.5deg); }
+.icono-ruleta:nth-child(11) { transform: rotate(112.5deg) translateY(-60px) rotate(-112.5deg); }
+.icono-ruleta:nth-child(12) { transform: rotate(157.5deg) translateY(-60px) rotate(-157.5deg); }
+.icono-ruleta:nth-child(13) { transform: rotate(202.5deg) translateY(-60px) rotate(-202.5deg); }
+.icono-ruleta:nth-child(14) { transform: rotate(247.5deg) translateY(-60px) rotate(-247.5deg); }
+.icono-ruleta:nth-child(15) { transform: rotate(292.5deg) translateY(-60px) rotate(-292.5deg); }
+.icono-ruleta:nth-child(16) { transform: rotate(337.5deg) translateY(-60px) rotate(-337.5deg); }
 
 .flecha-ruleta {
     position: absolute;
