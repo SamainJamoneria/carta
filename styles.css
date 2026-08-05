@@ -642,7 +642,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .disco-ruleta {
-    width: 250px; /* Disco ligeramente más grande */
+    width: 250px;
     height: 250px;
     border-radius: 50%;
     border: 5px solid var(--color-dorado);
@@ -650,7 +650,17 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     top: 20px;
     left: 20px;
     overflow: hidden;
-    background: #ffffff;
+    /* Fondo mediante gradiente cónico: divide los 360° en 8 porciones exactas de 45° alternando dos colores */
+    background: conic-gradient(
+        #ffffff 0deg 45deg,
+        #f2edd9 45deg 90deg,
+        #ffffff 90deg 135deg,
+        #f2edd9 135deg 180deg,
+        #ffffff 180deg 225deg,
+        #f2edd9 225deg 270deg,
+        #ffffff 270deg 315deg,
+        #f2edd9 315deg 360deg
+    );
     box-shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 
