@@ -1288,3 +1288,27 @@ body.modo-navidad .detalle-temporada {
   background: rgba(216, 179, 92, 0.2);
   color: var(--color-dorado);
 }
+
+/* ======================================================
+   CORRECCIÓN DE TAMAÑO PARA LAS IMÁGENES CIRCULARES DEL MENÚ
+====================================================== */
+
+/* Controla el contenedor o tarjeta donde se muestran los platos con imagen */
+.producto img, 
+.card-image-container img, 
+.menu-card img, 
+.carousel-item img {
+    width: 140px !important;
+    height: 140px !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block !important;
+    margin: 15px auto !important;
+}
+
+/* Si usas una estructura de tarjetas en cuadrícula o carrusel */
+.card, .menu-card, .carousel-item {
+    text-align: center;
+    padding: 15px;
+}
