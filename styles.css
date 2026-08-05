@@ -195,8 +195,8 @@ SECCIONES Y PRODUCTOS
 }
 
 .seccion h2 img.img-titulo-cat {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
     object-fit: contain;
     margin-right: 0;
     display: block;
@@ -341,8 +341,8 @@ MENÚ STICKY Y CATEGORÍAS (ARREGLADO)
 /* Tamaño de los iconos */
 .categoria .icono img,
 .categoria img.img-icono-cat {
-    width: 65px !important;    /* Tamaño grande y destacado */
-    height: 65px !important;
+    width: 75px !important;    /* Tamaño grande y destacado */
+    height: 75px !important;
     object-fit: contain;
     display: block;
     margin-bottom: 4px;
