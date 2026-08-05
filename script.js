@@ -280,15 +280,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Menú Hamburguesa Robusto (Multiselector Defensivo) ---
-    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa') || document.querySelector('.btn-hamburguesa') || document.querySelector('.hamburger');
-    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal') || document.querySelector('#modal-menu-principal .close-btn');
+    // --- Menú Hamburguesa Robusto ---
+    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
+    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
 
     if (btnHamburguesa && modalMenuPrincipal) {
         btnHamburguesa.addEventListener('click', (e) => {
             e.preventDefault();
             modalMenuPrincipal.classList.remove('hidden');
             btnHamburguesa.setAttribute('aria-expanded', 'true');
+        });
+    }
+
+    if (cerrarMenuPrincipal && modalMenuPrincipal) {
+        cerrarMenuPrincipal.addEventListener('click', () => {
+            modalMenuPrincipal.classList.add('hidden');
+            if (btnHamburguesa) btnHamburguesa.setAttribute('aria-expanded', 'false');
         });
     }
 
