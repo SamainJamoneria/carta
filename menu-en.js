@@ -2,7 +2,7 @@ const carta = [
 {
     id:"tostas",
     titulo:"Premium Toasts",
-    icono:"🥖",
+    icono: "tostas.png",
     productos:[
         {
             nombre:"Burrata with Iberian Ham Powder",
@@ -45,7 +45,7 @@ const carta = [
 {
     id:"tablas",
     titulo:"Sharing Boards",
-    icono:"🍽️",
+    icono: "tablas.png",
     productos:[
         {
             nombre:"Samaín Board",
@@ -70,7 +70,7 @@ const carta = [
 {
     id:"raciones",
     titulo:"Sharing Plates",
-    icono:"🍖",
+    icono: "raciones.png",
     productos:[
         { nombre:"Iberian Pork Loin", descripcion:"Half / Whole", precio:"8,00 € / 15,00 €", alergenos: [] },
         { nombre:"Iberian Salchichón", descripcion:"Half / Whole", precio:"7,00 € / 14,00 €", alergenos: [] },
@@ -104,7 +104,7 @@ const carta = [
 {
     id:"quesos",
     titulo:"Cheese Selection",
-    icono:"🧀",
+    icono: "quesos.png",
     productos:[
         { nombre:"Stilton", descripcion:"Half / Whole", precio:"6,00 € / 12,00 €", alergenos: ["l"] },
         { nombre:"Truffle Gouda", descripcion:"Half / Whole", precio:"7,00 € / 12,50 €", alergenos: ["l"] },
@@ -120,7 +120,7 @@ const carta = [
 {
     id:"piadinas",
     titulo:"Piadinas",
-    icono:"🌯",
+    icono: "piadinas.png",
     productos:[
         { nombre:"Tuna", descripcion:"Tomato, cheese and tuna", precio:"8,00 €", alergenos: ["g", "l", "p"] },
         { nombre:"Iberian", descripcion:"Tomato, cheese and hand-carved Iberian ham", precio:"12,50 €", alergenos: ["g", "l"] },
@@ -138,7 +138,7 @@ const carta = [
 {
     id:"dulces",
     titulo:"Sweet Piadinas",
-    icono:"🍫",
+    icono: "piadinas_dulces.png",
     productos:[
         { nombre:"Quince", descripcion:"Two cheeses with thin slices of quince", precio:"8,00 €", alergenos: ["g", "l"] },
         { nombre:"Nutella", descripcion:"", precio:"6,00 €", alergenos: ["g", "l", "f"] },
@@ -148,7 +148,7 @@ const carta = [
 {
     id:"bocadillos",
     titulo:"Sandwiches",
-    icono:"🥪",
+    icono: "bocadillos.png",
     productos:[
         { nombre:"Granada Cured Ham", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Iberian Salchichón", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
@@ -163,7 +163,7 @@ const carta = [
 {
     id:"postres",
     titulo:"Desserts",
-    icono:"🍰",
+    icono: "postres.png",
     productos:[
         { nombre:"Cheese with Quince", descripcion:"", precio:"5,00 €", alergenos: ["l"] },
         { nombre:"Ice Cream", description:"Please, ask about our available flavors", precio:"Please ask", alergenos: ["l"] }
