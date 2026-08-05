@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         carta.forEach(categoria => {
             menu.innerHTML += `
                 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
-                    <div class="icono">${categoria.icono}</div>
+                    <div class="icono"><img src="${categoria.icono}" alt="${categoria.titulo}" class="img-icono-cat"></div>
                     <div class="texto">${categoria.titulo}</div>
                 </a>
             `;
@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
             seccion.id = categoria.id;
 
             const titulo = document.createElement("h2");
-            titulo.textContent = categoria.icono + " " + categoria.titulo;
+            // Se inyecta la imagen con la clase "img-titulo-cat" respetando tu CSS existente
+            titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat"> ${categoria.titulo}`;
             seccion.appendChild(titulo);
 
             categoria.productos.forEach(producto => {
