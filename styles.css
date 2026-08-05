@@ -632,7 +632,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     font-size: 11px;
 }
 
-/* --- Ruleta Definitiva: Sincronización Perfecta de Gajos e Iconos --- */
+/* --- Ruleta Definitiva: Sincronización Geométrica Exacta --- */
 .ruleta-destino {
     position: relative;
     width: 290px;
@@ -650,7 +650,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     top: 20px;
     left: 20px;
     overflow: hidden;
-    /* Cada gajo ocupa exactamente 45 grados. El gradiente pinta bloques de 45°. */
+    /* Gradiente exacto de 8 porciones de 45° cada una, empezando arriba (0°) */
     background: conic-gradient(
         #ffffff 0deg 45deg,
         #f2edd9 45deg 90deg,
@@ -664,7 +664,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     box-shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 
-/* --- Contenedor de iconos posicionado exactamente en el centro de cada gajo --- */
+/* --- Contenedor de iconos alineados al centro exacto de cada gajo --- */
 .icono-ruleta {
     position: absolute;
     width: 44px;
@@ -672,7 +672,8 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     display: flex;
     align-items: center;
     justify-content: center;
-    transform-origin: center center;
+    /* El origen de transformación es el centro absoluto del disco (125px desde el borde del disco de 250px) */
+    transform-origin: 125px 125px;
     top: calc(50% - 22px);
     left: calc(50% - 22px);
     z-index: 5;
@@ -683,20 +684,29 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     height: 40px;
     object-fit: contain;
     display: block;
+    /* Mantenemos el icono derecho para que no gane la rotación del padre */
+    transform: rotate(0deg); 
 }
 
 /* 
-  Los centros de los 8 gajos de 45° están en: 
-  22.5°, 67.5°, 112.5°, 157.5°, 202.5°, 247.5°, 292.5° y 337.5°
+  Colocación directa en el centro de cada gajo (a 75px del centro hacia la parte ancha exterior):
+  - Gajo 1 (Blanco): 22.5deg
+  - Gajo 2 (Beige):  67.5deg
+  - Gajo 3 (Blanco): 112.5deg
+  - Gajo 4 (Beige):  157.5deg
+  - Gajo 5 (Blanco): 202.5deg
+  - Gajo 6 (Beige):  247.5deg
+  - Gajo 7 (Blanco): 292.5deg
+  - Gajo 8 (Beige):  337.5deg
 */
-.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-75px) rotate(-22.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-75px) rotate(-67.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-75px) rotate(-112.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-75px) rotate(-157.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-75px) rotate(-202.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-75px) rotate(-247.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-75px) rotate(-292.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-75px) rotate(-337.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-75px); }
+.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-75px); }
 
 .flecha-ruleta {
     position: absolute;
