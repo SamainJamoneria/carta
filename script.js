@@ -1,3 +1,9 @@
+/**
+ * @file script.js
+ * @description Lógica principal de renderizado de carta, buscadores, modales y menú hamburguesa defensivo.
+ * @author Principal Software Engineer & Web Architect
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
@@ -188,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 5. GESTIÓN DE MODALES Y MENÚ HAMBURGUESA
+    // 5. GESTIÓN DE MODALES Y MENÚ HAMBURGUESA BLINDADO
     // ==========================================
     const modalContacto = document.getElementById('modal-contacto');
     const modalGaleria = document.getElementById('modal-galeria');
@@ -272,24 +278,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Menú Hamburguesa ---
-    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
-    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
+    // --- Menú Hamburguesa Robusto (Multiselector Defensivo) ---
+    // Soportamos múltiples variantes de ID por si carta.html usa otro selector diferente
+    const btnHamburguesa = document.getElementById('btn-menu-hamburguesa') || document.querySelector('.hamburger') || document.querySelector('.menu-hamburguesa');
+    const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal') || document.querySelector('.cerrar-menu');
 
     if (btnHamburguesa && modalMenuPrincipal) {
         btnHamburguesa.addEventListener('click', (e) => {
             e.preventDefault();
             modalMenuPrincipal.classList.remove('hidden');
+            btnHamburguesa.setAttribute('aria-expanded', 'true');
         });
+    } else {
+        console.warn('Aviso: El botón del menú hamburguesa o el modal principal no se encontraron en esta vista.');
     }
 
     if (cerrarMenuPrincipal && modalMenuPrincipal) {
         cerrarMenuPrincipal.addEventListener('click', () => {
             modalMenuPrincipal.classList.add('hidden');
+            if (btnHamburguesa) btnHamburguesa.setAttribute('aria-expanded', 'false');
         });
     }
 
-    // Enlaces dentro del Menú Hamburguesa
+    // Enlaces internos dentro del Menú Hamburguesa
     const btnContactoModal = document.querySelector('#modal-menu-principal #btn-contacto-carta');
     const btnGaleriaModal = document.querySelector('#modal-menu-principal #btn-galeria');
     const btnTiendaModal = document.querySelector('#modal-menu-principal #btn-tienda');
