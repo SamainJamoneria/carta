@@ -654,11 +654,12 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     box-shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 
+/* --- Gajos simétricos centrados cada 45° --- */
 .gajo-quesito {
     position: absolute;
     inset: 0;
     transform-origin: center center;
-    clip-path: polygon(50% 50%, 50% 0%, 93% 15%); 
+    clip-path: polygon(50% 50%, 29% 0%, 71% 0%); 
     transition: background-color 0.08s ease, filter 0.08s ease;
 }
 
@@ -679,6 +680,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     filter: brightness(1.15) drop-shadow(0 0 4px rgba(216,179,92,0.5));
 }
 
+/* --- Contenedor de iconos en la parte ancha exterior --- */
 .icono-ruleta {
     position: absolute;
     width: 44px;
@@ -693,13 +695,13 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .icono-ruleta img {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     display: block;
 }
 
-/* Centrado exacto en la zona ancha exterior del disco de 250px (translateY de -75px) */
+/* Alineación exacta al centro de cada gajo simétrico (offset de 22.5°) a un radio de -75px */
 .disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-75px) rotate(-22.5deg); }
 .disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-75px) rotate(-67.5deg); }
 .disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-75px) rotate(-112.5deg); }
