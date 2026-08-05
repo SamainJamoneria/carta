@@ -275,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Menú Hamburguesa ---
     const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
+    const modalMenuPrincipal = document.getElementById('modal-menu-principal'); 
     const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
 
     if (btnHamburguesa && modalMenuPrincipal) {
