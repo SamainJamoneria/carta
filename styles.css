@@ -1345,3 +1345,25 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
   transition: transform 0.25s ease;
 }
 
+/* ======================================================
+   ESTILOS PARA ICONOS PNG EN CATEGORÍAS Y TÍTULOS
+   ====================================================== */
+
+/* Icono dentro del menú superior deslizante */
+.categoria .icono img.img-icono-cat {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Icono junto al título h2 de cada sección en la carta */
+.seccion h2 img.img-titulo-cat {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 10px;
+    display: inline-block;
+}
