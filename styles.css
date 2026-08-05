@@ -699,15 +699,22 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     display: block;
 }
 
-/* Posicionamiento relativo ajustado al contenedor interno del disco de 160px */
-.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-46px) rotate(-22.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-46px) rotate(-67.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-46px) rotate(-112.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-46px) rotate(-157.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-46px) rotate(-202.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-46px) rotate(-247.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-46px) rotate(-292.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-46px) rotate(-337.5deg); }
+/* Corrección definitiva para los iconos de la ruleta */
+.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(0deg) translateY(-52px) rotate(0deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(45deg) translateY(-52px) rotate(-45deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(90deg) translateY(-52px) rotate(-90deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(135deg) translateY(-52px) rotate(-135deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(180deg) translateY(-52px) rotate(-180deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(225deg) translateY(-52px) rotate(-225deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(270deg) translateY(-52px) rotate(-270deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(315deg) translateY(-52px) rotate(-315deg); }
+
+.disco-ruleta .icono-ruleta img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
 
 .flecha-ruleta {
     position: absolute;
