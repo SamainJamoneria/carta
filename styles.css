@@ -1312,3 +1312,43 @@ body.modo-navidad .detalle-temporada {
     text-align: center;
     padding: 15px;
 }
+
+/*==================================================
+BOTÓN DE INSTAGRAM EN EL FOOTER
+==================================================*/
+.instagram-footer {
+  margin: 20px auto 10px;
+  text-align: center;
+}
+
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 2px solid var(--color-dorado);
+  color: var(--color-principal);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.btn-instagram:hover,
+.btn-instagram:active {
+  background: var(--color-principal);
+  color: #ffffff;
+  border-color: var(--color-principal);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
+}
+
+.icon-ig {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: transform 0.25s ease;
