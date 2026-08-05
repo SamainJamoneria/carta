@@ -187,9 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
-    // 5. GESTIÓN DE MODALES
+    // 5. GESTIÓN DE MODALES Y MENÚ HAMBURGUESA
     // ==========================================
     const modalContacto = document.getElementById('modal-contacto');
     const modalGaleria = document.getElementById('modal-galeria');
@@ -275,7 +274,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Menú Hamburguesa ---
     const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
-    const modalMenuPrincipal = document.getElementById('modal-menu-principal'); 
     const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
 
     if (btnHamburguesa && modalMenuPrincipal) {
@@ -327,7 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalAlergenos) modalAlergenos.classList.remove('abierto');
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
-});
 
     // ==========================================
     // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
@@ -427,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-}); // <-- Cierre correcto de DOMContentLoaded
+});
 
 // ==========================================
 // 8. FUNCIONES AUXILIARES Y PROTECCIONES
