@@ -632,18 +632,18 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     font-size: 11px;
 }
 
-/* --- Corrección Estructural de la Ruleta --- */
+/* --- Ruleta Optimizada y Centrada --- */
 .ruleta-destino {
     position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 10px;
+    width: 230px; /* Ampliado para móvil */
+    height: 230px;
+    margin: 0 auto 15px;
     flex-shrink: 0;
 }
 
 .disco-ruleta {
-    width: 160px;
-    height: 160px;
+    width: 190px; /* Disco ligeramente más grande */
+    height: 190px;
     border-radius: 50%;
     border: 5px solid var(--color-dorado);
     position: absolute;
@@ -681,47 +681,40 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .icono-ruleta {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     transform-origin: center center;
-    top: calc(50% - 14px);
-    left: calc(50% - 14px);
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
     z-index: 5;
 }
 
 .icono-ruleta img {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
     display: block;
 }
 
-/* Corrección definitiva para los iconos de la ruleta */
-.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(0deg) translateY(-52px) rotate(0deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(45deg) translateY(-52px) rotate(-45deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(90deg) translateY(-52px) rotate(-90deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(135deg) translateY(-52px) rotate(-135deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(180deg) translateY(-52px) rotate(-180deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(225deg) translateY(-52px) rotate(-225deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(270deg) translateY(-52px) rotate(-270deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(315deg) translateY(-52px) rotate(-315deg); }
-
-.disco-ruleta .icono-ruleta img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    display: block;
-}
+/* Centrado exacto alineado con el ángulo central de cada gajo (offset de 22.5°) */
+.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-55px) rotate(-22.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-55px) rotate(-67.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-55px) rotate(-112.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-55px) rotate(-157.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-55px) rotate(-202.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-55px) rotate(-247.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-55px) rotate(-292.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-55px) rotate(-337.5deg); }
 
 .flecha-ruleta {
     position: absolute;
     top: 0;
     left: 0;
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
     z-index: 10;
     pointer-events: none;
     display: flex;
@@ -736,7 +729,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .flecha-ruleta .puntero {
     color: var(--color-precio);
-    font-size: 22px;
+    font-size: 24px;
     text-shadow: 0 2px 6px rgba(0,0,0,.35);
     margin-top: -2px;
 }
