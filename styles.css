@@ -312,7 +312,7 @@ MENÚ STICKY Y CATEGORÍAS
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 999px;
-    background: #ffffff;                /* Fondo claro por defecto */
+    background: #ffffff;                 /* Fondo claro por defecto */
     border: 2px solid var(--color-dorado); /* Borde dorado */
     color: var(--color-principal);      /* Texto e icono en azul */
     text-decoration: none;
@@ -1162,13 +1162,13 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;                    /* Fondo claro */
+    background: #ffffff;                     /* Fondo claro */
     border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);          /* Texto e icono en azul */
+    color: var(--color-principal);           /* Texto e icono en azul */
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
-    border-radius: 999px;                  /* Mismo acabado redondeado estilo píldora */
+    border-radius: 999px;                    /* Mismo acabado redondeado estilo píldora */
     text-decoration: none;
     cursor: pointer;
     width: 100%;
@@ -1346,24 +1346,29 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
 }
 
 /* ======================================================
-   ESTILOS PARA ICONOS PNG EN CATEGORÍAS Y TÍTULOS
+   ESTILOS AMPLIADOS PARA ICONOS PNG (TRIPLE TAMAÑO)
    ====================================================== */
 
-/* Icono dentro del menú superior deslizante */
+/* Icono y estructura vertical dentro del menú superior deslizante */
+.categoria {
+    flex-direction: column !important;
+    padding: 12px 24px !important;
+}
+
 .categoria .icono img.img-icono-cat {
-    width: 24px;
-    height: 24px;
+    width: 72px;  /* Triple de tamaño (antes 24px) */
+    height: 72px; 
     object-fit: contain;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 4px auto;
 }
 
 /* Icono junto al título h2 de cada sección en la carta */
 .seccion h2 img.img-titulo-cat {
-    width: 32px;
-    height: 32px;
+    width: 96px;  /* Triple de tamaño (antes 32px) */
+    height: 96px; 
     object-fit: contain;
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 14px;
     display: inline-block;
 }
