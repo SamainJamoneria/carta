@@ -632,10 +632,10 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     font-size: 11px;
 }
 
-/* --- Ruleta Optimizada y Centrada --- */
+/* --- Ruleta Optimizada y Centrada (Gradiente Cónico Corregido) --- */
 .ruleta-destino {
     position: relative;
-    width: 290px; /* Ampliado para móvil */
+    width: 290px;
     height: 290px;
     margin: 0 auto 15px;
     flex-shrink: 0;
@@ -650,8 +650,8 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     top: 20px;
     left: 20px;
     overflow: hidden;
-    /* Fondo mediante gradiente cónico: divide los 360° en 8 porciones exactas de 45° alternando dos colores */
     background: conic-gradient(
+        from -22.5deg at 50% 50%,
         #ffffff 0deg 45deg,
         #f2edd9 45deg 90deg,
         #ffffff 90deg 135deg,
@@ -662,32 +662,6 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
         #f2edd9 315deg 360deg
     );
     box-shadow: 0 8px 25px rgba(0,0,0,.2);
-}
-
-/* --- Gajos simétricos centrados cada 45° --- */
-.gajo-quesito {
-    position: absolute;
-    inset: 0;
-    transform-origin: center center;
-    clip-path: polygon(50% 50%, 8% 0%, 92% 0%); /* Abre la base superior para que cubra exactamente los 45° de ancho del gajo */
-    transition: background-color 0.08s ease, filter 0.08s ease;
-}
-
-.gajo-quesito:nth-child(odd)  { background-color: #ffffff; }
-.gajo-quesito:nth-child(even) { background-color: #f2edd9; }
-
-.gajo-quesito:nth-child(1) { transform: rotate(0deg); }
-.gajo-quesito:nth-child(2) { transform: rotate(45deg); }
-.gajo-quesito:nth-child(3) { transform: rotate(90deg); }
-.gajo-quesito:nth-child(4) { transform: rotate(135deg); }
-.gajo-quesito:nth-child(5) { transform: rotate(180deg); }
-.gajo-quesito:nth-child(6) { transform: rotate(225deg); }
-.gajo-quesito:nth-child(7) { transform: rotate(270deg); }
-.gajo-quesito:nth-child(8) { transform: rotate(315deg); }
-
-.gajo-quesito.iluminado {
-    background-color: var(--color-dorado) !important;
-    filter: brightness(1.15) drop-shadow(0 0 4px rgba(216,179,92,0.5));
 }
 
 /* --- Contenedor de iconos en la parte ancha exterior --- */
