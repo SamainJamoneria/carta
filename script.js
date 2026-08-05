@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             seccion.id = categoria.id;
 
             const titulo = document.createElement("h2");
-            // Se inyecta la imagen con la clase "img-titulo-cat" respetando tu CSS existente
             titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat"> ${categoria.titulo}`;
             seccion.appendChild(titulo);
 
@@ -425,72 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-});
-
-// ==========================================
-    // RULETA DE LA SUERTE (EL DESTINO SAMAÍN)
-    // ==========================================
-    const btnDestino = document.getElementById('btn-destino-samain');
-    const modalDestino = document.getElementById('modal-destino');
-    const cerrarDestino = document.getElementById('cerrar-destino');
-    const opcionesComensales = document.querySelectorAll('.opcion-comensales');
-    const resultadoDestino = document.getElementById('resultado-destino');
-    const flechaRuleta = document.getElementById('flecha-ruleta');
-    const discoRuleta = document.getElementById('disco-ruleta');
-
-    const nombreDestino = document.getElementById('nombre-destino');
-    const descripcionDestino = document.getElementById('descripcion-destino');
-    const precioDestino = document.getElementById('precio-destino');
-    const categoriaDestino = document.getElementById('categoria-destino');
-
-    if (btnDestino && modalDestino) {
-        btnDestino.addEventListener('click', () => modalDestino.classList.add('visible'));
-    }
-
-    if (cerrarDestino && modalDestino) {
-        cerrarDestino.addEventListener('click', () => modalDestino.classList.remove('visible'));
-    }
-
-    opcionesComensales.forEach(boton => {
-        boton.addEventListener('click', () => {
-            modalDestino.classList.remove('visible');
-            resultadoDestino.classList.add('visible');
-
-            // Elegir un producto aleatorio de toda la carta
-            let todosLosProductos = [];
-            if (typeof carta !== "undefined") {
-                carta.forEach(cat => {
-                    cat.productos.forEach(prod => {
-                        todosLosProductos.push({ ...prod, categoriaNombre: cat.titulo });
-                    });
-                });
-            }
-
-            if (todosLosProductos.length > 0) {
-                const elegido = todosLosProductos[Math.floor(Math.random() * todosLosProductos.length)];
-                
-                // Animación de giro de la ruleta (ej: 5 vueltas completas + un sector aleatorio)
-                const gradosGiro = 1800 + Math.floor(Math.random() * 360);
-                if (flechaRuleta) {
-                    flechaRuleta.style.transform = `rotate(${gradosGiro}deg)`;
-                }
-
-                // Mostrar el resultado tras la animación
-                setTimeout(() => {
-                    if (nombreDestino) nombreDestino.textContent = elegido.nombre;
-                    if (descripcionDestino) descripcionDestino.textContent = elegido.descripcion || "";
-                    if (precioDestino) precioDestino.textContent = elegido.precio;
-                    if (categoriaDestino) categoriaDestino.textContent = elegido.categoriaNombre;
-                }, 3500);
-            }
-        });
-    });
-
-    if (resultadoDestino) {
-        resultadoDestino.addEventListener('click', () => {
-            resultadoDestino.classList.remove('visible');
-        });
-    }
+}); // <-- Cierre correcto de DOMContentLoaded
 
 // ==========================================
 // 8. FUNCIONES AUXILIARES Y PROTECCIONES
