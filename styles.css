@@ -341,8 +341,8 @@ MENÚ STICKY Y CATEGORÍAS (ARREGLADO)
 /* Tamaño de los iconos */
 .categoria .icono img,
 .categoria img.img-icono-cat {
-    width: 52px !important;    /* Tamaño grande y destacado */
-    height: 52px !important;
+    width: 60px !important;    /* Tamaño grande y destacado */
+    height: 60px !important;
     object-fit: contain;
     display: block;
     margin-bottom: 4px;
