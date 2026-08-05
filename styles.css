@@ -659,7 +659,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     position: absolute;
     inset: 0;
     transform-origin: center center;
-    clip-path: polygon(50% 50%, 29% 0%, 71% 0%); 
+    clip-path: polygon(50% 50%, 8% 0%, 92% 0%); /* Abre la base superior para que cubra exactamente los 45° de ancho del gajo */
     transition: background-color 0.08s ease, filter 0.08s ease;
 }
 
