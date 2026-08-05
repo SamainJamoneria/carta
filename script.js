@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 5. GESTIÓN DE MODALES
     // ==========================================
@@ -325,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalAlergenos) modalAlergenos.classList.remove('abierto');
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
+});
 
     // ==========================================
     // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
