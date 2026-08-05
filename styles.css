@@ -635,15 +635,15 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 /* --- Ruleta Optimizada y Centrada --- */
 .ruleta-destino {
     position: relative;
-    width: 275px; /* Ampliado para móvil */
-    height: 275px;
+    width: 290px; /* Ampliado para móvil */
+    height: 290px;
     margin: 0 auto 15px;
     flex-shrink: 0;
 }
 
 .disco-ruleta {
-    width: 230px; /* Disco ligeramente más grande */
-    height: 230px;
+    width: 250px; /* Disco ligeramente más grande */
+    height: 250px;
     border-radius: 50%;
     border: 5px solid var(--color-dorado);
     position: absolute;
@@ -693,8 +693,8 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 }
 
 .icono-ruleta img {
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
     display: block;
 }
@@ -713,8 +713,8 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
     position: absolute;
     top: 0;
     left: 0;
-    width: 275px;
-    height: 275px;
+    width: 290px;
+    height: 290px;
     z-index: 10;
     pointer-events: none;
     display: flex;
@@ -729,7 +729,7 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .flecha-ruleta .puntero {
     color: var(--color-precio);
-    font-size: 24px;
+    font-size: 30px;
     text-shadow: 0 2px 6px rgba(0,0,0,.35);
     margin-top: -2px;
 }
