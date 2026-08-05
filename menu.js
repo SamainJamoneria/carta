@@ -2,7 +2,7 @@ const carta = [
 {
     id:"tostas",
     titulo:"Tostas Premium",
-    icono: "🥖",
+    icono: "tostas.png",
     productos:[
         {
             nombre:"Burrata con Polvo de Jamón Ibérico",
@@ -45,7 +45,7 @@ const carta = [
 {
     id:"tablas",
     titulo:"Tablas para Compartir",
-    icono:"🍽️",
+    icono:"tablas.png",
     productos:[
         {
             nombre:"Tabla Samaín",
@@ -70,7 +70,7 @@ const carta = [
 {
     id:"raciones",
     titulo:"Raciones",
-    icono:"🍖",
+    icono:"raciones.png",
     productos:[
         { nombre:"Lomo Ibérico", descripcion:"Media / Entera", precio:"8,00 € / 15,00 €", alergenos: [] },
         { nombre:"Salchichón Ibérico", descripcion:"Media / Entera", precio:"7,00 € / 14,00 €", alergenos: [] },
@@ -104,7 +104,7 @@ const carta = [
 {
     id:"quesos",
     titulo:"Selección de Quesos",
-    icono:"🧀",
+    icono:"quesos.png",
     productos:[
         { nombre:"Stilton", descripcion:"Media / Entera", precio:"6,00 € / 12,00 €", alergenos: ["l"] },
         { nombre:"Gouda con Trufa", descripcion:"Media / Entera", precio:"7,00 € / 12,50 €", alergenos: ["l"] },
@@ -120,7 +120,7 @@ const carta = [
 {
     id:"piadinas",
     titulo:"Piadinas",
-    icono:"🌯",
+    icono:"piadinas.png",
     productos:[
         { nombre:"Atún", descripcion:"Tomate, queso y atún", precio:"8,00 €", alergenos: ["g", "l", "p"] },
         { nombre:"Ibérica", descripcion:"Tomate, queso y jamón ibérico al corte", precio:"12,50 €", alergenos: ["g", "l"] },
@@ -138,7 +138,7 @@ const carta = [
 {
     id:"dulces",
     titulo:"Piadinas Dulces",
-    icono:"🍫",
+    icono:"piadinas_dulces.png",
     productos:[
         { nombre:"Membrillo", descripcion:"Dos quesos con finas láminas de membrillo", precio:"8,00 €", alergenos: ["g", "l"] },
         { nombre:"Nutella", descripcion:"", precio:"6,00 €", alergenos: ["g", "l", "f"] },
@@ -148,7 +148,7 @@ const carta = [
 {
     id:"bocadillos",
     titulo:"Bocadillos",
-    icono:"🥪",
+    icono:"bocadillos.png",
     productos:[
         { nombre:"Jamón Curado de Granada", descripcion:"", precio:"6,50 €", alergenos: ["g"] },
         { nombre:"Salchichón Ibérico", descripcion:"", precio:"5,00 €", alergenos: ["g"] },
@@ -163,7 +163,7 @@ const carta = [
 {
     id:"postres",
     titulo:"Postres",
-    icono:"🍰",
+    icono:"postres.png",
     productos:[
         { nombre:"Queso con Membrillo", descripcion:"", precio:"5,00 €", alergenos: ["l"] },
         { nombre:"Helados", descripcion:"Por favor, pregunte por nuestros sabores disponibles", precio:"Consultar", alergenos: ["l"] }
