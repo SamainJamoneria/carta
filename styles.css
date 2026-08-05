@@ -681,33 +681,33 @@ EL DESTINO SAMAÍN (ZONA LANZAMIENTO Y RULETA)
 
 .icono-ruleta {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     transform-origin: center center;
-    top: calc(50% - 16px);
-    left: calc(50% - 16px);
+    top: calc(50% - 22px);
+    left: calc(50% - 22px);
     z-index: 5;
 }
 
 .icono-ruleta img {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
     display: block;
 }
 
-/* Centrado exacto alineado con el ángulo central de cada gajo (offset de 22.5°) */
-.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-55px) rotate(-22.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-55px) rotate(-67.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-55px) rotate(-112.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-55px) rotate(-157.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-55px) rotate(-202.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-55px) rotate(-247.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-55px) rotate(-292.5deg); }
-.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-55px) rotate(-337.5deg); }
+/* Centrado exacto en la zona ancha exterior del disco de 250px (translateY de -75px) */
+.disco-ruleta .icono-ruleta:nth-of-type(1) { transform: rotate(22.5deg) translateY(-75px) rotate(-22.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(2) { transform: rotate(67.5deg) translateY(-75px) rotate(-67.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(3) { transform: rotate(112.5deg) translateY(-75px) rotate(-112.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(4) { transform: rotate(157.5deg) translateY(-75px) rotate(-157.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(5) { transform: rotate(202.5deg) translateY(-75px) rotate(-202.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(6) { transform: rotate(247.5deg) translateY(-75px) rotate(-247.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(7) { transform: rotate(292.5deg) translateY(-75px) rotate(-292.5deg); }
+.disco-ruleta .icono-ruleta:nth-of-type(8) { transform: rotate(337.5deg) translateY(-75px) rotate(-337.5deg); }
 
 .flecha-ruleta {
     position: absolute;
