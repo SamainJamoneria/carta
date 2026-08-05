@@ -187,6 +187,8 @@ SECCIONES Y PRODUCTOS
     margin-bottom: 28px;
     padding-bottom: 12px;
     border-bottom: 4px solid var(--color-dorado);
+    display: flex;
+    align-items: center;
 }
 
 .producto {
@@ -305,21 +307,28 @@ MENÚ STICKY Y CATEGORÍAS
 /* Categorías deslizantes: Fondo clarito con texto azul y borde dorado */
 .categoria {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
     flex: 0 0 auto;
-    padding: 10px 20px;
-    border-radius: 999px;
-    background: #ffffff;                 /* Fondo claro por defecto */
-    border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);      /* Texto e icono en azul */
+    padding: 10px 18px !important;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     text-decoration: none;
     font-weight: 700;
-    white-space: nowrap;
+    text-align: center;
     transition: all .25s ease;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.categoria .texto {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .categoria:hover {
@@ -331,8 +340,8 @@ MENÚ STICKY Y CATEGORÍAS
 
 /* Estado activo: Resalta en dorado al hacer scroll */
 .categoria.activa {
-    background: var(--color-dorado) !important; /* Fondo dorado */
-    color: #ffffff !important;                  /* Texto e icono en blanco */
+    background: var(--color-dorado) !important;
+    color: #ffffff !important;
     border-color: var(--color-dorado) !important;
     transform: scale(1.05);
     box-shadow: 0 4px 14px rgba(216, 179, 92, 0.55);
@@ -911,13 +920,12 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border: 2px solid var(--color-principal);
     width: 92%;
     max-width: 440px;
-    /* Limitamos el alto máximo al 85% de la pantalla para dejar margen */
     max-height: 85vh; 
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden; /* Evitamos el scrollbar */
+    overflow: hidden;
 }
 
 .modal-galeria-content h2 {
@@ -930,15 +938,15 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     border-bottom: 2px solid var(--color-dorado);
     padding-bottom: 6px;
     text-align: center;
-    flex-shrink: 0; /* Asegura que el título no se encoja */
+    flex-shrink: 0;
 }
 
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    flex: 1; /* Ocupa el espacio vertical disponible */
-    min-height: 0; /* Permite que el grid flexione hacia abajo */
+    flex: 1;
+    min-height: 0;
 }
 
 .galeria-item {
@@ -947,7 +955,7 @@ MODAL GALERÍA (AJUSTADO A PANTALLA SIN SCROLL)
     overflow: hidden;
     width: 100%;
     height: 100%;
-    max-height: 15vh; /* Limita la altura de cada miniatura según el alto de pantalla */
+    max-height: 15vh;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -1156,19 +1164,18 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
-/* Botones del menú hamburguesa: Mismo estilo que las categorías deslizables */
 .link-modal-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;                     /* Fondo claro */
-    border: 2px solid var(--color-dorado); /* Borde dorado */
-    color: var(--color-principal);           /* Texto e icono en azul */
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
     font-size: 1.05rem;
     font-weight: 700;
     padding: 12px;
-    border-radius: 999px;                    /* Mismo acabado redondeado estilo píldora */
+    border-radius: 999px;
     text-decoration: none;
     cursor: pointer;
     width: 100%;
@@ -1241,7 +1248,7 @@ MEDIA QUERIES (RESPONSIVE)
     .top-bar { padding: 0 10px; }
     .top-nav-left { gap: 10px; }
     .nav-link, .nav-link-btn { font-size: 0.82rem; }
-    .categoria { padding: 8px 14px; font-size: 0.9rem; }
+    .categoria { padding: 8px 12px !important; font-size: 0.85rem; }
     .icono { font-size: 22px; line-height: 1; text-decoration: none; }
     .texto { text-align: center; line-height: 1.1; }
 }
@@ -1250,9 +1257,8 @@ MEDIA QUERIES (RESPONSIVE)
    DETALLE TEMÁTICO EN CABECERA Y EFECTOS PARTICULAS
    ========================================================================== */
 
-/* Contenedor del detalle bajo "- Especialistas en Ibéricos -" */
 .detalle-temporada {
-  display: none; /* Oculto por defecto el resto del año */
+  display: none;
   margin: 8px auto 0;
   padding: 4px 12px;
   border-radius: 15px;
@@ -1262,7 +1268,6 @@ MEDIA QUERIES (RESPONSIVE)
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Modos específicos para el detalle */
 body.modo-navidad .detalle-temporada {
   display: inline-block;
   background: rgba(212, 175, 55, 0.15);
@@ -1284,7 +1289,6 @@ body.modo-carnaval .detalle-temporada {
   border: 1px solid rgba(253, 121, 168, 0.4);
 }
 
-/* Partículas flotantes de scroll */
 .particula-scroll {
   position: fixed;
   pointer-events: none;
@@ -1349,24 +1353,22 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
    ESTILOS AMPLIADOS PARA ICONOS PNG (TRIPLE TAMAÑO)
    ====================================================== */
 
-/* Icono y estructura vertical dentro del menú superior deslizante */
 .categoria {
     flex-direction: column !important;
-    padding: 12px 24px !important;
+    padding: 12px 20px !important;
 }
 
 .categoria .icono img.img-icono-cat {
-    width: 72px;  /* Triple de tamaño (antes 24px) */
-    height: 72px; 
+    width: 72px;
+    height: 72px;
     object-fit: contain;
     display: block;
     margin: 0 auto 4px auto;
 }
 
-/* Icono junto al título h2 de cada sección en la carta */
 .seccion h2 img.img-titulo-cat {
-    width: 96px;  /* Triple de tamaño (antes 32px) */
-    height: 96px; 
+    width: 96px;
+    height: 96px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 14px;
