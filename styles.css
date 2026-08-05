@@ -1189,6 +1189,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     background-color: #ffffff !important;
     border-radius: 3px;
     transition: background-color 0.2s ease;
+    pointer-events: none; /* <--- Añadir esta línea */   
 }
 
 .btn-hamburguesa:hover span,
