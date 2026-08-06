@@ -1233,10 +1233,10 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
 /* --- LA IMAGEN DEL ICONO DENTRO DEL MENÚ (Forzando el tamaño) --- */
 .link-modal-item .icono-menu-lateral {
     /* Usamos !important para asegurar que sobrescribe cualquier otro tamaño */
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important; /* Importante para que el flex no lo reduzca */
-    min-height: 40px !important;
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important; /* Importante para que el flex no lo reduzca */
+    min-height: 45px !important;
 
     object-fit: contain;
     background-color: #2d2b72; /* Fondo azul para el icono */
