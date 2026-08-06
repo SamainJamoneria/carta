@@ -1230,6 +1230,36 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     box-shadow: 0 4px 12px rgba(216,179,92,0.25);
 }
 
+/* --- Estilos Específicos para el Menú Hamburguesa --- */
+
+/* Contenedor de cada enlace del menú */
+.link-modal-item {
+    display: flex;
+    align-items: center; /* Alinea verticalmente icono y texto */
+    gap: 12px;           /* Espacio entre el icono y el texto */
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #2d2b72;      /* Color del texto (Azul principal) */
+    font-weight: 500;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* La imagen del icono dentro del menú */
+.link-modal-item .icono-menu-lateral {
+    width: 40px;         /* Tamaño fijo del icono (ajusta a tu gusto) */
+    height: 40px;        /* Mismo alto que ancho para que sea cuadrado */
+    object-fit: contain; /* Asegura que la imagen no se deforme */
+    background-color: #2d2b72; /* Fondo azul para el icono */
+    border-radius: 50%;  /* Esto lo hace redondo */
+    padding: 8px;        /* Espacio entre el borde redondo y el dibujo blanco */
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+/* Efecto hover (al pasar el ratón) para el enlace */
+.link-modal-item:hover {
+    background-color: #f6f4ef; /* Fondo crema al pasar el ratón */
+}
+
 /*==================================================
 MEDIA QUERIES (RESPONSIVE)
 ==================================================*/
