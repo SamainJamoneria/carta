@@ -1180,7 +1180,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     background-color: #ffffff !important;
     border-radius: 3px;
     transition: background-color 0.2s ease;
-    pointer-events: none; /* <--- Añadir esta línea */   
+    pointer-events: none; /* Evita que los clics vayan al span */
 }
 
 .btn-hamburguesa:hover span,
@@ -1191,6 +1191,7 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
 .modal-menu-content {
     text-align: center;
     max-width: 320px !important;
+    padding: 20px; /* Añadido un poco de padding general */
 }
 
 .nav-modal-links {
@@ -1200,64 +1201,50 @@ ESTILOS DEL BOTÓN HAMBURGUESA Y MODAL MENÚ
     margin-top: 15px;
 }
 
+/* --- ESTILO CORREGIDO PARA LOS ENLACES DEL MENÚ (Reemplaza los bloques anteriores) --- */
 .link-modal-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #ffffff;
-    border: 2px solid var(--color-dorado);
-    color: var(--color-principal);
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 12px;
-    border-radius: 999px;
-    text-decoration: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    font-family: inherit;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: all 0.25s ease;
-}
+    /* Reseteo de estilos anteriores de botón */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
 
-.link-modal-item:hover,
-.link-modal-item:active {
-    background: #fcfbfa;
-    border-color: var(--color-dorado);
-    color: var(--color-principal);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(216,179,92,0.25);
-}
-
-/* --- Estilos Específicos para el Menú Hamburguesa --- */
-
-/* Contenedor de cada enlace del menú */
-.link-modal-item {
-    display: flex;
+    /* Nuevos estilos */
+    display: flex !important;
     align-items: center; /* Alinea verticalmente icono y texto */
     gap: 12px;           /* Espacio entre el icono y el texto */
     padding: 15px 20px;
     text-decoration: none;
-    color: #2d2b72;      /* Color del texto (Azul principal) */
-    font-weight: 500;
+    color: #2d2b72 !important;      /* Color del texto (Azul principal) */
+    font-weight: 500;    /* Menos negrita para el texto */
     border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.25s ease;
 }
 
-/* La imagen del icono dentro del menú */
+.link-modal-item:hover,
+.link-modal-item:active {
+    background-color: #f6f4ef !important; /* Fondo crema al pasar el ratón */
+    color: #2d2b72 !important;
+}
+
+/* --- LA IMAGEN DEL ICONO DENTRO DEL MENÚ (Forzando el tamaño) --- */
 .link-modal-item .icono-menu-lateral {
-    width: 40px;         /* Tamaño fijo del icono (ajusta a tu gusto) */
-    height: 40px;        /* Mismo alto que ancho para que sea cuadrado */
-    object-fit: contain; /* Asegura que la imagen no se deforme */
-    background-color: #2d2b72; /* Fondo azul para el icono */
-    border-radius: 50%;  /* Esto lo hace redondo */
-    padding: 8px;        /* Espacio entre el borde redondo y el dibujo blanco */
-    box-sizing: border-box; /* Incluye el padding en el tamaño total */
-}
+    /* Usamos !important para asegurar que sobrescribe cualquier otro tamaño */
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important; /* Importante para que el flex no lo reduzca */
+    min-height: 40px !important;
 
-/* Efecto hover (al pasar el ratón) para el enlace */
-.link-modal-item:hover {
-    background-color: #f6f4ef; /* Fondo crema al pasar el ratón */
+    object-fit: contain;
+    background-color: #2d2b72; /* Fondo azul para el icono */
+    border-radius: 50%;        /* Esto lo hace redondo */
+    padding: 8px;              /* Espacio entre el borde redondo y el dibujo blanco */
+    box-sizing: border-box;    /* Incluye el padding en el tamaño total */
+    display: block !important;
+    flex-shrink: 0;            /* Evita que el icono se encoja si el texto es largo */
 }
 
 /*==================================================
