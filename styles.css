@@ -1432,7 +1432,7 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
 
 /* Estilo para la imagen de dados en el párrafo de texto */
 .icono-dados-texto {
-    height: 1.2em;           /* Ajusta la altura a la del texto circundante */
+    height: 1.8em;           /* Ajusta la altura a la del texto circundante */
     vertical-align: middle;  /* Alinea verticalmente con el texto */
     margin-right: 6px;       /* Espacio a la derecha del icono */
     object-fit: contain;
@@ -1440,9 +1440,8 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
 
 /* Estilo para la imagen de dados dentro del botón */
 .btn-destino .icono-dados-btn {
-    height: 1.4em;           /* Ligeramente más grande que el del texto, como pediste */
+    height: 2em;           /* Ligeramente más grande que el del texto, como pediste */
     vertical-align: middle;
     margin-right: 8px;       /* Espacio entre el icono y el texto del botón */
-    filter: brightness(0) invert(1); /* Esto hace que la imagen sea blanca dentro del botón azul */
     object-fit: contain;
 }
