@@ -1,19 +1,12 @@
-/**
- * @file script.js
- * @description Lógica principal y unificada para la carta digital de Jamonería Samaín.
- * Incluye renderizado dinámico, observadores de intersección, buscador, control de alérgenos,
- * galerías, efectos estacionales automáticos y gestión robusta de modales bilingües.
- * @author Principal Software Engineer & Web Architect
- */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
-    // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS
+    // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS (Blindado)
     // ==========================================
     const menu = document.getElementById("menu-categorias");
 
-    if (menu && typeof carta !== "undefined") {
+    if (menu && typeof carta !== "undefined" && Array.isArray(carta)) {
         carta.forEach(categoria => {
             menu.innerHTML += `
                 <a href="#${categoria.id}" class="categoria" data-id="${categoria.id}">
@@ -44,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "cac": { icono: "🥜", nombre: "Cacahuetes / Peanuts" }
     };
 
-    if (contenedor && typeof carta !== "undefined") {
+    if (contenedor && typeof carta !== "undefined" && Array.isArray(carta)) {
         carta.forEach(categoria => {
             const seccion = document.createElement("section");
             seccion.className = "seccion";
@@ -54,40 +47,42 @@ document.addEventListener("DOMContentLoaded", () => {
             titulo.innerHTML = `<img src="${categoria.icono}" alt="${categoria.titulo}" class="img-titulo-cat"> ${categoria.titulo}`;
             seccion.appendChild(titulo);
 
-            categoria.productos.forEach(producto => {
-                const tarjeta = document.createElement("div");
-                tarjeta.className = "producto";
+            if (categoria.productos && Array.isArray(categoria.productos)) {
+                categoria.productos.forEach(producto => {
+                    const tarjeta = document.createElement("div");
+                    tarjeta.className = "producto";
 
-                let htmlAlergenos = "";
-                if (producto.alergenos && producto.alergenos.length > 0) {
-                    htmlAlergenos = `<div class="tags-alergenos" style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">`;
-                    producto.alergenos.forEach(letra => {
-                        const data = mapaAlergenos[letra.toLowerCase()];
-                        if (data) {
-                            htmlAlergenos += `<span class="badge-alergeno" title="${data.nombre}" style="font-size:14px; background:rgba(0,0,0,0.05); padding:3px 6px; border-radius:6px; cursor:help; display:inline-flex; align-items:center;">${data.icono}</span>`;
-                        }
-                    });
-                    htmlAlergenos += `</div>`;
-                }
+                    let htmlAlergenos = "";
+                    if (producto.alergenos && producto.alergenos.length > 0) {
+                        htmlAlergenos = `<div class="tags-alergenos" style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">`;
+                        producto.alergenos.forEach(letra => {
+                            const data = mapaAlergenos[letra.toLowerCase()];
+                            if (data) {
+                                htmlAlergenos += `<span class="badge-alergeno" title="${data.nombre}" style="font-size:14px; background:rgba(0,0,0,0.05); padding:3px 6px; border-radius:6px; cursor:help; display:inline-flex; align-items:center;">${data.icono}</span>`;
+                            }
+                        });
+                        htmlAlergenos += `</div>`;
+                    }
 
-                tarjeta.innerHTML = `
-                    <div class="cabecera-producto">
-                        <div class="nombre">${producto.nombre}</div>
-                        <div class="precio">${producto.precio}</div>
-                    </div>
-                    ${producto.descripcion ? `<div class="descripcion">${producto.descripcion}</div>` : ""}
-                    ${htmlAlergenos}
-                `;
+                    tarjeta.innerHTML = `
+                        <div class="cabecera-producto">
+                            <div class="nombre">${producto.nombre}</div>
+                            <div class="precio">${producto.precio}</div>
+                        </div>
+                        ${producto.descripcion ? `<div class="descripcion">${producto.descripcion}</div>` : ""}
+                        ${htmlAlergenos}
+                    `;
 
-                seccion.appendChild(tarjeta);
-            });
+                    seccion.appendChild(tarjeta);
+                });
+            }
 
             contenedor.appendChild(seccion);
         });
     }
 
     // ==========================================
-    // 2. INTERSECTION OBSERVER (Scroll e indicador activo)
+    // 2. INTERSECTION OBSERVER
     // ==========================================
     const observer = new IntersectionObserver((entradas) => {
         entradas.forEach(entrada => {
@@ -196,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 5. GESTIÓN DE MODALES Y MENÚ HAMBURGUESA BLINDADO
+    // 5. GESTIÓN DE MODALES
     // ==========================================
     const modalContacto = document.getElementById('modal-contacto');
     const modalGaleria = document.getElementById('modal-galeria');
@@ -204,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalAlergenos = document.getElementById('modal-alergenos');
     const modalMenuPrincipal = document.getElementById('modal-menu-principal');
 
-    // --- Modal Alérgenos ---
     const imagenAlergenos = document.getElementById("imagen-alergenos");
     const cerrarAlergenos = document.getElementById("cerrar-modal");
 
@@ -215,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cerrarAlergenos.addEventListener("click", () => modalAlergenos.classList.remove("abierto"));
     }
 
-    // --- Modal Contacto ---
     const btnContacto = document.getElementById('btn-contacto-carta');
     const cerrarContacto = document.getElementById('cerrar-contacto');
 
@@ -226,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cerrarContacto.addEventListener('click', () => modalContacto.classList.add('hidden'));
     }
 
-    // --- Modal Galería ---
     const btnGaleria = document.getElementById('btn-galeria');
     const closeGaleria = document.getElementById('close-galeria');
 
@@ -240,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGaleria.addEventListener('click', () => modalGaleria.classList.add('hidden'));
     }
 
-    // --- Modal Visor Galería ---
     const modalVisor = document.getElementById("modal-visor-imagen");
     const imagenAmpliada = document.getElementById("imagen-ampliada");
     const cerrarVisor = document.getElementById("cerrar-visor");
@@ -263,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
         modalVisor.addEventListener("click", cerrarModalImagen);
     }
 
-    // --- Modal Tienda / Para Llevar ---
     const btnTienda = document.getElementById('btn-tienda');
     const closeTienda = document.getElementById('close-tienda') || document.getElementById('cerrar-tienda');
 
@@ -280,7 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Menú Hamburguesa Robusto ---
     const btnHamburguesa = document.getElementById('btn-menu-hamburguesa');
     const cerrarMenuPrincipal = document.getElementById('cerrar-menu-principal');
 
@@ -299,41 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (cerrarMenuPrincipal && modalMenuPrincipal) {
-        cerrarMenuPrincipal.addEventListener('click', () => {
-            modalMenuPrincipal.classList.add('hidden');
-            if (btnHamburguesa) btnHamburguesa.setAttribute('aria-expanded', 'false');
-        });
-    }
-
-    // Enlaces internos dentro del Menú Hamburguesa
-    const btnContactoModal = document.querySelector('#modal-menu-principal #btn-contacto-carta');
-    const btnGaleriaModal = document.querySelector('#modal-menu-principal #btn-galeria');
-    const btnTiendaModal = document.querySelector('#modal-menu-principal #btn-tienda');
-
-    if (btnContactoModal && modalContacto) {
-        btnContactoModal.addEventListener('click', () => {
-            modalMenuPrincipal.classList.add('hidden');
-            modalContacto.classList.remove('hidden');
-        });
-    }
-
-    if (btnGaleriaModal && modalGaleria) {
-        btnGaleriaModal.addEventListener('click', () => {
-            modalMenuPrincipal.classList.add('hidden');
-            modalGaleria.classList.remove('hidden');
-        });
-    }
-
-    if (btnTiendaModal && modalTienda) {
-        btnTiendaModal.addEventListener('click', () => {
-            modalMenuPrincipal.classList.add('hidden');
-            modalTienda.classList.remove('hidden');
-        });
-    }
-
     // ==========================================
-    // 6. CIERRE GLOBAL DE MODALES (Clic fuera)
+    // 6. CIERRE GLOBAL DE MODALES
     // ==========================================
     window.addEventListener('click', (event) => {
         if (event.target === modalContacto) modalContacto.classList.add('hidden');
@@ -343,172 +299,142 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-   // ==========================================
-// 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
-// ==========================================
-const body = document.body;
-const detalleEl = document.getElementById("detalle-temporada");
+    // ==========================================
+    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
+    // ==========================================
+    const body = document.body;
+    const detalleEl = document.getElementById("detalle-temporada");
 
-// Función para comprobar el idioma actual de forma dinámica
-const obtenerEsIngles = () => document.documentElement.lang === "en";
+    const obtenerEsIngles = () => document.documentElement.lang === "en";
 
-function obtenerModoPorFecha() {
-    const ahora = new Date();
-    const mes = ahora.getMonth() + 1;
-    const dia = ahora.getDate();
+    function obtenerModoPorFecha() {
+        const ahora = new Date();
+        const mes = ahora.getMonth() + 1;
+        const dia = ahora.getDate();
 
-    if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
-    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
-    if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
-    if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
+        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
+        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
+        if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
+        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
 
-    return null;
-}
-
-const modoActivo = obtenerModoPorFecha();
-
-if (modoActivo) {
-    body.classList.add(modoActivo);
-}
-
-const configuracionTemporadas = {
-    "modo-navidad": {
-        icono: "santa.png",
-        textos: {
-            es: "Felices Fiestas de parte del equipo de Samaín",
-            en: "Merry Christmas from the Samaín team"
-        },
-        particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png", "bola_roja.png"]
-    },
-    "modo-sanjuan": {
-        icono: "fuego.png",
-        textos: {
-            es: "¡Llega la mágica Noche de San Juan!",
-            en: "Celebrating San Juan"
-        },
-        particulas: ["ascuas.png", "ascuas.png", "ascuas.png", "ascuas.png"]
-    },
-    "modo-carnaval": {
-        icono: "bufon.png",
-        textos: {
-            es: "¡Feliz Carnaval!",
-            en: "Happy Carnival Season!"
-        },
-        particulas: ["bufon.png", "confeti.png", "mascara.png", "sombrero.png", "confeti.png"]
-    },
-    "modo-samain": {
-        // Usa calabazza.png en español y calabaza.png en inglés según tu preferencia
-        iconos: {
-            es: "calabazza.png",
-            en: "calabazza.png"
-        },
-        textos: {
-            es: "¡Feliz Samaín / Halloween!",
-            en: "Happy Samain / Halloween!"
-        },
-        particulas: ["calabaza.png", "fantasma.png", "araña.png", "rip.png"]
+        return null;
     }
-};
 
-if (modoActivo && configuracionTemporadas[modoActivo]) {
-    const config = configuracionTemporadas[modoActivo];
-    
-    const actualizarTextoTemporada = () => {
-        if (detalleEl) {
-            const idiomaActual = obtenerEsIngles() ? "en" : "es";
-            detalleEl.innerHTML = ""; // Limpiamos el contenido previo
+    const modoActivo = obtenerModoPorFecha();
 
-            // Determinamos el icono (soporta icono único o diferenciado por idioma)
-            const archivoIcono = config.iconos ? config.iconos[idiomaActual] : config.icono;
+    if (modoActivo) {
+        body.classList.add(modoActivo);
+    }
 
-            if (archivoIcono) {
-                const imgIcono = document.createElement("img");
-                imgIcono.src = `img/${archivoIcono}`;
-                imgIcono.alt = "Icono temporada";
-                imgIcono.style.height = "1.2em";
-                imgIcono.style.verticalAlign = "middle";
-                imgIcono.style.marginRight = "8px";
-                detalleEl.appendChild(imgIcono);
-            }
-
-            const textoSpan = document.createElement("span");
-            textoSpan.textContent = config.textos[idiomaActual];
-            detalleEl.appendChild(textoSpan);
+    const configuracionTemporadas = {
+        "modo-navidad": {
+            icono: "santa.png",
+            textos: {
+                es: "Felices Fiestas de parte del equipo de Samaín",
+                en: "Merry Christmas from the Samaín team"
+            },
+            particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+        },
+        "modo-sanjuan": {
+            icono: "fuego.png",
+            textos: {
+                es: "¡Llega la mágica Noche de San Juan!",
+                en: "Celebrating San Juan"
+            },
+            particulas: ["ascuas.png"]
+        },
+        "modo-carnaval": {
+            icono: "bufon.png",
+            textos: {
+                es: "¡Feliz Carnaval!",
+                en: "Happy Carnival Season!"
+            },
+            particulas: ["confeti.png", "mascara.png"]
+        },
+        "modo-samain": {
+            icono: "calabazza.png",
+            textos: {
+                es: "¡Feliz Samaín / Halloween!",
+                en: "Happy Samain / Halloween!"
+            },
+            particulas: ["calabaza.png", "fantasma.png"]
         }
     };
 
-    actualizarTextoTemporada();
-
-    let ultimoScroll = window.scrollY;
-    let contadorScroll = 0;
-
-    window.addEventListener("scroll", () => {
-        const scrollActual = window.scrollY;
-
-        if (scrollActual > ultimoScroll) {
-            contadorScroll++;
-            if (contadorScroll % 5 === 0) {
-                crearParticulaScroll(config.particulas);
-                crearParticulaScroll(config.particulas);
-            }
-        }
-        ultimoScroll = scrollActual;
-    }, { passive: true });
-
-    function crearParticulaScroll(listaRecursos) {
-        const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
+    if (modoActivo && configuracionTemporadas[modoActivo]) {
+        const config = configuracionTemporadas[modoActivo];
         
-        const particula = document.createElement("img");
-        particula.src = `img/${recurso}`;
-        particula.className = "particula-scroll";
-        particula.alt = "Decoración de temporada";
+        const actualizarTextoTemporada = () => {
+            if (detalleEl) {
+                const idiomaActual = obtenerEsIngles() ? "en" : "es";
+                detalleEl.textContent = config.textos[idiomaActual];
+            }
+        };
 
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * 80 + 20;
-        const tamano = (Math.random() * 15 + 25).toFixed(0);
-        const duracion = (Math.random() * 800 + 1000).toFixed(0);
+        actualizarTextoTemporada();
 
-        particula.style.left = `${posX}px`;
-        particula.style.top = `${posY}px`;
-        particula.style.width = `${tamano}px`;
-        particula.style.height = "auto";
-        particula.style.position = "absolute";
-        particula.style.pointerEvents = "none";
-        particula.style.animationDuration = `${duracion}ms`;
+        let ultimoScroll = window.scrollY;
+        let contadorScroll = 0;
 
-        document.body.appendChild(particula);
+        window.addEventListener("scroll", () => {
+            const scrollActual = window.scrollY;
 
-        setTimeout(() => particula.remove(), parseInt(duracion));
+            if (scrollActual > ultimoScroll) {
+                contadorScroll++;
+                if (contadorScroll % 5 === 0) {
+                    crearParticulaScroll(config.particulas);
+                }
+            }
+            ultimoScroll = scrollActual;
+        }, { passive: true });
+
+        function crearParticulaScroll(listaRecursos) {
+            const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
+            
+            const particula = document.createElement("img");
+            particula.src = `${recurso}`;
+            particula.className = "particula-scroll";
+            particula.alt = "Decoración de temporada";
+
+            const posX = Math.random() * (window.innerWidth - 50);
+            const tamano = (Math.random() * 15 + 25).toFixed(0);
+            const duracion = (Math.random() * 800 + 1200).toFixed(0);
+
+            particula.style.left = `${posX}px`;
+            particula.style.top = `-60px`;
+            particula.style.width = `${tamano}px`;
+            particula.style.height = "auto";
+            particula.style.animationDuration = `${duracion}ms`;
+
+            document.body.appendChild(particula);
+
+            setTimeout(() => particula.remove(), parseInt(duracion));
+        }
     }
-}
-    
-// ==========================================
-// 8. FUNCIONES AUXILIARES Y PROTECCIONES
-// ==========================================
-function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-}
 
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
+    // ==========================================
+    // 8. FUNCIONES AUXILIARES Y PROTECCIONES
+    // ==========================================
+    function normalizarTexto(texto) {
+        return texto
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12') {
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+            e.preventDefault();
+        }
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+            e.preventDefault();
+        }
+    });
 });
-
-document.addEventListener('keydown', function(e) {
-    // Bloquear F12
-    if (e.key === 'F12') {
-        e.preventDefault();
-    }
-    
-    // Bloquear Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
-    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-        e.preventDefault();
-    }
-    
-    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-        e.preventDefault();
-    }
-});
-
