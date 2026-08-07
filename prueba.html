@@ -24,15 +24,46 @@
             z-index: 100;
         }
 
-        #detalle-temporada {
-            margin-top: 12px;
-            font-size: 1.2rem;
+        /* Contenedor del detalle de temporada en la cabecera */
+        .detalle-temporada {
+            display: none; /* Oculto por defecto el resto del año */
+            margin: 12px auto 0;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 1rem;
             font-weight: 600;
-            color: #f1c40f;
-            display: flex;
+            width: fit-content;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        /* Modos específicos para el banner de la cabecera */
+        body.modo-navidad .detalle-temporada {
+            display: inline-flex;
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        body.modo-sanjuan .detalle-temporada {
+            display: inline-flex;
+            background: rgba(243, 156, 18, 0.15);
+            color: #f39c12;
+            border: 1px solid rgba(243, 156, 18, 0.4);
+        }
+
+        body.modo-carnaval .detalle-temporada {
+            display: inline-flex;
+            background: rgba(253, 121, 168, 0.15);
+            color: #fd79a8;
+            border: 1px solid rgba(253, 121, 168, 0.4);
+        }
+
+        body.modo-samain .detalle-temporada {
+            display: inline-flex;
+            background: rgba(230, 126, 34, 0.15);
+            color: #e67e22;
+            border: 1px solid rgba(230, 126, 34, 0.4);
         }
 
         .contenido {
@@ -41,44 +72,45 @@
             color: #333;
         }
 
-        /* CORRECCIÓN DE POSICIÓN Y ANIMACIÓN DE CAÍDA Y DESAPARICIÓN */
+        /* Partículas flotantes de scroll con caída completa */
         .particula-scroll {
-            position: fixed; /* Fijo a la ventana para que caigan por encima de todo el contenido */
+            position: fixed;
             pointer-events: none;
             z-index: 9999;
-            animation: animarCaida linear forwards;
+            user-select: none;
+            animation: caidaParticula linear forwards;
             will-change: transform, opacity;
         }
 
-        @keyframes animarCaida {
+        @keyframes caidaParticula {
             0% {
-                transform: translateY(-50px) rotate(0deg) scale(0.8);
                 opacity: 0;
+                transform: translateY(-50px) scale(0.8) rotate(0deg);
             }
             15% {
-                opacity: 1; /* Aparecen suavemente al empezar a caer */
+                opacity: 1;
             }
             85% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(105vh) rotate(360deg) scale(1.1);
-                opacity: 0; /* Se desvanecen por completo al llegar abajo */
+                opacity: 0;
+                transform: translateY(105vh) scale(1.1) rotate(360deg);
             }
         }
     </style>
 </head>
-<body class="modo-navidad">
+<body class="modo-navidad"> <!-- Cambia a modo-sanjuan, modo-carnaval o modo-samain para probar otras -->
 
     <header>
         <h1>Jamonería Samaín - Vista Previa</h1>
-        <!-- Contenedor del banner superior -->
-        <div id="detalle-temporada"></div>
+        <!-- Contenedor del banner superior con su clase CSS correspondiente -->
+        <div id="detalle-temporada" class="detalle-temporada"></div>
     </header>
 
     <div class="contenido">
         <h2>👇 Mueve la rueda del ratón hacia abajo (Haz Scroll)</h2>
-        <p>Verás cómo las partículas de Navidad se distribuyen por toda la pantalla, caen girando y desaparecen solas.</p>
+        <p>Verás las imágenes reales de tu carpeta img/ cayendo y desapareciendo por la pantalla.</p>
         <br><br><br>
         <p>Sigue haciendo scroll...</p>
         <br><br><br><br><br>
@@ -94,23 +126,46 @@
 
         const obtenerEsIngles = () => document.documentElement.lang === "en";
 
-        // Usamos Data URIs temporales con gráficos limpios para la prueba visual inmediata
+        // Configuración completa con tus archivos reales en la carpeta img/
         const configuracionTemporadas = {
             "modo-navidad": {
-                icono: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23e74c3c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/><circle cx='12' cy='10' r='3'/></svg>",
+                icono: "santa.png",
                 textos: {
                     es: "Felices Fiestas de parte del equipo de Samaín",
                     en: "Merry Christmas from the Samaín team"
                 },
-                particulas: [
-                    // Bola roja navideña simulada en SVG
-                    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><circle cx='12' cy='14' r='8' fill='%23e74c3c'/><path d='M10 4h4v3h-4z' fill='%23bdc3c7'/><path d='M12 2v2' stroke='%23bdc3c7' stroke-width='2'/></svg>",
-                    // Copo / Estrella simulada
-                    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='%233498db'><path d='M12 2L15 9H22L16 14L18 21L12 17L6 21L8 14L2 9H9L12 2Z'/></svg>"
-                ]
+                particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+            },
+            "modo-sanjuan": {
+                icono: "fuego.png",
+                textos: {
+                    es: "¡Llega la mágica Noche de San Juan!",
+                    en: "Celebrating San Juan"
+                },
+                particulas: ["ascuas.png"]
+            },
+            "modo-carnaval": {
+                icono: "bufon.png",
+                textos: {
+                    es: "¡Feliz Carnaval!",
+                    en: "Happy Carnival Season!"
+                },
+                particulas: ["bufon.png", "mascara.png", "sombrero.png", "confeti.png"]
+            },
+            "modo-samain": {
+                iconos: {
+                    es: "calabazza.png",
+                    en: "calabaza.png"
+                },
+                textos: {
+                    es: "¡Feliz Samaín / Halloween!",
+                    en: "Happy Samain / Halloween!"
+                },
+                particulas: ["calabaza.png", "fantasma.png", "araña.png", "rip.png"]
             }
         };
 
+        // Para esta prueba está forzado en "modo-navidad" (puedes cambiarlo a "modo-sanjuan", etc. para probar los demás)
         const modoActivo = "modo-navidad";
 
         if (modoActivo && configuracionTemporadas[modoActivo]) {
@@ -121,13 +176,13 @@
                     const idiomaActual = obtenerEsIngles() ? "en" : "es";
                     detalleEl.innerHTML = "";
 
-                    const archivoIcono = config.icono;
+                    const archivoIcono = config.iconos ? config.iconos[idiomaActual] : config.icono;
 
                     if (archivoIcono) {
                         const imgIcono = document.createElement("img");
-                        imgIcono.src = archivoIcono;
+                        imgIcono.src = `img/${archivoIcono}`;
                         imgIcono.alt = "Icono temporada";
-                        imgIcono.style.height = "1.4em";
+                        imgIcono.style.height = "1.2em";
                         imgIcono.style.verticalAlign = "middle";
                         detalleEl.appendChild(imgIcono);
                     }
@@ -146,11 +201,10 @@
             window.addEventListener("scroll", () => {
                 const scrollActual = window.scrollY;
 
-                // Detectar movimiento hacia abajo
                 if (scrollActual > ultimoScroll) {
                     contadorScroll++;
-                    // Cada 2 eventos de scroll genera una partícula para que se aprecie bien el flujo
-                    if (contadorScroll % 2 === 0) {
+                    if (contadorScroll % 2 === 0) { // Genera una partícula cada 2 eventos de scroll
+                        crearParticulaScroll(config.particulas);
                         crearParticulaScroll(config.particulas);
                     }
                 }
@@ -161,25 +215,23 @@
                 const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
                 
                 const particula = document.createElement("img");
-                particula.src = recurso;
+                particula.src = `img/${recurso}`;
                 particula.className = "particula-scroll";
-                particula.alt = "Partícula";
+                particula.alt = "Decoración de temporada";
 
-                // Posición horizontal aleatoria en todo el ancho de la ventana
                 const posX = Math.random() * (window.innerWidth - 50);
-                const tamano = Math.floor(Math.random() * 20) + 25; // Entre 25px y 45px
-                const duracion = Math.floor(Math.random() * 800) + 1200; // Entre 1.2s y 2s de caída
+                const tamano = (Math.random() * 15 + 25).toFixed(0); // Entre 25px y 40px
+                const duracion = (Math.random() * 800 + 1200).toFixed(0); // Entre 1.2s y 2s
 
                 particula.style.left = `${posX}px`;
-                particula.style.top = `-60px`; // Empiezan justo por encima de la pantalla
+                particula.style.top = `-60px`;
                 particula.style.width = `${tamano}px`;
                 particula.style.height = "auto";
                 particula.style.animationDuration = `${duracion}ms`;
 
                 document.body.appendChild(particula);
 
-                // Se borra exactamente al terminar la animación para liberar memoria
-                setTimeout(() => particula.remove(), duracion);
+                setTimeout(() => particula.remove(), parseInt(duracion));
             }
         }
     </script>
