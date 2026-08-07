@@ -394,13 +394,13 @@ const configuracionTemporadas = {
             es: "¡Feliz Carnaval!",
             en: "Happy Carnival Season!"
         },
-        particulas: ["bufon.png", "mascara.png", "sombrero.png", "confeti.png"]
+        particulas: ["bufon.png", "confeti.png", "mascara.png", "sombrero.png", "confeti.png"]
     },
     "modo-samain": {
         // Usa calabazza.png en español y calabaza.png en inglés según tu preferencia
         iconos: {
             es: "calabazza.png",
-            en: "calabaza.png"
+            en: "calabazza.png"
         },
         textos: {
             es: "¡Feliz Samaín / Halloween!",
