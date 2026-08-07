@@ -1454,8 +1454,8 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     background-color: #2d2b72; /* Color idéntico de los botones de comensales */
     border-radius: 50%;
     vertical-align: middle;
