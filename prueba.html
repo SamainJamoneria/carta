@@ -9,7 +9,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            height: 300vh; /* Altura para permitir scroll fluido */
+            height: 300vh;
             background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
         }
 
@@ -24,9 +24,9 @@
             z-index: 100;
         }
 
-        /* Contenedor del detalle de temporada en la cabecera */
-        .detalle-temporada {
-            display: none; /* Oculto por defecto */
+        /* CORREGIDO: Se elimina el display:none directo para evitar bloqueos y se gestiona limpiamente por modo */
+        #detalle-temporada {
+            display: none; 
             margin: 12px auto 0;
             padding: 4px 12px;
             border-radius: 15px;
@@ -37,8 +37,8 @@
             gap: 8px;
         }
 
-        /* Activación específica para Navidad */
-        body.modo-navidad .detalle-temporada {
+        /* Activación directa cuando el body tiene la clase */
+        body.modo-navidad #detalle-temporada {
             display: inline-flex;
             background: rgba(212, 175, 55, 0.15);
             color: #d4af37;
@@ -51,7 +51,7 @@
             color: #333;
         }
 
-        /* Partículas flotantes de scroll con caída completa */
+        /* Partículas flotantes con caída completa */
         .particula-scroll {
             position: fixed;
             pointer-events: none;
@@ -83,23 +83,19 @@
 
     <header>
         <h1>Jamonería Samaín - Vista Previa Navidad</h1>
-        <!-- Contenedor del banner superior -->
-        <div id="detalle-temporada" class="detalle-temporada"></div>
+        <div id="detalle-temporada"></div>
     </header>
 
     <div class="contenido">
         <h2>👇 Mueve la rueda del ratón hacia abajo (Haz Scroll)</h2>
-        <p>Se mostrará el icono de Papá Noel (santa.png) y lloverán las bolas reales de Navidad (bola_roja.png, bola_amarilla.png, bola_azul.png).</p>
+        <p>Se mostrará el icono de Papá Noel (santa.png) y lloverán las bolas reales de Navidad.</p>
         <br><br><br>
         <p>Sigue haciendo scroll para ver el efecto continuo...</p>
     </div>
 
     <script>
-        // ==========================================
-        // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS (NAVIDAD)
-        // ==========================================
         const body = document.body;
-        const detalleEl = document.getElementById("detalle-temporada");
+        const detalleEl =getElementById("detalle-temporada");
 
         const obtenerEsIngles = () => document.documentElement.lang === "en";
 
@@ -132,6 +128,12 @@
                         imgIcono.alt = "Icono temporada";
                         imgIcono.style.height = "1.2em";
                         imgIcono.style.verticalAlign = "middle";
+
+                        // Depurador visual en consola por si la ruta de la imagen fallase
+                        imgIcono.onerror = () => {
+                            console.error("⚠️ No se pudo cargar el icono: img/" + archivoIcono);
+                        };
+
                         detalleEl.appendChild(imgIcono);
                     }
 
@@ -166,9 +168,13 @@
                 particula.className = "particula-scroll";
                 particula.alt = "Decoración navideña";
 
+                particula.onerror = () => {
+                    console.error("⚠️ No se pudo cargar la partícula: img/" + recurso);
+                };
+
                 const posX = Math.random() * (window.innerWidth - 50);
-                const tamano = (Math.random() * 15 + 25).toFixed(0); // Entre 25px y 40px
-                const duracion = (Math.random() * 800 + 1200).toFixed(0); // Entre 1.2s y 2s
+                const tamano = (Math.random() * 15 + 25).toFixed(0);
+                const duracion = (Math.random() * 800 + 1200).toFixed(0);
 
                 particula.style.left = `${posX}px`;
                 particula.style.top = `-60px`;
