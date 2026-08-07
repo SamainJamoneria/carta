@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modo Navidad - Jamonería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 200vh; /* Para permitir hacer scroll */
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #detalle-temporada {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        .contenido {
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* Estilo para las partículas flotantes que caen al hacer scroll */
+        .particula-scroll {
+            position: absolute;
+            pointer-events: none;
+            z-index: 9999;
+            animation: animarParticula linear forwards;
+        }
+
+        @keyframes animarParticula {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(150px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="modo-navidad">
+
+    <header>
+        <h1>Jamonería Samaín</h1>
+        <!-- Aquí es donde se inyecta dinámicamente el icono y el texto -->
+        <div id="detalle-temporada"></div>
+    </header>
+
+    <div class="contenido">
+        <h2>Desplaza hacia abajo (haz scroll) para ver las partículas en acción ⬇️</h2>
+        <p>Imagina que esta es la carta digital o la página principal de la web.</p>
+    </div>
+
+    <script>
+        // ==========================================
+        // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
+        // ==========================================
+        const body = document.body;
+        const detalleEl = document.getElementById("detalle-temporada");
+
+        const obtenerEsIngles = () => document.documentElement.lang === "en";
+
+        const configuracionTemporadas = {
+            "modo-navidad": {
+                icono: "santa.png", // Asegúrate de tener esta imagen en una carpeta 'img/' o usa un placeholder si lo prefieres
+                textos: {
+                    es: "Felices Fiestas de parte del equipo de Samaín",
+                    en: "Merry Christmas from the Samaín team"
+                },
+                particulas: ["bola_amarilla.png", "bola_azul.png"]
+            }
+        };
+
+        // Forzamos el modo navidad para este ejemplo de prueba
+        const modoActivo = "modo-navidad";
+
+        if (modoActivo && configuracionTemporadas[modoActivo]) {
+            const config = configuracionTemporadas[modoActivo];
+            
+            const actualizarTextoTemporada = () => {
+                if (detalleEl) {
+                    const idiomaActual = obtenerEsIngles() ? "en" : "es";
+                    detalleEl.innerHTML = "";
+
+                    const archivoIcono = config.iconos ? config.iconos[idiomaActual] : config.icono;
+
+                    if (archivoIcono) {
+                        const imgIcono = document.createElement("img");
+                        // Si no tienes la imagen creada aún, puedes comentar temporalmente la ruta o usar una de prueba
+                        imgIcono.src = `img/${archivoIcono}`;
+                        imgIcono.alt = "Icono temporada";
+                        imgIcono.style.height = "1.2em";
+                        imgIcono.style.verticalAlign = "middle";
+                        imgIcono.style.marginRight = "8px";
+                        
+                        // Fallback visual por si la imagen física no está creada todavía en tu carpeta local
+                        imgIcono.onerror = () => {
+                            imgIcono.replaceWith("🎅 ");
+                        };
+
+                        detalleEl.appendChild(imgIcono);
+                    }
+
+                    const textoSpan = document.createElement("span");
+                    textoSpan.textContent = config.textos[idiomaActual];
+                    detalleEl.appendChild(textoSpan);
+                }
+            };
+
+            actualizarTextoTemporada();
+
+            let ultimoScroll = window.scrollY;
+            let contadorScroll = 0;
+
+            window.addEventListener("scroll", () => {
+                const scrollActual = window.scrollY;
+
+                if (scrollActual > ultimoScroll) {
+                    contadorScroll++;
+                    if (contadorScroll % 2 === 0) { // Puesto a 2 para que salgan más seguido en la prueba
+                        crearParticulaScroll(config.particulas);
+                    }
+                }
+                ultimoScroll = scrollActual;
+            }, { passive: true });
+
+            function crearParticulaScroll(listaRecursos) {
+                const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
+                
+                const particula = document.createElement("img");
+                particula.src = `img/${recurso}`;
+                particula.className = "particula-scroll";
+                particula.alt = "Decoración";
+
+                // Fallback visual si el archivo PNG de la bola aún no está en la carpeta img/
+                particula.onerror = () => {
+                    particula.replaceWith("❄️");
+                };
+
+                const posX = Math.random() * window.innerWidth;
+                const posY = window.scrollY + Math.random() * 200 + 50;
+                const tamano = (Math.random() * 15 + 25).toFixed(0);
+                const duracion = (Math.random() * 800 + 1000).toFixed(0);
+
+                particula.style.left = `${posX}px`;
+                particula.style.top = `${posY}px`;
+                particula.style.width = `${tamano}px`;
+                particula.style.height = "auto";
+                particula.style.animationDuration = `${duracion}ms`;
+
+                document.body.appendChild(particula);
+
+                setTimeout(() => particula.remove(), parseInt(duracion));
+            }
+        }
+    </script>
+</body>
+</html>
