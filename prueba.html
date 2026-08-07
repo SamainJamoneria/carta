@@ -24,20 +24,41 @@
             z-index: 100;
         }
 
-        #detalle-temporada {
-            display: none; 
-            margin: 12px auto 0;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 1rem;
-            font-weight: 600;
-            width: fit-content;
+        /* Contenedor principal de la temporada (oculto por defecto) */
+        #contenedor-temporada {
+            display: none;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
         }
 
-        body.modo-navidad #detalle-temporada {
-            display: inline-flex;
+        /* Se activa cuando el body tiene la clase */
+        body.modo-navidad #contenedor-temporada {
+            display: flex;
+        }
+
+        /* Iconos fuera del texto: el triple de altura (aprox 3.5em) y animación decorativa */
+        .icono-temporada-grande {
+            height: 3.5em;
+            width: auto;
+            object-fit: contain;
+            animation: flotarIcono 3s ease-in-out infinite alternate;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes flotarIcono {
+            0% { transform: translateY(0px) rotate(-5deg); }
+            100% { transform: translateY(-6px) rotate(5deg); }
+        }
+
+        /* Contenedor exclusivo para el texto central */
+        #detalle-temporada {
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
             background: rgba(212, 175, 55, 0.15);
             color: #d4af37;
             border: 1px solid rgba(212, 175, 55, 0.4);
@@ -80,19 +101,26 @@
 
     <header>
         <h1>Jamonería Samaín - Vista Previa Navidad</h1>
-        <div id="detalle-temporada"></div>
+        <!-- Estructura nueva: Icono izq, Texto centro, Icono der -->
+        <div id="contenedor-temporada">
+            <img id="icono-izq" class="icono-temporada-grande" alt="Icono temporada">
+            <div id="detalle-temporada"></div>
+            <img id="icono-der" class="icono-temporada-grande" alt="Icono temporada">
+        </div>
     </header>
 
     <div class="contenido">
         <h2>👇 Mueve la rueda del ratón hacia abajo (Haz Scroll)</h2>
-        <p>Se mostrará el icono de Papá Noel (santa.png) y lloverán las bolas reales de Navidad.</p>
+        <p>Ahora los iconos de Papá Noel están fuera y miden el triple que el texto.</p>
         <br><br><br>
-        <p>Sigue haciendo scroll para ver el efecto continuo...</p>
+        <p>Sigue haciendo scroll para ver la lluvia de bolas...</p>
     </div>
 
     <script>
         const body = document.body;
         const detalleEl = document.getElementById("detalle-temporada");
+        const iconoIzqEl = document.getElementById("icono-izq");
+        const iconoDerEl = document.getElementById("icono-der");
 
         const obtenerEsIngles = () => document.documentElement.lang === "en";
 
@@ -113,30 +141,24 @@
             const config = configuracionTemporadas[modoActivo];
             
             const actualizarTextoTemporada = () => {
+                const idiomaActual = obtenerEsIngles() ? "en" : "es";
+
+                // Asignar texto central
                 if (detalleEl) {
-                    const idiomaActual = obtenerEsIngles() ? "en" : "es";
-                    detalleEl.innerHTML = "";
+                    detalleEl.textContent = config.textos[idiomaActual];
+                }
 
-                    const archivoIcono = config.icono;
-
-                    if (archivoIcono) {
-                        const imgIcono = document.createElement("img");
-                        // CORREGIDO: Ruta directa sin la carpeta "img/"
-                        imgIcono.src = `${archivoIcono}`;
-                        imgIcono.alt = "Icono temporada";
-                        imgIcono.style.height = "1.2em";
-                        imgIcono.style.verticalAlign = "middle";
-
-                        imgIcono.onerror = () => {
-                            console.error("⚠️ No se pudo cargar el icono: " + archivoIcono);
-                        };
-
-                        detalleEl.appendChild(imgIcono);
+                // Asignar iconos grandes a ambos lados (fuera del texto)
+                const archivoIcono = config.icono;
+                if (archivoIcono) {
+                    if (iconoIzqEl) {
+                        iconoIzqEl.src = `${archivoIcono}`;
+                        iconoIzqEl.onerror = () => console.error("⚠️ No se pudo cargar el icono izquierdo: " + archivoIcono);
                     }
-
-                    const textoSpan = document.createElement("span");
-                    textoSpan.textContent = config.textos[idiomaActual];
-                    detalleEl.appendChild(textoSpan);
+                    if (iconoDerEl) {
+                        iconoDerEl.src = `${archivoIcono}`;
+                        iconoDerEl.onerror = () => console.error("⚠️ No se pudo cargar el icono derecho: " + archivoIcono);
+                    }
                 }
             };
 
@@ -161,7 +183,6 @@
                 const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
                 
                 const particula = document.createElement("img");
-                // CORREGIDO: Ruta directa sin la carpeta "img/"
                 particula.src = `${recurso}`;
                 particula.className = "particula-scroll";
                 particula.alt = "Decoración navideña";
