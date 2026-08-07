@@ -56,10 +56,12 @@
   <input type="text" id="buscar" placeholder="🔍 Search product...">
 </section>
 
+<!-- SECCIÓN DESTINO SAMAÍN CORREGIDA E IGUALADA -->
 <section class="destino-samain">
-  <img src="dados.png" alt="Dice" class="icono-dados-texto"><br>
-  Can't decide?<br>
-  <strong>Let fate choose for you.</strong>
+  <p class="texto-destino">
+    <img src="dados.png" alt="Dice" class="icono-dados-texto"> Can't decide?<br>
+    <strong>Let fate choose for you.</strong>
+  </p>
   <button id="btn-destino" class="btn-destino">
     <img src="dados.png" alt="Dice" class="icono-dados-btn"> SAMAÍN DESTINY
   </button>
@@ -84,11 +86,10 @@
       ⚠️ <strong>Please inform our staff before placing your order if you have any food allergies.</strong>
     </div>
   </div>
-</div> 
-
+</div>  
 
 <!-- Contenedor de selección de comensales -->
-<div id="modal-comensales" class="modal-contacto hidden"> 
+<div id="modal-comensales" class="modal-contacto hidden">  
   <div class="modal-contacto-content">
     <h2>
       <span class="icono-cubiertos-titulo"><img src="cubiertos.png" alt="Cubiertos"></span>
@@ -106,7 +107,6 @@
   </div>
 </div>
 
-
 <div id="resultado-destino" class="resultado-destino">
   <div class="tarjeta-destino">
     <div class="ruleta-destino">
@@ -114,17 +114,17 @@
         <span class="puntero">▼</span>
       </div>
       
- <div class="disco-ruleta" id="disco-ruleta">
-    <div class="icono-ruleta"><img src="tostas.png" alt="Tostas"></div>
-    <div class="icono-ruleta"><img src="tablas.png" alt="Entrantes"></div>
-    <div class="icono-ruleta"><img src="raciones.png" alt="Raciones"></div>
-    <div class="icono-ruleta"><img src="quesos.png" alt="Quesos"></div>
-    <div class="icono-ruleta"><img src="piadinas.png" alt="Piadinas"></div>
-    <div class="icono-ruleta"><img src="piadinas_dulces.png" alt="Piadinas Dulces"></div>
-    <div class="icono-ruleta"><img src="bocadillos.png" alt="Bocadillos"></div>
-    <div class="icono-ruleta"><img src="postres.png" alt="Postres"></div>
+      <div class="disco-ruleta" id="disco-ruleta">
+        <div class="icono-ruleta"><img src="tostas.png" alt="Tostas"></div>
+        <div class="icono-ruleta"><img src="tablas.png" alt="Entrantes"></div>
+        <div class="icono-ruleta"><img src="raciones.png" alt="Raciones"></div>
+        <div class="icono-ruleta"><img src="quesos.png" alt="Quesos"></div>
+        <div class="icono-ruleta"><img src="piadinas.png" alt="Piadinas"></div>
+        <div class="icono-ruleta"><img src="piadinas_dulces.png" alt="Piadinas Dulces"></div>
+        <div class="icono-ruleta"><img src="bocadillos.png" alt="Bocadillos"></div>
+        <div class="icono-ruleta"><img src="postres.png" alt="Postres"></div>
+      </div>
     </div>
-  </div>
     
     <p class="titulo-destino">✨ Fate has decided...</p>
     <div id="categoria-destino" class="categoria-destino"></div>
@@ -282,5 +282,5 @@
 <script src="script.js"></script>
 <script src="destino.js"></script>
 
-   </body>
+</body>
 </html>
