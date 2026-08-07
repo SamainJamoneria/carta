@@ -92,7 +92,6 @@
 
     <script>
         const body = document.body;
-        // CORREGIDO: Añadido "document." para que el selector funcione correctamente
         const detalleEl = document.getElementById("detalle-temporada");
 
         const obtenerEsIngles = () => document.documentElement.lang === "en";
@@ -122,13 +121,14 @@
 
                     if (archivoIcono) {
                         const imgIcono = document.createElement("img");
-                       imgIcono.src = `${archivoIcono}`;
+                        // CORREGIDO: Ruta directa sin la carpeta "img/"
+                        imgIcono.src = `${archivoIcono}`;
                         imgIcono.alt = "Icono temporada";
                         imgIcono.style.height = "1.2em";
                         imgIcono.style.verticalAlign = "middle";
 
                         imgIcono.onerror = () => {
-                            console.error("⚠️ No se pudo cargar el icono: img/" + archivoIcono);
+                            console.error("⚠️ No se pudo cargar el icono: " + archivoIcono);
                         };
 
                         detalleEl.appendChild(imgIcono);
@@ -161,12 +161,13 @@
                 const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
                 
                 const particula = document.createElement("img");
-                particula.src = `img/${recurso}`;
+                // CORREGIDO: Ruta directa sin la carpeta "img/"
+                particula.src = `${recurso}`;
                 particula.className = "particula-scroll";
                 particula.alt = "Decoración navideña";
 
                 particula.onerror = () => {
-                    console.error("⚠️ No se pudo cargar la partícula: img/" + recurso);
+                    console.error("⚠️ No se pudo cargar la partícula: " + recurso);
                 };
 
                 const posX = Math.random() * (window.innerWidth - 50);
