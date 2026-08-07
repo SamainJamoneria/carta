@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba Modo Navidad - Jamonería Samaín</title>
+    <title>Prueba Modo Carnaval - Jamonería Samaín</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             height: 300vh;
-            background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+            background: linear-gradient(to bottom, #2b1055, #7597de);
         }
 
         header {
-            background-color: #1a252f;
+            background-color: #1a102f;
             color: white;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -34,11 +34,11 @@
         }
 
         /* Se activa cuando el body tiene la clase */
-        body.modo-navidad #contenedor-temporada {
+        body.modo-carnaval #contenedor-temporada {
             display: flex;
         }
 
-        /* Iconos fuera del texto: el triple de altura (aprox 3.5em) y animación decorativa */
+        /* Iconos fuera del texto: el triple de altura y animación flotante */
         .icono-temporada-grande {
             height: 3.5em;
             width: auto;
@@ -49,25 +49,25 @@
         }
 
         @keyframes flotarIcono {
-            0% { transform: translateY(0px) rotate(-5deg); }
-            100% { transform: translateY(-6px) rotate(5deg); }
+            0% { transform: translateY(0px) rotate(-8deg); }
+            100% { transform: translateY(-6px) rotate(8deg); }
         }
 
-        /* Contenedor exclusivo para el texto central */
+        /* Contenedor exclusivo para el texto central de Carnaval */
         #detalle-temporada {
             padding: 6px 18px;
             border-radius: 20px;
             font-size: 1rem;
             font-weight: 600;
-            background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.5);
         }
 
         .contenido {
             padding: 60px 20px;
             text-align: center;
-            color: #333;
+            color: #fff;
         }
 
         .particula-scroll {
@@ -97,23 +97,22 @@
         }
     </style>
 </head>
-<body class="modo-navidad">
+<body class="modo-carnaval">
 
     <header>
-        <h1>Jamonería Samaín - Vista Previa Navidad</h1>
-        <!-- Estructura nueva: Icono izq, Texto centro, Icono der -->
+        <h1>Jamonería Samaín - Vista Previa Carnaval</h1>
         <div id="contenedor-temporada">
-            <img id="icono-izq" class="icono-temporada-grande" alt="Icono temporada">
+            <img id="icono-izq" class="icono-temporada-grande" alt="Icono carnaval">
             <div id="detalle-temporada"></div>
-            <img id="icono-der" class="icono-temporada-grande" alt="Icono temporada">
+            <img id="icono-der" class="icono-temporada-grande" alt="Icono carnaval">
         </div>
     </header>
 
     <div class="contenido">
-        <h2>👇 Mueve la rueda del ratón hacia abajo (Haz Scroll)</h2>
-        <p>Ahora los iconos de Papá Noel están fuera y miden el triple que el texto.</p>
+        <h2>👇 Haz scroll hacia abajo</h2>
+        <p>Comprueba cómo quedan los iconos de Carnaval a los lados y las partículas cayendo.</p>
         <br><br><br>
-        <p>Sigue haciendo scroll para ver la lluvia de bolas...</p>
+        <p>Sigue haciendo scroll para ver el efecto continuo...</p>
     </div>
 
     <script>
@@ -125,17 +124,17 @@
         const obtenerEsIngles = () => document.documentElement.lang === "en";
 
         const configuracionTemporadas = {
-            "modo-navidad": {
-                icono: "santa.png",
+            "modo-carnaval": {
+                icono: "mascara.png", // Asegúrate de tener este archivo en la raíz
                 textos: {
-                    es: "Felices Fiestas de parte del equipo de Samaín",
-                    en: "Merry Christmas from the Samaín team"
+                    es: "¡Disfruta del Carnaval de parte del equipo de Samaín!",
+                    en: "Enjoy Carnival from the Samaín team!"
                 },
-                particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+                particulas: ["confeti.png", "serpentina.png"] // Asegúrate de tener estos archivos en la raíz
             }
         };
 
-        const modoActivo = "modo-navidad";
+        const modoActivo = "modo-carnaval";
 
         if (modoActivo && configuracionTemporadas[modoActivo]) {
             const config = configuracionTemporadas[modoActivo];
@@ -143,12 +142,10 @@
             const actualizarTextoTemporada = () => {
                 const idiomaActual = obtenerEsIngles() ? "en" : "es";
 
-                // Asignar texto central
                 if (detalleEl) {
                     detalleEl.textContent = config.textos[idiomaActual];
                 }
 
-                // Asignar iconos grandes a ambos lados (fuera del texto)
                 const archivoIcono = config.icono;
                 if (archivoIcono) {
                     if (iconoIzqEl) {
@@ -185,7 +182,7 @@
                 const particula = document.createElement("img");
                 particula.src = `${recurso}`;
                 particula.className = "particula-scroll";
-                particula.alt = "Decoración navideña";
+                particula.alt = "Decoración carnaval";
 
                 particula.onerror = () => {
                     console.error("⚠️ No se pudo cargar la partícula: " + recurso);
