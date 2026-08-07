@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba Modo Carnaval - Jamonería Samaín</title>
+    <title>Prueba Modo San Juan - Jamonería Samaín</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             height: 300vh;
-            background: linear-gradient(to bottom, #2b1055, #7597de);
+            background: linear-gradient(to bottom, #1b0a2a, #4a1525);
         }
 
         header {
-            background-color: #1a102f;
+            background-color: #2c0e18;
             color: white;
             padding: 25px;
             text-align: center;
@@ -33,12 +33,12 @@
             margin-top: 15px;
         }
 
-        /* Se activa cuando el body tiene la clase */
-        body.modo-carnaval #contenedor-temporada {
+        /* Se activa cuando el body tiene la clase correspondiente */
+        body.modo-sanjuan #contenedor-temporada {
             display: flex;
         }
 
-        /* Iconos fuera del texto: el triple de altura y animación flotante */
+        /* Iconos fuera del texto: animación flotante */
         .icono-temporada-grande {
             height: 3.5em;
             width: auto;
@@ -53,15 +53,15 @@
             100% { transform: translateY(-6px) rotate(8deg); }
         }
 
-        /* Contenedor exclusivo para el texto central de Carnaval */
+        /* Contenedor exclusivo para el texto central de San Juan */
         #detalle-temporada {
             padding: 6px 18px;
             border-radius: 20px;
             font-size: 1rem;
             font-weight: 600;
-            background: rgba(255, 215, 0, 0.2);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.5);
+            background: rgba(255, 100, 0, 0.2);
+            color: #ff9944;
+            border: 1px solid rgba(255, 100, 0, 0.5);
         }
 
         .contenido {
@@ -97,20 +97,20 @@
         }
     </style>
 </head>
-<body class="modo-carnaval">
+<body class="modo-sanjuan">
 
     <header>
-        <h1>Jamonería Samaín - Vista Previa Carnaval</h1>
+        <h1>Jamonería Samaín - Vista Previa San Juan</h1>
         <div id="contenedor-temporada">
-            <img id="icono-izq" class="icono-temporada-grande" alt="Icono carnaval">
+            <img id="icono-izq" class="icono-temporada-grande" alt="Icono San Juan">
             <div id="detalle-temporada"></div>
-            <img id="icono-der" class="icono-temporada-grande" alt="Icono carnaval">
+            <img id="icono-der" class="icono-temporada-grande" alt="Icono San Juan">
         </div>
     </header>
 
     <div class="contenido">
         <h2>👇 Haz scroll hacia abajo</h2>
-        <p>Comprueba cómo quedan los iconos de Carnaval a los lados y las partículas cayendo.</p>
+        <p>Comprueba cómo quedan los iconos de Fuego a los lados y las ascuas cayendo.</p>
         <br><br><br>
         <p>Sigue haciendo scroll para ver el efecto continuo...</p>
     </div>
@@ -124,17 +124,17 @@
         const obtenerEsIngles = () => document.documentElement.lang === "en";
 
         const configuracionTemporadas = {
-            "modo-carnaval": {
-                icono: "bufon.png", // Asegúrate de tener este archivo en la raíz
+            "modo-sanjuan": {
+                icono: "fuego.png", // Asegúrate de tener este archivo en la raíz
                 textos: {
-                    es: "¡Disfruta del Carnaval de parte del equipo de Samaín!",
-                    en: "Enjoy Carnival from the Samaín team!"
+                    es: "¡Llega la mágica Noche de San Juan!",
+                    en: "Celebrating San Juan Night!"
                 },
-                particulas: ["confeti.png", "mascara.png", "sombrero.png",] // Asegúrate de tener estos archivos en la raíz
+                particulas: ["ascuas.png", "ascuas.png", "ascuas.png", "ascuas.png"] // Asegúrate de tener este archivo en la raíz
             }
         };
 
-        const modoActivo = "modo-carnaval";
+        const modoActivo = "modo-sanjuan";
 
         if (modoActivo && configuracionTemporadas[modoActivo]) {
             const config = configuracionTemporadas[modoActivo];
@@ -182,7 +182,7 @@
                 const particula = document.createElement("img");
                 particula.src = `${recurso}`;
                 particula.className = "particula-scroll";
-                particula.alt = "Decoración carnaval";
+                particula.alt = "Ascuas San Juan";
 
                 particula.onerror = () => {
                     console.error("⚠️ No se pudo cargar la partícula: " + recurso);
