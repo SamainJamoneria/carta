@@ -378,7 +378,7 @@ const configuracionTemporadas = {
             es: "Felices Fiestas de parte del equipo de Samaín",
             en: "Merry Christmas from the Samaín team"
         },
-        particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+        particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png", "bola_roja.png"]
     },
     "modo-sanjuan": {
         icono: "fuego.png",
@@ -386,7 +386,7 @@ const configuracionTemporadas = {
             es: "¡Llega la mágica Noche de San Juan!",
             en: "Celebrating San Juan"
         },
-        particulas: ["ascuas.png"]
+        particulas: ["ascuas.png", "ascuas.png", "ascuas.png", "ascuas.png"]
     },
     "modo-carnaval": {
         icono: "bufon.png",
@@ -448,6 +448,7 @@ if (modoActivo && configuracionTemporadas[modoActivo]) {
         if (scrollActual > ultimoScroll) {
             contadorScroll++;
             if (contadorScroll % 5 === 0) {
+                crearParticulaScroll(config.particulas);
                 crearParticulaScroll(config.particulas);
             }
         }
