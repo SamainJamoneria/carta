@@ -343,106 +343,144 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-    // ==========================================
-    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
-    // ==========================================
-    const body = document.body;
-    const detalleEl = document.getElementById("detalle-temporada");
-    const esIngles = document.documentElement.lang === "en";
+   // ==========================================
+// 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
+// ==========================================
+const body = document.body;
+const detalleEl = document.getElementById("detalle-temporada");
 
-    function obtenerModoPorFecha() {
-        const ahora = new Date();
-        const mes = ahora.getMonth() + 1;
-        const dia = ahora.getDate();
+// Función para comprobar el idioma actual de forma dinámica
+const obtenerEsIngles = () => document.documentElement.lang === "en";
 
-        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
-        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
-        if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
-        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
+function obtenerModoPorFecha() {
+    const ahora = new Date();
+    const mes = ahora.getMonth() + 1;
+    const dia = ahora.getDate();
 
-        return null;
+    if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
+    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
+    if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
+    if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
+
+    return null;
+}
+
+const modoActivo = obtenerModoPorFecha();
+
+if (modoActivo) {
+    body.classList.add(modoActivo);
+}
+
+const configuracionTemporadas = {
+    "modo-navidad": {
+        icono: "santa.png",
+        textos: {
+            es: "Felices Fiestas de parte del equipo de Samaín",
+            en: "Merry Christmas from the Samaín team"
+        },
+        particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+    },
+    "modo-sanjuan": {
+        icono: "fuego.png",
+        textos: {
+            es: "¡Llega la mágica Noche de San Juan!",
+            en: "Celebrating San Juan"
+        },
+        particulas: ["ascuas.png"]
+    },
+    "modo-carnaval": {
+        icono: "bufon.png",
+        textos: {
+            es: "¡Feliz Carnaval!",
+            en: "Happy Carnival Season!"
+        },
+        particulas: ["bufon.png", "mascara.png", "sombrero.png", "confeti.png"]
+    },
+    "modo-samain": {
+        // Usa calabazza.png en español y calabaza.png en inglés según tu preferencia
+        iconos: {
+            es: "calabazza.png",
+            en: "calabaza.png"
+        },
+        textos: {
+            es: "¡Feliz Samaín / Halloween!",
+            en: "Happy Samain / Halloween!"
+        },
+        particulas: ["calabaza.png", "fantasma.png", "araña.png", "rip.png"]
     }
+};
 
-    let modoActivo = obtenerModoPorFecha();
+if (modoActivo && configuracionTemporadas[modoActivo]) {
+    const config = configuracionTemporadas[modoActivo];
+    
+    const actualizarTextoTemporada = () => {
+        if (detalleEl) {
+            const idiomaActual = obtenerEsIngles() ? "en" : "es";
+            detalleEl.innerHTML = ""; // Limpiamos el contenido previo
 
-    if (modoActivo) {
-        body.classList.add(modoActivo);
-    }
+            // Determinamos el icono (soporta icono único o diferenciado por idioma)
+            const archivoIcono = config.iconos ? config.iconos[idiomaActual] : config.icono;
 
-    const configuracionTemporadas = {
-        "modo-navidad": {
-            texto: esIngles 
-                ? "🎄 Merry Christmas from the Samaín team" 
-                : "🎄 Felices Fiestas de parte del equipo de Samaín",
-            particulas: ["❄", "❅", "❆", "🤍"]
-        },
-        "modo-sanjuan": {
-            texto: esIngles 
-                ? "🔥 Celebrating San Juan" 
-                : "🔥 ¡Llega la mágica Noche de San Juan!",
-            particulas: ["💥", "✨", "🔥", "⚡"]
-        },
-        "modo-carnaval": {
-            texto: esIngles 
-                ? "🎭 Happy Carnival Season!" 
-                : "🎭 ¡Feliz Carnaval!",
-            particulas: ["🎉", "🎊", "✨", "🎈", "🔴", "🟡", "🔵"]
-        },
-        "modo-samain": {
-            texto: esIngles 
-                ? "🎃 Happy Samain / Halloween!" 
-                : "🎃 ¡Feliz Samaín / Halloween!",
-            particulas: ["🎃", "👻", "🍂", "✨"]
+            if (archivoIcono) {
+                const imgIcono = document.createElement("img");
+                imgIcono.src = `img/${archivoIcono}`;
+                imgIcono.alt = "Icono temporada";
+                imgIcono.style.height = "1.2em";
+                imgIcono.style.verticalAlign = "middle";
+                imgIcono.style.marginRight = "8px";
+                detalleEl.appendChild(imgIcono);
+            }
+
+            const textoSpan = document.createElement("span");
+            textoSpan.textContent = config.textos[idiomaActual];
+            detalleEl.appendChild(textoSpan);
         }
     };
 
-    if (modoActivo && configuracionTemporadas[modoActivo]) {
-        const config = configuracionTemporadas[modoActivo];
-        if (detalleEl) {
-            detalleEl.textContent = config.texto;
-        }
+    actualizarTextoTemporada();
 
-        let ultimoScroll = window.scrollY;
-        let contadorScroll = 0;
+    let ultimoScroll = window.scrollY;
+    let contadorScroll = 0;
 
-        window.addEventListener("scroll", () => {
-            const scrollActual = window.scrollY;
+    window.addEventListener("scroll", () => {
+        const scrollActual = window.scrollY;
 
-            if (scrollActual > ultimoScroll) {
-                contadorScroll++;
-                if (contadorScroll % 5 === 0) {
-                    crearParticulaScroll(config.particulas);
-                }
+        if (scrollActual > ultimoScroll) {
+            contadorScroll++;
+            if (contadorScroll % 5 === 0) {
+                crearParticulaScroll(config.particulas);
             }
-            ultimoScroll = scrollActual;
-        }, { passive: true });
-
-        function crearParticulaScroll(listaSimbolos) {
-            const particula = document.createElement("div");
-            particula.className = "particula-scroll";
-
-            const simbolo = listaSimbolos[Math.floor(Math.random() * listaSimbolos.length)];
-            particula.textContent = simbolo;
-
-            const posX = Math.random() * window.innerWidth;
-            const posY = Math.random() * 80 + 20;
-
-            const tamano = (Math.random() * 0.8 + 0.8).toFixed(2);
-            const duracion = (Math.random() * 800 + 1000).toFixed(0);
-
-            particula.style.left = `${posX}px`;
-            particula.style.top = `${posY}px`;
-            particula.style.fontSize = `${tamano}rem`;
-            particula.style.animationDuration = `${duracion}ms`;
-
-            document.body.appendChild(particula);
-
-            setTimeout(() => particula.remove(), parseInt(duracion));
         }
+        ultimoScroll = scrollActual;
+    }, { passive: true });
+
+    function crearParticulaScroll(listaRecursos) {
+        const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
+        
+        const particula = document.createElement("img");
+        particula.src = `img/${recurso}`;
+        particula.className = "particula-scroll";
+        particula.alt = "Decoración de temporada";
+
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * 80 + 20;
+        const tamano = (Math.random() * 15 + 25).toFixed(0);
+        const duracion = (Math.random() * 800 + 1000).toFixed(0);
+
+        particula.style.left = `${posX}px`;
+        particula.style.top = `${posY}px`;
+        particula.style.width = `${tamano}px`;
+        particula.style.height = "auto";
+        particula.style.position = "absolute";
+        particula.style.pointerEvents = "none";
+        particula.style.animationDuration = `${duracion}ms`;
+
+        document.body.appendChild(particula);
+
+        setTimeout(() => particula.remove(), parseInt(duracion));
     }
-
-});
-
+}
+    
 // ==========================================
 // 8. FUNCIONES AUXILIARES Y PROTECCIONES
 // ==========================================
