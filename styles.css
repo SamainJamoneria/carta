@@ -1353,6 +1353,11 @@ body.modo-carnaval .detalle-temporada {
   animation: caidaParticula linear forwards;
 }
 
+/* Ocultar el contenedor de temporada por defecto para evitar parpadeos al cargar */
+#contenedor-temporada {
+    display: none;
+}
+
 @keyframes caidaParticula {
   0% {
     opacity: 1;
@@ -1363,6 +1368,7 @@ body.modo-carnaval .detalle-temporada {
     transform: translateY(120px) scale(0.3) rotate(360deg);
   }
 }
+
 /* ======================================================
    CORRECCIÓN DE TAMAÑO PARA LAS IMÁGENES CIRCULARES DEL MENÚ
 ====================================================== */
