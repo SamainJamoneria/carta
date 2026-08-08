@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-    // ==========================================
+        // ==========================================
     // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
     // ==========================================
     const body = document.body;
@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 es: "Felices Fiestas de parte del equipo de Samaín",
                 en: "Merry Christmas from the Samaín team"
             },
-            particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png"]
+            particulas: ["bola_roja.png", "bola_amarilla.png", "bola_azul.png", "bola_roja.png"]
         },
         "modo-sanjuan": {
             icono: "fuego.png",
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 es: "¡Llega la mágica Noche de San Juan!",
                 en: "Celebrating San Juan"
             },
-            particulas: ["ascuas.png"]
+            particulas: ["ascuas.png", "ascuas.png", "ascuas.png", "ascuas.png"]
         },
         "modo-carnaval": {
             icono: "bufon.png",
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 es: "¡Feliz Carnaval!",
                 en: "Happy Carnival Season!"
             },
-            particulas: ["confeti.png", "mascara.png"]
+            particulas: ["confeti.png", "mascara.png", "sombrero.png", "bufon.png"]
         },
         "modo-samain": {
             icono: "calabazza.png",
@@ -357,60 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 es: "¡Feliz Samaín / Halloween!",
                 en: "Happy Samain / Halloween!"
             },
-            particulas: ["calabaza.png", "fantasma.png"]
+            particulas: ["calabaza.png", "fantasma.png", "araña.png", "rip.png"]
         }
     };
-
-    if (modoActivo && configuracionTemporadas[modoActivo]) {
-        const config = configuracionTemporadas[modoActivo];
-        
-        const actualizarTextoTemporada = () => {
-            if (detalleEl) {
-                const idiomaActual = obtenerEsIngles() ? "en" : "es";
-                detalleEl.textContent = config.textos[idiomaActual];
-            }
-        };
-
-        actualizarTextoTemporada();
-
-        let ultimoScroll = window.scrollY;
-        let contadorScroll = 0;
-
-        window.addEventListener("scroll", () => {
-            const scrollActual = window.scrollY;
-
-            if (scrollActual > ultimoScroll) {
-                contadorScroll++;
-                if (contadorScroll % 5 === 0) {
-                    crearParticulaScroll(config.particulas);
-                }
-            }
-            ultimoScroll = scrollActual;
-        }, { passive: true });
-
-        function crearParticulaScroll(listaRecursos) {
-            const recurso = listaRecursos[Math.floor(Math.random() * listaRecursos.length)];
-            
-            const particula = document.createElement("img");
-            particula.src = `${recurso}`;
-            particula.className = "particula-scroll";
-            particula.alt = "Decoración de temporada";
-
-            const posX = Math.random() * (window.innerWidth - 50);
-            const tamano = (Math.random() * 15 + 25).toFixed(0);
-            const duracion = (Math.random() * 800 + 1200).toFixed(0);
-
-            particula.style.left = `${posX}px`;
-            particula.style.top = `-60px`;
-            particula.style.width = `${tamano}px`;
-            particula.style.height = "auto";
-            particula.style.animationDuration = `${duracion}ms`;
-
-            document.body.appendChild(particula);
-
-            setTimeout(() => particula.remove(), parseInt(duracion));
-        }
-    }
 
     // ==========================================
     // 8. FUNCIONES AUXILIARES Y PROTECCIONES
