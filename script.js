@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
@@ -299,11 +298,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
     });
 
-        // ==========================================
-    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS
+    // ==========================================
+    // 7. EFECTOS DE TEMPORADA AUTOMÁTICOS Y PARTÍCULAS
     // ==========================================
     const body = document.body;
+    const contenedorTemporada = document.getElementById("contenedor-temporada");
+    const iconoIzq = document.getElementById("icono-izq");
+    const iconoDer = document.getElementById("icono-der");
     const detalleEl = document.getElementById("detalle-temporada");
+    const contenedorConfeti = document.getElementById("confeti");
 
     const obtenerEsIngles = () => document.documentElement.lang === "en";
 
@@ -318,12 +321,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
 
         return null;
-    }
-
-    const modoActivo = obtenerModoPorFecha();
-
-    if (modoActivo) {
-        body.classList.add(modoActivo);
     }
 
     const configuracionTemporadas = {
@@ -360,6 +357,42 @@ document.addEventListener("DOMContentLoaded", () => {
             particulas: ["calabaza.png", "fantasma.png", "araña.png", "rip.png"]
         }
     };
+
+    const modoActivo = obtenerModoPorFecha();
+
+    if (modoActivo && configuracionTemporadas[modoActivo]) {
+        body.classList.add(modoActivo);
+        const config = configuracionTemporadas[modoActivo];
+        
+        if (contenedorTemporada) contenedorTemporada.style.display = "flex";
+        if (iconoIzq) iconoIzq.src = config.icono;
+        if (iconoDer) iconoDer.src = config.icono;
+        if (detalleEl) {
+            detalleEl.textContent = obtenerEsIngles() ? config.textos.en : config.textos.es;
+        }
+
+        // Generar partículas deslizándose por toda la pantalla
+        if (contenedorConfeti && config.particulas && config.particulas.length > 0) {
+            const numeroParticulas = 20;
+            for (let i = 0; i < numeroParticulas; i++) {
+                const particula = document.createElement("img");
+                const imagenAleatoria = config.particulas[Math.floor(Math.random() * config.particulas.length)];
+                particula.src = imagenAleatoria;
+                particula.className = "particula-flotante";
+                
+                particula.style.left = Math.random() * 100 + "vw";
+                particula.style.top = -10 + "vh";
+                particula.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                particula.style.animationDelay = (Math.random() * 5) + "s";
+                particula.style.opacity = Math.random() * 0.7 + 0.3;
+                particula.style.width = (Math.random() * 20 + 20) + "px";
+                
+                contenedorConfeti.appendChild(particula);
+            }
+        }
+    } else {
+        if (contenedorTemporada) contenedorTemporada.style.display = "none";
+    }
 
     // ==========================================
     // 8. FUNCIONES AUXILIARES Y PROTECCIONES
