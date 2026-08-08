@@ -1344,13 +1344,6 @@ body.modo-carnaval .detalle-temporada {
   border: 1px solid rgba(253, 121, 168, 0.4);
 }
 
-body.modo-samain .detalle-temporada {
-  display: inline-block;
-  background: rgba(230, 126, 34, 0.15);
-  color: #e67e22;
-  border: 1px solid rgba(230, 126, 34, 0.4);
-}
-
 /* Partículas flotantes de scroll */
 .particula-scroll {
   position: fixed;
@@ -1367,7 +1360,7 @@ body.modo-samain .detalle-temporada {
   }
   100% {
     opacity: 0;
-    transform: translateY(105px) scale(0.8) rotate(360deg);
+    transform: translateY(120px) scale(0.3) rotate(360deg);
   }
 }
 /* ======================================================
