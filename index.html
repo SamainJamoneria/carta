@@ -94,8 +94,8 @@ h1{
 
 /* Círculo con el azul corporativo idéntico al menú */
 .icon-circle {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background-color: #2d2b72;
     border-radius: 50%;
     display: flex;
@@ -107,8 +107,8 @@ h1{
 
 /* Tamaño y ajuste de las imágenes insertadas */
 .info-icon {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 
@@ -249,52 +249,63 @@ h1{
 ====================================================== */
 @media (max-height: 850px), (max-width: 600px) {
     body {
-        padding: 12px;
+        padding: 8px;
     }
     
     .contenido {
-        padding: 18px 20px;
+        padding: 14px 16px;
     }
     
     h1 {
-        font-size: 1.6rem;
-        margin-bottom: 4px;
+        font-size: 1.4rem;
+        margin-bottom: 2px;
     }
     
     .subtitulo {
-        margin-bottom: 16px;
-        font-size: 0.9rem;
+        margin-bottom: 10px;
+        font-size: 0.85rem;
     }
     
     .boton {
-        padding: 12px 14px;
-        font-size: 17px;
-        margin-bottom: 10px;
-        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 15px;
+        margin-bottom: 8px;
+        border-radius: 8px;
     }
     
     .info {
-        margin-top: 14px;
-        padding-top: 12px;
+        margin-top: 10px;
+        padding-top: 10px;
+        gap: 6px;
+    }
+    
+    .icon-circle {
+        width: 32px;
+        height: 32px;
+    }
+
+    .info-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .info-item {
+        font-size: 0.82rem;
         gap: 8px;
     }
     
-    .info-item {
-        font-size: 0.88rem;
-    }
-    
     .instagram-container {
-        margin-top: 6px;
+        margin-top: 4px;
     }
     
     .btn-instagram {
-        padding: 8px 16px;
-        font-size: 0.88rem;
+        padding: 6px 14px;
+        font-size: 0.82rem;
     }
     
     .footer {
-        margin-top: 12px;
-        font-size: 12px;
+        margin-top: 8px;
+        font-size: 11px;
     }
 }
 
@@ -331,7 +342,7 @@ h1{
         <img src="ubicacion.png" alt="Ubicación" class="info-icon">
     </div>
     <a href="https://maps.google.com/?q=Plaza+de+la+Cormelana+6+A+Coruña" target="_blank">
-      Plaza de la Cormelana nº6 <br> 15003 A Coruña
+      Plaza de la Cormelana nº6 · 15003 A Coruña
     </a>
   </div>
 
@@ -380,7 +391,7 @@ Gracias por visitarnos <span id="pixelHeart" class="heart-trigger" title="¡Un s
   </div>
 </div>
 
-<!-- SCRIPT EXCLUSIVO PARA INDEX.HTML (Evita romper la carta) -->
+<!-- SCRIPT EXCLUSIVO PARA INDEX.HTML -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const heartTrigger = document.getElementById('pixelHeart');
