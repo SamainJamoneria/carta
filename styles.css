@@ -1463,7 +1463,7 @@ footer {
 
 /* Estilo para el enlace de Instagram dentro del footer para que combine */
 .footer-container .btn-instagram {
-    color: #ffffff;
+    color: var(--color-principal); 
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -1473,7 +1473,7 @@ footer {
 }
 
 .footer-container .btn-instagram:hover {
-    color: var(--color-dorado);
+    color: #ffffff; /* Blanco al interactuar */
 }
 
 
