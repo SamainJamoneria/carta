@@ -87,16 +87,29 @@ h1{
 .info-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    gap: 12px;
     font-size: 0.95rem;
     color: #333333;
-    text-align: center;
 }
 
-.info-icon {
-    font-size: 1.1rem;
+/* Círculo con el azul corporativo idéntico al menú */
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #2d2b72;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tamaño y ajuste de las imágenes insertadas */
+.info-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .info a{
@@ -314,19 +327,25 @@ h1{
 <div class="info">
 
   <div class="info-item">
-    <span class="info-icon">📍</span>
+    <div class="icon-circle">
+        <img src="ubicacion.png" alt="Ubicación" class="info-icon">
+    </div>
     <a href="https://maps.google.com/?q=Plaza+de+la+Cormelana+6+A+Coruña" target="_blank">
       Plaza de la Cormelana nº6 · 15003 A Coruña
     </a>
   </div>
 
   <div class="info-item">
-    <span class="info-icon">☎️</span>
+    <div class="icon-circle">
+        <img src="telefono.png" alt="Teléfono" class="info-icon">
+    </div>
     <a href="tel:+34881125487">881 12 54 87</a>
   </div>
 
   <div class="info-item">
-    <span class="info-icon">🕒</span>
+    <div class="icon-circle">
+        <img src="reloj.png" alt="Horario" class="info-icon">
+    </div>
     <span>Abierto todos los días</span>
   </div>
 
@@ -420,4 +439,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-    
