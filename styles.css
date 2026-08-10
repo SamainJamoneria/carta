@@ -1397,42 +1397,49 @@ body.modo-carnaval .detalle-temporada {
 BOTÓN DE INSTAGRAM EN EL FOOTER
 ==================================================*/
 .instagram-footer {
-  margin: 20px auto 10px;
-  text-align: center;
+    margin: 20px auto 10px;
+    text-align: center;
 }
 
 .btn-instagram {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #ffffff;
-  border: 2px solid var(--color-dorado);
-  color: var(--color-principal);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 2px solid var(--color-dorado);
+    color: var(--color-principal);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
 }
 
 .btn-instagram:hover,
 .btn-instagram:active {
-  background: var(--color-principal);
-  color: #ffffff;
-  border-color: var(--color-principal);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
+    background: var(--color-principal);
+    color: #ffffff;
+    border-color: var(--color-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(45, 43, 114, 0.25);
 }
 
 .icon-ig {
-  width: 24px;
-  height: 24px;
-  display: block;
-  transition: transform 0.25s ease;
- }  
+    width: 24px;
+    height: 24px;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+/* Si el icono es un SVG o imagen y quieres asegurarte de que encaje bien */
+.btn-instagram img,
+.btn-instagram svg {
+    width: 20px;
+    height: 20px;
+}
 
 /* --- Ajuste de iconos de dados en sección Destino --- */
 
@@ -1487,36 +1494,3 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     object-fit: contain;
 }
 
-/*==========================
-Pie de Página (Footer)
-==========================*/
-footer {
-    background: linear-gradient(rgba(34,34,80,.82), rgba(34,34,80,.82)), url("cabecera.jpg") center/cover;
-    color: #ffffff;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Estilo para el enlace de Instagram dentro del footer para que combine */
-.footer-container .btn-instagram {
-    color: #ffffff;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.footer-container .btn-instagram:hover {
-    color: var(--color-dorado);
-}
