@@ -1486,3 +1486,11 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     margin-right: 10px;      /* Espacio entre el icono y el texto */
     object-fit: contain;
 }
+
+.footer-container {
+    display: flex;
+    flex-direction: column; /* Apila los elementos en vertical */
+    align-items: center;    /* Centra todo horizontalmente */
+    text-align: center;
+    gap: 12px;              /* Espacio de separación entre el botón y el texto */
+}
