@@ -1487,6 +1487,27 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     object-fit: contain;
 }
 
+/*==========================
+Pie de Página (Footer)
+==========================*/
+.footer-principal {
+    background: linear-gradient(rgba(34,34,80,.82), rgba(34,34,80,.82)), url("cabecera.jpg") center/cover;
+    color: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Por si tienes enlaces o iconos en el footer que quieras que brillen en dorado al pasar el ratón, igual que arriba */
+.footer-principal a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-principal a:hover {
+    color: var(--color-dorado);
+}
+
 .footer-container {
     display: flex;
     flex-direction: column; /* Apila los elementos en vertical */
@@ -1494,3 +1515,4 @@ BOTÓN DE INSTAGRAM EN EL FOOTER
     text-align: center;
     gap: 12px;              /* Espacio de separación entre el botón y el texto */
 }
+
