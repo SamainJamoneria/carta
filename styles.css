@@ -914,7 +914,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 
 .contacto-item {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Alinea el icono con la primera línea de texto */
     gap: 14px;
 }
 
@@ -925,7 +925,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 
 .contacto-label {
     font-size: 0.75rem;
-    color: #666;
+    color: #2d2b72; /* Color azul corporativo */
     font-weight: bold;
     letter-spacing: 0.5px;
     margin-bottom: 2px;
@@ -933,9 +933,8 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 
 .contacto-val {
     font-size: 0.95rem;
-    color: #2d2b72; /* Color azul corporativo idéntico al menú */
+    color: #333;
     text-decoration: none;
-    font-weight: 500;
 }
 
 .contacto-val:hover {
@@ -945,7 +944,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 /* Círculo corporativo */
 .icon-circle {
     width: 40px;
-    height: 40;
+    height: 40px;
     background-color: #2d2b72;
     border-radius: 50%;
     display: flex;
