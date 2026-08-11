@@ -924,17 +924,18 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 }
 
 .contacto-label {
-    font-size: 0.75rem;
-    color: #2d2b72; /* Color azul corporativo */
+    font-size: 0.85rem;
+    color: #2d2b72;
     font-weight: bold;
     letter-spacing: 0.5px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .contacto-val {
-    font-size: 0.95rem;
-    color: #333;
+    font-size: 1rem; 
+    color: #2d2b72;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .contacto-val:hover {
