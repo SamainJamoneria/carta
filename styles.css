@@ -950,8 +950,8 @@ a.contacto-val:hover {
 
 /* Círculo corporativo */
 .icon-circle {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     background-color: #2d2b72;
     border-radius: 50%;
     display: flex;
@@ -962,8 +962,8 @@ a.contacto-val:hover {
 }
 
 .info-icon {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
