@@ -925,17 +925,23 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
 
 .contacto-label {
     font-size: 0.85rem;
-    color: #2d2b72;
+    color: #2d2b72; /* Las etiquetas principales se quedan en azul corporativo */
     font-weight: bold;
     letter-spacing: 0.5px;
     margin-bottom: 3px;
 }
 
 .contacto-val {
-    font-size: 1rem; 
-    color: #2d2b72;
+    font-size: 0.95rem;
+    color: #333333; /* Texto descriptivo (horarios, accesibilidad, etc.) en negro/gris oscuro */
+    font-weight: normal;
     text-decoration: none;
-    font-weight: 500;
+}
+
+/* Solo los enlaces interactivos (teléfono y dirección) van en azul y se subrayan al pasar el ratón */
+a.contacto-val {
+    color: #2d2b72;
+    font-weight: bold;
 }
 
 a.contacto-val:hover {
@@ -956,8 +962,8 @@ a.contacto-val:hover {
 }
 
 .info-icon {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
 }
 
