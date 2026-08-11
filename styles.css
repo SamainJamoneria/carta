@@ -938,7 +938,7 @@ MODALES (CONTACTO, GALERÍA, VISOR Y TIENDA)
     font-weight: 500;
 }
 
-.contacto-val:hover {
+a.contacto-val:hover {
     text-decoration: underline;
 }
 
