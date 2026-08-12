@@ -1222,8 +1222,8 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 
     /* Aumenta el tamaño de la imagen del icono dentro del círculo */
     #modal-tienda .icon-circle .info-icon {
-        width: 28px !important;
-        height: 28px !important;
+        width: 29px !important;
+        height: 29px !important;
     }
 
     /* Si también quieres que el icono del botón de teléfono inferior se vea más grande */
