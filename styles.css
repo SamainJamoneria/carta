@@ -1147,10 +1147,11 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     text-align: left;
 }
 
+.tienda-titulo, 
 .tienda-titulo-destacado {
     font-size: 0.95rem;
     font-weight: 800;
-    color: #2d2b72;
+    color: #2d2b72 !important; /* Fuerza el color azul corporativo */
     letter-spacing: 0.5px;
     margin-bottom: 4px;
 }
