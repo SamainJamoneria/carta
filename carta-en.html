@@ -270,31 +270,60 @@
   <img id="imagen-ampliada" src="" alt="Enlarged image" />
 </div>  
 
-<!-- Takeaway & Shop Modal -->
+<!-- TAKEAWAY & SHOP MODAL -->
 <div id="modal-tienda" class="modal-contacto hidden">
-    <div class="modal-contacto-content">
-        <span id="cerrar-tienda" class="close-btn">&times;</span>
-        <h2>TAKEAWAY & SHOP</h2>
-        
-        <div class="tienda-seccion">
-            <h3 class="tienda-titulo"><span class="tienda-icono">🍷</span> Gourmet Products</h3>
-            <p>We offer a range of Gourmet products for retail sale.</p>
-        </div>
-
-        <div class="tienda-seccion">
-            <h3 class="tienda-titulo"><span class="tienda-icono">🛍️</span> Takeaway Menu</h3>
-            <p>You can order any of our menu items to take away.</p>
-        </div>
-
-        <div class="tienda-evento-destacado">
-            <h3 class="tienda-titulo-destacado"><span class="tienda-icono">🎉</span> Hosting an event or craving something special?</h3>
-            <p>Reserve our products and platters for birthdays, celebrations, and special events... or simply treat yourself!</p>
-        </div>
-
-        <p class="tienda-contacto-texto">Call to reserve or speak with our staff:</p>
-        <a href="tel:+34881125487" class="tienda-telefono">📞 881 12 54 87</a>
+  <div class="modal-contacto-content">
+    <span class="close-btn" id="cerrar-tienda">&times;</span>
+    
+    <h2>TAKEAWAY & SHOP</h2>
+    
+    <!-- Gourmet Products -->
+    <div class="tienda-seccion">
+      <div class="icon-circle">
+        <img src="copa.png" alt="Gourmet Products" class="info-icon">
+      </div>
+      <div class="tienda-info">
+        <p class="tienda-titulo">GOURMET PRODUCTS</p>
+        <p>We offer a range of gourmet products for retail sale.</p>
+      </div>
     </div>
-</div> 
+
+    <!-- Takeaway Menu -->
+    <div class="tienda-seccion">
+      <div class="icon-circle">
+        <img src="bolsa.png" alt="Takeaway Menu" class="info-icon">
+      </div>
+      <div class="tienda-info">
+        <p class="tienda-titulo">TAKEAWAY MENU</p>
+        <p>You can order our menu items to take away.</p>
+      </div>
+    </div>
+
+    <!-- Featured Event Box -->
+    <div class="tienda-evento-destacado">
+      <div class="icon-circle">
+        <img src="fiesta.png" alt="Events" class="info-icon">
+      </div>
+      <div class="tienda-info">
+        <p class="tienda-titulo-destacado">HAVING AN EVENT OR CRAVING SOMETHING SPECIAL?</p>
+        <p>Reserve our products and platters for birthdays, celebrations, and special events... or simply to treat yourself because... <strong>you deserve it!</strong></p>
+      </div>
+    </div>
+
+    <!-- Call to Action Footer -->
+    <p class="tienda-contacto-texto">Call to reserve or speak with our staff:</p>
+    
+    <div class="tienda-telefono-container">
+      <a href="tel:+34881125487" class="tienda-telefono">
+        <div class="icon-circle" style="width: 36px; height: 36px;">
+          <img src="telefono.png" alt="Phone" class="info-icon" style="width: 18px; height: 18px;">
+        </div>
+        <span>881 12 54 87</span>
+      </a>
+    </div>
+
+  </div>
+</div>
 
 <script src="menu-en.js"></script>
 <script src="script.js"></script>
