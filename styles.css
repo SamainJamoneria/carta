@@ -1195,8 +1195,8 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 
 /* Círculos corporativos */
 .icon-circle {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     background-color: #2d2b72;
     border-radius: 50%;
     display: flex;
@@ -1207,8 +1207,8 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 }
 
 .info-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
 }
 
@@ -1221,8 +1221,8 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 
     /* Aumenta el tamaño de la imagen del icono dentro del círculo */
     #modal-tienda .icon-circle .info-icon {
-        width: 24px !important;
-        height: 24px !important;
+        width: 26px !important;
+        height: 26px !important;
     }
 
     /* Si también quieres que el icono del botón de teléfono inferior se vea más grande */
@@ -1232,8 +1232,8 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     }
 
     #modal-tienda .tienda-telefono .info-icon {
-        width: 20px !important;
-        height: 20px !important;
+        width: 22px !important;
+        height: 22px !important;
     }
 }
 
