@@ -1110,7 +1110,7 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     text-align: left;
 }
 
@@ -1129,20 +1129,21 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 
 .tienda-seccion p {
     color: #333333;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.4;
     margin: 0;
 }
 
+/* Caja destacada con fondo y borde punteado igual que antes */
 .tienda-evento-destacado {
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    background-color: #f8f7f3;
+    background-color: #fcf9f0;
     border: 2px dashed #d8b35c;
     border-radius: 12px;
-    padding: 16px;
-    margin: 20px 0;
+    padding: 14px;
+    margin: 18px 0;
     text-align: left;
 }
 
@@ -1156,31 +1157,35 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
 
 .tienda-evento-destacado p {
     color: #333333;
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font-size: 0.88rem;
+    line-height: 1.4;
     margin: 0;
 }
 
 .tienda-contacto-texto {
     font-size: 0.9rem;
-    color: #666666;
-    margin-bottom: 8px;
+    color: #555555;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.tienda-telefono-container {
     text-align: center;
 }
 
 .tienda-telefono {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #2d2b72;
     font-weight: 800;
     font-size: 1.15rem;
     text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 8px;
+    padding: 8px 18px;
+    border-radius: 12px;
     background: #f0eff8;
     transition: background 0.2s ease, color 0.2s ease;
-    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .tienda-telefono:hover {
@@ -1188,7 +1193,7 @@ ESPECÍFICO DE MODAL TIENDA Y PARA LLEVAR
     color: #ffffff;
 }
 
-/* Círculo corporativo y tamaño de iconos */
+/* Círculos corporativos */
 .icon-circle {
     width: 42px;
     height: 42px;
