@@ -1,0 +1,20 @@
+{
+  "name": "Samaín Jamonería",
+  "short_name": "Samaín",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2d2b72",
+  "icons": [
+    {
+      "src": "icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
