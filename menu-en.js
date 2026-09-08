@@ -157,6 +157,7 @@ const carta = [
         { nombre:"Cheese", descripcion:"", precio:"4,00 €", alergenos: ["g", "l"] },
         { nombre:"Mortadella", descripcion:"", precio:"4,50 €", alergenos: ["g"] },
         { nombre:"Bacon", descripcion:"", precio:"6,00 €", alergenos: ["g"] },
+        { nombre:" Pork Cracklings with Local Cheese", descripcion:"", precio:"7,90 €", alergenos: ["g", "l"] },
         { nombre:"Extra Ingredient", descripcion:"", precio:"0,50 €", alergenos: [] }
     ]
 },
