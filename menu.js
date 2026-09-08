@@ -157,6 +157,7 @@ const carta = [
             { nombre: "Queso", descripcion: "", precio: "4,00 €", alergenos: ["g", "l"] },
             { nombre: "Mortadela", descripcion: "", precio: "4,50 €", alergenos: ["g"] },
             { nombre: "Bacon", descripcion: "", precio: "6,00 €", alergenos: ["g"] },
+            { nombre: "Chicharrones con Queso del país", descripcion: "", precio: "7,90 €", alergenos: ["g", "l"] },
             { nombre: "Ingrediente Extra", descripcion: "", precio: "0,50 €", alergenos: [] }
         ]
     },
