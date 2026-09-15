@@ -80,7 +80,7 @@ const carta = [
             { nombre: "Cecina (Curada de Vacuno)", descripcion: "Media / Entera", precio: "9,00 € / 16,00 €", alergenos: [] },
             { nombre: "Chicharrones con Queso del País", descripcion: "Media / Entera", precio: "6,50 € / 13,00 €", alergenos: ["l"] },
             {
-                nombre: "Ensalada de Ventresca de Atún",
+                nombre: "Ensalada de Ventresca",
                 descripcion: "Con reducción de Pedro Ximénez",
                 precio: "14,00 €",
                 alergenos: ["p", "v"]
@@ -97,7 +97,7 @@ const carta = [
                 precio: "14,50 €",
                 alergenos: ["l", "p"]
             },
-            { nombre: "Anchoas Marinadas", descripcion: "", precio: "10,00 €", alergenos: ["p"] },
+            { nombre: "Boquerones en Vinagreta", descripcion: "", precio: "10,00 €", alergenos: ["p"] },
             { nombre: "Gildas", descripcion: "Precio por unidad", precio: "2,70 €", alergenos: ["p", "v"] }
         ]
     },
