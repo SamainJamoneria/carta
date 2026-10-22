@@ -310,18 +310,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const obtenerEsIngles = () => document.documentElement.lang === "en";
 
-    function obtenerModoPorFecha() {
-        const ahora = new Date();
-        const mes = ahora.getMonth() + 1;
-        const dia = ahora.getDate();
+   // Domingo de Pascua (algoritmo gregoriano de Meeus/Jones/Butcher)
+function calcularPascua(anio) {
+    const a = anio % 19;
+    const b = Math.floor(anio / 100);
+    const c = anio % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const mes = Math.floor((h + l - 7 * m + 114) / 31); // 3 = marzo, 4 = abril
+    const dia = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(anio, mes - 1, dia);
+}
 
-        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
-        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
-        if (mes === 12 || (mes === 1 && dia <= 7)) return "modo-navidad";
-        if (mes === 2 && dia >= 10 && dia <= 25) return "modo-carnaval";
+function obtenerModoPorFecha() {
+    const ahora = new Date();
+    const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+    const mes = hoy.getMonth() + 1;
+    const dia = hoy.getDate();
 
-        return null;
-    }
+    // Carnaval: martes = Pascua - 47 días. Activo desde 2 días antes hasta el martes
+    const pascua = calcularPascua(hoy.getFullYear());
+    const inicioCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 49);
+    const finCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 47);
+
+    if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
+    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
+    if ((mes === 12 && dia >= 20) || (mes === 1 && dia <= 7)) return "modo-navidad";
+    if (hoy >= inicioCarnaval && hoy <= finCarnaval) return "modo-carnaval";
+
+    return null;
+}
 
     const configuracionTemporadas = {
         "modo-navidad": {
