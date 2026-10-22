@@ -71,6 +71,16 @@ body{
     background:#4442a4;
 }
 
+/* BANDERAS EN SVG (compatibles con Windows) */
+.bandera {
+    width: 26px;
+    height: 18px;
+    vertical-align: -3px;
+    margin-right: 8px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.35);
+}
+
 /* ESTILOS DE LA SECCIÓN DE INFORMACIÓN */
 .info{
     margin-top:22px;
@@ -267,6 +277,13 @@ body{
         margin-bottom: 6px;
         border-radius: 8px;
     }
+
+    .bandera {
+        width: 22px;
+        height: 15px;
+        vertical-align: -2px;
+        margin-right: 6px;
+    }
     
     .info {
         margin-top: 8px;
@@ -326,11 +343,21 @@ body{
 </div>
 
 <a class="boton" href="carta.html" target="_blank">
-🇪🇸 Carta en Español
+<svg class="bandera" viewBox="0 0 750 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="750" height="500" fill="#c60b1e"/>
+  <rect y="125" width="750" height="250" fill="#ffc400"/>
+</svg>Carta en Español
 </a>
 
 <a class="boton" href="carta-en.html" target="_blank">
-🇬🇧 English Menu
+<svg class="bandera" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <clipPath id="t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath>
+  <path d="M0 0v30h60V0z" fill="#012169"/>
+  <path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/>
+  <path d="M0 0l60 30m0-30L0 30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
+  <path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>
+  <path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/>
+</svg>English Menu
 </a>
 
 <div class="info">
