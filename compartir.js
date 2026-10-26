@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
         btn: "Share on Insta",
         decidido: "Fate has decided…",
         lema: "- Iberian Specialists -",
-        cta: "Spin the wheel at",
         caption: "My destiny today:",
         copiado: "Text copied: paste it when you post and tag @samaincormelana 😉",
         descargada: "Image saved and text copied. Upload it to your story and tag us: @samaincormelana"
@@ -16,18 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
         btn: "Comparte en Insta",
         decidido: "El destino ha decidido…",
         lema: "- Especialistas en Ibéricos -",
-        cta: "Haz tu tirada en",
         caption: "Mi destino de hoy:",
         copiado: "Texto copiado: pégalo al publicar y etiqueta a @samaincormelana 😉",
         descargada: "Imagen guardada y texto copiado. Súbela a tu historia y etiquétanos: @samaincormelana"
     };
 
     const CUENTA = "@samaincormelana";
-    const WEB    = "samainjamoneria.github.io/carta";
     const LOCAL  = "Jamonería Samaín · A Coruña";
 
     const nombreEl = document.getElementById("nombre-destino");
-    const precioEl = document.getElementById("precio-destino");
     const catEl    = document.getElementById("categoria-destino");
     const tarjeta  = document.querySelector(".tarjeta-destino");
     if (!nombreEl || !tarjeta) return;
@@ -84,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const nombre = nombreEl.textContent.trim();
         if (!nombre) return null;
 
-        const precio   = precioEl ? precioEl.textContent.trim() : "";
         const catTexto = catEl ? catEl.textContent.trim() : "";
         const catImg   = catEl ? catEl.querySelector("img") : null;
 
@@ -174,8 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
             x.textBaseline = "alphabetic";
         }
 
-        // Nombre del plato (ajusta el tamaño si es largo)
-        let y = 1260, tam = 92, ls = [];
+        // Nombre del plato (ajusta el tamaño si es largo). Sin precio.
+        let y = 1290, tam = 92, ls = [];
         for (const t of [92, 80, 68, 58]) {
             tam = t;
             x.font = "bold " + t + "px Arial, Helvetica, sans-serif";
@@ -185,18 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
         x.fillStyle = "#ffffff";
         ls.forEach(l => { x.fillText(l, W / 2, y); y += tam * 1.2; });
 
-        if (precio) {
-            x.fillStyle = oro; x.font = "bold 80px Arial, Helvetica, sans-serif";
-            x.fillText(precio, W / 2, y + 30);
-        }
-
-        // Pie: cuenta, local y web
+        // Pie: cuenta y local
         x.fillStyle = oro; x.font = "bold 78px Arial, Helvetica, sans-serif";
-        x.fillText(CUENTA, W / 2, 1690);
+        x.fillText(CUENTA, W / 2, 1720);
         x.fillStyle = "#ffffff"; x.font = "40px Arial, Helvetica, sans-serif";
-        x.fillText(LOCAL, W / 2, 1760);
-        x.fillStyle = "rgba(255,255,255,0.7)"; x.font = "34px Arial, Helvetica, sans-serif";
-        x.fillText(T.cta + " " + WEB, W / 2, 1820);
+        x.fillText(LOCAL, W / 2, 1790);
 
         return new Promise(res => c.toBlob(
             b => res(b ? new File([b], "mi-destino-samain.png", { type: "image/png" }) : null),
