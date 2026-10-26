@@ -1688,3 +1688,39 @@ body.modo-carnaval #detalle-temporada {
     display: block;
     border-radius: 3px;
 }
+
+/* Botón compartir en Instagram (tarjeta del destino) */
+.btn-compartir-insta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+    color: #ffffff;
+    font: 700 16px Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(188, 24, 136, 0.30);
+    transition: transform .2s ease;
+}
+
+.btn-compartir-insta:active { transform: scale(.97); }
+
+.btn-compartir-insta img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1); /* icono en blanco */
+}
+
+.aviso-compartir {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--color-secundario);
+}
+
+.aviso-compartir:empty { display: none; }
