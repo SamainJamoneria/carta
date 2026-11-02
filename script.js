@@ -341,7 +341,7 @@ function obtenerModoPorFecha() {
     const finCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 47);
 
     if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
-    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 2)) return "modo-samain";
+    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 1)) return "modo-samain";
     if ((mes === 12 && dia >= 20) || (mes === 1 && dia <= 7)) return "modo-navidad";
     if (hoy >= inicioCarnaval && hoy <= finCarnaval) return "modo-carnaval";
 
