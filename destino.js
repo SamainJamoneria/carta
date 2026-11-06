@@ -20,6 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const precioDestino = document.getElementById("precio-destino");
     const categoriaDestino = document.getElementById("categoria-destino");
 
+    const ES_INGLES = (document.documentElement.lang || "es").toLowerCase().startsWith("en");
+
+    // Orden de los 8 gajos del disco. Debe coincidir EXACTAMENTE con el orden
+    // de los iconos en el HTML (tostas, tablas, raciones, quesos, piadinas,
+    // piadinas dulces, bocadillos, postres) y con los "id" de la carta.
+    const ORDEN_RULETA = [
+        "tostas",     // 0
+        "tablas",     // 1
+        "raciones",   // 2
+        "quesos",     // 3
+        "piadinas",   // 4
+        "dulces",     // 5 (piadinas dulces)
+        "bocadillos", // 6
+        "postres"     // 7
+    ];
+
     let timerFinalizacion = null;
     let frameId = null;
     let audioCtx = null; // Contexto de Web Audio API
@@ -129,35 +145,28 @@ document.addEventListener("DOMContentLoaded", () => {
     //================================================
     function iniciarRuleta(){
         const resultado = obtenerProducto();
-        
+
         if (!resultado) {
-            alert("Error: No se pudo cargar los datos de la carta.");
+            alert(ES_INGLES
+                ? "Error: could not load the menu data."
+                : "Error: No se pudo cargar los datos de la carta.");
             return;
         }
 
         if (resultadoDestino) resultadoDestino.classList.add("visible");
         if (ruleta) ruleta.classList.add("girando");
 
-        const categoriesOrden = [
-            "tostas",     // Index 0 (🥖)
-            "entrantes",  // Index 1 (🍽️)
-            "raciones",   // Index 2 (🍖)
-            "quesos",     // Index 3 (🧀)
-            "piadinas",   // Index 4 (🌯)
-            "chocolates", // Index 5 (🍫)
-            "bocadillos", // Index 6 (🥪)
-            "dulces"      // Index 7 (🍰)
-        ];
-
-        let categoriaId = resultado.categoria.id;
-        if (categoriaId === "tablas")  categoriaId = "raciones";
-        if (categoriaId === "postres") categoriaId = "dulces";
-
-        const indice = categoriesOrden.indexOf(categoriaId);
+        // Posición del gajo de la categoría elegida (ya sin remapeos:
+        // "tablas" tiene su propio gajo y "postres" también)
+        const indice = ORDEN_RULETA.indexOf(resultado.categoria.id);
         const indiceSeguro = indice !== -1 ? indice : 0;
 
-        const gradosPorGajo = 360 / 8;
-        const gradosDestino = (360 - (indiceSeguro * gradosPorGajo)) % 360;
+        // El icono de cada gajo está en el CENTRO del gajo (45*i + 22.5 grados).
+        // Para que ese centro quede justo bajo el puntero (arriba, 0 grados)
+        // hay que girar el disco 360 - (45*i + 22.5) grados.
+        const gradosPorGajo = 360 / ORDEN_RULETA.length; // 45
+        const centroGajo = (indiceSeguro * gradosPorGajo) + (gradosPorGajo / 2);
+        const gradosDestino = (360 - centroGajo) % 360;
         const gradosFinal = (360 * 5) + gradosDestino;
 
         if (discoRuleta) {
@@ -175,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         timerFinalizacion = setTimeout(() => {
             if (frameId) cancelAnimationFrame(frameId);
-            
+
             if (gajos) {
                 gajos.forEach((gajo, i) => {
                     if (i === indiceSeguro) gajo.classList.add("iluminado");
@@ -184,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             finalizarRuleta(resultado);
-        }, 3500); 
+        }, 3500);
     }
 
     // Iluminación y sonido dinámico
@@ -226,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
         frameId = requestAnimationFrame(actualizarGlow);
     }
 
-   // Finalizar tirada
+    // Finalizar tirada
     function finalizarRuleta(resultado){
         if (ruleta) {
             ruleta.classList.remove("girando");
@@ -236,16 +245,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(navigator.vibrate) navigator.vibrate([120, 60, 120]);
         reproducirSonidoVictoria();
-        lanzarConfeti();    
+        lanzarConfeti();
 
         if (nombreDestino) nombreDestino.textContent = resultado.producto.nombre;
         if (descripcionDestino) descripcionDestino.textContent = resultado.producto.descripcion || "";
         if (precioDestino) precioDestino.textContent = resultado.producto.precio;
-        
-        // CORRECCIÓN AQUÍ: Si el icono es una ruta de imagen, creamos la etiqueta <img> de forma limpia
+
+        // Si el icono es una ruta de imagen, creamos la etiqueta <img>; si no, texto/emoji
         if (categoriaDestino) {
             const iconoSrc = resultado.categoria.icono;
-            // Comprobamos si el icono es una imagen o texto/emoji y lo pintamos adecuadamente
             if (iconoSrc && (iconoSrc.includes('.png') || iconoSrc.includes('.jpg') || iconoSrc.includes('.svg'))) {
                 categoriaDestino.innerHTML = `<img src="${iconoSrc}" alt="" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px; object-fit: contain;"> ${resultado.categoria.titulo}`;
             } else {
@@ -278,11 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function obtenerProducto(){
         const elSeleccionado = document.querySelector(".seleccionado");
         const personas = elSeleccionado ? elSeleccionado.dataset.comensales : "2";
-        
+
         if (typeof carta === "undefined" || !carta || !Array.isArray(carta)) {
             return null;
         }
 
+        // Las categorías dulces no entran en el sorteo
         const cartaFiltrada = carta.filter(c => c.id !== "dulces" && c.id !== "postres" && c.id !== "chocolates");
         if (cartaFiltrada.length === 0) return null;
 
@@ -303,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const sumaPesos = categoriasConPeso.reduce((acc, item) => acc + item.peso, 0);
         let aleatorio = Math.random() * sumaPesos;
-        
+
         let categoriaElegida = categoriasConPeso[0].categoria;
         for (const item of categoriasConPeso) {
             if (aleatorio < item.peso) {
@@ -329,19 +338,19 @@ document.addEventListener("DOMContentLoaded", () => {
         resultadoDestino.addEventListener("click", () => {
             if (timerFinalizacion) clearTimeout(timerFinalizacion);
             if (frameId) cancelAnimationFrame(frameId);
-            
+
             if (ruleta) ruleta.classList.remove("girando", "finalizada");
             if (gajos) gajos.forEach(g => g.classList.remove("iluminado"));
             if (discoRuleta) {
                 discoRuleta.style.transition = "none";
                 discoRuleta.style.transform = "rotate(0deg)";
             }
-            
+
             if (nombreDestino) nombreDestino.textContent = "";
             if (descripcionDestino) descripcionDestino.textContent = "";
             if (precioDestino) precioDestino.textContent = "";
             if (categoriaDestino) categoriaDestino.textContent = "";
-            
+
             resultadoDestino.classList.remove("visible");
         });
     }
