@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Idioma de la página (carta.html = es, carta-en.html = en)
+    const ES_INGLES = (document.documentElement.lang || "es").toLowerCase().startsWith("en");
+
+    // Textos del buscador según idioma
+    const TXT_BUSQUEDA = ES_INGLES ? {
+        buscando: "Searching:",
+        sinResultados: "No products found",
+        unResultado: "product found",
+        variosResultados: "products found"
+    } : {
+        buscando: "Buscando:",
+        sinResultados: "No se encontraron productos",
+        unResultado: "producto encontrado",
+        variosResultados: "productos encontrados"
+    };
+
     // ==========================================
     // 1. RENDERIZADO DE MENÚ Y CATEGORÍAS (Blindado)
     // ==========================================
@@ -148,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. BUSCADOR
+    // 4. BUSCADOR (mensajes según idioma)
     // ==========================================
     const buscador = document.getElementById("buscar");
     const resultado = document.getElementById("resultado-busqueda");
@@ -177,13 +193,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultado.innerHTML = "";
             } else if (totalResultados === 0) {
                 resultado.innerHTML = `
-                    <span class="texto-busqueda">🔍 Buscando: <strong>${this.value}</strong></span><br>
-                    <span class="sin-resultados">❌ No se encontraron productos</span>
+                    <span class="texto-busqueda">🔍 ${TXT_BUSQUEDA.buscando} <strong>${this.value}</strong></span><br>
+                    <span class="sin-resultados">❌ ${TXT_BUSQUEDA.sinResultados}</span>
                 `;
             } else {
                 resultado.innerHTML = `
-                    <span class="texto-busqueda">🔍 Buscando: <strong>${this.value}</strong></span><br>
-                    <span class="con-resultados">✅ ${totalResultados} ${totalResultados === 1 ? "producto encontrado" : "productos encontrados"}</span>
+                    <span class="texto-busqueda">🔍 ${TXT_BUSQUEDA.buscando} <strong>${this.value}</strong></span><br>
+                    <span class="con-resultados">✅ ${totalResultados} ${totalResultados === 1 ? TXT_BUSQUEDA.unResultado : TXT_BUSQUEDA.variosResultados}</span>
                 `;
             }
         });
@@ -308,45 +324,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const detalleEl = document.getElementById("detalle-temporada");
     const contenedorConfeti = document.getElementById("confeti");
 
-    const obtenerEsIngles = () => document.documentElement.lang === "en";
+    const obtenerEsIngles = () => ES_INGLES;
 
-   // Domingo de Pascua (algoritmo gregoriano de Meeus/Jones/Butcher)
-function calcularPascua(anio) {
-    const a = anio % 19;
-    const b = Math.floor(anio / 100);
-    const c = anio % 100;
-    const d = Math.floor(b / 4);
-    const e = b % 4;
-    const f = Math.floor((b + 8) / 25);
-    const g = Math.floor((b - f + 1) / 3);
-    const h = (19 * a + b - d - g + 15) % 30;
-    const i = Math.floor(c / 4);
-    const k = c % 4;
-    const l = (32 + 2 * e + 2 * i - h - k) % 7;
-    const m = Math.floor((a + 11 * h + 22 * l) / 451);
-    const mes = Math.floor((h + l - 7 * m + 114) / 31); // 3 = marzo, 4 = abril
-    const dia = ((h + l - 7 * m + 114) % 31) + 1;
-    return new Date(anio, mes - 1, dia);
-}
+    // Domingo de Pascua (algoritmo gregoriano de Meeus/Jones/Butcher)
+    function calcularPascua(anio) {
+        const a = anio % 19;
+        const b = Math.floor(anio / 100);
+        const c = anio % 100;
+        const d = Math.floor(b / 4);
+        const e = b % 4;
+        const f = Math.floor((b + 8) / 25);
+        const g = Math.floor((b - f + 1) / 3);
+        const h = (19 * a + b - d - g + 15) % 30;
+        const i = Math.floor(c / 4);
+        const k = c % 4;
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const mes = Math.floor((h + l - 7 * m + 114) / 31); // 3 = marzo, 4 = abril
+        const dia = ((h + l - 7 * m + 114) % 31) + 1;
+        return new Date(anio, mes - 1, dia);
+    }
 
-function obtenerModoPorFecha() {
-    const ahora = new Date();
-    const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
-    const mes = hoy.getMonth() + 1;
-    const dia = hoy.getDate();
+    function obtenerModoPorFecha() {
+        const ahora = new Date();
+        const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+        const mes = hoy.getMonth() + 1;
+        const dia = hoy.getDate();
 
-    // Carnaval: martes = Pascua - 47 días. Activo desde 2 días antes hasta el martes
-    const pascua = calcularPascua(hoy.getFullYear());
-    const inicioCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 49);
-    const finCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 47);
+        // Carnaval: martes = Pascua - 47 días. Activo desde 2 días antes hasta el martes
+        const pascua = calcularPascua(hoy.getFullYear());
+        const inicioCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 49);
+        const finCarnaval = new Date(pascua.getFullYear(), pascua.getMonth(), pascua.getDate() - 47);
 
-    if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
-    if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 1)) return "modo-samain";
-    if ((mes === 12 && dia >= 20) || (mes === 1 && dia <= 7)) return "modo-navidad";
-    if (hoy >= inicioCarnaval && hoy <= finCarnaval) return "modo-carnaval";
+        if (mes === 6 && dia >= 15 && dia <= 25) return "modo-sanjuan";
+        if ((mes === 10 && dia >= 20) || (mes === 11 && dia <= 1)) return "modo-samain";
+        if ((mes === 12 && dia >= 20) || (mes === 1 && dia <= 7)) return "modo-navidad";
+        if (hoy >= inicioCarnaval && hoy <= finCarnaval) return "modo-carnaval";
 
-    return null;
-}
+        return null;
+    }
 
     const configuracionTemporadas = {
         "modo-navidad": {
@@ -388,7 +404,7 @@ function obtenerModoPorFecha() {
     if (modoActivo && configuracionTemporadas[modoActivo]) {
         body.classList.add(modoActivo);
         const config = configuracionTemporadas[modoActivo];
-        
+
         if (contenedorTemporada) contenedorTemporada.style.display = "flex";
         if (iconoIzq) iconoIzq.src = config.icono;
         if (iconoDer) iconoDer.src = config.icono;
@@ -404,14 +420,14 @@ function obtenerModoPorFecha() {
                 const imagenAleatoria = config.particulas[Math.floor(Math.random() * config.particulas.length)];
                 particula.src = imagenAleatoria;
                 particula.className = "particula-flotante";
-                
+
                 particula.style.left = Math.random() * 100 + "vw";
                 particula.style.top = -10 + "vh";
                 particula.style.animationDuration = (Math.random() * 5 + 5) + "s";
                 particula.style.animationDelay = (Math.random() * 5) + "s";
                 particula.style.opacity = Math.random() * 0.7 + 0.3;
                 particula.style.width = (Math.random() * 20 + 20) + "px";
-                
+
                 contenedorConfeti.appendChild(particula);
             }
         }
