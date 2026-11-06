@@ -214,6 +214,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalAlergenos = document.getElementById('modal-alergenos');
     const modalMenuPrincipal = document.getElementById('modal-menu-principal');
 
+    // Cierra el menú de hamburguesa (se usa al abrir Contacto, Galería o Tienda)
+    const cerrarMenuLateral = () => {
+        if (modalMenuPrincipal) modalMenuPrincipal.classList.add('hidden');
+        const botonHamburguesa = document.getElementById('btn-menu-hamburguesa');
+        if (botonHamburguesa) botonHamburguesa.setAttribute('aria-expanded', 'false');
+    };
+
     const imagenAlergenos = document.getElementById("imagen-alergenos");
     const cerrarAlergenos = document.getElementById("cerrar-modal");
 
@@ -228,7 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cerrarContacto = document.getElementById('cerrar-contacto');
 
     if (btnContacto && modalContacto) {
-        btnContacto.addEventListener('click', () => modalContacto.classList.remove('hidden'));
+        btnContacto.addEventListener('click', () => {
+            cerrarMenuLateral();
+            modalContacto.classList.remove('hidden');
+        });
     }
     if (cerrarContacto && modalContacto) {
         cerrarContacto.addEventListener('click', () => modalContacto.classList.add('hidden'));
@@ -240,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnGaleria && modalGaleria) {
         btnGaleria.addEventListener('click', (e) => {
             e.preventDefault();
+            cerrarMenuLateral();
             modalGaleria.classList.remove('hidden');
         });
     }
@@ -275,6 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnTienda && modalTienda) {
         btnTienda.addEventListener('click', (e) => {
             e.preventDefault();
+            cerrarMenuLateral();
             modalTienda.classList.remove('hidden');
         });
     }
