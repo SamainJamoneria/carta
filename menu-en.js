@@ -167,7 +167,7 @@ const carta = [
     icono: "postres.png",
     productos:[
         { nombre:"Cheese with Quince", descripcion:"", precio:"5,00 €", alergenos: ["l"] },
-        { nombre:"Ice Cream", description:"Please, ask about our available flavors", precio:"Please ask", alergenos: ["l"] }
+        { nombre:"Ice Cream", descripcion:"Please, ask about our available flavors", precio:"Please ask", alergenos: ["l"] }
     ]
 }
 ];
